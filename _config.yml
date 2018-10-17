@@ -85,7 +85,7 @@ plugins:
 excerpt_separator: <!--more-->
 
 # Serving
-baseurl: "" # does not include hostname
+baseurl: "/blog" # does not include hostname
 show_dir_listing: false
 
 # Outputting
