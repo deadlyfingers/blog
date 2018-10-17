@@ -38,3 +38,19 @@ or offline mode:
 ## Serve
 
 `bundle exec jekyll serve`
+
+## Publish
+
+Install **gulp** v4 globally and **gulp-gh-pages**:  
+
+> You will need to remove gulp v3 `npm rm -g gulp` before installing v4.
+
+```
+npm install -g gulp-cli
+npm install
+```
+
+Deploy '_site' build dir to 'gh-pages' branch
+```
+gulp deploy
+```

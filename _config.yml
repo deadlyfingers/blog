@@ -43,7 +43,8 @@ encoding: UTF-8
 strict_front_matter : true
 
 include:
-  - "node_modules/@fortawesome/fontawesome-free/webfonts"
+  - node_modules/@fortawesome/fontawesome-free/webfonts
+  - node_modules/foundation-sites
 
 exclude:
   - package.json
@@ -61,7 +62,7 @@ exclude:
   - "^*"
 
 keep_files: 
-  - "node_modules/@fortawesome/fontawesome-free/webfonts"
+  - node_modules/@fortawesome/fontawesome-free/webfonts
 
 # Filtering Content
 show_drafts: false
@@ -105,4 +106,3 @@ kramdown:
 jailed: false
 gfm_quirks: paragraph_end
 theme: jekyll-theme-primer
-
