@@ -13,6 +13,6 @@
     "gulp-gh-pages": "^0.5.4"
   },
   "scripts": {
-    "dev": "browser-sync start --server '_site' --files '_site' --extensions 'html' --port 3000 --no-ui"
+    "dev": "browser-sync start --server '_dev' --files '_dev' --extensions 'html' --port 3000 --no-ui"
   }
 }

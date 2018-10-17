@@ -4,6 +4,9 @@ _site
 .jekyll-cache/
 .jekyll-metadata
 
+# dev build
+_dev
+
 # Ruby
 Gemfile.lock
 *.rb

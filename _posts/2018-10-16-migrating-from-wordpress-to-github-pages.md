@@ -36,9 +36,9 @@ However there are some downsides during this process:
 
 > GitHub Pages is powered by [Jekyll](https://jekyllrb.com/). To import your Wordpress XML archive and run Jekyll locally you will need to install [Ruby 2.1](https://www.ruby-lang.org/en/downloads/) or better.
 
-1. If you are migrating an existing blog you have to export your content from the Wordpress admin control panel. 
-    > The general form of the URL is as follows:  
-    `https://YOUR-USER-NAME.wordpress.com/wp-admin/export.php`
+1. If you are migrating an existing blog you have to export your content from the Wordpress admin control panel.  
+
+    > The general form of the URL is as follows: `https://YOUR-USER-NAME.wordpress.com/wp-admin/export.php`  
 
 2. Import the Wordpress XML archive file as mentioned on the [import wordpress to Jekyll docs](http://import.jekyllrb.com/docs/wordpressdotcom/)
     
