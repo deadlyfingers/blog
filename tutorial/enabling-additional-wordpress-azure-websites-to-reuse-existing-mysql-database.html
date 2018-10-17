@@ -5,9 +5,9 @@
   <meta name="description" content="Developer blog">
   <title>Enabling additional Wordpress Azure websites to reuse existing MySQL database</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="/blog/assets/main.css" rel="stylesheet">
+  <link href="/assets/main.css" rel="stylesheet">
   <!-- RSS -->
-  <link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="Deadlyfingers.net" />
+  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Deadlyfingers.net" />
 </head>
 
 <body>
@@ -41,11 +41,11 @@
 
 <h5 id="but-what-if-you-want-to-create-a-second-wordpress-azure-website-while-reusing-your-existing-mysql-database-from-the-first-one">But what if you want to create a second Wordpress Azure website while reusing your existing MySQL database from the first one?</h5>
 
-<p><img src="/blog/assets/images/AZURE_WP201_create-multiple-wordpress-websites-using-existing-mysql-database.png" alt="AZURE_WP201_create-multiple-wordpress-websites-using-existing-mysql-database" /></p>
+<p><img src="/assets/images/AZURE_WP201_create-multiple-wordpress-websites-using-existing-mysql-database.png" alt="AZURE_WP201_create-multiple-wordpress-websites-using-existing-mysql-database" /></p>
 
 <p>Initially when I load up the ‘<strong>*.azure-websites.net</strong>’ URL I just get a blank page (which is PHP’s quiet way of letting you know something needs fixed). When you reuse the existing MySQL database then you going to need to tweak one setting in the Wordpress configuration file (<strong>wp-config.php</strong>). To modify this config file you will need to grab your FTP settings in your Azure website dashboard.</p>
 
-<p><img src="/blog/assets/images/AZURE_WP202_azure-websites-dashboard-ftp-upload-settings.png" alt="AZURE_WP202_azure-websites-dashboard-ftp-upload-settings" /></p>
+<p><img src="/assets/images/AZURE_WP202_azure-websites-dashboard-ftp-upload-settings.png" alt="AZURE_WP202_azure-websites-dashboard-ftp-upload-settings" /></p>
 
 <p>Download the publish profile to get your FTP username and password. Open this file in an XML text editor to locate the ‘<em>userName</em>’ and ‘<em>userPass</em>’ values which are located just after the ‘<em>ftpPassiveMode</em>’ attribute.</p>
 
@@ -63,7 +63,7 @@
 
 <p>Also, if you want to see what this looks like in your database just open up a MySQL client to check the new Wordpress tables added using the connection settings available in your Azure Websites dashboard.</p>
 
-<p><img src="/blog/assets/images/AZURE_WP202_azure-portal-dashboard-connection-settings.png" alt="AZURE_WP202_azure-portal-dashboard-connection-settings" /></p>
+<p><img src="/assets/images/AZURE_WP202_azure-portal-dashboard-connection-settings.png" alt="AZURE_WP202_azure-portal-dashboard-connection-settings" /></p>
 
 
 </div>
@@ -75,7 +75,7 @@
 
 <div id="pagination" class="large-12 cell">
   <div>
-    <a href="/blog/tutorial/enabling-additional-wordpress-azure-websites-to-reuse-existing-mysql-database">Enabling additional Wordpress Azure websites to reuse existing MySQL database</a>
+    <a href="/tutorial/enabling-additional-wordpress-azure-websites-to-reuse-existing-mysql-database">Enabling additional Wordpress Azure websites to reuse existing MySQL database</a>
     <span>
       
       <span>by David Douglas</span>
@@ -98,13 +98,13 @@
     <div class="large-6 cell">
       
       <span class="next">Next</span>
-      <a href="/blog/tutorial/create-android-app-with-cloud-backend-in-minutes">Create an Android app with a cloud backend in minutes</a>
+      <a href="/tutorial/create-android-app-with-cloud-backend-in-minutes">Create an Android app with a cloud backend in minutes</a>
       
     </div>
     <div class="large-6 cell">
       
       <span class="prev">Previous</span>
-      <a href="/blog/tutorial/setting-up-a-wordpress-website-with-azure">Setting up a Wordpress website with Azure</a>
+      <a href="/tutorial/setting-up-a-wordpress-website-with-azure">Setting up a Wordpress website with Azure</a>
       
     </div>
   </div>

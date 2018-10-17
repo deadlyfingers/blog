@@ -5,9 +5,9 @@
   <meta name="description" content="Developer blog">
   <title>Responsive Design from problem to production</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="/blog/assets/main.css" rel="stylesheet">
+  <link href="/assets/main.css" rel="stylesheet">
   <!-- RSS -->
-  <link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="Deadlyfingers.net" />
+  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Deadlyfingers.net" />
 </head>
 
 <body>
@@ -73,7 +73,7 @@
 
 <p>If you are a designer for print it helps to have an understanding of the print production process. Similarly, with responsive web design it is important to know how responsive developer tools operate. When it comes to design for print designers use grids and guides for page layout. This grid layout mechanism is similar for web developers except the grid will dynamically resize depending on window or screen size. The most popular grids for responsive design are <a href="https://getbootstrap.com/examples/grid/">Bootstrap</a> and <a href="http://foundation.zurb.com/grid.html">Foundation</a> so even if you don’t like to get your hands dirty with code, it is something that anyone can play with and see how design elements (or columns) will react as the dynamic grid changes with different widths. By default, both grid systems use a 12 column grid but you can also customize the number of columns with <a href="http://getbootstrap.com/customize/">Bootstrap</a> and with <a href="http://foundation.zurb.com/sites/docs/v/5.5.3/components/grid.html">Foundation using Sass</a>. Designers who have a grasp of how the dynamic grid operates on the production or development side will be in a better position to create ‘responsive-ready’ designs.</p>
 
-<p><img src="/blog/assets/images/Sketch-1024.png" /></p>
+<p><img src="/assets/images/Sketch-1024.png" /></p>
 
 <h3 id="design-tools">Design tools</h3>
 
@@ -93,31 +93,31 @@
 
 <p>Unsurprisingly it’s not possible to cover every web technology in one article so I will explain the reasons behind the web technologies that I’ve been consistently using for my recent projects. Plus, I really want to share my favourite client-side web design / developer stack because if you are passionate about design I think you will like it too!</p>
 
-<p><img src="/blog/assets/images/bower-logo.png" /></p>
+<p><img src="/assets/images/bower-logo.png" /></p>
 
 <h3 id="project-dependencies">Project dependencies</h3>
 
 <p>Responsive web projects tend to use a number of third party dependencies, and package managers can be used to help install and version manage them all. <a href="http://bower.io/">Bower</a> is awesome for managing project dependencies like Bootstrap or jQuery. While <a href="https://nodejs.org">NPM</a> is great for install testing and build tools like Gulp and BrowserSync. Package management is also advantageous for source controlled projects as it can be easily setup to prevent committing a shed load of third party code into your repro. Following this procedure means contributor commits are kept clean and will make it easier to inspect changes or code review.</p>
 
-<p><img src="/blog/assets/images/logo-red.png" /></p>
+<p><img src="/assets/images/logo-red.png" /></p>
 
 <h3 id="design-as-you-go">Design as you go</h3>
 
 <p>A painter will add strokes of paint to his canvas, while a sculptor will chip bits of a rock to expose an image. Designing websites is a progressive art that is both additive like a painter and subtractive like a sculptor. Can you imagine asking a painter or sculptor to work blind folded? As a designer I can’t produce my best work unless I have real-time feedback of my adjustments. I need to see and interact with my design in real-time and across multiple devices. That’s why <a href="https://www.browsersync.io">BrowserSync</a> is the single most important responsive design tool for client-side web development. ‘Live reload’ or ‘live preview’ is important for web design, and with responsive web design it’s mission critical to test all the desktop and touch screens!</p>
 
-<p><img src="/blog/assets/images/PolymerLogo.png" /></p>
+<p><img src="/assets/images/PolymerLogo.png" /></p>
 
 <h3 id="a-ui-kit-for-web-apps">A UI kit for web apps</h3>
 
 <p>Ever wanted to replicate the performance of the native UITableView on iOS or ListView on Android? Polymer’s ‘iron-list’ and ‘iron-image’ elements can be used to create <a href="https://www.youtube.com/watch?v=2UKPRbrw3Kk">‘buttery-smooth’ scrolling recyclable lists at 60fps</a>. Polymer is also built on top of <a href="http://webcomponents.org">Web Components</a> which allows you create your own reusable elements, but Polymer also provides a <a href="https://elements.polymer-project.org/browse?package=paper-elements">‘Material Design’ UI kit</a> suited for <a href="https://elements.polymer-project.org/guides/responsive-material-design-layouts">responsive web app development</a>. I also find the template and binding model lends itself well for creating responsive designs. Polymer is well suited for developing SPAs (single page applications) and can support <a href="https://www.youtube.com/watch?v=iDQqP5Yyczg">client-side routing</a>.</p>
 
-<p><img src="/blog/assets/images/SASS.png" /></p>
+<p><img src="/assets/images/SASS.png" /></p>
 
 <h3 id="smarter-css">Smarter CSS</h3>
 
 <p>Design should be an enjoyable art, but can you imagine what a lot of CSS is like to manage! All these responsive elements, layout grids, images and glyphs will add lines and lines of CSS. The sheer amount of CSS required by a responsive design project could very easily and quickly become unmanageable. <a href="http://thesassway.com/editorial/sass-vs-scss-which-syntax-is-better">Sass or SCSS</a> is just like writing CSS, except you can do it with less code and fewer lines of code are easier to manage. Sass variables will enable designers to create a theme to easily define or tweak colours, type styles and spacing. Another powerful feature is ‘mixins’ which can be used to reuse common styles, define responsive media queries, generate image tiles, build font faces and include browser prefixes. Sass will reduce the number of lines of CSS you need to manage.</p>
 
-<p><img src="/blog/assets/images/Bootstrap.png" /></p>
+<p><img src="/assets/images/Bootstrap.png" /></p>
 
 <h3 id="responsive-grid">Responsive Grid</h3>
 
@@ -180,13 +180,13 @@
 
 <p>One final thing though, high definition images are much larger in filesize so make sure to compress all bitmaps! <a href="https://imageoptim.com/">ImageOptim</a> is a great image compression tool I use on Mac, though they also recommend <a href="http://nikkhokkho.sourceforge.net/images/FileOptimizerSetup.exe">File Optimizer for Windows</a>.</p>
 
-<p><img src="/blog/assets/images/icomoon.png" /></p>
+<p><img src="/assets/images/icomoon.png" /></p>
 
 <h3 id="vector-glyphs">Vector glyphs</h3>
 
 <p>With responsive design there is always a need to scale graphics. Vector graphics are resolution independent and can be scaled to any size and that makes them a great asset. The good news it that <a href="http://caniuse.com/#feat=svg">most modern browsers support SVG</a>. But if you have a set of vector icons that are monochromic, then a neater way to bring these to web is by exporting them all as a custom font. <a href="https://icomoon.io/">Icomoon</a> is a free online tool to create custom font glyphs. Oh, and because its seen as a font you can take advantage of CSS font sizing and colour properties.</p>
 
-<p><img src="/blog/assets/images/gulp-3x.png" /></p>
+<p><img src="/assets/images/gulp-3x.png" /></p>
 
 <h3 id="automate-all-the-things">Automate all the things</h3>
 
@@ -314,7 +314,7 @@
 
 <div id="pagination" class="large-12 cell">
   <div>
-    <a href="/blog/info/responsive-design">Responsive Design from problem to production</a>
+    <a href="/info/responsive-design">Responsive Design from problem to production</a>
     <span>
       
       <span>by David Douglas</span>
@@ -335,13 +335,13 @@
     <div class="large-6 cell">
       
       <span class="next">Next</span>
-      <a href="/blog/tutorial/azure-app-services-for-unity3d">Azure App Services for Unity3D</a>
+      <a href="/tutorial/azure-app-services-for-unity3d">Azure App Services for Unity3D</a>
       
     </div>
     <div class="large-6 cell">
       
       <span class="prev">Previous</span>
-      <a href="/blog/info/making-sense-of-web-app-debug-logs-on-multiple-android-and-ios-devices">Making sense of web app debug logs on multiple Android and iOS devices</a>
+      <a href="/info/making-sense-of-web-app-debug-logs-on-multiple-android-and-ios-devices">Making sense of web app debug logs on multiple Android and iOS devices</a>
       
     </div>
   </div>

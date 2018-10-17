@@ -5,9 +5,9 @@
   <meta name="description" content="Developer blog">
   <title>Making sense of web app debug logs on multiple Android and iOS devices</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="/blog/assets/main.css" rel="stylesheet">
+  <link href="/assets/main.css" rel="stylesheet">
   <!-- RSS -->
-  <link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="Deadlyfingers.net" />
+  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Deadlyfingers.net" />
 </head>
 
 <body>
@@ -27,7 +27,7 @@
     <div class="grid-x grid-margin-x">
       <div id="post" class="large-8 cell post">
   
-  <time datetime="2015-11-13 17:39:00 +0100" class="date">13 Nov 2015</time>
+  <time datetime="2015-11-13 16:39:00 +0000" class="date">13 Nov 2015</time>
   
   <h1 class="post-title">Making sense of web app debug logs on multiple Android and iOS devices</h1>
   <div class="post-line"></div>
@@ -39,11 +39,11 @@
 
 <p>For Cordova app development on Android there are a few ways to debug web apps but usually it’s a case of <code class="highlighter-rouge">cordova build android</code> then <code class="highlighter-rouge">cordova run android --device --debug</code>. Then if you have setup Android SDK’s PATH environment var you can run <code class="highlighter-rouge">monitor</code> in command line to open up the Android Device Monitor app to see all the logs.</p>
 
-<p><img src="/blog/assets/images/AndroidDeviceMonitor.jpg" alt="AndroidDeviceMonitor" /></p>
+<p><img src="/assets/images/AndroidDeviceMonitor.jpg" alt="AndroidDeviceMonitor" /></p>
 
 <p>For Cordova app development on iOS it’s usually <code class="highlighter-rouge">cordova build ios</code> in Terminal and then you just open the project in Xcode to debug the app.</p>
 
-<p><img src="/blog/assets/images/XcodeLogs.jpg" alt="XcodeLogs" /></p>
+<p><img src="/assets/images/XcodeLogs.jpg" alt="XcodeLogs" /></p>
 
 <p>Both these options allow you to run and debug multiple devices although you have to tab or switch views to see the other devices logs. Also Android logs are so noisy it’s almost impossible to spot the stuff you want to look at. Ideally I would like to look at all logs at the same time and dial in on the stuff I’m really interested in.</p>
 
@@ -72,7 +72,7 @@ cordova run android <span class="nt">--debug</span> <span class="nt">--target</s
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb <span class="nt">-s</span> ZX1C224H9F logcat <span class="nt">-s</span> jxcore-log:<span class="se">\*</span>
 </code></pre></div></div>
 
-<p><img src="/blog/assets/images/logcat-jxcore.jpg" alt="logcat-jxcore" /></p>
+<p><img src="/assets/images/logcat-jxcore.jpg" alt="logcat-jxcore" /></p>
 
 <p>Now that’s much cleaner and stuff doesn’t scroll faster than you can actually read! ;)</p>
 
@@ -82,7 +82,7 @@ cordova run android <span class="nt">--debug</span> <span class="nt">--target</s
 
 <p>With iOS all you need to do is attach your devices and download <a href="http://lemonjar.com/iosconsole">iOS Console</a> which is a handy freeware app to view iOS logs on a Mac with filtering. With our iOS Postcard app I have set the filter to ‘jxcore’.</p>
 
-<p><img src="/blog/assets/images/iOSConsole-logs.jpg" alt="iOSConsole-logs" /></p>
+<p><img src="/assets/images/iOSConsole-logs.jpg" alt="iOSConsole-logs" /></p>
 
 <p><strong>iOS Console</strong> doesn’t need Xcode running and the logs are a lot cleaner than the default Console app.</p>
 
@@ -102,7 +102,7 @@ cordova run android <span class="nt">--debug</span> <span class="nt">--target</s
 
 <div id="pagination" class="large-12 cell">
   <div>
-    <a href="/blog/info/making-sense-of-web-app-debug-logs-on-multiple-android-and-ios-devices">Making sense of web app debug logs on multiple Android and iOS devices</a>
+    <a href="/info/making-sense-of-web-app-debug-logs-on-multiple-android-and-ios-devices">Making sense of web app debug logs on multiple Android and iOS devices</a>
     <span>
       
       <span>by David Douglas</span>
@@ -123,13 +123,13 @@ cordova run android <span class="nt">--debug</span> <span class="nt">--target</s
     <div class="large-6 cell">
       
       <span class="next">Next</span>
-      <a href="/blog/info/responsive-design">Responsive Design from problem to production</a>
+      <a href="/info/responsive-design">Responsive Design from problem to production</a>
       
     </div>
     <div class="large-6 cell">
       
       <span class="prev">Previous</span>
-      <a href="/blog/info/faster-cordova-web-app-deployment-with-hotwire-script">Faster Cordova web app deployment with hotwire script</a>
+      <a href="/info/faster-cordova-web-app-deployment-with-hotwire-script">Faster Cordova web app deployment with hotwire script</a>
       
     </div>
   </div>

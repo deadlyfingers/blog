@@ -5,9 +5,9 @@
   <meta name="description" content="Developer blog">
   <title>Send GCM Push Notifications using Azure Mobile Services</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="/blog/assets/main.css" rel="stylesheet">
+  <link href="/assets/main.css" rel="stylesheet">
   <!-- RSS -->
-  <link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="Deadlyfingers.net" />
+  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Deadlyfingers.net" />
 </head>
 
 <body>
@@ -47,34 +47,34 @@
 
 <ol>
   <li>First install <em>Google Play Services</em> package in the Android SDK Manager.<br />
-  <img src="/blog/assets/images/MS302_Android-SDK-Install-Google-APIs-Google-Play-Services.png" alt="" /><br />
-  <img src="/blog}/assets/images/MS301_AVD_Android-Virtual-Device-Target-Google-APIs-Push-Notifications.png" alt="" />
+  <img src="/assets/images/MS302_Android-SDK-Install-Google-APIs-Google-Play-Services.png" alt="" /><br />
+  <img src="}/assets/images/MS301_AVD_Android-Virtual-Device-Target-Google-APIs-Push-Notifications.png" alt="" />
     <blockquote>
       <p>NB: If using an Android Virtual Device then ensure your <em>Target</em> is set to <strong>Google APIs</strong> to allow Push Notifications to work.</p>
     </blockquote>
   </li>
   <li>
     <p>Create a new project in <a href="http://console.develepers.google.com">Google Developers Console</a>.
-  <img src="/blog/assets/images/MS303_GoogleDevelopersConsole-Create-Project.png" alt="" />
+  <img src="/assets/images/MS303_GoogleDevelopersConsole-Create-Project.png" alt="" />
   Turn on <em>Google Cloud Messaging for Android</em>.
-  <img src="/blog/assets/images/MS304_Google-Project-APIs-Enable-Cloud-Messaging-for-Android.png" alt="" />
+  <img src="/assets/images/MS304_Google-Project-APIs-Enable-Cloud-Messaging-for-Android.png" alt="" />
   Create a new <em>Public API access</em> key.
-  <img src="/blog/assets/images/MS305_Google-Project-Credentials-Create-Public-API-access-key.png" alt="" />
+  <img src="/assets/images/MS305_Google-Project-Credentials-Create-Public-API-access-key.png" alt="" />
   Create a new <em>Server key</em>.
-  <img src="/blog/assets/images/MS306_Credentials-Create-Server-key.png" alt="" /><br />
-  <img src="/blog/assets/images/MS307_Create-Server-key.png" alt="" /></p>
+  <img src="/assets/images/MS306_Credentials-Create-Server-key.png" alt="" /><br />
+  <img src="/assets/images/MS307_Create-Server-key.png" alt="" /></p>
   </li>
   <li>
     <p>Copy the public <strong>API key</strong>
-  <img src="/blog/assets/images/MS308_Copy-Public-API-key.png" alt="" />
+  <img src="/assets/images/MS308_Copy-Public-API-key.png" alt="" />
   Paste <strong>API key</strong> into Mobile Service’s <strong>Push &gt; Google Cloud Messaging settings</strong>
-  <img src="/blog/assets/images/MS309_MobileService-Push-Google-Cloud-Messaging-settings-API-key.png" alt="" />
+  <img src="/assets/images/MS309_MobileService-Push-Google-Cloud-Messaging-settings-API-key.png" alt="" />
   Save changes.
-  <img src="/blog/assets/images/MS309_MobileService-Push-Google-Cloud-Messaging-settings-API-key.png" alt="" /></p>
+  <img src="/assets/images/MS309_MobileService-Push-Google-Cloud-Messaging-settings-API-key.png" alt="" /></p>
   </li>
   <li>
     <p>Copy <em>google-play-services.jar</em> (from Android SDK libs) and <em>notifications.jar</em> (from <a href="https://go.microsoft.com/fwLink/?LinkID=280126&amp;clcid=0x409">Azure Mobiles Services SDK for Android</a>) into the Android project’s <strong>libs</strong> folder.
-  <img src="/blog/assets/images/MS310_CopyPushNotificationsLibraries.png" alt="" /></p>
+  <img src="/assets/images/MS310_CopyPushNotificationsLibraries.png" alt="" /></p>
   </li>
   <li>Add Push Notification permissions to the project’s <em>AndroidManifest.xml</em>.
     <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;permission</span> <span class="na">android:name=</span><span class="s">"**my_app_package**.permission.C2D_MESSAGE"</span> 
@@ -85,7 +85,7 @@
  <span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.WAKE_LOCK"</span> <span class="nt">/&gt;</span>
 </code></pre></div>    </div>
     <p>NB: Replace all occurrences of <em>**my_app_package**</em> with the manifest’s <strong>package</strong> name attribute.
-  <img src="/blog/assets/images/MS311_AndroidManifest-AddPushNotificationsPermissions.png" alt="" />
+  <img src="/assets/images/MS311_AndroidManifest-AddPushNotificationsPermissions.png" alt="" />
   Add the receiver block just before the application closing tag. <br />
   eg. <em>… &lt;/application&gt;</em></p>
     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> &lt;receiver android:name="com.microsoft.windowsazure.notifications.NotificationsBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND"&gt;
@@ -96,7 +96,7 @@
  &lt;/receiver&gt;
 </code></pre></div>    </div>
     <p>NB: Replace <em>**my_app_package**</em> with the manifest’s <strong>package</strong> name attribute.<br />
-  <img src="/blog/assets/images/MS314_AndroidManifest-receiver-replace-app-package-name.png" alt="" />
+  <img src="/assets/images/MS314_AndroidManifest-receiver-replace-app-package-name.png" alt="" />
   NB: If you get a red text error on receiver <em>notifications.NotificationsBroadcastReceiver</em> then add dependencies to the <em>build.gradle</em> file and sync project libraries.</p>
     <div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">dependencies</span> {
    <span class="n">compile</span> <span class="s1">'com.android.support:support-v4:+'</span>
@@ -104,18 +104,18 @@
    <span class="n">compile</span> <span class="n">fileTree</span>(<span class="n">dir</span>: <span class="s1">'libs'</span>, <span class="n">include</span>: [<span class="s1">'*.jar'</span>])
   }
 </code></pre></div>    </div>
-    <p><img src="/blog/assets/images/MS313_AndroidStudio-build-gradle-dependencies-libs-jar-project-sync.png" alt="" /></p>
+    <p><img src="/assets/images/MS313_AndroidStudio-build-gradle-dependencies-libs-jar-project-sync.png" alt="" /></p>
   </li>
   <li>Copy Google <strong>Project Number</strong> in overview section.
-  <img src="/blog/assets/images/MS315_GoogleProject-Overview-copy-Project-Number.png" alt="" />
+  <img src="/assets/images/MS315_GoogleProject-Overview-copy-Project-Number.png" alt="" />
   Paste value into <em>ToDoActivity.java</em> as a String constant.
     <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">PROJECT_ID</span> <span class="o">=</span> <span class="s">"**project-number**"</span><span class="o">;</span>
 </code></pre></div>    </div>
-    <p><img src="/blog/assets/images/MS316_Activity-paste-Project-Number-constant.png" alt="" />
+    <p><img src="/assets/images/MS316_Activity-paste-Project-Number-constant.png" alt="" />
   In the <em>onCreate</em> method of <em>ToDoActivity.java</em> add a <strong>Notifications Manager</strong> handler.</p>
     <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">NotificationsManager</span><span class="o">.</span><span class="na">handleNotifications</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">PROJECT_ID</span><span class="o">,</span> <span class="n">MyPushNotificationsHandler</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
 </code></pre></div>    </div>
-    <p><img src="/blog/assets/images/MS317_NotificationsManager-handleNotifications.png" alt="" /></p>
+    <p><img src="/assets/images/MS317_NotificationsManager-handleNotifications.png" alt="" /></p>
   </li>
   <li>Create a <em>Channel</em> class
     <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Channel</span> <span class="o">{</span>
@@ -140,7 +140,7 @@
    <span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">setId</span><span class="o">(</span><span class="n">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span> <span class="n">mId</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span> <span class="o">}</span>
   <span class="o">}</span>
 </code></pre></div>    </div>
-    <p><img src="/blog/assets/images/MS318_Channel-model-class-handle-property.png" alt="" /></p>
+    <p><img src="/assets/images/MS318_Channel-model-class-handle-property.png" alt="" /></p>
   </li>
   <li>Create <em>MyPushNotificationsHandler</em> class
     <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyPushNotificationsHandler</span> <span class="kd">extends</span> <span class="n">NotificationsHandler</span>
@@ -173,13 +173,13 @@
    <span class="o">}</span>
   <span class="o">}</span>
 </code></pre></div>    </div>
-    <p><img src="/blog/assets/images/MS319_PushNotificationsHandler-class.png" alt="" />
+    <p><img src="/assets/images/MS319_PushNotificationsHandler-class.png" alt="" />
   Tip: To auto import classes in Android Studio enable <em>Add umabiguous imports on the fly</em>
-  <img src="/blog/assets/images/MS320_AndroidStudio-Auto-Import-Add-unambiguous-imports-on-the-fly.png" alt="" /></p>
+  <img src="/assets/images/MS320_AndroidStudio-Auto-Import-Add-unambiguous-imports-on-the-fly.png" alt="" /></p>
   </li>
   <li>
     <p>Create new <em>Channel</em> table in Azure Mobile Services.
-  <img src="/blog/assets/images/MS321_Azure-MobileServices-create-Table-Channel.png" alt="" /></p>
+  <img src="/assets/images/MS321_Azure-MobileServices-create-Table-Channel.png" alt="" /></p>
   </li>
   <li>Edit TodoItem table <strong>Script &gt; Insert</strong>
     <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">function</span> <span class="nf">insert</span><span class="o">(</span><span class="n">item</span><span class="o">,</span> <span class="n">user</span><span class="o">,</span> <span class="n">request</span><span class="o">)</span> <span class="o">{</span>
@@ -216,7 +216,7 @@
   <span class="o">}</span>
   <span class="o">}</span>
 </code></pre></div>    </div>
-    <p><img src="/blog/assets/images/MS322_Azure-MobileServices-TodoItem-Table-Script-Insert-sendNotifications.png" alt="" /><br />
+    <p><img src="/assets/images/MS322_Azure-MobileServices-TodoItem-Table-Script-Insert-sendNotifications.png" alt="" /><br />
   <em>This will send a push notification upon successful insert of a Todo item.</em></p>
   </li>
   <li>Edit Channel table <strong>Script &gt; Insert</strong>
@@ -237,15 +237,15 @@
   <span class="o">}</span>
   <span class="o">}</span>
 </code></pre></div>    </div>
-    <p><img src="/blog/assets/images/MS323_Azure-MobileServices-Channel-Table-Script-Insert-unique-Channel-handle.png" alt="" /><br />
+    <p><img src="/assets/images/MS323_Azure-MobileServices-Channel-Table-Script-Insert-unique-Channel-handle.png" alt="" /><br />
   <em>This will prevent duplicate registrations of user and device handles.</em></p>
   </li>
   <li>In the app add a Todo item to trigger a Push Notification
-  <img src="/blog/assets/images/MS324_Android-app-add-todo-push-notification.png" alt="" />
+  <img src="/assets/images/MS324_Android-app-add-todo-push-notification.png" alt="" />
   <em>The Push Notification will appear with the Todo item text.</em>
-  <img src="/blog/assets/images/MS325_Android-app-push-notification.png" alt="" />
+  <img src="/assets/images/MS325_Android-app-push-notification.png" alt="" />
   That’s all there is to it! If you wanted to take it to the next level you could use this backend Mobile Service and roll it out across other platforms like Windows Store, Windows Phone, iOS, or use cross platform tools like Xamerin or Phonegap.
-  <img src="/blog/assets/images/MS326_Azure-MobileService-app-platforms.png" alt="" /></li>
+  <img src="/assets/images/MS326_Azure-MobileService-app-platforms.png" alt="" /></li>
 </ol>
 
 <p><em>For latest platform support, how to connect to other identities and push notification services check out the <a href="http://azure.microsoft.com/en-us/documentation/">Azure online docs</a>.</em></p>
@@ -260,7 +260,7 @@
 
 <div id="pagination" class="large-12 cell">
   <div>
-    <a href="/blog/tutorial/send-gcm-push-notifications-using-azure-mobile-services">Send GCM Push Notifications using Azure Mobile Services</a>
+    <a href="/tutorial/send-gcm-push-notifications-using-azure-mobile-services">Send GCM Push Notifications using Azure Mobile Services</a>
     <span>
       
       <span>by David Douglas</span>
@@ -281,13 +281,13 @@
     <div class="large-6 cell">
       
       <span class="next">Next</span>
-      <a href="/blog/info/addictive-mini-games-for-surface">Addictive mini games for Surface</a>
+      <a href="/info/addictive-mini-games-for-surface">Addictive mini games for Surface</a>
       
     </div>
     <div class="large-6 cell">
       
       <span class="prev">Previous</span>
-      <a href="/blog/tutorial/setup-mobile-service-table-permissions-and-authentication">Setup Mobile Service table permissions and authentication</a>
+      <a href="/tutorial/setup-mobile-service-table-permissions-and-authentication">Setup Mobile Service table permissions and authentication</a>
       
     </div>
   </div>

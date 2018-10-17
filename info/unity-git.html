@@ -5,9 +5,9 @@
   <meta name="description" content="Developer blog">
   <title>Merging Unity scenes, prefabs and assets with git</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="/blog/assets/main.css" rel="stylesheet">
+  <link href="/assets/main.css" rel="stylesheet">
   <!-- RSS -->
-  <link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="Deadlyfingers.net" />
+  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Deadlyfingers.net" />
 </head>
 
 <body>
@@ -41,7 +41,7 @@
 
 <p>By default Unity will save scenes and prefabs as binary files. But there is an option to force Unity to save scenes as <a href="https://docs.unity3d.com/Manual/TextSceneFormat.html">YAML text based files</a> instead. This setting can be found under the <strong>Edit &gt; Project Settings &gt; Editor</strong> menu and then under <strong>Asset Serialization Mode</strong> choose <strong>Force Text</strong>.</p>
 
-<p><img src="/blog/assets/images/Unity-Edit-ProjectSettings-Editor-AssetSerializationMode-ForceText.png" alt="unity-edit-projectsettings-editor-assetserializationmode-forcetext" /></p>
+<p><img src="/assets/images/Unity-Edit-ProjectSettings-Editor-AssetSerializationMode-ForceText.png" alt="unity-edit-projectsettings-editor-assetserializationmode-forcetext" /></p>
 
 <p>But as this is not the default setting make sure when applying this mode that everyone else on the team is happy to switch.<br />
 If you select “Force Text” to save files in YAML format you should add a <em>.gitattributes</em> file that tells git to treat <em>*.unity</em>, <em>*.prefab</em> and <em>*.asset</em> files as binary to ensure git doesn’t try to merge scenes automatically. Paste the following into the <em>.gitconfig</em> file inside your Unity project:</p>
@@ -152,7 +152,7 @@ git config --global --list
 
 <div id="pagination" class="large-12 cell">
   <div>
-    <a href="/blog/info/unity-git">Merging Unity scenes, prefabs and assets with git</a>
+    <a href="/info/unity-git">Merging Unity scenes, prefabs and assets with git</a>
     <span>
       
       <span>by David Douglas</span>
@@ -173,13 +173,13 @@ git config --global --list
     <div class="large-6 cell">
       
       <span class="next">Next</span>
-      <a href="/blog/tutorial/unity3d-and-azure-blob-storage">Unity3d and Azure Blob Storage</a>
+      <a href="/tutorial/unity3d-and-azure-blob-storage">Unity3d and Azure Blob Storage</a>
       
     </div>
     <div class="large-6 cell">
       
       <span class="prev">Previous</span>
-      <a href="/blog/code/swift-json-parsing-for-ios-development">Swift JSON parsing for iOS development</a>
+      <a href="/code/swift-json-parsing-for-ios-development">Swift JSON parsing for iOS development</a>
       
     </div>
   </div>

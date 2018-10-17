@@ -5,9 +5,9 @@
   <meta name="description" content="Developer blog">
   <title>Unity3D and Cloud backend using Azure Mobile Services and Prime31 plugin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="/blog/assets/main.css" rel="stylesheet">
+  <link href="/assets/main.css" rel="stylesheet">
   <!-- RSS -->
-  <link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="Deadlyfingers.net" />
+  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Deadlyfingers.net" />
 </head>
 
 <body>
@@ -43,34 +43,34 @@
 <ol>
   <li><a href="https://manage.windowsazure.com">Sign-in to Azure portal</a>. If you don’t have an Azure account yet game developers can register for the <a href="http://bit.ly/gamedevoffer">Cloud GameDev Offer.</a></li>
   <li>Create Azure Mobile Service
-  <img src="/blog/assets/images/Slide07.jpg" alt="Create Mobile Service" />
-  <img src="/blog/assets/images/Slide08.jpg" alt="Create Mobile Service" />
-  <img src="/blog/assets/images/Slide09.jpg" alt="Create Mobile Service" /></li>
+  <img src="/assets/images/Slide07.jpg" alt="Create Mobile Service" />
+  <img src="/assets/images/Slide08.jpg" alt="Create Mobile Service" />
+  <img src="/assets/images/Slide09.jpg" alt="Create Mobile Service" /></li>
   <li>Create Demo TodoItem Table
-  <img src="/blog/assets/images/Slide20.jpg" alt="Create Mobile Service" /></li>
+  <img src="/assets/images/Slide20.jpg" alt="Create Mobile Service" /></li>
   <li>Get <a href="https://prime31.com/plugins">Prime31 “Microsoft Azure Plugin”</a> for Windows 8 Store. (free until July 2015)
-  <a href="https://prime31.com/plugins"><img src="/blog/assets/images/Slide18.jpg" alt="Create Mobile Service" /></a>
+  <a href="https://prime31.com/plugins"><img src="/assets/images/Slide18.jpg" alt="Create Mobile Service" /></a>
   When you click on the “Download Now” button, it will prompt you for your name/email. Submit the form to get the download link to the Unity plugin sent to your email.</li>
   <li>Download &amp; install <a href="http://go.microsoft.com/fwlink/?LinkId=257545&amp;clcid=0x409">Microsoft Azure Mobile Services SDK.</a>
-  <a href="http://go.microsoft.com/fwlink/?LinkId=257545&amp;clcid=0x409"><img src="/blog/assets/images/InstallWindowsAzureSDK.png" alt="Install Azure Mobile Services SDK" /></a></li>
+  <a href="http://go.microsoft.com/fwlink/?LinkId=257545&amp;clcid=0x409"><img src="/assets/images/InstallWindowsAzureSDK.png" alt="Install Azure Mobile Services SDK" /></a></li>
   <li>Create new <a href="http://unity3d.com/unity/download">Unity3D</a> project
-  <img src="/blog/assets/images/Slide21.jpg" alt="Unity3D New Project" /></li>
+  <img src="/assets/images/Slide21.jpg" alt="Unity3D New Project" /></li>
   <li>Download Prime31 plugin from email link and then open the ‘MetroAzure.unitypackage’ package
-  <img src="/blog/assets/images/Slide22.jpg" alt="Open Prime31 plugin package" /></li>
+  <img src="/assets/images/Slide22.jpg" alt="Open Prime31 plugin package" /></li>
   <li>Import the Prime31 plugin package.
-  <img src="/blog/assets/images/Slide23.jpg" alt="Unity3D import plugin package" /></li>
+  <img src="/assets/images/Slide23.jpg" alt="Unity3D import plugin package" /></li>
   <li>Open “MetroAzure” Scene
-  <img src="/blog/assets/images/Slide24.jpg" alt="Unity3D open MetroAzure Scene" /></li>
+  <img src="/assets/images/Slide24.jpg" alt="Unity3D open MetroAzure Scene" /></li>
   <li>Open “MetroAzureDemoUI.cs” Script
-  <img src="/blog/assets/images/Slide25.jpg" alt="Unity3D open MetroAzureDemoUI script" /></li>
+  <img src="/assets/images/Slide25.jpg" alt="Unity3D open MetroAzureDemoUI script" /></li>
   <li>Copy &amp; Paste Azure Mobile Services Connection Strings (from Azure Mobile Service portal)
-  <img src="/blog/assets/images/Slide26.jpg" alt="Unity3D open MetroAzureDemoUI script" />
+  <img src="/assets/images/Slide26.jpg" alt="Unity3D open MetroAzureDemoUI script" />
     <blockquote>
       <p>Remember to save changes!</p>
     </blockquote>
   </li>
   <li>Select <strong>File &gt; Build Settings</strong> and target Windows Store platform.
-  <img src="/blog/assets/images/Slide29.jpg" alt="Unity3D Build Settings" />
+  <img src="/assets/images/Slide29.jpg" alt="Unity3D Build Settings" />
     <ul>
       <li>“Add Current” scene</li>
       <li>Select “Windows Store” and “Switch Platform”</li>
@@ -78,23 +78,23 @@
     </ul>
   </li>
   <li>Select <strong>Player Settings</strong>
-  <img src="/blog/assets/images/Slide30.jpg" alt="Unity3D Player Settings" />
+  <img src="/assets/images/Slide30.jpg" alt="Unity3D Player Settings" />
   Under “Metro Unprocessed Plugins” set:<br />
   <strong>Size:</strong>  <strong><em>1</em></strong><br />
   <strong>Element 0:</strong>  <strong><em>P31MetroAzure.dll</em></strong><br />
   Click <strong>Build</strong></li>
   <li>Open Windows Store build in <a href="https://go.microsoft.com/fwLink/?LinkID=257546&amp;clcid=0x409">Visual Studio</a>
-  <img src="/blog/assets/images/Slide31.jpg" alt="Windows Store build" /></li>
+  <img src="/assets/images/Slide31.jpg" alt="Windows Store build" /></li>
   <li>Open ‘Package.appxmanifest’ manifest to add Internet capabilities.
-  <img src="/blog/assets/images/Slide32.jpg" alt="Windows app manifest capabilities" /></li>
+  <img src="/assets/images/Slide32.jpg" alt="Windows app manifest capabilities" /></li>
   <li>If necessary open ‘Configuration Manager’ to target current PC hardware.
-  <img src="/blog/assets/images/Slide33.jpg" alt="Windows Configuration Manager" />
-  <img src="/blog/assets/images/Slide34.jpg" alt="Windows Configuration Manager x86" /></li>
+  <img src="/assets/images/Slide33.jpg" alt="Windows Configuration Manager" />
+  <img src="/assets/images/Slide34.jpg" alt="Windows Configuration Manager x86" /></li>
   <li>Build and run!
-  <img src="/blog/assets/images/Slide35.jpg" alt="Visual Studio" />
-  <img src="/blog/assets/images/Slide36.jpg" alt="Unity demo" />
+  <img src="/assets/images/Slide35.jpg" alt="Visual Studio" />
+  <img src="/assets/images/Slide36.jpg" alt="Unity demo" />
   ‘Connect Azure Service’ first, then try adding some items.
-  <img src="/blog/assets/images/Slide37.jpg" alt="Azure Mobile Services Demo Table" />
+  <img src="/assets/images/Slide37.jpg" alt="Azure Mobile Services Demo Table" />
   You will see the items appear in your Azure Mobile Service ‘TodoItem’ table.</li>
 </ol>
 
@@ -132,7 +132,7 @@ http://www.slideshare.net/deadlyfingers/unity-and-azure-mobile-services</p>
 
 <div id="pagination" class="large-12 cell">
   <div>
-    <a href="/blog/tutorial/unity3d-and-cloud-backend-using-azure-mobile-services-and-prime31-plugin">Unity3D and Cloud backend using Azure Mobile Services and Prime31 plugin</a>
+    <a href="/tutorial/unity3d-and-cloud-backend-using-azure-mobile-services-and-prime31-plugin">Unity3D and Cloud backend using Azure Mobile Services and Prime31 plugin</a>
     <span>
       
       <span>by David Douglas</span>
@@ -159,13 +159,13 @@ http://www.slideshare.net/deadlyfingers/unity-and-azure-mobile-services</p>
     <div class="large-6 cell">
       
       <span class="next">Next</span>
-      <a href="/blog/tutorial/unity3d-game-dev-with-azure-mobile-services-using-bitrave-plugin">Unity3D game dev with Azure Mobile Services using BitRave plugin</a>
+      <a href="/tutorial/unity3d-game-dev-with-azure-mobile-services-using-bitrave-plugin">Unity3D game dev with Azure Mobile Services using BitRave plugin</a>
       
     </div>
     <div class="large-6 cell">
       
       <span class="prev">Previous</span>
-      <a href="/blog/tutorial/how-to-record-screen-of-iphone-ipad-android-and-windowsphone-device">How to record screen of iPhone, iPad, Android and WindowsPhone device</a>
+      <a href="/tutorial/how-to-record-screen-of-iphone-ipad-android-and-windowsphone-device">How to record screen of iPhone, iPad, Android and WindowsPhone device</a>
       
     </div>
   </div>

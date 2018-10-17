@@ -5,9 +5,9 @@
   <meta name="description" content="Developer blog">
   <title>Azure App Services for Unity3D</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="/blog/assets/main.css" rel="stylesheet">
+  <link href="/assets/main.css" rel="stylesheet">
   <!-- RSS -->
-  <link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="Deadlyfingers.net" />
+  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Deadlyfingers.net" />
 </head>
 
 <body>
@@ -41,20 +41,20 @@
 
 <ol>
   <li>Open <em>Settings</em>, search for <strong>Easy Tables</strong> and add a <strong>‘Highscores’</strong> table.
- <img src="/blog/assets/images/AppService_1-EasyTables.png" alt="AppService_1-EasyTables" /></li>
+ <img src="/assets/images/AppService_1-EasyTables.png" alt="AppService_1-EasyTables" /></li>
   <li>Set all table permissions to allow anonymous access to start with. 
- <img src="/blog/assets/images/AppService_2-TablePermissions.png" alt="AppService_2-TablePermissions" /></li>
+ <img src="/assets/images/AppService_2-TablePermissions.png" alt="AppService_2-TablePermissions" /></li>
   <li>Manage schema to add <em>Number</em> column for <strong>‘score’</strong> and <em>String</em> column for <strong>‘userId’</strong>
- <img src="/blog/assets/images/AppService_3-ManageSchema.png" alt="AppService_3-ManageSchema" /></li>
+ <img src="/assets/images/AppService_3-ManageSchema.png" alt="AppService_3-ManageSchema" /></li>
   <li>Additionally, if you want to store user data or game scores you can enable authentication using Facebook, Twitter, Microsoft account or Google account. If you want to use the Facebook login in this demo you will need to <a href="https://developers.facebook.com/docs/apps/register#create-app">create a Facebook app</a>. Once you’ve created the Facebook app add the Facebook App ID and Secret to your Azure App Service Facebook Authentication settings.
- <img src="/blog/assets/images/AppService_Auth.png" alt="AppService_Auth" />
+ <img src="/assets/images/AppService_Auth.png" alt="AppService_Auth" />
   Then configure the Facebook App Basic and Advanced settings with your Azure App Service URL:
- <img src="/blog/assets/images/FacebookAppDomains.png" alt="FacebookAppDomains" />
- <img src="/blog/assets/images/FacebookAppSecureCanvasURL.png" alt="FacebookAppSecureCanvasURL" />
- <img src="/blog/assets/images/FacebookAppAdvancedSettings.png" alt="FacebookAppAdvancedSettings" />
+ <img src="/assets/images/FacebookAppDomains.png" alt="FacebookAppDomains" />
+ <img src="/assets/images/FacebookAppSecureCanvasURL.png" alt="FacebookAppSecureCanvasURL" />
+ <img src="/assets/images/FacebookAppAdvancedSettings.png" alt="FacebookAppAdvancedSettings" />
   If in doubt how to configure these settings check out the <a href="https://azure.microsoft.com/en-gb/documentation/articles/app-service-mobile-how-to-configure-facebook-authentication/">Azure App Service documentation</a>.</li>
   <li>Once authentication is setup the <strong>‘Highscores’</strong> table script can be edited to save <strong>‘userId’</strong> information.
- <img src="/blog/assets/images/AppService_4-TableInsertScript.png" alt="AppService_4-TableInsertScript" />
+ <img src="/assets/images/AppService_4-TableInsertScript.png" alt="AppService_4-TableInsertScript" />
     <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">table</span><span class="p">.</span><span class="nx">insert</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
  <span class="k">if</span> <span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
      <span class="nx">context</span><span class="p">.</span><span class="nx">item</span><span class="p">.</span><span class="nx">userId</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
@@ -64,8 +64,8 @@
 </code></pre></div>    </div>
   </li>
   <li>In addition to table scripts you can also create custom APIs. In <em>Settings</em>, search for <strong>Easy APIs</strong> and add an example <strong>‘hello’</strong> API.
- <img src="/blog/assets/images/AppService_EasyAPIs.png" alt="AppService_EasyAPIs" />
- <img src="/blog/assets/images/AppService_EasyAPIs-hello.js.png" alt="AppService_EasyAPIs-hello.js" />
+ <img src="/assets/images/AppService_EasyAPIs.png" alt="AppService_EasyAPIs" />
+ <img src="/assets/images/AppService_EasyAPIs-hello.js.png" alt="AppService_EasyAPIs-hello.js" />
     <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
  <span class="s2">"get"</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
      <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span> <span class="na">message</span> <span class="p">:</span> <span class="s2">"Hello Unity!"</span> <span class="p">});</span>
@@ -86,7 +86,7 @@
 
 <div id="pagination" class="large-12 cell">
   <div>
-    <a href="/blog/tutorial/azure-app-services-for-unity3d">Azure App Services for Unity3D</a>
+    <a href="/tutorial/azure-app-services-for-unity3d">Azure App Services for Unity3D</a>
     <span>
       
       <span>by David Douglas</span>
@@ -107,13 +107,13 @@
     <div class="large-6 cell">
       
       <span class="next">Next</span>
-      <a href="/blog/code/creating-content-with-web-components">Creating content with Web Components</a>
+      <a href="/code/creating-content-with-web-components">Creating content with Web Components</a>
       
     </div>
     <div class="large-6 cell">
       
       <span class="prev">Previous</span>
-      <a href="/blog/info/responsive-design">Responsive Design from problem to production</a>
+      <a href="/info/responsive-design">Responsive Design from problem to production</a>
       
     </div>
   </div>
