@@ -5,9 +5,9 @@
   <meta name="description" content="Developer blog">
   <title>Migrating from Wordpress blog to GitHub Pages</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="/assets/main.css" rel="stylesheet">
+  <link href="/blog/assets/main.css" rel="stylesheet">
   <!-- RSS -->
-  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Deadlyfingers.net" />
+  <link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="Deadlyfingers.net" />
 </head>
 
 <body>
@@ -69,10 +69,11 @@ Ultimately I decided to migrate my Wordpress blog to GitHub pages.</p>
 </blockquote>
 
 <ol>
-  <li>If you are migrating an existing blog you have to export your content from the Wordpress admin control panel.
+  <li>
+    <p>If you are migrating an existing blog you have to export your content from the Wordpress admin control panel.</p>
+
     <blockquote>
-      <p>The general form of the URL is as follows:<br />
- <code class="highlighter-rouge">https://YOUR-USER-NAME.wordpress.com/wp-admin/export.php</code></p>
+      <p>The general form of the URL is as follows: <code class="highlighter-rouge">https://YOUR-USER-NAME.wordpress.com/wp-admin/export.php</code></p>
     </blockquote>
   </li>
   <li>
@@ -121,7 +122,8 @@ Ultimately I decided to migrate my Wordpress blog to GitHub pages.</p>
       <p>NB. Don’t use “\” in path otherwise you will get file not found error, use “/” in path instead.</p>
     </blockquote>
   </li>
-  <li>To show code syntax highlights you will need to add some styles for <a href="https://github.com/jneen/rouge">Rouge</a> (GitHub Page’s syntax highlighter). You can use Rougify to copy GitHub’s code syntax highlighting to a stylesheet.
+  <li>
+    <p>To show code syntax highlights you will need to add some styles for <a href="https://github.com/jneen/rouge">Rouge</a> (GitHub Page’s syntax highlighter). You can use Rougify to copy GitHub’s code syntax highlighting to a stylesheet.</p>
     <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> gem install rouge
 </code></pre></div>    </div>
     <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> rougify style github <span class="o">&gt;</span> _sass/styles/_rouge.scss
@@ -192,7 +194,7 @@ Ultimately I decided to migrate my Wordpress blog to GitHub pages.</p>
 
 <div id="pagination" class="large-12 cell">
   <div>
-    <a href="/info/migrating-from-wordpress-to-github-pages">Migrating from Wordpress blog to GitHub Pages</a>
+    <a href="/blog/info/migrating-from-wordpress-to-github-pages">Migrating from Wordpress blog to GitHub Pages</a>
     <span>
       
       <span>by David Douglas</span>
@@ -224,7 +226,7 @@ Ultimately I decided to migrate my Wordpress blog to GitHub pages.</p>
     <div class="large-6 cell">
       
       <span class="prev">Previous</span>
-      <a href="/code/custom-vuforia-vumarks-to-identify-iot-devices-with-hololens">Custom Vuforia VuMarks to identify and monitor IoT Devices with HoloLens</a>
+      <a href="/blog/code/custom-vuforia-vumarks-to-identify-iot-devices-with-hololens">Custom Vuforia VuMarks to identify and monitor IoT Devices with HoloLens</a>
       
     </div>
   </div>
