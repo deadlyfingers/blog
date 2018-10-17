@@ -1,154 +1,123 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2018-10-17T14:56:01+01:00</updated><id>/</id><title type="html">Deadlyfingers.net</title><subtitle>Developer blog</subtitle><author><name>David Douglas</name></author><entry><title type="html">Migrating from Wordpress blog to GitHub Pages</title><link href="/info/migrating-from-wordpress-to-github-pages" rel="alternate" type="text/html" title="Migrating from Wordpress blog to GitHub Pages" /><published>2018-10-16T00:00:00+01:00</published><updated>2018-10-16T00:00:00+01:00</updated><id>/info/migrating-from-wordpress-to-github-pages</id><content type="html" xml:base="/info/migrating-from-wordpress-to-github-pages">&lt;p&gt;Wordpress has done a decent job of running my blog. 
-But I’ve longer for something leaner for writing developer code stories as the rich &lt;strong&gt;HTML&lt;/strong&gt; text editor tends to introduce too much complexity.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2018-10-17T15:04:45+01:00</updated><id>/</id><title type="html">Deadlyfingers.net</title><subtitle>Developer blog</subtitle><author><name>David Douglas</name></author><entry><title type="html">Migrating from Wordpress blog to GitHub Pages</title><link href="/info/migrating-from-wordpress-to-github-pages" rel="alternate" type="text/html" title="Migrating from Wordpress blog to GitHub Pages" /><published>2018-10-16T00:00:00+01:00</published><updated>2018-10-16T00:00:00+01:00</updated><id>/info/migrating-from-wordpress-to-github-pages</id><content type="html" xml:base="/info/migrating-from-wordpress-to-github-pages">Wordpress has done a decent job of running my blog. 
+But I've longer for something leaner for writing developer code stories as the rich **HTML** text editor tends to introduce too much complexity. 
 
 &lt;!--more--&gt;
 
-&lt;p&gt;Initially I thought about writing a custom blog web app but decided it would be better to consider existing platforms that can handle my requirements.
-Ultimately I decided to migrate my Wordpress blog to GitHub pages.&lt;/p&gt;
+Initially I thought about writing a custom blog web app but decided it would be better to consider existing platforms that can handle my requirements.
+Ultimately I decided to migrate my Wordpress blog to GitHub pages.
 
-&lt;p&gt;Here’s a bunch of things I like with GitHub Pages compared with my self-hosted Wordpress site:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Rather than edit posts in small scroll view I can use a desktop code editor like &lt;a href=&quot;https://code.visualstudio.com/&quot;&gt;VS Code&lt;/a&gt; which supports full screen editing of text and &lt;a href=&quot;https://code.visualstudio.com/docs/languages/markdown#_editor-and-preview-synchronization&quot;&gt;live code preview&lt;/a&gt;. (I’m aware this might not be everyone’s cup of tea but writing developer blog posts inside a developer tool feels right at home for me!)&lt;/li&gt;
-  &lt;li&gt;Markdown is much easier for writing developer documentation and inline code snippets, but I can also inject HTML when needed.&lt;/li&gt;
-  &lt;li&gt;Use GitHub as server - I don’t need to provide my own hosting or database. Free hosting is nice!&lt;/li&gt;
-  &lt;li&gt;Easy to setup &lt;strong&gt;custom domain&lt;/strong&gt; - just add some &lt;a href=&quot;https://help.github.com/articles/setting-up-an-apex-domain/#configuring-a-records-with-your-dns-provider&quot;&gt;&lt;strong&gt;A Records&lt;/strong&gt; with your DNS provider&lt;/a&gt;.
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;185.199.108.153&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;185.199.109.153&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;185.199.110.153&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;185.199.111.153&lt;/code&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://blog.github.com/2018-05-01-github-pages-custom-domains-https/&quot;&gt;GitHub has partnered with Let’s Encrypt&lt;/a&gt; so you get &lt;strong&gt;HTTPS&lt;/strong&gt; for free - just check a box!&lt;/li&gt;
-&lt;/ul&gt;
+Here's a bunch of things I like with GitHub Pages compared with my self-hosted Wordpress site:
+- Rather than edit posts in small scroll view I can use a desktop code editor like [VS Code](https://code.visualstudio.com/) which supports full screen editing of text and [live code preview](https://code.visualstudio.com/docs/languages/markdown#_editor-and-preview-synchronization). (I'm aware this might not be everyone's cup of tea but writing developer blog posts inside a developer tool feels right at home for me!)
+- Markdown is much easier for writing developer documentation and inline code snippets, but I can also inject HTML when needed.
+- Use GitHub as server - I don't need to provide my own hosting or database. Free hosting is nice!
+- Easy to setup **custom domain** - just add some [**A Records** with your DNS provider](https://help.github.com/articles/setting-up-an-apex-domain/#configuring-a-records-with-your-dns-provider).
+    - `185.199.108.153`
+    - `185.199.109.153`
+    - `185.199.110.153`
+    - `185.199.111.153`
+- [GitHub has partnered with Let's Encrypt](https://blog.github.com/2018-05-01-github-pages-custom-domains-https/) so you get **HTTPS** for free - just check a box!
 
-&lt;p&gt;However there are some downsides during this process:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Not as easy to setup as Wordpress.&lt;/li&gt;
-  &lt;li&gt;Don’t expect the migration of Wordpress HTML to MD files to be perfect! In my case the conversion tool had problems preserving spacing in code blocks and some character conversions may need fixed.&lt;/li&gt;
-  &lt;li&gt;By default all updates will be public on github so you have to think about that if you need to support private posts.&lt;/li&gt;
-&lt;/ul&gt;
+However there are some downsides during this process:
+- Not as easy to setup as Wordpress. 
+- Don't expect the migration of Wordpress HTML to MD files to be perfect! In my case the conversion tool had problems preserving spacing in code blocks and some character conversions may need fixed.
+- By default all updates will be public on github so you have to think about that if you need to support private posts.
 
-&lt;h2 id=&quot;how-to-migrate-from-wordpress-to-github-pages-jekyll&quot;&gt;How to migrate from Wordpress to GitHub Pages (Jekyll)&lt;/h2&gt;
+## How to migrate from Wordpress to GitHub Pages (Jekyll)
 
-&lt;blockquote&gt;
-  &lt;p&gt;GitHub Pages is powered by &lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt;. To import your Wordpress XML archive and run Jekyll locally you will need to install &lt;a href=&quot;https://www.ruby-lang.org/en/downloads/&quot;&gt;Ruby 2.1&lt;/a&gt; or better.&lt;/p&gt;
-&lt;/blockquote&gt;
+&gt; GitHub Pages is powered by [Jekyll](https://jekyllrb.com/). To import your Wordpress XML archive and run Jekyll locally you will need to install [Ruby 2.1](https://www.ruby-lang.org/en/downloads/) or better.
 
-&lt;ol&gt;
-  &lt;li&gt;If you are migrating an existing blog you have to export your content from the Wordpress admin control panel.
-    &lt;blockquote&gt;
-      &lt;p&gt;The general form of the URL is as follows:&lt;br /&gt;
- &lt;code class=&quot;highlighter-rouge&quot;&gt;https://YOUR-USER-NAME.wordpress.com/wp-admin/export.php&lt;/code&gt;&lt;/p&gt;
-    &lt;/blockquote&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Import the Wordpress XML archive file as mentioned on the &lt;a href=&quot;http://import.jekyllrb.com/docs/wordpressdotcom/&quot;&gt;import wordpress to Jekyll docs&lt;/a&gt;&lt;/p&gt;
+1. If you are migrating an existing blog you have to export your content from the Wordpress admin control panel. 
+    &gt; The general form of the URL is as follows:  
+    `https://YOUR-USER-NAME.wordpress.com/wp-admin/export.php`
 
-    &lt;blockquote&gt;
-      &lt;p&gt;Install Ruby Gems&lt;/p&gt;
-    &lt;/blockquote&gt;
+2. Import the Wordpress XML archive file as mentioned on the [import wordpress to Jekyll docs](http://import.jekyllrb.com/docs/wordpressdotcom/)
+    
+    &gt; Install Ruby Gems
 
-    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; gem install jekyll-import
- gem install hpricot
- gem install open_uri_redirections
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;blockquote&gt;
-      &lt;p&gt;Convert Wordpress XML archive to HTML files and download images to ‘assets’ directory.&lt;/p&gt;
-    &lt;/blockquote&gt;
+    ```shell
+    gem install jekyll-import
+    gem install hpricot
+    gem install open_uri_redirections
+    ```
+    &gt; Convert Wordpress XML archive to HTML files and download images to 'assets' directory.
+    
+    ```shell
+    ruby -rubygems -e 'require &quot;jekyll-import&quot;;
+    JekyllImport::Importers::WordpressDotCom.run({
+      &quot;source&quot; =&gt; &quot;C:/Users/USERNAME/Downloads/REPLACE_USING_YOUR_FILE_NAME.wordpress.YYYY-MM-DD.xml&quot;,
+      &quot;no_fetch_images&quot; =&gt; false,
+      &quot;assets_folder&quot; =&gt; &quot;assets/images&quot;
+    })'
+    ```
 
-    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; ruby &lt;span class=&quot;nt&quot;&gt;-rubygems&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'require &quot;jekyll-import&quot;;
- JekyllImport::Importers::WordpressDotCom.run({
-   &quot;source&quot; =&amp;gt; &quot;C:/Users/USERNAME/Downloads/REPLACE_USING_YOUR_FILE_NAME.wordpress.YYYY-MM-DD.xml&quot;,
-   &quot;no_fetch_images&quot; =&amp;gt; false,
-   &quot;assets_folder&quot; =&amp;gt; &quot;assets/images&quot;
- })'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Convert HTML files to Markdown files. You can try any number of tools to see what works best for you. I tried various ones including the &lt;a href=&quot;https://github.com/xijo/reverse_markdown&quot;&gt;reverse_markdown&lt;/a&gt; Ruby gem and the &lt;a href=&quot;https://github.com/aaronsw/html2text.git&quot;&gt;html2text&lt;/a&gt; Python script. To help batch process the files I created a &lt;a href=&quot;https://gist.github.com/deadlyfingers/2023c61cbac83bb613393f262693cdf4&quot;&gt;Wordpress HTML to MD gist&lt;/a&gt; to find any &lt;strong&gt;*.html&lt;/strong&gt; files in the ‘_posts’ directory and convert them all to &lt;strong&gt;*.md&lt;/strong&gt; files using &lt;a href=&quot;https://rubygems.org/gems/reverse-markdown&quot;&gt;reverse_markdown&lt;/a&gt; gem.&lt;/p&gt;
+3. Convert HTML files to Markdown files. You can try any number of tools to see what works best for you. I tried various ones including the [reverse_markdown](https://github.com/xijo/reverse_markdown) Ruby gem and the [html2text](https://github.com/aaronsw/html2text.git) Python script. To help batch process the files I created a [Wordpress HTML to MD gist](https://gist.github.com/deadlyfingers/2023c61cbac83bb613393f262693cdf4) to find any **\*.html** files in the '_posts' directory and convert them all to **\*.md** files using [reverse_markdown](https://rubygems.org/gems/reverse-markdown) gem.
+    
+    &gt; **'wordpress-html-to-md.rb'** gist usage:
 
-    &lt;blockquote&gt;
-      &lt;p&gt;&lt;strong&gt;‘wordpress-html-to-md.rb’&lt;/strong&gt; gist usage:&lt;/p&gt;
-    &lt;/blockquote&gt;
-
-    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; gem install reverse_markdown
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; ruby ./wordpress-html-to-md.rb &lt;span class=&quot;s2&quot;&gt;&quot;_posts&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    ```shell
+    gem install reverse_markdown
+    ```
+    ```shell
+    ruby ./wordpress-html-to-md.rb &quot;_posts&quot;
+    ```
     &lt;script src=&quot;https://gist.github.com/deadlyfingers/2023c61cbac83bb613393f262693cdf4.js&quot;&gt;&lt;/script&gt;
 
-    &lt;blockquote&gt;
-      &lt;p&gt;&lt;strong&gt;html2text&lt;/strong&gt; usage:&lt;/p&gt;
-    &lt;/blockquote&gt;
+    &gt; **html2text** usage:
 
-    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; ./html2text.py C:/Users/USERNAME/git/blog/_posts/YYYY-MM-DD-filename.html
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;blockquote&gt;
-      &lt;p&gt;NB. Don’t use “\” in path otherwise you will get file not found error, use “/” in path instead.&lt;/p&gt;
-    &lt;/blockquote&gt;
-  &lt;/li&gt;
-  &lt;li&gt;To show code syntax highlights you will need to add some styles for &lt;a href=&quot;https://github.com/jneen/rouge&quot;&gt;Rouge&lt;/a&gt; (GitHub Page’s syntax highlighter). You can use Rougify to copy GitHub’s code syntax highlighting to a stylesheet.
-    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; gem install rouge
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; rougify style github &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; _sass/styles/_rouge.scss
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
+    ```shell
+    ./html2text.py C:/Users/USERNAME/git/blog/_posts/YYYY-MM-DD-filename.html
+    ```
+    &gt; NB. Don't use &quot;\\&quot; in path otherwise you will get file not found error, use &quot;/&quot; in path instead.
 
-&lt;p&gt;After this you might decide to apply one of the &lt;a href=&quot;https://pages.github.com/themes/&quot;&gt;built-in GitHub Pages themes&lt;/a&gt; or use a &lt;a href=&quot;https://github.com/benbalter/jekyll-remote-theme&quot;&gt;remote theme&lt;/a&gt; or &lt;a href=&quot;https://jekyllrb.com/docs/themes/&quot;&gt;create your own theme&lt;/a&gt;. In my case I added the &lt;a href=&quot;https://foundation.zurb.com/sites/docs/xy-grid.html&quot;&gt;Foundation XY-Grid&lt;/a&gt; module for responsive design grid layouts. One thing I would like to see supported in GitHub Pages is support for &lt;strong&gt;npm packages&lt;/strong&gt;. Everyone seems to have their own way for building this out and it would be nice just to provide a &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt; file and let GitHub take take of the rest. One nice solution however might be to roll out the &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; dependencies as part of a remote theme. But at this early stage I prefer to keep it all together in one repo until I have proved everything &lt;em&gt;just works&lt;/em&gt; over time.&lt;/p&gt;
+4. To show code syntax highlights you will need to add some styles for [Rouge](https://github.com/jneen/rouge) (GitHub Page's syntax highlighter). You can use Rougify to copy GitHub's code syntax highlighting to a stylesheet.
+    ```shell
+    gem install rouge
+    ```
+    ```shell
+    rougify style github &gt; _sass/styles/_rouge.scss
+    ```
 
-&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+After this you might decide to apply one of the [built-in GitHub Pages themes](https://pages.github.com/themes/) or use a [remote theme](https://github.com/benbalter/jekyll-remote-theme) or [create your own theme](https://jekyllrb.com/docs/themes/). In my case I added the [Foundation XY-Grid](https://foundation.zurb.com/sites/docs/xy-grid.html) module for responsive design grid layouts. One thing I would like to see supported in GitHub Pages is support for **npm packages**. Everyone seems to have their own way for building this out and it would be nice just to provide a `package.json` file and let GitHub take take of the rest. One nice solution however might be to roll out the `node_modules` dependencies as part of a remote theme. But at this early stage I prefer to keep it all together in one repo until I have proved everything _just works_ over time. 
 
-&lt;p&gt;I’ve included a list of references below which I found useful during the creation of this new GitHub Pages blog.&lt;/p&gt;
+## References
 
-&lt;h3 id=&quot;github-pages-settings&quot;&gt;GitHub Pages settings&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://help.github.com/articles/user-organization-and-project-pages/#project-pages-sites&quot;&gt;GitHub Project Pages&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://help.github.com/articles/using-jekyll-as-a-static-site-generator-with-github-pages/&quot;&gt;Using Jekyll&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://pages.github.com/themes/&quot;&gt;Themes&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://help.github.com/articles/configuring-jekyll-plugins/#default-plugins&quot;&gt;Default Plugins&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://help.github.com/articles/updating-your-markdown-processor-to-kramdown/&quot;&gt;markdown: kramdown&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://help.github.com/articles/using-syntax-highlighting-on-github-pages/&quot;&gt;highlighter: rouge&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+I've included a list of references below which I found useful during the creation of this new GitHub Pages blog.
 
-&lt;h3 id=&quot;jekyll-blog&quot;&gt;Jekyll blog&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://import.jekyllrb.com/docs/wordpressdotcom/&quot;&gt;Import posts from Wordpress blog&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://jekyllrb.com/docs/structure/&quot;&gt;Jekyll structure&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://devhints.io/jekyll&quot;&gt;Jekyll cheatsheet&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/rstacruz/cheatsheets/blob/master/jekyll.md&quot;&gt;Jekyll md cheatsheet&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://jekyllrb.com/docs/posts/&quot;&gt;Posts&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://jekyllrb.com/docs/assets/&quot;&gt;Assets&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://jekyllrb.com/docs/assets/#sassscss&quot;&gt;Sass/SCSS&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://ben.balter.com/jekyll-style-guide/themes/&quot;&gt;Generate GitHub Rouge SASS&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://jekyllrb.com/docs/liquid/tags/#link&quot;&gt;Linking to pages&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+### GitHub Pages settings
+- [GitHub Pages](https://pages.github.com/)
+- [GitHub Project Pages](https://help.github.com/articles/user-organization-and-project-pages/#project-pages-sites)
+- [Using Jekyll](https://help.github.com/articles/using-jekyll-as-a-static-site-generator-with-github-pages/)
+- [Themes](https://pages.github.com/themes/)
+- [Default Plugins](https://help.github.com/articles/configuring-jekyll-plugins/#default-plugins)
+- [markdown: kramdown](https://help.github.com/articles/updating-your-markdown-processor-to-kramdown/)
+- [highlighter: rouge](https://help.github.com/articles/using-syntax-highlighting-on-github-pages/)
 
-&lt;h3 id=&quot;yml-config-reference-docs&quot;&gt;YML Config reference docs&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://help.github.com/articles/page-build-failed-config-file-error/#troubleshooting-_configyml-syntax-errors&quot;&gt;YML Syntax&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://jekyllrb.com/docs/configuration/default/&quot;&gt;Jekyll Configuration&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://jekyllrb.com/docs/github-pages/&quot;&gt;GitHub Pages setup&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://pages.github.com/versions/&quot;&gt;GitHub Pages dependencies&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/List_of_tz_database_time_zones&quot;&gt;List of TimeZones&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+### Jekyll blog
+- [Import posts from Wordpress blog](http://import.jekyllrb.com/docs/wordpressdotcom/)
+- [Jekyll structure](https://jekyllrb.com/docs/structure/)
+- [Jekyll cheatsheet](https://devhints.io/jekyll)
+- [Jekyll md cheatsheet](https://github.com/rstacruz/cheatsheets/blob/master/jekyll.md)
+- [Posts](https://jekyllrb.com/docs/posts/)
+- [Assets](https://jekyllrb.com/docs/assets/)
+- [Sass/SCSS](https://jekyllrb.com/docs/assets/#sassscss)
+- [Generate GitHub Rouge SASS](http://ben.balter.com/jekyll-style-guide/themes/)
+- [Linking to pages](https://jekyllrb.com/docs/liquid/tags/#link)
 
-&lt;h3 id=&quot;disqus&quot;&gt;Disqus&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://sgeos.github.io/jekyll/disqus/2016/02/15/adding-disqus-to-a-jekyll-blog.html&quot;&gt;Adding Disqus to Jekyll blog&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+### YML Config reference docs
+- [YML Syntax](https://help.github.com/articles/page-build-failed-config-file-error/#troubleshooting-_configyml-syntax-errors)
+- [Jekyll Configuration](https://jekyllrb.com/docs/configuration/default/)
+- [GitHub Pages setup](https://jekyllrb.com/docs/github-pages/)
+- [GitHub Pages dependencies](https://pages.github.com/versions/)
+- [List of TimeZones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
 
-&lt;h3 id=&quot;foundation&quot;&gt;Foundation&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://foundation.zurb.com/sites/docs/xy-grid.html&quot;&gt;XY-Grid&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+### Disqus
+- [Adding Disqus to Jekyll blog](http://sgeos.github.io/jekyll/disqus/2016/02/15/adding-disqus-to-a-jekyll-blog.html)
 
-&lt;h3 id=&quot;gulp&quot;&gt;Gulp&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.npmjs.com/package/gulp-gh-pages&quot;&gt;Publish build to GitHub Pages&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>David Douglas</name></author><category term="GitHub Pages" /><category term="Jekyll" /><category term="Ruby" /><category term="Wordpress" /><category term="Blog" /><category term="Markdown" /><category term="Website" /><summary type="html">Wordpress has done a decent job of running my blog. But I’ve longer for something leaner for writing developer code stories as the rich HTML text editor tends to introduce too much complexity.</summary></entry><entry><title type="html">Custom Vuforia VuMarks to identify and monitor IoT Devices with HoloLens</title><link href="/code/custom-vuforia-vumarks-to-identify-iot-devices-with-hololens" rel="alternate" type="text/html" title="Custom Vuforia VuMarks to identify and monitor IoT Devices with HoloLens" /><published>2018-09-24T15:47:27+01:00</published><updated>2018-09-24T15:47:27+01:00</updated><id>/code/custom-vuforia-vumarks-to-identify-iot-devices-with-hololens</id><content type="html" xml:base="/code/custom-vuforia-vumarks-to-identify-iot-devices-with-hololens">Some of the most popular experiences of Augmented or Mixed Reality are currently in a gaming or an immersive 3D form. But what makes headsets like the HoloLens so different and special is the ability to still see into the physical world. It is this link that opens up so many new opportunities and future possibilities of spatial computing. An interesting scenario is using HoloLens to interact with IoT devices in the real world. Just by gazing at devices around a room imagine you could identify a specific IoT device to review its real-time telemetry and control it over the air!
+### Foundation
+- [XY-Grid](https://foundation.zurb.com/sites/docs/xy-grid.html)
+
+### Gulp
+- [Publish build to GitHub Pages](https://www.npmjs.com/package/gulp-gh-pages)</content><author><name>David Douglas</name></author><category term="GitHub Pages" /><category term="Jekyll" /><category term="Ruby" /><category term="Wordpress" /><category term="Blog" /><category term="Markdown" /><category term="Website" /><summary type="html">Wordpress has done a decent job of running my blog. But I’ve longer for something leaner for writing developer code stories as the rich HTML text editor tends to introduce too much complexity.</summary></entry><entry><title type="html">Custom Vuforia VuMarks to identify and monitor IoT Devices with HoloLens</title><link href="/code/custom-vuforia-vumarks-to-identify-iot-devices-with-hololens" rel="alternate" type="text/html" title="Custom Vuforia VuMarks to identify and monitor IoT Devices with HoloLens" /><published>2018-09-24T15:47:27+01:00</published><updated>2018-09-24T15:47:27+01:00</updated><id>/code/custom-vuforia-vumarks-to-identify-iot-devices-with-hololens</id><content type="html" xml:base="/code/custom-vuforia-vumarks-to-identify-iot-devices-with-hololens">Some of the most popular experiences of Augmented or Mixed Reality are currently in a gaming or an immersive 3D form. But what makes headsets like the HoloLens so different and special is the ability to still see into the physical world. It is this link that opens up so many new opportunities and future possibilities of spatial computing. An interesting scenario is using HoloLens to interact with IoT devices in the real world. Just by gazing at devices around a room imagine you could identify a specific IoT device to review its real-time telemetry and control it over the air!
 
 ## Setting up some sample IoT devices to interact with...
 
