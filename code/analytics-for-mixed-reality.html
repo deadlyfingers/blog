@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Developer blog">
+  <title>Analytics for Mixed Reality</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/assets/main.css" rel="stylesheet">
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Deadlyfingers.net" />
+</head>
+
+<body>
+  <div class="grid-container">
+    <!-- nav -->
+    <div class="grid-x">
+  <div class="small-6 cell">
+    <h1><a href="/">Deadlyfingers.net</a></h1>
+  </div>
+  <div class="small-6 cell right">
+    <a class="icon twitter" href="https://twitter.com/deadlyfingers"></a>
+    <a class="icon github" href="https://github.com/deadlyfingers"></a>
+    <a class="icon youtube" href="https://youtube.com/deadlyfingerstv"></a>
+  </div>
+</div>
+    <!-- body content -->
+    <div class="grid-x grid-margin-x">
+      <div id="post" class="large-8 cell post">
+  
+  <time datetime="2018-09-17 16:36:26 +0100" class="date">17 Sep 2018</time>
+  
+  <h1 class="post-title">Analytics for Mixed Reality</h1>
+  <div class="post-line"></div>
+  <h2 id="behind-every-good-user-experience-is-great-analytics">Behind every good user experience is great analytics</h2>
+
+<p>If you ever designed or developed client side applications or websites you’ve probably integrated with an analytics service to provide telemetry data to help make informed design choices and development decisions to improve user experience and business outcomes.<br />
+One of the key performance indicators is when you track steps or funnel operations as conversions to calculate a conversion rate for each session. You would want to know how the conversion rate can be improved upon and a good idea would be to watch out for the steps with a high bounce rate where users are dropping off. If the bounce rate is very high then there might even be a blocker or flaw in regards to the user. Either way we can understand the benefit for the collection and study of analytics which is essential for providing the insights that will help designers and developers craft better user experiences and advance product development.</p>
+
+<h1 id="application-insights-for-unity">Application Insights for Unity</h1>
+
+<p>If you’re a Unity developer or you develop in VR, AR, MR or XR you might have stuck the issue of gathering analytics onto the backlog but it should be one of the first items done so you can use it to help plan and prioritize the other features. To help you get started I’ve made an <a href="https://github.com/Unity3dAzure/UnityApplicationInsights">Application Insights for Unity sample</a> so you can start logging telemetry in just a few minutes! All you have to do to add this to your existing Unity app or game is drop the <strong>Unity Application Insights</strong> script onto a Game Object, add your Application Insights <strong>Instrumentation key</strong> and you will be all set to record valuable user session telemetry automatically. After that all you have to do it wait around 5 mins for the telemetry to display in the <strong>Application Insights Usage</strong> section in Azure. You can also extend this in you own app or game to record any custom events or metrics you want to know about. But right out of the box (without any additional effort on your part) you will be able to visualize telemetry for users, sessions and user flow and their journey across the scenes of your Unity app or game. Here are just some of the visualizations already built-in to Application Insights in the Azure portal:</p>
+
+<h3 id="user-flows">User Flows</h3>
+
+<p>Chart user flow across Unity scene changes and split by custom or interaction events.</p>
+
+<p><img src="/assets/images/ApplicationInsights-UserFlows.png" alt="Unity App Insights User Flow" /></p>
+
+<h3 id="sessions">Sessions</h3>
+
+<p>View users and events during sessions.</p>
+
+<p><img src="/assets/images/ApplicationInsights-Sessions.png" alt="Unity App Insights User sessions" /></p>
+
+<h3 id="funnels">Funnels</h3>
+
+<p>Create funnels by creating step by step conditions to get conversion rates.</p>
+
+<p><img src="/assets/images/ApplicationInsights-Funnels.png" alt="Unity App Insights Conversions" /></p>
+
+<h3 id="retention">Retention</h3>
+
+<p>Review returning users over a period of time.</p>
+
+<p><img src="/assets/images/ApplicationInsights-Retention.png" alt="Unity App Insights Retention" /></p>
+
+<h2 id="analytics-for-mixed-reality-interactions">Analytics for Mixed Reality interactions</h2>
+
+<p>In the Unity project there is also a MR sample to show how to setup Application Insights for recording custom interaction events and metrics in a scene. To use the sample please fork or clone the <a href="https://github.com/Unity3dAzure/UnityApplicationInsights">Unity Application Insights sample project</a>, import the <a href="https://github.com/Microsoft/HolographicAcademy/raw/Azure-MixedReality-Labs/Azure%20Mixed%20Reality%20Labs/MR%20and%20Azure%20309%20-%20Application%20insights/AppInsights_LabPlugins.unitypackage">plugins</a> and setup <strong>Application Insights</strong> in <a href="https://portal.azure.com">Azure portal</a> if you haven’t already. Once you’ve got that you can get up and running on HoloLens straight from the Unity Editor:</p>
+
+<ol>
+  <li>To view the Mixed Reality sample in HoloLens open the scene named “Scene-MR”. (Make sure you’ve pasted in your Instrumentation key into the Application Insights game object script)</li>
+  <li>Connect to remote HoloLens device using <strong>Window &gt; XR &gt; Holographic Emulation</strong> window. Note: Requires the <a href="https://www.microsoft.com/en-us/p/holographic-remoting-player/9nblggh4sv40?activetab=pivot%3aoverviewtab">Holographic Remoting Player</a> installed and open on HoloLens to get the <em>Remote Machine</em> IP address.</li>
+  <li>Hit <strong>Play</strong> and you will start recording interaction telemetry with the holograms.</li>
+</ol>
+
+<p>The Application Insights MR scripts will record taps, gaze time and object proximity - when users physically “visit” a hologram by moving closer to it.<br />
+You can also create your own custom dashboard templates using <a href="https://github.com/Azure/ibex-dashboard">Ibex Dashboard</a> (which is another project I helped with) and is designed for visualizing data from Application Insights using <a href="https://aka.ms/kusto">Kusto queries</a>.</p>
+
+<p><img src="/assets/images/IbexDashboard-UnityMR.png" alt="" /></p>
+
+<p>You can add the <a href="https://gist.github.com/deadlyfingers/e664aaccb748be2f332f462615f6a090">dashboard template for MR</a> shown above to visualize the telemetry for MR custom events and metrics. Check out the <a href="https://github.com/Unity3dAzure/UnityApplicationInsights#custom-visualization-of-unity-ui-and-mr-telemetry">readme on github</a> for more info about installing custom Ibex Dashboard templates.</p>
+
+
+</div>
+
+<div class="large-4 cell">
+  <!-- <a href="http://example.com/bar.html#disqus_thread">Link</a> -->
+
+</div>
+
+<div id="pagination" class="large-12 cell">
+  <div>
+    <a href="/code/analytics-for-mixed-reality">Analytics for Mixed Reality</a>
+    <span>
+      
+      <span>by David Douglas</span>
+      
+    </span>
+  </div>
+  <ul class="tags">
+    
+    <li>Application Insights</li>
+    
+    <li>Ibex Dashboard</li>
+    
+    <li>Data Visualisation</li>
+    
+    <li>Azure</li>
+    
+    <li>Unity3D</li>
+    
+    <li>Mixed Reality</li>
+    
+    <li>HoloLens</li>
+    
+  </ul>
+
+  <div class="grid-x grid-margin-x grid-padding-y">
+    <div class="large-6 cell">
+      
+      <span class="next">Next</span>
+      <a href="/code/custom-vuforia-vumarks-to-identify-iot-devices-with-hololens">Custom Vuforia VuMarks to identify and monitor IoT Devices with HoloLens</a>
+      
+    </div>
+    <div class="large-6 cell">
+      
+      <span class="prev">Previous</span>
+      <a href="/code/unity-web-sockets-mixed-reality-uwp">Unity Web Sockets for Mixed Reality</a>
+      
+    </div>
+  </div>
+  <div class="top"><a href="#" class="top">Top</a></div>
+</div>
+    </div>
+  </div>
+
+  <!-- scripts -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+</body>

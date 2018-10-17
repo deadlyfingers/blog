@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Developer blog">
+  <title>Unity3D game dev with Azure Mobile Services using BitRave plugin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/assets/main.css" rel="stylesheet">
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Deadlyfingers.net" />
+</head>
+
+<body>
+  <div class="grid-container">
+    <!-- nav -->
+    <div class="grid-x">
+  <div class="small-6 cell">
+    <h1><a href="/">Deadlyfingers.net</a></h1>
+  </div>
+  <div class="small-6 cell right">
+    <a class="icon twitter" href="https://twitter.com/deadlyfingers"></a>
+    <a class="icon github" href="https://github.com/deadlyfingers"></a>
+    <a class="icon youtube" href="https://youtube.com/deadlyfingerstv"></a>
+  </div>
+</div>
+    <!-- body content -->
+    <div class="grid-x grid-margin-x">
+      <div id="post" class="large-8 cell post">
+  
+  <time datetime="2014-11-21 16:02:28 +0100" class="date">21 Nov 2014</time>
+  
+  <h1 class="post-title">Unity3D game dev with Azure Mobile Services using BitRave plugin</h1>
+  <div class="post-line"></div>
+  <blockquote>
+  <p>Azure Mobile Service is now App Service, please follow the updated <a href="http://www.deadlyfingers.net/azure/azure-app-services-for-unity3d/">tutorial for App Services for Unity3D</a> instead.</p>
+</blockquote>
+
+<p>This quick-start tutorial is for Unity3D game developers who would like to get a cloud backend that runs across multiple platforms (including the Unity Editor for quick testing). One of the big advantages for game devs using Unity3D is that it supports so many platforms. It’s fair to say <a href="http://www.deadlyfingers.net/azure/create-android-app-with-cloud-backend-in-minutes/" title="No. of connected devices greater than no. of individuals">more people own more than one device that connects to the internet</a> and a lot of them can run apps and games. While the platforms and ecosystems may differ as a gamer I would like to play the same game across any device (and on any platform) and expect things to sync. Azure Mobile Services is a ‘Backend as a Service’ which supports multi-platform app development. In Unity the BitRave plugin for Azure Mobile Services is designed to just work on any platform that Unity supports.</p>
+
+<p><a href="http://youtu.be/8Rg3tDsDKVU">Watch getting started with Unity BitRave Azure plugin running on iOS and Android</a></p>
+
+<div class="video"><iframe src="//www.youtube.com/embed/8Rg3tDsDKVU" frameborder="0" allowfullscreen=""></iframe></div>
+
+<ol>
+  <li>To kick off with create a Mobile Service in Azure management portal. If you don’t have an Azure account yet game developers can register for the <a href="http://bit.ly/gamedevoffer">Cloud GameDev Offer.</a>
+ <img src="/assets/images/Slide07.jpg" alt="" />
+    <blockquote>
+      <p>NB: A Mobile Service will only take a minute to setup and just a couple of minutes more to become active and ready to use.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p><a href="http://bit.ly/azurebitrave">Download BitRave plugin.</a>
+  <img src="/assets/images/Unity3D-BitRave-AzureMobileServices_00.png" alt="" /></p>
+  </li>
+  <li>
+    <p>Create new Unity3D project.
+  <img src="/assets/images/Unity3D-BitRave-AzureMobileServices_01.png" alt="" /></p>
+  </li>
+  <li>
+    <p>Copy BitRave’s <em>AzureMobileServicesUniversalPlugin/Assets</em> into Unity3D project’s ‘Assets’ folder.
+  <img src="/assets/images/Unity3D-BitRave-AzureMobileServices_02.png" alt="" /></p>
+  </li>
+  <li>
+    <p><a href="http://bit.ly/bitravejson">Get JSON.NET Unity asset</a> to enable cross platform support.
+  <img src="/assets/images/Unity3D-BitRave-AzureMobileServices_03.png" alt="" /></p>
+  </li>
+  <li>
+    <p>Open <em>TestAzure</em> Scene.
+  <img src="/assets/images/Unity3D-BitRave-AzureMobileServices_04.png" alt="" /></p>
+  </li>
+  <li>
+    <p>Open <em>AzureUI.cs</em> script and replace the connection strings with your own Mobile Service URL &amp; API Key.
+  <img src="/assets/images/Unity3D-BitRave-AzureMobileServices_05.png" alt="" /></p>
+  </li>
+  <li>The BitRave demo uses Authentication with Facebook. You will need to <a href="http://azure.microsoft.com/en-us/documentation/articles/mobile-services-how-to-register-facebook-authentication/">create a Facebook app for your Mobile Service</a> and copy &amp; paste the App Id and App Secret into your Mobile Service’s <strong>IDENTITY</strong> Facebook section. Then <a href="https://developers.facebook.com/tools/accesstoken/">generate the Facebook Access Token</a> under Facebook’s <strong>Tools &gt; Access Tokens.</strong>
+  <img src="/assets/images/Unity3D-BitRave-AzureMobileServices_06a.png" alt="" />
+  Copy the Access Token and paste into <em>AzureUI.cs</em> script’s Access Token value.
+  <img src="/assets/images/Unity3D-BitRave-AzureMobileServices_06b.png" alt="" />
+    <blockquote>
+      <p>NB: Remember to save changes!</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>In Unity select the <strong>Main Camera</strong> and remove the Script in the Inspector panel.
+  <img src="/assets/images/Unity3D-BitRave-AzureMobileServices_07a.png" alt="" />
+  Reattach the <em>AzureUI.cs</em> script. (Drag &amp; drop the script onto the Camera.)
+  <img src="/assets/images/Unity3D-BitRave-AzureMobileServices_07b.png" alt="" />
+  <img src="/assets/images/Unity3D-BitRave-AzureMobileServices_07c.png" alt="" /></p>
+  </li>
+  <li>
+    <p>Add the demo <em>TodoItem</em> table (in Azure Mobile Service’s get started section).
+  <img src="/assets/images/Unity3D-BitRave-AzureMobileServices_08.png" alt="" /></p>
+  </li>
+  <li>
+    <p>Run in Unity Editor and connect to Mobile Service.
+  <img src="/assets/images/Unity3D-BitRave-AzureMobileServices_09a.png" alt="" />
+  Once logged in you can add a <em>TodoItem</em>.
+  <img src="/assets/images/Unity3D-BitRave-AzureMobileServices_09b.png" alt="" />
+  You can query or list all items.
+  <img src="/assets/images/Unity3D-BitRave-AzureMobileServices_09c.png" alt="" />
+  Items can be selected to updated.
+  <img src="/assets/images/Unity3D-BitRave-AzureMobileServices_09d.png" alt="" /></p>
+  </li>
+  <li>
+    <p>In Unity <strong>Build Settings</strong> switch platform to build for iOS. I’ve selected <em>Development Build</em> and <em>Symlink Unity Libraries</em> for smaller/faster builds.
+  <img src="/assets/images/Unity3D-BitRave-AzureMobileServices_10c.png" alt="" />
+  To run on the iOS Simulator edit <strong>Player Settings</strong> and under <strong>Target iOS Version</strong> menu select <strong>Simulator SDK</strong>
+  <img src="/assets/images/Unity3D-BitRave-AzureMobileServices_10d.png" alt="" /></p>
+  </li>
+  <li>
+    <p>Open Xcode project to build &amp; run. Rotate iOS simulator to landscape to display UI.
+  <img src="/assets/images/Unity3D-BitRave-AzureMobileServices_11.png" alt="" />
+  Connect to Mobile Services by logging in to add some items.
+  <img src="/assets/images/Unity3D-BitRave-AzureMobileServices_11b.png" alt="" />
+  <img src="/assets/images/Unity3D-BitRave-AzureMobileServices_11c.png" alt="" /></p>
+  </li>
+  <li>
+    <p>In Unity <strong>Build Settings</strong> switch platform to build for Android. I’ve selected <em>Development Build</em> and <em>Google Android Project</em>.
+  <img src="/assets/images/Unity3D-BitRave-AzureMobileServices_12a.png" alt="" />
+  Edit <strong>Player Settings</strong> to change the <strong>Bundle Identifier</strong>. (This is in reverse domain name notation - for example <em>net.deadlyfingers.DemoApp</em>)
+  <img src="/assets/images/Unity3D-BitRave-AzureMobileServices_12b.png" alt="" /></p>
+  </li>
+  <li>Import Android project into Android Studio.
+  <img src="/assets/images/Unity3D-BitRave-AzureMobileServices_13a.png" alt="" />
+  Edit the <em>AndroidManifest.xml</em> and change the <em>installLocation</em> attribute to <strong>auto</strong>.
+  <img src="/assets/images/Unity3D-BitRave-AzureMobileServices_13c.png" alt="" />
+  Build &amp; run app. (I find the Nexus 7 tablet API 21 ARM emulator works best with Unity builds.)
+  <img src="/assets/images/Unity3D-BitRave-AzureMobileServices_14a.png" alt="" />
+  Rotate Android emulator to landscape to display UI.
+  <img src="/assets/images/Unity3D-BitRave-AzureMobileServices_14b.png" alt="" />
+  Connect to Mobile Services by logging in to add some items.
+  <img src="/assets/images/Unity3D-BitRave-AzureMobileServices_14c.png" alt="" />
+  <img src="/assets/images/Unity3D-BitRave-AzureMobileServices_14d.png" alt="" /></li>
+</ol>
+
+<h2 id="one-more-thing-to-todo">One more thing to todo!</h2>
+
+<p>You can also record the <em>userId</em> by adding one line of code on the server-side.</p>
+
+<p><img src="/assets/images/TodoItem-Insert-userId.png" alt="TodoItem-Insert-userId" /></p>
+
+<p>Edit <em>TodoItem</em> table <strong>Script &gt; Insert</strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">insert</span><span class="p">(</span><span class="nx">item</span><span class="p">,</span> <span class="nx">user</span><span class="p">,</span> <span class="nx">request</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">item</span><span class="p">.</span><span class="nx">userId</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">userId</span><span class="p">;</span> <span class="c1">// adds userId property to insert item from user object. </span>
+  <span class="nx">request</span><span class="p">.</span><span class="nx">execute</span><span class="p">();</span> 
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="score-bonus-points">Score bonus points!</h2>
+
+<p>Check out my <a href="http://www.deadlyfingers.net/azure/unity3d-leaderboard-demo-using-bitrave-azure-plugin/">Leaderboard BitRave tutorial</a> showing how to save, update and query high scores stored in the Cloud using a Mobile Service.</p>
+
+<p>Share your Unity3D <a href="https://twitter.com/search?q=%23GameDev&amp;src=typd">#GameDev</a> with <a href="https://twitter.com/deadlyfingers">@deadlyfingers</a></p>
+
+
+</div>
+
+<div class="large-4 cell">
+  <!-- <a href="http://example.com/bar.html#disqus_thread">Link</a> -->
+
+</div>
+
+<div id="pagination" class="large-12 cell">
+  <div>
+    <a href="/tutorial/unity3d-game-dev-with-azure-mobile-services-using-bitrave-plugin">Unity3D game dev with Azure Mobile Services using BitRave plugin</a>
+    <span>
+      
+      <span>by David Douglas</span>
+      
+    </span>
+  </div>
+  <ul class="tags">
+    
+    <li>Android</li>
+    
+    <li>iOS</li>
+    
+    <li>Azure</li>
+    
+    <li>Mobile Services</li>
+    
+    <li>Unity3D</li>
+    
+  </ul>
+
+  <div class="grid-x grid-margin-x grid-padding-y">
+    <div class="large-6 cell">
+      
+      <span class="next">Next</span>
+      <a href="/tutorial/unity3d-leaderboard-demo-using-bitrave-azure-plugin">Unity3D Leaderboard demo using BitRave Azure plugin</a>
+      
+    </div>
+    <div class="large-6 cell">
+      
+      <span class="prev">Previous</span>
+      <a href="/tutorial/unity3d-and-cloud-backend-using-azure-mobile-services-and-prime31-plugin">Unity3D and Cloud backend using Azure Mobile Services and Prime31 plugin</a>
+      
+    </div>
+  </div>
+  <div class="top"><a href="#" class="top">Top</a></div>
+</div>
+    </div>
+  </div>
+
+  <!-- scripts -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+</body>

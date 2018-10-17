@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Developer blog">
+  <title>Developing a peer to peer web for iOS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/assets/main.css" rel="stylesheet">
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Deadlyfingers.net" />
+</head>
+
+<body>
+  <div class="grid-container">
+    <!-- nav -->
+    <div class="grid-x">
+  <div class="small-6 cell">
+    <h1><a href="/">Deadlyfingers.net</a></h1>
+  </div>
+  <div class="small-6 cell right">
+    <a class="icon twitter" href="https://twitter.com/deadlyfingers"></a>
+    <a class="icon github" href="https://github.com/deadlyfingers"></a>
+    <a class="icon youtube" href="https://youtube.com/deadlyfingerstv"></a>
+  </div>
+</div>
+    <!-- body content -->
+    <div class="grid-x grid-margin-x">
+      <div id="post" class="large-8 cell post">
+  
+  <time datetime="2015-07-30 12:00:26 +0100" class="date">30 Jul 2015</time>
+  
+  <h1 class="post-title">Developing a peer to peer web for iOS</h1>
+  <div class="post-line"></div>
+  <p>To establish peer to peer (p2p) communication on iOS devices there is an API for that known as the <a href="https://developer.apple.com/library/ios/documentation/MultipeerConnectivity/Reference/MultipeerConnectivityFramework/">Multipeer Connectivity framework</a>. There are a couple of things to bear in mind about this framework:</p>
+
+<ul>
+  <li>Discovers and connects with iOS devices but will not discover devices on other platforms like Android</li>
+  <li>Maximum number of 7 invitees (client peers)</li>
+  <li>Will raise a prompt for user acceptance of a peer connection request</li>
+</ul>
+
+<h2 id="intro-to-thali-project-for-ios">Intro to Thali project for iOS</h2>
+
+<p><a href="https://github.com/thaliproject/Thali_CordovaPlugin">Thali</a> is an experimental open source p2p project that promises to enable p2p web to run on mobile devices. This is quite a big undertaking so to make life easier to begin with we can start to look at the iOS to iOS p2p connectivity story which is documented as <a href="http://www.goland.org/nodetolocalp2ponthali">Thali “Story -1”</a>.<br />
+The spec will use the TCP internet standard to transport data across peers therefore all mobile devices will run a Node.js layer. In order to run Node.js on iOS we use a <a href="https://github.com/thaliproject/Thali_CordovaPlugin">Cordova plugin</a> which runs <a href="http://jxcore.com/">JXCore</a>. This will then connect with a native TCP bridge which will relay the data over the iOS Multipeer Connectivity framework. The flow is illustrated in the diagram below:<br />
+<a href="/assets/images/iOS-ThaliFlow.png"><img src="/assets/images/iOS-ThaliFlow.png" alt="Thali flow for iOS" /></a></p>
+
+<h2 id="how-to-build-thali-demo-for-ios">How to build Thali demo for iOS</h2>
+
+<p>If you like playing with bleeding edge code you can build the <a href="http://tiny.cc/thali-ios">“Story -1” iOS dev branch</a>. (NB: You will need two iOS devices with Bluetooth 4.0 support.)</p>
+
+<p>To run this build script in Terminal you will need Node.js. If you haven’t already got Node.js installed you can <a href="http://www.deadlyfingers.net/webdev/ember-cli-todo-example-app-with-azure-mobile-services/#nodejs-mac">get Node.js with <abbr title="Node Version Manager">NVM</abbr> for Mac OS X.</a></p>
+
+<p>Install the Cordova package:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install <span class="nt">-g</span> cordova
+</code></pre></div></div>
+
+<p>Build Thali “Story -1” demo for iOS:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="nv">HOME_DIR</span><span class="o">=</span><span class="s2">"Code"</span>
+<span class="nv">PROJECT_DIR</span><span class="o">=</span><span class="s2">"ThaliTest-1-ios"</span>
+mkdir <span class="nt">-p</span> ~/<span class="nv">$HOME_DIR</span>
+<span class="nb">cd</span> ~/<span class="nv">$HOME_DIR</span>
+cordova create ~/<span class="nv">$HOME_DIR</span>/<span class="nv">$PROJECT_DIR</span> com.test.thalitest ThaliTest
+<span class="nb">cd</span> <span class="nv">$PROJECT_DIR</span>
+cordova platform add ios
+cordova plugin add https://github.com/thaliproject/Thali_CordovaPlugin.git#story-1-dadougla
+<span class="c"># copy sample 'www' dir </span>
+cp <span class="nt">-a</span> <span class="nt">-R</span> <span class="nt">-v</span> plugins/org.thaliproject.p2p/sample/ios/www ./
+<span class="c"># build iOS project</span>
+cordova build
+<span class="c"># open iOS project in Xcode</span>
+open platforms/ios/ThaliTest.xcodeproj
+</code></pre></div></div>
+
+<h2 id="how-all-the-parts-work-inside-the-xcode-project">How all the parts work inside the Xcode project…</h2>
+
+<p>There are three main parts or layers in the Thali iOS project:</p>
+
+<ol>
+  <li>
+    <h3 id="cordova">Cordova</h3>
+    <ul>
+      <li>All demo UI code is handled by “thali_main.js” script.</li>
+    </ul>
+  </li>
+  <li>
+    <h3 id="jxcore">JXCore</h3>
+    <ul>
+      <li>UI actions will trigger a call to functions in “app.js” script which is responsible for running all our Node.js code and calling the native methods as documented in the <a href="https://github.com/thaliproject/Thali_CordovaPlugin/blob/story_0_matthewp/doc/api/connectivity.md">Thali common API.</a></li>
+    </ul>
+  </li>
+  <li>
+    <h3 id="native-plugins">Native Plugins</h3>
+    <ul>
+      <li>All native methods called from JXCore are registered in “THEAppContext.m” <code class="highlighter-rouge">defineJavaScriptExtensions</code> method</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="what-about-android-p2p">What about Android p2p?</h2>
+
+<p>More info about Thali for Android is available on <a href="http://www.drjukka.com/blog/wordpress/?p=140">Dr Jukka’s blog</a>.</p>
+
+<h2 id="what-about-ios-and-android-p2p">What about iOS and Android p2p?</h2>
+
+<p>More info about future Thali development including iOS and Android p2p interoperability is documented on <a href="http://thaliproject.org/stories">Thali stories</a>.</p>
+
+
+</div>
+
+<div class="large-4 cell">
+  <!-- <a href="http://example.com/bar.html#disqus_thread">Link</a> -->
+
+</div>
+
+<div id="pagination" class="large-12 cell">
+  <div>
+    <a href="/info/developing-a-peer-to-peer-web-for-ios">Developing a peer to peer web for iOS</a>
+    <span>
+      
+      <span>by David Douglas</span>
+      
+    </span>
+  </div>
+  <ul class="tags">
+    
+    <li>iOS</li>
+    
+  </ul>
+
+  <div class="grid-x grid-margin-x grid-padding-y">
+    <div class="large-6 cell">
+      
+      <span class="next">Next</span>
+      <a href="/info/developing-a-web-app-that-behaves-like-a-native-app">Developing a web app that behaves like a native app</a>
+      
+    </div>
+    <div class="large-6 cell">
+      
+      <span class="prev">Previous</span>
+      <a href="/tutorial/using-azure-cli-on-mac-os-x-to-create-mobile-service">Using Azure CLI on Mac OS X to create Mobile Service</a>
+      
+    </div>
+  </div>
+  <div class="top"><a href="#" class="top">Top</a></div>
+</div>
+    </div>
+  </div>
+
+  <!-- scripts -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+</body>

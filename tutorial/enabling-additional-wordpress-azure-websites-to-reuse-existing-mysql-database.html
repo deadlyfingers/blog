@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Developer blog">
+  <title>Enabling additional Wordpress Azure websites to reuse existing MySQL database</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/assets/main.css" rel="stylesheet">
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Deadlyfingers.net" />
+</head>
+
+<body>
+  <div class="grid-container">
+    <!-- nav -->
+    <div class="grid-x">
+  <div class="small-6 cell">
+    <h1><a href="/">Deadlyfingers.net</a></h1>
+  </div>
+  <div class="small-6 cell right">
+    <a class="icon twitter" href="https://twitter.com/deadlyfingers"></a>
+    <a class="icon github" href="https://github.com/deadlyfingers"></a>
+    <a class="icon youtube" href="https://youtube.com/deadlyfingerstv"></a>
+  </div>
+</div>
+    <!-- body content -->
+    <div class="grid-x grid-margin-x">
+      <div id="post" class="large-8 cell post">
+  
+  <time datetime="2014-04-25 11:55:04 +0100" class="date">25 Apr 2014</time>
+  
+  <h1 class="post-title">Enabling additional Wordpress Azure websites to reuse existing MySQL database</h1>
+  <div class="post-line"></div>
+  <blockquote>
+  <p>This tutorial has been deprecated. Please check the <a href="https://blogs.msdn.microsoft.com/appserviceteam/2017/05/16/wiki-wordpress-on-app-service/">wiki</a> for setting up Wordpress with the new Azure App Service.</p>
+</blockquote>
+
+<p>It’s super simple to create your first Wordpress blog using Microsoft Azure Websites Gallery. Getting this all up and running is extremely fast. I’ve uploaded a <a href="https://www.youtube.com/watch?v=__Zj9zaGKLU">short video</a> and blog post showing <a href="http://www.deadlyfingers.net/azure/setting-up-a-wordpress-website-with-azure/">how to setup up a Wordpress site in Azure</a> in only a couple of minutes.</p>
+
+<div class="video"><iframe src="//www.youtube.com/embed/__Zj9zaGKLU" frameborder="0" allowfullscreen=""></iframe></div>
+
+<h5 id="but-what-if-you-want-to-create-a-second-wordpress-azure-website-while-reusing-your-existing-mysql-database-from-the-first-one">But what if you want to create a second Wordpress Azure website while reusing your existing MySQL database from the first one?</h5>
+
+<p><img src="/assets/images/AZURE_WP201_create-multiple-wordpress-websites-using-existing-mysql-database.png" alt="AZURE_WP201_create-multiple-wordpress-websites-using-existing-mysql-database" /></p>
+
+<p>Initially when I load up the ‘<strong>*.azure-websites.net</strong>’ URL I just get a blank page (which is PHP’s quiet way of letting you know something needs fixed). When you reuse the existing MySQL database then you going to need to tweak one setting in the Wordpress configuration file (<strong>wp-config.php</strong>). To modify this config file you will need to grab your FTP settings in your Azure website dashboard.</p>
+
+<p><img src="/assets/images/AZURE_WP202_azure-websites-dashboard-ftp-upload-settings.png" alt="AZURE_WP202_azure-websites-dashboard-ftp-upload-settings" /></p>
+
+<p>Download the publish profile to get your FTP username and password. Open this file in an XML text editor to locate the ‘<em>userName</em>’ and ‘<em>userPass</em>’ values which are located just after the ‘<em>ftpPassiveMode</em>’ attribute.</p>
+
+<p>Once you FTP in, navigate to <code class="highlighter-rouge">site/wwwroot/</code> and edit the <strong>wp-config.php</strong> file (you may wish to download a backup first). Then change the ‘<strong>table_prefix</strong>’ value (line no. 62) from:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$table_prefix</span> <span class="o">=</span> <span class="s1">'wp_'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>to something like:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$table_prefix</span> <span class="o">=</span> <span class="s1">'wp2_'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>You should now be able to navigate to your website URL ‘<strong>*.azure-websites.net/wp-admin/</strong>’ to complete the Wordpress setup.</p>
+
+<p>Also, if you want to see what this looks like in your database just open up a MySQL client to check the new Wordpress tables added using the connection settings available in your Azure Websites dashboard.</p>
+
+<p><img src="/assets/images/AZURE_WP202_azure-portal-dashboard-connection-settings.png" alt="AZURE_WP202_azure-portal-dashboard-connection-settings" /></p>
+
+
+</div>
+
+<div class="large-4 cell">
+  <!-- <a href="http://example.com/bar.html#disqus_thread">Link</a> -->
+
+</div>
+
+<div id="pagination" class="large-12 cell">
+  <div>
+    <a href="/tutorial/enabling-additional-wordpress-azure-websites-to-reuse-existing-mysql-database">Enabling additional Wordpress Azure websites to reuse existing MySQL database</a>
+    <span>
+      
+      <span>by David Douglas</span>
+      
+    </span>
+  </div>
+  <ul class="tags">
+    
+    <li>Blog</li>
+    
+    <li>Azure</li>
+    
+    <li>Website</li>
+    
+    <li>WordPress</li>
+    
+  </ul>
+
+  <div class="grid-x grid-margin-x grid-padding-y">
+    <div class="large-6 cell">
+      
+      <span class="next">Next</span>
+      <a href="/tutorial/create-android-app-with-cloud-backend-in-minutes">Create an Android app with a cloud backend in minutes</a>
+      
+    </div>
+    <div class="large-6 cell">
+      
+      <span class="prev">Previous</span>
+      <a href="/tutorial/setting-up-a-wordpress-website-with-azure">Setting up a Wordpress website with Azure</a>
+      
+    </div>
+  </div>
+  <div class="top"><a href="#" class="top">Top</a></div>
+</div>
+    </div>
+  </div>
+
+  <!-- scripts -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+</body>

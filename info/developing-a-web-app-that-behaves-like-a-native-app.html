@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Developer blog">
+  <title>Developing a web app that behaves like a native app</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/assets/main.css" rel="stylesheet">
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Deadlyfingers.net" />
+</head>
+
+<body>
+  <div class="grid-container">
+    <!-- nav -->
+    <div class="grid-x">
+  <div class="small-6 cell">
+    <h1><a href="/">Deadlyfingers.net</a></h1>
+  </div>
+  <div class="small-6 cell right">
+    <a class="icon twitter" href="https://twitter.com/deadlyfingers"></a>
+    <a class="icon github" href="https://github.com/deadlyfingers"></a>
+    <a class="icon youtube" href="https://youtube.com/deadlyfingerstv"></a>
+  </div>
+</div>
+    <!-- body content -->
+    <div class="grid-x grid-margin-x">
+      <div id="post" class="large-8 cell post">
+  
+  <time datetime="2015-09-11 10:09:52 +0100" class="date">11 Sep 2015</time>
+  
+  <h1 class="post-title">Developing a web app that behaves like a native app</h1>
+  <div class="post-line"></div>
+  <p>Like many developers out there I started out coding for the web. So you might think it would be easier to develop a web app than a native app, right? The short answer is no… but web app development is getting better and the performance gap is closing.</p>
+
+<h1 id="thoughts-on-web-app-vs-native-app-development">Thoughts on web app vs native app development</h1>
+
+<p>Delivering a world-class UX is the main reason to opt for native development. Web app performance has quite some way to go especially on the vast majority of low spec devices. For example even if you get your web app running at a buttery smooth 60fps in iOS Safari, it doesn’t automatically mean you get that sort of performance in an app’s UIWebView.</p>
+
+<blockquote>
+  <p><strong>iOS Tip:</strong> Don’t be content testing any web app or web UI framework in Safari and think that it works. A real web app development test is only done by running it inside an embedded WebView.</p>
+</blockquote>
+
+<p>What you have to be careful off is getting sucked into some web app framework because you can get some decent results pretty quickly, but as soon as you add a little more complexity things can start to break and the speed of development will slow as a result. Whereas while native development might take longer to learn initially, after that you can start building some pretty slick apps just using the standard suite of UI components provided.</p>
+
+<p>Ultimately things are getting better for web app development but probably not enough as to make native app developers want to consider switching. But with all the modern browser javascript speed optimisations and mobile devices becoming ever more powerful it’s worth considering a web app where the ability to share code is most important. After all who wouldn’t rather develop code once that works across mobile and desktop and leverages the extensive web developer knowledge base? So the compelling reason to build a web app is that your code should run on any screen that runs a modern browser.</p>
+
+<h1 id="postcard-app">Postcard app</h1>
+
+<p>I’ve been involved with developing the <a href="https://github.com/thaliproject/postcardapp">Postcard app</a> which is a web app for demoing a peer to peer web experience using the <a href="https://github.com/thaliproject/Thali_CordovaPlugin">Thali Cordova plugin</a>. Throughout the design, development and build process of this web app I’ve encountered a number of issues or pain points and thought it would be good to share the golden nuggets I’ve learnt while trying to develop a web app that behaves like a native app!</p>
+
+<p><img src="/assets/images/logo.png" alt="Postcard app icon" /></p>
+
+<h2 id="icons-and-splashes-generator-for-cordova-web-app">Icons and splashes generator for Cordova web app</h2>
+
+<p>With any project I always like to start with design before I jump into development. Design is a time consuming task but some things can be automated like resizing all those app icons and splashscreens across multiple platforms. I wrote a time saving <a href="https://gist.github.com/deadlyfingers/721b5495ea25a1eebd53#file-iconsplash-rb">Ruby script to build app icons and splashscreens for iOS and Android</a> with <a href="http://cordova.apache.org/docs/en/5.0.0/config_ref_images.md.html">Cordova’s image filenames and sizes</a>. (Usage and instructions are in the <a href="https://gist.github.com/deadlyfingers/721b5495ea25a1eebd53#file-readme-md">gist</a>)</p>
+
+<h2 id="designing-a-web-app-across-different-screens---live">Designing a web app across different screens - live!</h2>
+
+<p>Many web apps take advantage of node and there is a great module for designers called <a href="http://www.browsersync.io">BrowserSync</a>.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install <span class="nt">-g</span> browser-sync
+</code></pre></div></div>
+
+<p>BrowserSync allows you live preview all your design or code changes across multiple screens. That means you can test your web app in real-time on any browser on Mac or Windows as well as hook up the web app on iPhone, iPad or Android. Also when you interact on one screen for example following a link or scrolling the page this automatically updates everywhere else. This is a must have for any responsive design or adaptive design work!<br />
+ <img src="/assets/images/BrowserSync-Demo.gif" alt="BrowserSync demo" /></p>
+
+<h2 id="polymer-10---a-ui-kit-for-web-apps">Polymer 1.0 - a UI kit for web apps</h2>
+
+<p>For the UI design side of things I choose <a href="https://elements.polymer-project.org/">Polymer 1.0</a> due to it’s host of web app elements inspired by a native app’s UI kit. Initially I didn’t like all the custom element names, as this reminded of an Angular wild west of element names but you can quickly learn the Polymer core elements and view the documentation and source behind them. Also there is a benefit to this as it prevents the usual ‘div nest of inception’ meaning that an HTML layout can be understood at a glance.</p>
+
+<h3 id="getting-started-developing-with-polymer">Getting started developing with Polymer</h3>
+
+<p>The trickiest thing is actually getting all the Polymer elements you need to use as these all come separately which of course makes sense later for production. But do yourself a favour and just install all the paper, iron and neon elements for no hassle development.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bower install <span class="nt">--save</span> PolymerElements/paper-elements 
+bower install <span class="nt">--save</span> PolymerElements/iron-elements 
+bower install <span class="nt">--save</span> PolymerElements/neon-animation
+</code></pre></div></div>
+
+<h3 id="should-i-use-polymers-on-click-or-on-tap-event">Should I use Polymer’s ‘on-click’ or ‘on-tap’ event?</h3>
+
+<p>There is a <a href="http://www.telerik.com/blogs/what-exactly-is.....-the-300ms-click-delay">300ms click delay issue</a> that affects mobile web apps. The good news is that there is a simple fix by using the <a href="https://developer.mozilla.org/en/docs/Mozilla/Mobile/Viewport_meta_tag">viewport meta tag</a> with <code class="highlighter-rouge">width=device-width</code> property. But the bad news is that this trick only works in Chrome 32+ on Android.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<p>Thankfully Polymer tries to handle this issue for you if you use the <code class="highlighter-rouge">on-tap</code> event however it doesn’t appear to currently trigger a click on Mac Safari (using an iframe web app). So if desktop Safari compatibility is more important then you may have to stick with the standard <code class="highlighter-rouge">on-click</code> event until this is fixed. Or just incase you already use a <a href="https://github.com/ftlabs/fastclick">‘fast click’</a> javascript polyfill it may run into issues due to <a href="http://developer.telerik.com/featured/300-ms-click-delay-ios-8/">click delay complications with the iOS 8 web view</a>.</p>
+
+<h3 id="meet-iron-list---the-uitableview-for-web-app">Meet ‘iron-list’ - the UITableView for web app</h3>
+
+<p>Polymer’s <code class="highlighter-rouge">iron-list</code> element is essential for scrolling large amounts of data on mobile devices. It does this by using a virtual list and recycling (20) cells to handle smooth scrolling of 1000s of items. One note of caution is that this runs fine in Safari browser but there is currently a <a href="https://github.com/PolymerElements/iron-list/issues/61">scrolling issue in iOS 8 WebView</a> beyond a certain number of items. If only UIWebView would behave the same as Safari then development would run so much smoother!</p>
+
+<h2 id="make-it-feel-like-a-native-app---not-a-web-site">Make it feel like a native app - not a web site!</h2>
+
+<p>It’s important to make sure things act like an app and not feel like a website thrown inside a Cordova webview. There are a couple of giveaway indicators that can be fixed, although not everything will behave perfectly.</p>
+
+<h3 id="disable-the-scrolling-bounce-effect">Disable the scrolling bounce effect</h3>
+
+<p>While adding the <a href="https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html">magical web app meta tags</a> will give you full screen control in the browser it doesn’t get rid of the web page scrolling spring effect common with iOS and Mac. Now while the spring effect provides a wonderful UX in a web browsing context - native app’s don’t spring! To disable this unwanted behaviour the first thing to do is to enable the <code class="highlighter-rouge">DisallowOverscroll</code> preference in <a href="https://cordova.apache.org/docs/en/3.0.0/guide_platforms_ios_config.md.html">Cordova’s config.xml</a>.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;preference</span> <span class="na">name=</span><span class="s">"DisallowOverscroll"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">&gt;&lt;/preference&gt;</span>
+</code></pre></div></div>
+
+<p>If you are not using Cordova then you can disable the iOS webview scroll:</p>
+
+<pre><code class="language-objectivec">[[webView scrollView] setScrollEnabled:NO];
+</code></pre>
+
+<p>It’s always a good idea to do a CSS reset on the <code class="highlighter-rouge">html,body</code> and then add the following to disable the bounce effect in the browser:</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">html</span><span class="o">,</span><span class="nt">body</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span> 
+    <span class="nl">height</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span> 
+    <span class="nl">padding</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span> 
+    <span class="nl">margin</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span> 
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* disable webkit bounce effect in the browser */</span>
+<span class="nt">html</span><span class="o">,</span><span class="nt">body</span> <span class="p">{</span>
+    <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span> 
+    <span class="nl">-webkit-overflow-scrolling</span><span class="p">:</span> <span class="n">touch</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="disable-select-copypaste">Disable select copy/paste</h3>
+
+<p>Another annoying web behaviour inherited is that everything is selectable on a web page. Again a useful behaviour in a web browsing context but not so much with a web app. Besides not feeling right there is a UX issue if a user taps the ‘wrong way’ instead of activating a button click as expected they end up in a text selection mode. The easiest workaround is setting <code class="highlighter-rouge">user-select</code> to <code class="highlighter-rouge">none</code> on the ‘body’. NB: If your web app contains form inputs then you can exclude those inputs using the <code class="highlighter-rouge">:not()</code> CSS selector but I find it easier to switch everything off by default.</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* disable iOS text selection */</span>
+<span class="nt">body</span> <span class="p">{</span>
+    <span class="nl">-webkit-touch-callout</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+    <span class="nl">-webkit-user-select</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+    <span class="nl">-khtml-user-select</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+    <span class="nl">-moz-user-select</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+    <span class="nl">-ms-user-select</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+    <span class="py">user-select</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+    <span class="nl">cursor</span><span class="p">:</span> <span class="nb">default</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The one problem you still get with iOS UIWebView is that you always get a <a href="http://stackoverflow.com/questions/9218574/get-rid-of-magnifying-glass-in-ios-web-app">magnifying glass</a> when doing a long-press and unfortunately there is no simple way of disabling this without <a href="http://stackoverflow.com/questions/7157292/how-to-disable-the-magnifying-glass-in-uiwebview">hacking UIWebView private APIs</a>.</p>
+
+<h3 id="prevent-scrolling-nav-bar-when-editing-input">Prevent scrolling nav bar when editing input</h3>
+
+<p>A quirk with web apps on iOS is trying to fix a nav bar so it won’t scroll off the screen when editing an input or textarea that would obscure the soft-keyboard when it pops up. One trick is to position your input as high up the page as possible in order to avoid the issue. But sometimes this isn’t always possible so the other option is to try a hacky workaround discussed on <a href="http://stackoverflow.com/questions/13529554/prevent-scrolling-on-keyboard-display-ios-6"><abbr title="Stack Overflow">SO</abbr></a> which also seems to work pretty well with Polymer:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;textarea</span> <span class="na">placeholder=</span><span class="s">"Message"</span> <span class="na">class=</span><span class="s">"flex"</span> <span class="na">on-focus=</span><span class="s">"shouldFocusWithoutScrollUp"</span><span class="nt">&gt;&lt;/textarea&gt;</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Polymer</span><span class="p">({</span>
+	<span class="c1">// hack for iOS to prevent scrolling view up when soft keyboard pops up</span>
+	<span class="na">shouldFocusWithoutScrollUp</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">_isiOS</span><span class="p">()</span> <span class="p">)</span> <span class="p">{</span>
+    		<span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">webkitTransform</span> <span class="o">=</span> <span class="s1">'translate3d(0px,-10000px,0)'</span><span class="p">;</span> 
+    		<span class="nx">webkitRequestAnimationFrame</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">webkitTransform</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span> <span class="p">}.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">));</span>
+    	<span class="p">}</span>
+	<span class="p">},</span>
+
+	<span class="na">_isiOS</span> <span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nb">navigator</span><span class="p">.</span><span class="nx">userAgent</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/iPhone|iPad|iPod/i</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>In Cordova if you want to enable Javascript focus() calls to open the soft-keyboard you can disable the <code class="highlighter-rouge">KeyboardDisplayRequiresUserAction</code> preference. Although bear in mind iOS8 now supports focus() calls but I found the input and keyboard can lose connection sometimes.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;preference</span> <span class="na">name=</span><span class="s">"KeyboardDisplayRequiresUserAction"</span> <span class="na">value=</span><span class="s">"false"</span><span class="nt">&gt;&lt;/preference&gt;</span>
+</code></pre></div></div>
+
+<h2 id="problems-with-web-app-when-running-as-a-native-ios-app">Problems with web app when running as a native iOS app…</h2>
+
+<p>I encountered quite a number of problems when running a web app inside the iOS 8 UIWebView. I have listed the main issues below to watch out for with possible workarounds:</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">[WebActionDisablingCALayerDelegate setBeingRemoved:]: unrecognized selector sent to instance 0x174009d20
+*** WebKit discarded an uncaught exception in the webView:willRemoveScrollingLayer:withContentsLayer:forNode: delegate: -[WebActionDisablingCALayerDelegate setBeingRemoved:]: unrecognized selector sent to instance 0x174009d20
+</span></code></pre></div></div>
+
+<p>Solution: Add body style for <code class="highlighter-rouge">-webkit-transform</code>. This WebView bug occurred when animating an element sliding up from the bottom of the page. It caused the animation to jump and skip frames and seemed to trigger memory warnings.</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">body</span> <span class="p">{</span>
+	<span class="nl">-webkit-transform</span><span class="p">:</span> <span class="n">translateZ</span><span class="p">(</span><span class="m">0px</span><span class="p">);</span> <span class="c">/* hack for iOS8 iframe scroll issue */</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">[46377:7026777] Received memory warning.
+</span></code></pre></div></div>
+
+<p>Solution: If you’ve tested for memory leaks then try disabling animations. If this solves the issue then try to optimise your script so that expensive business logic is called only after animations are completed.</p>
+
+<hr />
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Message from debugger: failed to send the k packet
+</span></code></pre></div></div>
+
+<p>Solution: Keep app awake! In the app delegate enable <code class="highlighter-rouge">setIdleTimerDisabled</code>:</p>
+
+<pre><code class="language-objectivec">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // Override point for customization after application launch.
+    [application setIdleTimerDisabled:YES]; // don't sleep
+    return YES;
+}
+</code></pre>
+
+<blockquote>
+  <p><strong>iOS Tip:</strong> When testing web apps on iOS it can take so long to build and debug on device that the screen locks and the deploy fails. Use the <code class="highlighter-rouge">setIdleTimerDisabled</code> to keep the app alive for debugging!</p>
+</blockquote>
+
+<hr />
+
+</div>
+
+<div class="large-4 cell">
+  <!-- <a href="http://example.com/bar.html#disqus_thread">Link</a> -->
+
+</div>
+
+<div id="pagination" class="large-12 cell">
+  <div>
+    <a href="/info/developing-a-web-app-that-behaves-like-a-native-app">Developing a web app that behaves like a native app</a>
+    <span>
+      
+      <span>by David Douglas</span>
+      
+    </span>
+  </div>
+  <ul class="tags">
+    
+    <li>Android</li>
+    
+    <li>Cordova</li>
+    
+    <li>iOS</li>
+    
+    <li>WebApp</li>
+    
+  </ul>
+
+  <div class="grid-x grid-margin-x grid-padding-y">
+    <div class="large-6 cell">
+      
+      <span class="next">Next</span>
+      <a href="/tutorial/azure-mobile-services-for-unity3d">Azure Mobile Services for Unity3d</a>
+      
+    </div>
+    <div class="large-6 cell">
+      
+      <span class="prev">Previous</span>
+      <a href="/info/developing-a-peer-to-peer-web-for-ios">Developing a peer to peer web for iOS</a>
+      
+    </div>
+  </div>
+  <div class="top"><a href="#" class="top">Top</a></div>
+</div>
+    </div>
+  </div>
+
+  <!-- scripts -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+</body>

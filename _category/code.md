@@ -1,4 +1,0 @@
----
-tag: code
-permalink: "/code/"
----

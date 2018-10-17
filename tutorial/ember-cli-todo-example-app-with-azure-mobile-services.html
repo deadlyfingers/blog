@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Developer blog">
+  <title>Ember-CLI ToDo example app with Azure Mobile Services</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/assets/main.css" rel="stylesheet">
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Deadlyfingers.net" />
+</head>
+
+<body>
+  <div class="grid-container">
+    <!-- nav -->
+    <div class="grid-x">
+  <div class="small-6 cell">
+    <h1><a href="/">Deadlyfingers.net</a></h1>
+  </div>
+  <div class="small-6 cell right">
+    <a class="icon twitter" href="https://twitter.com/deadlyfingers"></a>
+    <a class="icon github" href="https://github.com/deadlyfingers"></a>
+    <a class="icon youtube" href="https://youtube.com/deadlyfingerstv"></a>
+  </div>
+</div>
+    <!-- body content -->
+    <div class="grid-x grid-margin-x">
+      <div id="post" class="large-8 cell post">
+  
+  <time datetime="2015-02-28 18:52:59 +0100" class="date">28 Feb 2015</time>
+  
+  <h1 class="post-title">Ember-CLI ToDo example app with Azure Mobile Services</h1>
+  <div class="post-line"></div>
+  <h2 id="background">Background</h2>
+
+<p>When you create an <a href="https://manage.windowsazure.com">Azure Mobile Service</a> you can download a <strong>ToDo sample app</strong> to help you get started on a number of platforms including Windows, iOS and Android. There are also cross platform options available with Xamarin or web app development using PhoneGap or HTML/Javascript. Recently I came across a pretty neat Javascript framework called <a href="http://emberjs.com">Ember</a> for creating web apps. While you can go ahead and quickly download the <a href="https://github.com/emberjs/starter-kit/archive/v1.10.0.zip">Ember Starter Kit</a> to try out some of the introductory snippets listed on the Emberjs homepage, the better option for serious development of Ember apps is to use <a href="http://www.ember-cli.com">Ember-CLI</a>. The Ember Command Line Interface gets you up and running with a full MVC framework and helps install project dependencies using NPM (Node Package Manager) and Bower. Having just started learning Ember-CLI myself I thought it might be useful to do a getting started tutorial showing how to hook it up with Azure Mobile Services to create a ToDo app with same functionality as the other offerings already available on the Mobile Services quick-start page.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>Before you can start using Ember-CLI you will need <a href="http://nodejs.org">Node.js</a> installed.</p>
+
+<h3 id="how-to-install-nodejs-on-windows">How to install Node.js on Windows</h3>
+
+<ul>
+  <li><a href="http://nodejs.org/dist/v0.12.0/x64/node-v0.12.0-x64.msi">node (64-bit)</a></li>
+  <li><a href="http://nodejs.org/dist/v0.12.0/node-v0.12.0-x86.msi">node (32-bit)</a></li>
+</ul>
+
+<p>Alternatively you can manage multiple node versions using the latest <a href="https://github.com/coreybutler/nvm-windows/releases">nvm-setup</a> Windows installer.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvm install 0.12.0 
+nvm use 0.12.0
+</code></pre></div></div>
+
+<p>See <a href="https://github.com/coreybutler/nvm-windows">nvm-windows</a> for more commands.</p>
+
+<h3 id="how-to-install-nodejs-on-mac">How to install Node.js on Mac</h3>
+
+<p>If you’re using a Mac its better to install Node.js using NVM (Node Version Manager) rather than install as admin/sudo user. Run the following commands in Terminal:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/creationix/nvm.git ~/.nvm <span class="o">&amp;&amp;</span> <span class="nb">cd</span> ~/.nvm <span class="o">&amp;&amp;</span> git checkout <span class="sb">`</span>git describe <span class="nt">--abbrev</span><span class="o">=</span>0 <span class="nt">--tags</span><span class="sb">`</span>
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Edit bash profile </span>
+nano ~/.bash_profile
+</code></pre></div></div>
+
+<div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">export</span> <span class="n">NVM_DIR</span>=<span class="s2">"/Users/YOUR_USERNAME/.nvm"</span> 
+[-<span class="n">s</span> <span class="s2">"$NVM_DIR/nvm.sh"</span>] &amp;&amp; . <span class="s2">"$NVM_DIR/nvm.sh"</span>
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Loads nvm source </span>
+~/.bash_profile
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvm install 0.12.0 nvm <span class="nb">alias </span>default v0.12.0
+</code></pre></div></div>
+
+<p>NB: In new Terminal sessions you may need to run <code class="highlighter-rouge">nvm use default</code>. If you want to you can add this to your bash profile to setup automatically.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvm use default
+</code></pre></div></div>
+
+<p>Or for a specific node version:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvm use v0.12.0
+</code></pre></div></div>
+
+<p>Once you have node installed you can check its working by getting the version:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node <span class="nt">-v</span> 
+npm <span class="nt">-v</span>
+</code></pre></div></div>
+
+<h3 id="installing-ember-cli-and-bower">Installing Ember-CLI and bower</h3>
+
+<p>Install ember-cli, bower and phantomjs globally using the -g switch.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install <span class="nt">-g</span> ember-cli 
+npm install <span class="nt">-g</span> bower 
+npm install <span class="nt">-g</span> phantomjs
+</code></pre></div></div>
+
+<h1 id="creating-the-todo-example-app-using-ember-cli-and-azure-mobile-services">Creating the Todo example app using Ember-CLI and Azure Mobile Services</h1>
+
+<ol>
+  <li>Create an <a href="http://bit.ly/azureportal">Azure Mobile Service</a></li>
+  <li>Create example <strong>TodoItem</strong> table.<br />
+ <img src="/assets/images/CreateTable-TodoItem.png" alt="CreateTable-TodoItem" /></li>
+  <li>Create a new Ember-CLI app
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir ~/TodoApp <span class="nb">cd</span> ~/TodoApp ember new client <span class="nb">cd </span>client
+</code></pre></div>    </div>
+  </li>
+  <li>Run in ember client in Browser.
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ember serve
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Open <a href="http://localhost:4200/">http://localhost:4200/</a> in new Browser window to see web app.<br />
+  <img src="/assets/images/welcome-to-emberjs.png" alt="welcome-to-emberjs" /></p>
+  </li>
+  <li>Save Azure Mobile Services javascript files into <code class="highlighter-rouge">/vendor</code> folder.
+    <ul>
+      <li><a href="http://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.2.5.js">MobileServices.Web-1.2.5.js</a></li>
+      <li><a href="http://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.2.5.min.js">MobileServices.Web-1.2.5.min.js</a></li>
+    </ul>
+  </li>
+  <li>
+    <p>Update the Broccoli file <code class="highlighter-rouge">Brocfile.js</code> to import <code class="highlighter-rouge">/vendor</code> javascripts</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">var</span> <span class="nx">EmberApp</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'ember-cli/lib/broccoli/ember-app'</span><span class="p">);</span>
+
+ <span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EmberApp</span><span class="p">();</span>
+
+ <span class="nx">app</span><span class="p">.</span><span class="k">import</span><span class="p">({</span>
+   <span class="na">development</span><span class="p">:</span> <span class="s1">'vendor/MobileServices.Web-1.2.5.js'</span><span class="p">,</span>
+   <span class="na">production</span><span class="p">:</span>  <span class="s1">'vendor/MobileServices.Web-1.2.5.min.js'</span>
+ <span class="p">});</span>
+
+ <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">app</span><span class="p">.</span><span class="nx">toTree</span><span class="p">();</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Update the js hint file <code class="highlighter-rouge">.jshintrc</code> to recognise the <code class="highlighter-rouge">WindowsAzure</code> global namespace.</p>
+
+    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="p">{</span><span class="w">
+   </span><span class="s2">"predef"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+     </span><span class="s2">"document"</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"window"</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"-Promise"</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"WindowsAzure"</span><span class="w">
+   </span><span class="p">],</span><span class="w">
+   </span><span class="s2">"browser"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+  <li>Generate <code class="highlighter-rouge">TodoItem</code> model, <code class="highlighter-rouge">index</code> controller and route. (Generating a route will also generate a Handlebars <em>index.hbs</em> template by default).
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ember generate model TodoItem 
+ ember generate controller index 
+ ember generate route index
+</code></pre></div>    </div>
+  </li>
+  <li>Create <code class="highlighter-rouge">azure</code> service. (Generating a service will also generate an <em>azure-service.js</em> initalizer)
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ember generate service azure
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Update the <strong>services/azure.js</strong> script with your own Mobile Service connection strings (on lines 61-62):</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Ember</span> <span class="k">from</span> <span class="s1">'ember'</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">azureService</span> <span class="o">=</span> <span class="nx">Ember</span><span class="p">.</span><span class="nb">Object</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+
+  <span class="na">read</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">table</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">table</span> <span class="o">+</span> <span class="s2">" read"</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">azureService</span><span class="p">.</span><span class="nx">client</span><span class="p">().</span><span class="nx">getTable</span><span class="p">(</span><span class="nx">table</span><span class="p">).</span><span class="nx">read</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">onComplete</span><span class="p">,</span> <span class="nx">onError</span><span class="p">);</span>
+    <span class="kd">function</span> <span class="nx">onComplete</span><span class="p">(</span><span class="nx">fulfilled</span><span class="p">){</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"read items:"</span> <span class="o">+</span> <span class="nx">fulfilled</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+      <span class="k">return</span> <span class="nx">fulfilled</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kd">function</span> <span class="nx">onError</span><span class="p">(</span><span class="nx">error</span><span class="p">){</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Error reading item: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+
+  <span class="na">insert</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">table</span><span class="p">,</span> <span class="nx">item</span><span class="p">,</span> <span class="nx">model</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">table</span> <span class="o">+</span> <span class="s2">" insert:"</span> <span class="o">+</span> <span class="nx">item</span><span class="p">.</span><span class="nx">id</span> <span class="o">+</span> <span class="s2">" model:"</span> <span class="o">+</span> <span class="nx">model</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">azureService</span><span class="p">.</span><span class="nx">client</span><span class="p">().</span><span class="nx">getTable</span><span class="p">(</span><span class="nx">table</span><span class="p">).</span><span class="nx">insert</span><span class="p">(</span><span class="nx">item</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">onComplete</span><span class="p">,</span> <span class="nx">onError</span><span class="p">);</span>
+    <span class="kd">function</span> <span class="nx">onComplete</span><span class="p">(</span><span class="nx">fulfilledItem</span><span class="p">){</span>
+      <span class="c1">// NB: use Ember's pushObject / unshiftObject to respect KVO!</span>
+      <span class="nx">model</span><span class="p">.</span><span class="nx">unshiftObject</span><span class="p">(</span><span class="nx">fulfilledItem</span><span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"inserted item:"</span> <span class="o">+</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">fulfilledItem</span><span class="p">)</span> <span class="o">+</span> <span class="s2">" model:"</span> <span class="o">+</span> <span class="nx">model</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+      <span class="k">return</span> <span class="nx">fulfilledItem</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kd">function</span> <span class="nx">onError</span><span class="p">(</span><span class="nx">error</span><span class="p">){</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Error inserting item: "</span><span class="o">+</span><span class="nx">error</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+
+  <span class="na">del</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">table</span><span class="p">,</span> <span class="nx">item</span><span class="p">,</span> <span class="nx">model</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">table</span> <span class="o">+</span> <span class="s2">" del:"</span> <span class="o">+</span> <span class="nx">item</span><span class="p">.</span><span class="nx">id</span> <span class="o">+</span> <span class="s2">" model:"</span> <span class="o">+</span> <span class="nx">model</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">azureService</span><span class="p">.</span><span class="nx">client</span><span class="p">().</span><span class="nx">getTable</span><span class="p">(</span><span class="nx">table</span><span class="p">).</span><span class="nx">del</span><span class="p">(</span><span class="nx">item</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">onComplete</span><span class="p">,</span> <span class="nx">onError</span><span class="p">);</span>
+    <span class="kd">function</span> <span class="nx">onComplete</span><span class="p">(</span><span class="nx">fulfilled</span><span class="p">){</span>
+      <span class="c1">// NB: use Ember's removeObject to respect KVO!</span>
+      <span class="nx">model</span><span class="p">.</span><span class="nx">removeObject</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"deleted item:"</span> <span class="o">+</span> <span class="s2">" model:"</span> <span class="o">+</span> <span class="nx">model</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+      <span class="k">return</span> <span class="nx">fulfilled</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kd">function</span> <span class="nx">onError</span><span class="p">(</span><span class="nx">error</span><span class="p">){</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Error deleting item: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+
+  <span class="na">update</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">table</span><span class="p">,</span> <span class="nx">item</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">table</span> <span class="o">+</span> <span class="s2">" update:"</span> <span class="o">+</span> <span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">azureService</span><span class="p">.</span><span class="nx">client</span><span class="p">().</span><span class="nx">getTable</span><span class="p">(</span><span class="nx">table</span><span class="p">).</span><span class="nx">update</span><span class="p">(</span><span class="nx">item</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">onComplete</span><span class="p">,</span> <span class="nx">onError</span><span class="p">);</span>
+    <span class="kd">function</span> <span class="nx">onComplete</span><span class="p">(</span><span class="nx">fulfilledItem</span><span class="p">){</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"updated item:"</span> <span class="o">+</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">fulfilledItem</span><span class="p">));</span>
+      <span class="k">return</span> <span class="nx">fulfilledItem</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kd">function</span> <span class="nx">onError</span><span class="p">(</span><span class="nx">error</span><span class="p">){</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Error updating item: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+<span class="p">});</span>
+
+<span class="c1">//  creates static properties and methods for the class</span>
+<span class="nx">azureService</span><span class="p">.</span><span class="nx">reopenClass</span><span class="p">({</span>
+  <span class="na">APPLICATION_URL</span> <span class="p">:</span> <span class="s2">"https://MOBILE_SERVICE_URL.azure-mobile.net/"</span><span class="p">,</span>
+  <span class="na">APPLICATION_KEY</span> <span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+  <span class="na">mobileServiceClient</span> <span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+
+  <span class="na">client</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">APPLICATION_URL</span> <span class="o">===</span> <span class="s2">""</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">APPLICATION_KEY</span> <span class="o">===</span> <span class="s2">""</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">error</span> <span class="o">=</span> <span class="s2">"Please configure your Azure Mobile Service URL &amp; Application KEY (app/services/azure.js 61-62)"</span><span class="p">;</span>
+      <span class="nx">alert</span> <span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+      <span class="k">throw</span> <span class="p">(</span><span class="s2">"</span><span class="err">\</span><span class="s2">n"</span> <span class="o">+</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">mobileServiceClient</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Creating Mobile Service Client..."</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">mobileServiceClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WindowsAzure</span><span class="p">.</span><span class="nx">MobileServiceClient</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">APPLICATION_URL</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">APPLICATION_KEY</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">mobileServiceClient</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+<span class="p">});</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">azureService</span><span class="p">;</span>
+</code></pre></div>    </div>
+
+    <p>When the app first loads we will need to <em>read</em> a <code class="highlighter-rouge">table</code>. In this case we will <em>read</em> the <strong>TodoItem</strong> table to get a list of TodoItems. When a user needs to add a Todo item we will call the <em>insert</em> method to add an <code class="highlighter-rouge">item</code> into a <code class="highlighter-rouge">table</code> and update our Ember <code class="highlighter-rouge">model</code> for display. The <code class="highlighter-rouge">del</code> method will work the same way except the <code class="highlighter-rouge">item</code> will be deleted. Finally the <code class="highlighter-rouge">update</code> method will be used to save changes to an <code class="highlighter-rouge">item</code>, which in this case will be when the TodoItem is completed (stroked out).</p>
+  </li>
+  <li>
+    <p>Edit <strong>models/todo-item.js</strong> to handle todo <code class="highlighter-rouge">text</code> string and a <code class="highlighter-rouge">completed</code> boolean so tasks can be marked off:</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">DS</span> <span class="k">from</span> <span class="s1">'ember-data'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+  <span class="c1">// NB: You may not set 'id' as an attribute on your model</span>
+  <span class="na">text</span><span class="p">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'string'</span><span class="p">),</span>
+  <span class="na">completed</span><span class="p">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'boolean'</span><span class="p">)</span>
+<span class="p">});</span>
+</code></pre></div>    </div>
+
+    <p>The TodoItem model consists of a string property for the Todo text and a boolean property to say if the Todo item has been completed.</p>
+  </li>
+  <li>
+    <p>Edit <strong>routes/index.js</strong> and set <code class="highlighter-rouge">model</code> to read TodoItems table:</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Ember</span> <span class="k">from</span> <span class="s1">'ember'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">Ember</span><span class="p">.</span><span class="nx">Route</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+
+  <span class="na">model</span><span class="p">:</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">service</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">'azureService'</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="s1">'TodoItem'</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"service:"</span> <span class="o">+</span> <span class="nx">service</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">service</span><span class="p">.</span><span class="nx">read</span><span class="p">(</span><span class="nx">table</span><span class="p">);</span>
+  <span class="p">}</span>
+
+<span class="p">});</span>
+</code></pre></div>    </div>
+
+    <p>As <code class="highlighter-rouge">ember serve</code> auto updates as you save changes you should see some activity in your Browser’s console log.</p>
+  </li>
+  <li>
+    <p>In the Browser’s console log you might get a refused to connect error “because it violates the following Content Security Policy directive: connect-src ‘self’” that means we need to update our environment config. To fix this add the following <code class="highlighter-rouge">contentSecurityPolicy</code> settings to the <code class="highlighter-rouge">ENV</code> var in <strong>config/environment.js</strong> to allow connections to <code class="highlighter-rouge">*.azure-mobile.net</code>:</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* jshint node: true */</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">environment</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">ENV</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">modulePrefix</span><span class="p">:</span> <span class="s1">'client'</span><span class="p">,</span>
+    <span class="na">environment</span><span class="p">:</span> <span class="nx">environment</span><span class="p">,</span>
+    <span class="na">baseURL</span><span class="p">:</span> <span class="s1">'/'</span><span class="p">,</span>
+    <span class="na">locationType</span><span class="p">:</span> <span class="s1">'auto'</span><span class="p">,</span>
+    <span class="na">EmberENV</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">FEATURES</span><span class="p">:</span> <span class="p">{</span>
+        <span class="c1">// Here you can enable experimental features on an ember canary build</span>
+        <span class="c1">// e.g. 'with-controller': true</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="na">contentSecurityPolicy</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s1">'default-src'</span><span class="p">:</span> <span class="s2">"'none'"</span><span class="p">,</span>
+      <span class="s1">'script-src'</span><span class="p">:</span> <span class="s2">"'self' 'unsafe-inline' 'unsafe-eval' *.azure-mobile.net"</span><span class="p">,</span>
+      <span class="s1">'font-src'</span><span class="p">:</span> <span class="s2">"'self'"</span><span class="p">,</span>
+      <span class="s1">'connect-src'</span><span class="p">:</span> <span class="s2">"'self' *.azure-mobile.net"</span><span class="p">,</span>
+      <span class="s1">'img-src'</span><span class="p">:</span> <span class="s2">"'self'"</span><span class="p">,</span>
+      <span class="s1">'style-src'</span><span class="p">:</span> <span class="s2">"'self' 'unsafe-inline'"</span><span class="p">,</span>
+      <span class="s1">'media-src'</span><span class="p">:</span> <span class="s2">"'self'"</span>
+    <span class="p">},</span>
+    <span class="na">APP</span><span class="p">:</span> <span class="p">{</span>
+      <span class="c1">// Here you can pass flags/options to your application instance</span>
+      <span class="c1">// when it is created</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Update the <strong>templates/index.hbs</strong> which will be used to display the user interface.</p>
+
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;h3&gt;</span> Todo: {{text}}<span class="nt">&lt;/h3&gt;</span>
+<span class="nt">&lt;header&gt;</span>
+<span class="nt">&lt;form&gt;</span>
+{{input value=text type="text" name="text" placeholder="Todo" autofocus="autofocus"}}
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">value=</span><span class="s">"Add"</span> <span class="na">disabled</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;/header&gt;&lt;main&gt;</span>
+<span class="nt">&lt;ol&gt;</span>
+{{#each item in model}}
+  <span class="nt">&lt;/ol&gt;</span>
+<span class="nt">&lt;li&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">item</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">disabled</span> <span class="na">checked</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"item.completed"</span><span class="nt">&gt;</span>{{item.text}}
+        
+    <span class="nt">&lt;button</span> <span class="na">item</span><span class="nt">&gt;</span>Delete
+  <span class="nt">&lt;/button&gt;&lt;/span&gt;&lt;/label&gt;</span>
+<span class="nt">&lt;/li&gt;</span>
+{{/each}}
+<span class="nt">&lt;/main&gt;</span>
+</code></pre></div>    </div>
+
+    <blockquote>
+      <p>NB: You will get an uncaught error if you try to add, update or delete items as we still need to handle user actions with a controller.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Update the <strong>controllers/index.js</strong> to handle actions from user interface and delegate them to our Azure service.</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* jshint node: true */</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">environment</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">ENV</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">modulePrefix</span><span class="p">:</span> <span class="s1">'client'</span><span class="p">,</span>
+    <span class="na">environment</span><span class="p">:</span> <span class="nx">environment</span><span class="p">,</span>
+    <span class="na">baseURL</span><span class="p">:</span> <span class="s1">'/'</span><span class="p">,</span>
+    <span class="na">locationType</span><span class="p">:</span> <span class="s1">'auto'</span><span class="p">,</span>
+    <span class="na">EmberENV</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">FEATURES</span><span class="p">:</span> <span class="p">{</span>
+        <span class="c1">// Here you can enable experimental features on an ember canary build</span>
+        <span class="c1">// e.g. 'with-controller': true</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="na">contentSecurityPolicy</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s1">'default-src'</span><span class="p">:</span> <span class="s2">"'none'"</span><span class="p">,</span>
+      <span class="s1">'script-src'</span><span class="p">:</span> <span class="s2">"'self' 'unsafe-inline' 'unsafe-eval' *.azure-mobile.net"</span><span class="p">,</span>
+      <span class="s1">'font-src'</span><span class="p">:</span> <span class="s2">"'self'"</span><span class="p">,</span>
+      <span class="s1">'connect-src'</span><span class="p">:</span> <span class="s2">"'self' *.azure-mobile.net"</span><span class="p">,</span>
+      <span class="s1">'img-src'</span><span class="p">:</span> <span class="s2">"'self'"</span><span class="p">,</span>
+      <span class="s1">'style-src'</span><span class="p">:</span> <span class="s2">"'self' 'unsafe-inline'"</span><span class="p">,</span>
+      <span class="s1">'media-src'</span><span class="p">:</span> <span class="s2">"'self'"</span>
+    <span class="p">},</span>
+    <span class="na">APP</span><span class="p">:</span> <span class="p">{</span>
+      <span class="c1">// Here you can pass flags/options to your application instance</span>
+      <span class="c1">// when it is created</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+</code></pre></div>    </div>
+
+    <p>To allow access to the service from the controller we need to inject the <code class="highlighter-rouge">azureService</code> in the <strong>initializers/azure-service.js</strong> service initializer.</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="kd">function</span> <span class="nx">initialize</span><span class="p">(</span><span class="nx">container</span><span class="p">,</span> <span class="nx">application</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">application</span><span class="p">.</span><span class="nx">inject</span><span class="p">(</span><span class="s1">'route'</span><span class="p">,</span> <span class="s1">'azureService'</span><span class="p">,</span> <span class="s1">'service:azure'</span><span class="p">);</span>
+  <span class="nx">application</span><span class="p">.</span><span class="nx">inject</span><span class="p">(</span><span class="s1">'controller'</span><span class="p">,</span> <span class="s1">'azureService'</span><span class="p">,</span> <span class="s1">'service:azure'</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">name</span><span class="p">:</span> <span class="s1">'azure-service'</span><span class="p">,</span>
+  <span class="na">initialize</span><span class="p">:</span> <span class="nx">initialize</span>
+<span class="p">};</span>
+</code></pre></div>    </div>
+
+    <p><img src="/assets/images/ember-cli-todo-app.png" alt="ember-cli-todo-app" /><br />
+<img src="/assets/images/TodoItem-table.png" alt="TodoItem-table" /></p>
+  </li>
+  <li>
+    <p>Finally add some styles to grey out and strike through completed items <strong>styles/app.css</strong> :</p>
+
+    <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">body</span> <span class="p">{</span>
+  <span class="nl">font-family</span><span class="p">:</span> <span class="nb">sans-serif</span><span class="p">;</span>
+  <span class="nl">cursor</span><span class="p">:</span> <span class="nb">default</span><span class="p">;</span>
+  <span class="nl">margin</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="nl">padding</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="nl">-webkit-user-select</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+<span class="p">}</span>
+    
+<span class="nt">header</span> <span class="p">{</span>
+  <span class="nl">margin</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+<span class="p">}</span>
+    
+<span class="nt">span</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="m">#000</span><span class="p">;</span> <span class="c">/* default (incompleted todos) */</span>
+<span class="p">}</span>
+    
+<span class="nc">.completed</span><span class="o">,</span> <span class="nc">.true</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="m">#999</span><span class="p">;</span> <span class="c">/* completed tasks are greyed and striked out */</span>
+  <span class="nl">text-decoration</span><span class="p">:</span> <span class="nb">line-through</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">button</span> <span class="p">{</span>
+  <span class="nl">float</span><span class="p">:</span> <span class="nb">right</span><span class="p">;</span>
+<span class="p">}</span>
+    
+<span class="nt">ol</span> <span class="p">{</span>
+  <span class="nl">list-style-position</span><span class="p">:</span> <span class="nb">inside</span><span class="p">;</span>
+  <span class="nl">margin</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="nl">padding</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="m">#999</span><span class="p">;</span>
+<span class="p">}</span>
+    
+<span class="nt">li</span> <span class="p">{</span>
+  <span class="nl">padding</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+<span class="p">}</span>
+    
+<span class="nt">li</span><span class="nd">:nth-child</span><span class="o">(</span><span class="nt">odd</span><span class="o">)</span> <span class="p">{</span>
+  <span class="nl">background</span><span class="p">:</span><span class="m">#fcfcfc</span><span class="p">;</span>
+<span class="p">}</span>
+    
+<span class="nt">li</span><span class="nd">:nth-child</span><span class="o">(</span><span class="nt">even</span><span class="o">)</span> <span class="p">{</span>
+  <span class="nl">background</span><span class="p">:</span><span class="m">#f9f9f9</span><span class="p">;</span>
+<span class="p">}</span>
+    
+<span class="nt">label</span> <span class="p">{</span>
+  <span class="nl">cursor</span><span class="p">:</span> <span class="nb">pointer</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p><a href="/assets/images/ember-cli-todo-app-style.png"><img src="/assets/images/ember-cli-todo-app-style.png" alt="ember-cli-todo-app-style" /></a></p>
+
+<p><a href="https://github.com/deadlyfingers/ember-cli-todo-app-azure">Download finished Todo ember-cli project on GitHub</a></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/deadlyfingers/ember-cli-todo-app-azure.git 
+<span class="nb">cd </span>ember-cli-todo-app-azure 
+npm install 
+bower install 
+ember serve
+</code></pre></div></div>
+
+</div>
+
+<div class="large-4 cell">
+  <!-- <a href="http://example.com/bar.html#disqus_thread">Link</a> -->
+
+</div>
+
+<div id="pagination" class="large-12 cell">
+  <div>
+    <a href="/tutorial/ember-cli-todo-example-app-with-azure-mobile-services">Ember-CLI ToDo example app with Azure Mobile Services</a>
+    <span>
+      
+      <span>by David Douglas</span>
+      
+    </span>
+  </div>
+  <ul class="tags">
+    
+    <li>Ember-CLI</li>
+    
+    <li>Azure</li>
+    
+    <li>Mobile Services</li>
+    
+  </ul>
+
+  <div class="grid-x grid-margin-x grid-padding-y">
+    <div class="large-6 cell">
+      
+      <span class="next">Next</span>
+      <a href="/tutorial/using-azure-cli-on-mac-os-x-to-create-mobile-service">Using Azure CLI on Mac OS X to create Mobile Service</a>
+      
+    </div>
+    <div class="large-6 cell">
+      
+      <span class="prev">Previous</span>
+      <a href="/tutorial/unity3d-leaderboard-demo-using-bitrave-azure-plugin">Unity3D Leaderboard demo using BitRave Azure plugin</a>
+      
+    </div>
+  </div>
+  <div class="top"><a href="#" class="top">Top</a></div>
+</div>
+    </div>
+  </div>
+
+  <!-- scripts -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+</body>

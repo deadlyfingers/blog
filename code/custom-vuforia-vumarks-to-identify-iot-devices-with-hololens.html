@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Developer blog">
+  <title>Custom Vuforia VuMarks to identify and monitor IoT Devices with HoloLens</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/assets/main.css" rel="stylesheet">
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Deadlyfingers.net" />
+</head>
+
+<body>
+  <div class="grid-container">
+    <!-- nav -->
+    <div class="grid-x">
+  <div class="small-6 cell">
+    <h1><a href="/">Deadlyfingers.net</a></h1>
+  </div>
+  <div class="small-6 cell right">
+    <a class="icon twitter" href="https://twitter.com/deadlyfingers"></a>
+    <a class="icon github" href="https://github.com/deadlyfingers"></a>
+    <a class="icon youtube" href="https://youtube.com/deadlyfingerstv"></a>
+  </div>
+</div>
+    <!-- body content -->
+    <div class="grid-x grid-margin-x">
+      <div id="post" class="large-8 cell post">
+  
+  <time datetime="2018-09-24 15:47:27 +0100" class="date">24 Sep 2018</time>
+  
+  <h1 class="post-title">Custom Vuforia VuMarks to identify and monitor IoT Devices with HoloLens</h1>
+  <div class="post-line"></div>
+  <p>Some of the most popular experiences of Augmented or Mixed Reality are currently in a gaming or an immersive 3D form. But what makes headsets like the HoloLens so different and special is the ability to still see into the physical world. It is this link that opens up so many new opportunities and future possibilities of spatial computing. An interesting scenario is using HoloLens to interact with IoT devices in the real world. Just by gazing at devices around a room imagine you could identify a specific IoT device to review its real-time telemetry and control it over the air!</p>
+
+<h2 id="setting-up-some-sample-iot-devices-to-interact-with">Setting up some sample IoT devices to interact with…</h2>
+
+<p>To test out this scenario the first thing we need here is access to some IoT devices to identify. In our case and for sake of simplicity we use some simulated IoT devices using the <a href="https://www.azureiotsolutions.com/Accelerators">Azure IoT Solution Accelerators</a> <strong>Remote Monitoring</strong> sample which you can try out.</p>
+
+<p><img src="/assets/images/Azure-IoT-000-Solution-Accelerators.png" alt="" /></p>
+
+<p><img src="/assets/images/Azure-IoT-002-launch-.png" alt="" /></p>
+
+<p>Once the Azure IoT Remote Monitoring solution is provisioned and ready you can select it to review a list of devices. This provides us with the list of Device Name Ids we will use to generate the VuForia VuMarks in the next steps.</p>
+
+<p><img src="/assets/images/Azure-IoT-003-devices.png" alt="" /></p>
+
+<h2 id="identifying-iot-devices-in-the-real-world-using-vuforia-vumarks">Identifying IoT devices in the real-world using VuForia VuMarks</h2>
+
+<p>The second thing we need is to be able to identify each IoT device in HoloLens. One approach we tried during a HoloLens hack was to use <a href="https://library.vuforia.com/features/objects/vumark.html">Vuforia VuMarks</a> to identify each device. A VuMark template contains a particular type of encoded data; numeric, string or raw bytes. Initially I tried out the <a href="https://library.vuforia.com/content/dam/vuforia-library/docs/target_samples/unity/mars_vumarks.pdf">default numeric type VuMarks</a> from the <a href="https://library.vuforia.com/content/vuforia-library/en/articles/Solution/sample-apps-target-pdfs.html">VuForia Samples</a> to check everything was working before trying anything more complex. Bear in mind there will also be a number of physical and environmental factors including VuMark placement, size and lighting conditions in the area to test and consider.<br />
+<strong>Tip:</strong> I found it useful to test the VuMarks by saving all the generated images on my iPhone and testing them in the Unity Editor using the built-in web cam.</p>
+
+<h3 id="creating-a-custom-vumark">Creating a custom VuMark</h3>
+
+<p>I used the <a href="https://library.vuforia.com/articles/Solution/Designing-a-VuMark-in-Adobe-Illustrator.html">VuForia VuMark Illustrator template</a> to create a custom VuMark. In my case I wanted to a support a <strong>32 character length string</strong> to contain a GUID so I created a string type VuMark with <strong>280 data elements</strong>. To save time designing your own VuMark you can download my finished <a href="/assets/media/guidVumark.svg">custom GUID VuMark SVG</a>. If you want to create your own VuMark I’ve included a list of VuMark element requirements below so you can get an idea of how complex the design would need to be and compare how many elements are required for each data type:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id length</th>
+      <th>String elements required</th>
+      <th>Byte elements required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>35</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>56</td>
+      <td>64</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>84</td>
+      <td>96</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>98</td>
+      <td>112</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>112</td>
+      <td>120</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>119</td>
+      <td>128</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>133</td>
+      <td>144</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>147</td>
+      <td>160</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>161</td>
+      <td>176</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>182</td>
+      <td>208</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>196</td>
+      <td>224</td>
+    </tr>
+    <tr>
+      <td>24</td>
+      <td>210</td>
+      <td>240</td>
+    </tr>
+    <tr>
+      <td>32</td>
+      <td><strong>280</strong></td>
+      <td>320</td>
+    </tr>
+    <tr>
+      <td>48</td>
+      <td>406</td>
+      <td>464</td>
+    </tr>
+    <tr>
+      <td>64</td>
+      <td>546</td>
+      <td>624</td>
+    </tr>
+    <tr>
+      <td>100</td>
+      <td>840</td>
+      <td>928</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>Maximum numeric Id</th>
+      <th>Numeric elements required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>9</td>
+      <td>28</td>
+    </tr>
+    <tr>
+      <td>99</td>
+      <td>31</td>
+    </tr>
+    <tr>
+      <td>999</td>
+      <td>34</td>
+    </tr>
+    <tr>
+      <td>9999</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <td>9 x5</td>
+      <td>41</td>
+    </tr>
+    <tr>
+      <td>9 x6</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <td>9 x7</td>
+      <td>54</td>
+    </tr>
+    <tr>
+      <td>9 x8</td>
+      <td>57</td>
+    </tr>
+    <tr>
+      <td>9 x9</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <td>9 x10</td>
+      <td>64</td>
+    </tr>
+    <tr>
+      <td>9 x11</td>
+      <td>67</td>
+    </tr>
+    <tr>
+      <td>9 x12</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <td>9 x13</td>
+      <td>74</td>
+    </tr>
+    <tr>
+      <td>9 x14</td>
+      <td>77</td>
+    </tr>
+    <tr>
+      <td>9 x15</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <td>9 x16</td>
+      <td>84</td>
+    </tr>
+    <tr>
+      <td>9 x17</td>
+      <td>87</td>
+    </tr>
+    <tr>
+      <td>9 x18</td>
+      <td>90</td>
+    </tr>
+    <tr>
+      <td>9 x19</td>
+      <td>94</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>For more info on designing VuMarks you can <a href="https://developer.vuforia.com/sites/default/files/VuMark%20Design%20Guide.pdf">download the VuMark design guide</a> or <a href="https://library.vuforia.com/articles/Training/VuMark-Design-Guide">view design guide docs</a>. I also found the <a href="https://www.youtube.com/watch?v=YXMiDRyvqzk">video explaining the VuMark design process</a> to be most helpful. NB: To design your own custom VuMarks you will need <a href="https://www.adobe.com/uk/products/illustrator.html">Adobe Illustrator</a> to run the <a href="https://developer.vuforia.com/vui/auth/login?url=/downloads/tool%3Fd%3Dwindows-4851025-17-4124%26retU">VuMark template scripts</a>.</p>
+
+<p><strong>Illustrator / VuMark Scripts troubleshooting notes:</strong></p>
+
+<ul>
+  <li>You may have to restart Illustrator after copying the scripts into the <code class="highlighter-rouge">C:\Program Files\Adobe\Adobe Illustrator CC 2018\Presets\en_US\Scripts</code> directory.</li>
+  <li>If you hit an error when setting up a new VuMark using the <a href="https://developer.vuforia.com/vui/auth/login?url=/downloads/tool%3Fd%3Dwindows-4851025-17-4124%26retU">Illustrator scripts v6.0.112</a> then check you have Adobe’s <a href="https://developer.vuforia.com/forum/vumark-design-tools/errors-illustrator-scripts#comment-55448">Myriad Pro fonts installed</a>.</li>
+  <li>If you can’t see the Illustrator canvas or the document area is blank or black then you might have to disable GPU acceleration under Preferences &gt; Performance.</li>
+</ul>
+
+<h3 id="creating-custom-vumark-database-for-unity">Creating custom VuMark database for Unity</h3>
+
+<p>Once you’ve designed your custom VuMark in Illustrator and it passes all the tests you will be ready to export your VuMark Template artwork. If you don’t have your own design ready you can <a href="/assets/media/guidVumark.svg">download my GUID VuMark SVG artwork</a>.</p>
+
+<p><img src="/assets/images/VuMark-Creation-Illustrator-280-elements-32-string.png" alt="" /></p>
+
+<p><strong>Note:</strong> If you’re starting a new design it’s preferable to avoid rotational symmetry in your VuMark’s border or contour otherwise you will have some additional work to do, as well as this the validation scripts don’t seem to provide a clear indication if this is completed correctly. You might also notice the Border and Clear Space width is only shown as “VERIFY” status - this check is left to the designer to manually check that the magenta overlay around the VuMark contour falls within the border and clear space boundary.</p>
+
+<ol>
+  <li>If you haven’t used VuForia before you will have to create a developer account and get a free license key for development in Unity.
+ <img src="/assets/images/VuForia-Developer-License-Key.png" alt="" /></li>
+  <li>Create a new VuMarks database.
+ <img src="/assets/images/VuForia-Database.png" alt="" /></li>
+  <li>Upload the <a href="/assets/media/guidVumark.svg">custom VuMark SVG artwork file</a> into your VuMark database. <strong>Note:</strong> You should set the width of the VuMark in relation to Unity’s unit of measurement which is in <strong>meters</strong>. In my case I want to recognize the VuMark on my iPhone which is 6 cm wide therefore I use a value of “ <strong>0.06</strong>” m.
+ <img src="/assets/images/VuMark-Upload-Export-SVG.png" alt="" /></li>
+  <li>Select your VuMark template target to <strong>download</strong> as your VuMark database.
+ <img src="/assets/images/VuForia-VuMark-Database.png" alt="" /></li>
+  <li>Download database for <strong>Unity Editor</strong>.
+ <img src="/assets/images/VuForia-Unity-Database.png" alt="" /></li>
+  <li><strong>Import</strong> your VuMarks database package into Unity project. If you don’t have your own Unity project you can setup the <a href="https://github.com/deadlyfingers/MixedRealityIoTMonitoring">Mixed Reality IoT Monitoring sample</a> to get started.
+ <img src="/assets/images/Unity-Import-VuMarks-Package.png" alt="" /></li>
+  <li>In Unity scene check the VuMark Behavior is setup correctly with your custom <strong>VuMark Database and Template</strong> and has <strong>Extended Tracking</strong> enabled for Mixed Reality.
+ <img src="/assets/images/Unity-VuMark-Behaviour.png" alt="" /></li>
+  <li>Open the VuForia AR Camera configuration settings to enter your <strong>VuForia developer license key</strong> and to <strong>load and activate the VuMark database</strong>.
+ <img src="/assets/images/VuForia-ARCamera-Config.jpg" alt="" /></li>
+  <li>Generate the VuMark images for each Device Id you want to recognize.
+ <img src="/assets/images/VuForia-Generate-VuMark-GUID.png" alt="" /></li>
+</ol>
+
+<p>For my sample IoT devices I generated the following device Ids; “chiller-01.0”, “chiller-02.0”, “elevator-01.0”, “elevator-02.0”, “furnace-01.0”.</p>
+
+<div class="grid-x">
+  <div class="small-6 cell">
+    <img src="/assets/images/guidVumark_chiller-01.0.png" alt="chiller-01.0" />
+  </div>
+  <div class="small-6 cell">
+    <img src="/assets/images/guidVumark_chiller-02.0.png" alt="chiller-02.0" />
+  </div>
+  <div class="small-6 cell">
+    <img src="/assets/images/guidVumark_elevator-01.0.png" alt="elevator-01.0" />
+  </div>
+  <div class="small-6 cell">
+    <img src="/assets/images/guidVumark_elevator-02.0.png" alt="elevator-02.0" />
+  </div>
+  <div class="small-6 cell">
+    <img src="/assets/images/guidVumark_furnace-01.0.png" alt="furnace-01.0" />
+  </div>
+</div>
+
+<p><strong>Tip:</strong> Save the generated VuMark images to iPhone / Android to test with. (I just saved the generated VuMark PNG images to my <a href="https://onedrive.live.com/">OneDrive</a> images folder to sync onto my iPhone.)</p>
+
+<h2 id="running-the-sample-mixed-reality-iot-monitoring-unity-project">Running the sample Mixed Reality IoT Monitoring Unity project</h2>
+
+<p>To run the <a href="https://github.com/deadlyfingers/MixedRealityIoTMonitoring">Mixed Reality IoT Monitoring Unity project</a> you will also need to setup the Azure Function APIs to get the device data from the Azure IoT Remote Monitoring sample.</p>
+
+<h3 id="azure-iot-device-functions-nodejs-backend">Azure IoT Device Functions (Nodejs backend)</h3>
+
+<ol>
+  <li>Fork the <a href="https://github.com/deadlyfingers/IoTDeviceFunctions">Azure IoT Device Functions project</a> on github.</li>
+  <li>Sign in to your <a href="https://portal.azure.com">Azure portal</a></li>
+  <li>Create a new Azure Function. NB: Ensure your <strong>Function app settings</strong> is using <strong>version 2</strong></li>
+  <li>Add the following environment variables using your <strong>Azure Function app settings</strong> :
+    <ul>
+      <li>IOTHUB_CONNECTION_STRING</li>
+      <li>TSI_FQDN</li>
+      <li>AD_APP_ID</li>
+      <li>AD_APP_KEY</li>
+      <li>AD_TENANT_DOMAIN NAME “*.onmicrosoft.com”</li>
+    </ul>
+  </li>
+  <li>To deploy your Function app select <strong>Platform Features &gt; Deployment Options &gt; Setup &gt; GitHub</strong> and choose your forked repo.</li>
+</ol>
+
+<h2 id="next-steps">Next steps…</h2>
+
+<p>Using VuForia VuMarks we are able to identify an IoT device using a HoloLens. Then using the recognized device Id as a param we can poll an Azure Functions endpoint to return the device’s telemetry. The next steps in this scenario would be to add buttons to call methods listed in the device’s payload.</p>
+
+</div>
+
+<div class="large-4 cell">
+  <!-- <a href="http://example.com/bar.html#disqus_thread">Link</a> -->
+
+</div>
+
+<div id="pagination" class="large-12 cell">
+  <div>
+    <a href="/code/custom-vuforia-vumarks-to-identify-iot-devices-with-hololens">Custom Vuforia VuMarks to identify and monitor IoT Devices with HoloLens</a>
+    <span>
+      
+      <span>by David Douglas</span>
+      
+    </span>
+  </div>
+  <ul class="tags">
+    
+    <li>IoT</li>
+    
+    <li>HoloLens</li>
+    
+    <li>Mixed Reality</li>
+    
+    <li>VuForia</li>
+    
+    <li>VuMark</li>
+    
+    <li>Data Visualisation</li>
+    
+  </ul>
+
+  <div class="grid-x grid-margin-x grid-padding-y">
+    <div class="large-6 cell">
+      
+      <span class="next">Next</span>
+      <a href="/info/migrating-from-wordpress-to-github-pages">Migrating from Wordpress blog to GitHub Pages</a>
+      
+    </div>
+    <div class="large-6 cell">
+      
+      <span class="prev">Previous</span>
+      <a href="/code/analytics-for-mixed-reality">Analytics for Mixed Reality</a>
+      
+    </div>
+  </div>
+  <div class="top"><a href="#" class="top">Top</a></div>
+</div>
+    </div>
+  </div>
+
+  <!-- scripts -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+</body>

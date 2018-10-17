@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Developer blog">
+  <title>Querying Application Insights for data visualisation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/assets/main.css" rel="stylesheet">
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Deadlyfingers.net" />
+</head>
+
+<body>
+  <div class="grid-container">
+    <!-- nav -->
+    <div class="grid-x">
+  <div class="small-6 cell">
+    <h1><a href="/">Deadlyfingers.net</a></h1>
+  </div>
+  <div class="small-6 cell right">
+    <a class="icon twitter" href="https://twitter.com/deadlyfingers"></a>
+    <a class="icon github" href="https://github.com/deadlyfingers"></a>
+    <a class="icon youtube" href="https://youtube.com/deadlyfingerstv"></a>
+  </div>
+</div>
+    <!-- body content -->
+    <div class="grid-x grid-margin-x">
+      <div id="post" class="large-8 cell post">
+  
+  <time datetime="2017-08-30 14:48:00 +0100" class="date">30 Aug 2017</time>
+  
+  <h1 class="post-title">Querying Application Insights for data visualisation</h1>
+  <div class="post-line"></div>
+  <p><a href="https://github.com/CatalystCode/ibex-dashboard">Ibex dashboard</a> is an open source <a href="https://azure.microsoft.com/en-gb/services/app-service/web/">web app</a> for displaying telemetry data from <a href="https://azure.microsoft.com/en-gb/services/application-insights/">Application Insights</a>. It comes with a number of <a href="https://github.com/CatalystCode/ibex-dashboard/tree/master/server/dashboards/preconfigured">sample templates</a> including analytics dashboards for <a href="https://dev.botframework.com/">Bots</a>. If you’re developing a bot and you want to see how your bot is performing over time then you can select the <a href="https://github.com/CatalystCode/ibex-dashboard/blob/master/server/dashboards/preconfigured/bot-framework-inst.ts">Bot Instrumentation template</a> which requires you to enter your Application Insights App Id and App Key. Also depending on your bot you will need to add <a href="https://github.com/CatalystCode/botbuilder-instrumentation">Node.js instrumentation</a> or <a href="https://github.com/CatalystCode/botbuilder-instrumentation-cs">C# instrumentation</a> in order to enable logging to Application Insights. Then after a couple of minutes you will start to see the data come through! The dashboard can be completely customised using <a href="https://github.com/CatalystCode/ibex-dashboard/tree/master/client/src/components/generic">generic components</a> including charts, tables, score cards and drill-down dialogs. These elements can be used to review how your bot performs over time, monitor usage stats, message sentiment, user retention and inspect user intents.</p>
+
+<p><a href="https://github.com/CatalystCode/ibex-dashboard"><img src="/assets/images/Ibex-Dashboard-Bot-Analytics.png" alt="" /></a></p>
+
+<p>If you are new to <a href="https://azure.microsoft.com/en-gb/services/application-insights/">Application Insights</a> one of the useful features of the <a href="https://github.com/CatalystCode/ibex-dashboard">Ibex dashboard</a> is the ability to inspect an element’s Application Insights query and the formatted JSON data side by side.</p>
+
+<p><a href="https://github.com/CatalystCode/ibex-dashboard"><img src="/assets/images/Ibex-Dashboard-Bot-Analytics-App-Insights-Query.png" alt="" /></a></p>
+
+<p>This query can be copied and played back inside your Application Insights live code editor. This is a good way to learn how the Application Insights queries work as you can step through the query by commenting out various lines with double slashes ‘//’.</p>
+
+<p><a href="https://github.com/CatalystCode/ibex-dashboard"><img src="/assets/images/Application-Insights-Query.png" alt="" /></a></p>
+
+<h2 id="writing-azure-log-analytics-queries-for-ibex-dashboard">Writing Azure Log Analytics queries for Ibex dashboard</h2>
+
+<p>The <a href="https://github.com/CatalystCode/ibex-dashboard/blob/master/docs/DASHBOARD-SCHEMA.md">Ibex dashboard schema</a> is composed of meta data, data sources, filters, elements and dialogs. Each data source allows you to define a query and a ‘calculated’ javascript function to process the query’s results for display purposes. Before learning to write Application Insights queries I was used to writing javascript map / reduce functions to aggregate data and so it’s all too easy to rely on previous javascript knowledge to process the data from a basic query. But often this javascript ‘reduce’ aggregation logic can done in an Application Insights query with a lot less effort. So invest some time up front to <a href="https://docs.loganalytics.io/docs/Learn/Getting-Started/Getting-started-with-the-Analytics-portal">learn the key Application Insights query concepts</a> and it will pay off in the long run!</p>
+
+<p>To help to illustrate this we can look at the Application Insights query for tracking a bot to human hand-off during a user’s conversation session. For this scenario we built a <a href="https://qnamaker.ai/">QnA bot</a> with the <a href="https://www.npmjs.com/package/botbuilder-handoff">hand-off module</a> installed. If a customer asks the QnA bot a question and no answer was found in the knowledge base we trigger an automatic hand-off to human. We want to show the fastest, longest and average times for customer waiting for an human agent to respond in the dashboard.</p>
+
+<p>We can start by writing a basic query in Application Insights to get all the transcripts from the ‘customEvents’ table and ‘project’ only the information we need.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">customEvents</span> 
+<span class="nx">where</span> <span class="nx">name</span> <span class="o">==</span> <span class="s1">'Transcript'</span>
+<span class="o">|</span> <span class="nx">extend</span> <span class="nx">customerName</span><span class="o">=</span><span class="nx">tostring</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="nx">customerName</span><span class="p">),</span> 
+  <span class="nx">text</span><span class="o">=</span><span class="nx">tostring</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="nx">text</span><span class="p">),</span> 
+  <span class="nx">userTime</span><span class="o">=</span><span class="nx">tostring</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">),</span> 
+  <span class="nx">state</span><span class="o">=</span><span class="nx">toint</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="nx">state</span><span class="p">),</span> 
+  <span class="nx">agentName</span><span class="o">=</span><span class="nx">tostring</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="nx">agentName</span><span class="p">),</span> 
+  <span class="k">from</span><span class="o">=</span><span class="nx">tostring</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="k">from</span><span class="p">)</span>  
+<span class="o">|</span> <span class="nx">project</span> <span class="k">from</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">customerName</span><span class="p">,</span> <span class="nx">agentName</span><span class="p">,</span> <span class="nx">state</span><span class="p">,</span> <span class="nx">userTime</span> 
+<span class="o">|</span> <span class="nx">order</span> <span class="nx">by</span> <span class="nx">userTime</span> <span class="nx">asc</span>
+</code></pre></div></div>
+
+<p>But in this example we are not using Application Insights to aggregate the results so we end up with a lot of results to process. Given the query above the following code snippet is the amount of Javascript required.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">calculated</span><span class="p">:</span> <span class="p">(</span><span class="nx">transcripts</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">key</span> <span class="o">=</span> <span class="s1">'customerId'</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">transcriptsGrouped</span> <span class="o">=</span> <span class="nx">transcripts</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">a</span><span class="p">.</span><span class="nx">findIndex</span><span class="p">(</span><span class="nx">col</span> <span class="o">=&gt;</span> <span class="nx">col</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="nx">c</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">i</span> <span class="o">===</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">collection</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">'id'</span><span class="p">:</span> <span class="nx">c</span><span class="p">[</span><span class="nx">key</span><span class="p">],</span>
+        <span class="s1">'transcripts'</span><span class="p">:</span> <span class="p">[]</span>
+      <span class="p">};</span>
+      <span class="nx">a</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">collection</span><span class="p">);</span> <span class="c1">// new group</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">a</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">transcripts</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">c</span><span class="p">);</span> <span class="c1">// append to group</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">a</span><span class="p">;</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="kd">const</span> <span class="nx">SEC_PER_DAY</span> <span class="o">=</span> <span class="mi">86400</span><span class="p">;</span> <span class="c1">// 60 * 60 * 24;</span>
+  <span class="kd">let</span> <span class="nx">times</span> <span class="o">=</span> <span class="p">[];</span>
+
+  <span class="nx">transcriptsGrouped</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">userTranscript</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">prevTranscript</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="nx">userTranscript</span><span class="p">.</span><span class="nx">transcripts</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">transcript</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">prevTranscript</span> <span class="o">&amp;&amp;</span> <span class="nx">prevTranscript</span><span class="p">.</span><span class="nx">state</span> <span class="o">===</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">transcript</span><span class="p">.</span><span class="nx">state</span> <span class="o">===</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">date1</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">prevTranscript</span><span class="p">.</span><span class="nx">userTime</span><span class="p">);</span>
+        <span class="kd">let</span> <span class="nx">date2</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">transcript</span><span class="p">.</span><span class="nx">userTime</span><span class="p">);</span>
+        <span class="kd">let</span> <span class="nx">diff</span> <span class="o">=</span> <span class="p">(</span><span class="nx">date2</span> <span class="o">-</span> <span class="nx">date1</span><span class="p">)</span> <span class="o">/</span> <span class="nx">SEC_PER_DAY</span><span class="p">;</span>
+        <span class="nx">times</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">diff</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="nx">prevTranscript</span> <span class="o">=</span> <span class="nx">transcript</span><span class="p">;</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+
+  <span class="kd">const</span> <span class="nx">avgTimeWaiting</span> <span class="o">=</span> <span class="nx">times</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">c</span> <span class="p">},</span> <span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="nx">times</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">maxTimeWaiting</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(...</span><span class="nx">times</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">minTimeWaiting</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(...</span><span class="nx">times</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="s1">'transcriptsAverageTimeWaiting-value'</span><span class="p">:</span> <span class="nx">avgTimeWaiting</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+    <span class="s1">'transcriptsLongestTimeWaiting-value'</span><span class="p">:</span> <span class="nx">maxTimeWaiting</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+    <span class="s1">'transcriptsShortestTimeWaiting-value'</span><span class="p">:</span> <span class="nx">minTimeWaiting</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The first ‘reduce’ block is required to group the transcripts per user Id. Then for every user we track the state change from waiting and talking to human agent and calculate the time difference in seconds. Where ‘state’ is an integer value that marks the current status of the conversion.<br />
+`
+0 = Bot
+1 = Waiting
+2 = Human agent
+`</p>
+
+<p>But we can optimise the code by doing the aggregation within the Application Insights query by using the ‘summarize’ operator and ‘count’ function.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">customEvents</span>
+<span class="nx">where</span> <span class="nx">name</span> <span class="o">==</span> <span class="s1">'Transcript'</span>
+<span class="o">|</span> <span class="nx">extend</span> <span class="nx">conversationId</span><span class="o">=</span><span class="nx">tostring</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="nx">userConversationId</span><span class="p">),</span> 
+  <span class="nx">customerId</span><span class="o">=</span><span class="nx">tostring</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="nx">customerId</span><span class="p">),</span> 
+  <span class="nx">state</span><span class="o">=</span><span class="nx">toint</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="nx">state</span><span class="p">)</span>  
+<span class="o">|</span> <span class="nx">where</span> <span class="nx">state</span><span class="o">==</span><span class="mi">1</span> <span class="nx">or</span> <span class="nx">state</span><span class="o">==</span><span class="mi">2</span>
+<span class="o">|</span> <span class="nx">order</span> <span class="nx">by</span> <span class="nx">timestamp</span> <span class="nx">asc</span>
+<span class="o">|</span> <span class="nx">summarize</span> <span class="nx">total</span><span class="o">=</span><span class="nx">count</span><span class="p">(),</span> <span class="nx">times</span><span class="o">=</span><span class="nx">makelist</span><span class="p">(</span><span class="nx">timestamp</span><span class="p">)</span> <span class="nx">by</span> <span class="nx">conversationId</span><span class="p">,</span> <span class="nx">customerId</span><span class="p">,</span> <span class="nx">bin</span><span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="o">|</span> <span class="nx">project</span> <span class="nx">conversationId</span><span class="p">,</span> <span class="nx">customerId</span><span class="p">,</span> <span class="nx">state</span><span class="p">,</span> <span class="nx">startTime</span><span class="o">=</span><span class="nx">times</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> 
+<span class="o">|</span> <span class="nx">summarize</span> <span class="nx">result</span><span class="o">=</span><span class="nx">count</span><span class="p">(</span><span class="nx">state</span><span class="p">),</span> <span class="nx">startEndTimes</span><span class="o">=</span><span class="nx">makelist</span><span class="p">(</span><span class="nx">startTime</span><span class="p">)</span> <span class="nx">by</span> <span class="nx">conversationId</span><span class="p">,</span> <span class="nx">customerId</span>
+<span class="o">|</span> <span class="nx">where</span> <span class="nx">result</span> <span class="o">==</span> <span class="mi">2</span>
+<span class="o">|</span> <span class="nx">project</span> <span class="nx">conversationId</span><span class="p">,</span> <span class="nx">customerId</span><span class="p">,</span> <span class="nx">timeTaken</span><span class="o">=</span><span class="nx">todatetime</span><span class="p">(</span><span class="nx">startEndTimes</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">-</span><span class="nx">todatetime</span><span class="p">(</span><span class="nx">startEndTimes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>Notice how you can apply aggregations in multiple passes, in this case the ‘summarize’ operator and ‘count’ function is used to aggregate results twice in conjunction with multiple ‘where’ statements that are used to filter the results. Now the javascript ‘calculated’ function code can be greatly simplified:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">calculated</span><span class="p">:</span> <span class="p">(</span><span class="nx">results</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">times</span> <span class="o">=</span> <span class="nx">results</span><span class="p">.</span><span class="nx">reduce</span><span class="p">(</span>
+    <span class="p">(</span><span class="nx">acc</span><span class="p">,</span> <span class="nx">cur</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="c1">// converts time hh:mm:ss format to value in seconds</span>
+      <span class="nx">acc</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">cur</span><span class="p">.</span><span class="nx">timeTaken</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">':'</span><span class="p">).</span><span class="nx">reverse</span><span class="p">().</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">c</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">c</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="nx">i</span><span class="p">),</span> <span class="mi">0</span><span class="p">));</span>
+      <span class="k">return</span> <span class="nx">acc</span><span class="p">;</span>
+    <span class="p">},</span>
+    <span class="p">[]);</span>
+
+  <span class="kd">const</span> <span class="nx">avgTimeWaiting</span> <span class="o">=</span> <span class="nx">times</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="nx">times</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">maxTimeWaiting</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(...</span><span class="nx">times</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">minTimeWaiting</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(...</span><span class="nx">times</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="s1">'transcriptsAverageTimeWaiting-value'</span><span class="p">:</span> <span class="nx">avgTimeWaiting</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+    <span class="s1">'transcriptsLongestTimeWaiting-value'</span><span class="p">:</span> <span class="nx">maxTimeWaiting</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+    <span class="s1">'transcriptsShortestTimeWaiting-value'</span><span class="p">:</span> <span class="nx">minTimeWaiting</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The only thing we do is a ‘reduce’ function to convert the time format ‘hh:mm:ss’ returned from the Application Insights query into a number of seconds for the various calculations for displaying in a score card element.</p>
+
+<p>The final Application Insights query is available in the <a href="https://github.com/CatalystCode/ibex-dashboard/blob/master/server/dashboards/preconfigured/human-handoff.ts">hand-off to human dashboard template</a> and is included with <a href="https://github.com/CatalystCode/ibex-dashboard">Ibex dashboard</a>.</p>
+
+<h4 id="further-reading-and-resources">Further reading and resources:</h4>
+
+<ul>
+  <li><a href="https://docs.microsoft.com/en-us/azure/application-insights/app-insights-analytics">Azure Application Insights</a></li>
+  <li><a href="https://docs.loganalytics.io/">Azure Log Analytics query language</a></li>
+  <li><a href="https://docs.loganalytics.io/docs/Language-Reference/">Azure Log Analytics query language reference docs</a></li>
+  <li><a href="http://portal.loganalytics.io/demo">Azure Log Analytics playground</a></li>
+  <li><a href="https://github.com/CatalystCode/ibex-dashboard">Ibex dashboard for Application Insights</a></li>
+</ul>
+
+</div>
+
+<div class="large-4 cell">
+  <!-- <a href="http://example.com/bar.html#disqus_thread">Link</a> -->
+
+</div>
+
+<div id="pagination" class="large-12 cell">
+  <div>
+    <a href="/code/querying-application-insights-for-data-visualisation">Querying Application Insights for data visualisation</a>
+    <span>
+      
+      <span>by David Douglas</span>
+      
+    </span>
+  </div>
+  <ul class="tags">
+    
+    <li>Application Insights</li>
+    
+    <li>Ibex Dashboard</li>
+    
+    <li>Data Visualisation</li>
+    
+    <li>Bots</li>
+    
+    <li>Log Analytics</li>
+    
+  </ul>
+
+  <div class="grid-x grid-margin-x grid-padding-y">
+    <div class="large-6 cell">
+      
+      <span class="next">Next</span>
+      <a href="/code/unity-web-sockets-mixed-reality-uwp">Unity Web Sockets for Mixed Reality</a>
+      
+    </div>
+    <div class="large-6 cell">
+      
+      <span class="prev">Previous</span>
+      <a href="/tutorial/unity3d-and-azure-blob-storage">Unity3d and Azure Blob Storage</a>
+      
+    </div>
+  </div>
+  <div class="top"><a href="#" class="top">Top</a></div>
+</div>
+    </div>
+  </div>
+
+  <!-- scripts -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+</body>

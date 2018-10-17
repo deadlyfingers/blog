@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Developer blog">
+  <title>Creating content with Web Components</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/assets/main.css" rel="stylesheet">
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Deadlyfingers.net" />
+</head>
+
+<body>
+  <div class="grid-container">
+    <!-- nav -->
+    <div class="grid-x">
+  <div class="small-6 cell">
+    <h1><a href="/">Deadlyfingers.net</a></h1>
+  </div>
+  <div class="small-6 cell right">
+    <a class="icon twitter" href="https://twitter.com/deadlyfingers"></a>
+    <a class="icon github" href="https://github.com/deadlyfingers"></a>
+    <a class="icon youtube" href="https://youtube.com/deadlyfingerstv"></a>
+  </div>
+</div>
+    <!-- body content -->
+    <div class="grid-x grid-margin-x">
+      <div id="post" class="large-8 cell post">
+  
+  <time datetime="2016-08-22 17:19:59 +0100" class="date">22 Aug 2016</time>
+  
+  <h1 class="post-title">Creating content with Web Components</h1>
+  <div class="post-line"></div>
+  <p>Many web projects rely on a <abbr title="Content Management System">CMS</abbr> of some description. The system itself is not important, but rather the content it helps to create. The primary function of a CMS is to enable the creation of content - it should empower content creation. If a new project requires a CMS the question that would tend to spring into a developer’s mind is - can I use an existing CMS already out there, or do I need to build a CMS from scratch for this project? But before that can be answered, perhaps some simple questions need to be asked first.</p>
+
+<h2 id="asking-the-simple-questions">Asking the simple questions…</h2>
+
+<p>Content Management Systems are designed to make it easier to create and publish content. With so many open source systems available there’s a good chance you can find something to do the job you need. Often in the case where additional functionality is required most systems can be extended with some sort of plugin to add that ‘must have’ feature. So why would you ever need to build your own CMS from scratch? This decision should not hang solely upon application’s technical requirements, but rather it depends on who will be using it - we need to ask ourselves who will be the one creating the content? Sounds like a simple question, perhaps even an obvious question but it merits deep thought and careful design decisions. If it is a non-technical audience then displaying a bunch of features that the user doesn’t need is distracting, in the worst case intimidating, ultimately leading to a poor user experience. What if you could design something from scratch so it could be tailored exactly to fit the user’s requirements? Imagine if the UI only contained the functions needed without extraneous menu options or clutter and was designed to maximise ease of use and content creation.</p>
+
+<h2 id="starting-from-scratch">Starting from scratch</h2>
+
+<p>Recently I was working on the ‘Badge Builder’ project which required a CMS to author quiz content. But rather than manipulate some existing CMS or plugin that might roughly fit the use case we wondered if we could design and build our own bespoke CMS components during a one week hack. At the very outset of the project we wanted to build a system that would be easy to use and quick to create content regardless of the technical abilities of the user.</p>
+
+<p><img src="/assets/images/BadgeBuilder.jpg" alt="Badge Builder" /></p>
+
+<p>The main problem with building all the CMS components from scratch would be the time required - with only three weeks. However there are a number of things that I feel made the most of the development time we had.</p>
+
+<h3 id="web-components"><strong>Web Components</strong></h3>
+
+<p>By leveraging <a href="http://webcomponents.org/">Web Components</a> we could make our own custom HTML elements for each quiz and content element. Common behaviours could also be shared across elements.</p>
+
+<h3 id="polymer"><strong>Polymer</strong></h3>
+
+<p>During our one week hack the <a href="https://developers.google.com/web/tools/polymer-starter-kit/?hl=en">Polymer Starter Kit</a> was a good kick start and saved time by setting up a stack of things like node and bower dependencies. <a href="https://www.polymer-project.org">Polymer</a> provides a nice UI kit for web apps which can be separately imported for use. The PSK boilerplate is now available through <a href="https://www.polymer-project.org/1.0/docs/tools/polymer-cli">Polymer-cli</a>.</p>
+
+<h3 id="sass-and-foundation-grid"><strong>SASS and Foundation grid</strong></h3>
+
+<p>Because nobody likes working with thousands of lines of CSS, SASS can reduce physical line count and can be easily split into separate files which makes it easier to manage in source controlled projects. Also SASS makes it easy to import <a href="http://foundation.zurb.com/grid.html">Foundation Grid</a> for responsive design.</p>
+
+<h3 id="live-reload-of-server-and-client"><strong>Live reload of server and client</strong></h3>
+
+<p>A combination of <a href="https://github.com/remy/nodemon">Nodemon</a> and <a href="https://www.browsersync.io/">BrowserSync</a> allowed us to see live updates of all changes made on server and client side. This combo is essential to fine tune the interface and user experience and is my personal ‘must have’ for designing and developing a web app project.</p>
+
+<h3 id="document-database"><strong>Document database</strong></h3>
+
+<p>Saving content as a JSON object allowed greater freedom developing components on client side.</p>
+
+<h2 id="polymer-web-components">Polymer Web Components</h2>
+
+<p>Developing Web Components for each quiz element and content element felt very intuitive. A quiz could be built using a combination of a number of individual quiz and content components.</p>
+
+<h3 id="quiz-components">Quiz components:</h3>
+
+<ul>
+  <li><strong>Single choice</strong>
+    <ul>
+      <li>Select the correct answer from a number of options</li>
+    </ul>
+  </li>
+  <li><strong>Multiple choice</strong>
+    <ul>
+      <li>Select one or more answers that apply from a number of options</li>
+    </ul>
+  </li>
+  <li><strong>Ordered list</strong>
+    <ul>
+      <li>Move options into their correct order using drag and drop</li>
+    </ul>
+  </li>
+  <li><strong>Groups</strong>
+    <ul>
+      <li>Move options into their correct groups using drag and drop</li>
+    </ul>
+  </li>
+  <li><strong>Keywords</strong>
+    <ul>
+      <li>Type keywords to answer requirements</li>
+    </ul>
+  </li>
+  <li><strong>Comments</strong>
+    <ul>
+      <li>Type a number of words to answer</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="content-components">Content components:</h3>
+
+<ul>
+  <li><strong>HTML</strong>
+    <ul>
+      <li>HTML formatted content</li>
+    </ul>
+  </li>
+  <li><strong>Embedded media</strong>
+    <ul>
+      <li>Embedded video player using iframe</li>
+    </ul>
+  </li>
+  <li><strong>Link</strong>
+    <ul>
+      <li>External url</li>
+    </ul>
+  </li>
+  <li><strong>Section</strong>
+    <ul>
+      <li>Split quiz into sections</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="reusable-elements">Reusable elements</h2>
+
+<p>To create <a href="https://www.polymer-project.org/1.0/docs/tools/reusable-elements">reusable Web Components</a> you can use the Polymer <a href="https://github.com/PolymerElements/seed-element">Seed Element</a> which sets up a test, demo and documentation page. But rather than have the overhead of managing and publishing multiple custom elements during development, it was faster to have the custom elements bundled with the project - the idea being once we had finished the project we could extract and publish them as separate elements. (One ‘gotya’ to be aware of is that custom element names need to be hyphenated.)</p>
+
+<p>All the Web Components for the Badge Builder needed to operate on two different views - the editor (CMS) screen and the interactive viewer (quiz) screen.</p>
+
+<h3 id="badge-builder-editor-cms">Badge Builder Editor (CMS)</h3>
+
+<p><img src="/assets/images/BadgeBuilder-MicroBit.jpg" alt="BadgeBuilder-MicroBit" /></p>
+
+<h3 id="badge-builder-viewer-quiz">Badge Builder Viewer (quiz)</h3>
+
+<p><img src="/assets/images/BadgeBuilder-MicroBit-Quiz.jpg" alt="BadgeBuilder-MicroBit-Quiz" /></p>
+
+<p>For the editor we wanted the quiz elements to be pretty <abbr title="What You See Is What You Get">WYSIWYG</abbr> so for the most part the same element was used for the editor and viewer. The Polymer <a href="https://www.polymer-project.org/1.0/docs/api/dom-if"><code class="highlighter-rouge">dom-if</code></a> template was a good way to render the parts unique to each view in this case.</p>
+
+<h2 id="displaying-dynamic-content-using-web-components">Displaying dynamic content using Web Components</h2>
+
+<p>To render the dynamic components to the page an empty placeholder was used.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"components"</span><span class="nt">&gt;&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<p>The quiz content was loaded with Polymer’s <a href="https://elements.polymer-project.org/elements/iron-ajax"><code class="highlighter-rouge">iron-ajax</code></a> element and the array of content was parsed in the response handler using a switch statement to check against specific element types.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">elements</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">element</span> <span class="o">=</span> <span class="nx">elements</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+  <span class="k">switch</span><span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">elementType</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="s2">"content-html"</span><span class="p">:</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">addHTML</span><span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">text</span><span class="p">);</span>
+    <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="s2">"content-video"</span><span class="p">:</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">addVideo</span><span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">embededURI</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="s2">"content-button"</span><span class="p">:</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">addButton</span><span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">buttonURL</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="s2">"content-section"</span><span class="p">:</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">addContentSection</span><span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">title</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="s2">"quiz-short-input"</span><span class="p">:</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">addQuizShortInput</span><span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">question</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">answerKeywords</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">answer</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">hintText</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">showHint</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="s2">"quiz-long-input"</span><span class="p">:</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">addQuizLongInput</span><span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">question</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">answer</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">wordLimit</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">hintText</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">showHint</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="s2">"quiz-list-groups"</span><span class="p">:</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">addQuizListGroups</span><span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">question</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">answer</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">hintText</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">showHint</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="nl">default</span><span class="p">:</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">addQuizElementType</span><span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">elementType</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">question</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">options</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">answer</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">hintText</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">showHint</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Most elements are unique and are handled separately, apart from the default case which for elements that share exactly the same object properties. In this case the element type is passed to the function to create the element and set the properties by using the `document.createElement` method. (The other option is to define <a href="https://www.polymer-project.org/1.0/docs/devguide/registering-elements" target="_blank"> custom constructor</a> but it's not necessary.)</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">addQuizElementType</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">elementType</span><span class="p">,</span> <span class="nx">id</span><span class="p">,</span> <span class="nx">question</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">answer</span><span class="p">,</span> <span class="nx">hintText</span><span class="p">,</span> <span class="nx">showHint</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">elementType</span><span class="p">);</span> <span class="c1">// string should be a hyphenated web component</span>
+  <span class="nx">el</span><span class="p">.</span><span class="nx">_id</span> <span class="o">=</span> <span class="nx">id</span><span class="p">;</span>
+  <span class="nx">el</span><span class="p">.</span><span class="nx">question</span> <span class="o">=</span> <span class="nx">question</span><span class="p">;</span>
+  <span class="nx">el</span><span class="p">.</span><span class="nx">options</span> <span class="o">=</span> <span class="nx">options</span><span class="p">;</span>
+  <span class="nx">el</span><span class="p">.</span><span class="nx">answer</span> <span class="o">=</span> <span class="nx">answer</span><span class="p">;</span>
+  <span class="nx">el</span><span class="p">.</span><span class="nx">hintText</span> <span class="o">=</span> <span class="nx">hintText</span><span class="p">;</span>
+  <span class="nx">el</span><span class="p">.</span><span class="nx">showHint</span> <span class="o">=</span> <span class="nx">showHint</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">addElement</span><span class="p">(</span><span class="nx">el</span><span class="p">);</span> <span class="c1">// add element to the DOM</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Once the element has been created and properties set it still needs added to the DOM. This is handled with `appendChild(element)` Javascript method. Notice that we can use Polymer's &#8216;`$`&#8217; selector to append children to our <em>div</em> tag with `id="components"`. Because the elements are added dynamically in Javascript and therefore manipulating the DOM it is necessary to wrap the selector using the <a href="https://www.polymer-project.org/1.0/docs/devguide/local-dom" target="_blank">Polymer DOM API</a>.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">addElement</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">isCreated</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">element</span><span class="p">.</span><span class="nx">edit</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="nx">element</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s2">"draggable"</span><span class="p">);</span>
+  <span class="nx">Polymer</span><span class="p">.</span><span class="nx">dom</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$</span><span class="p">.</span><span class="nx">components</span><span class="p">).</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">element</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The add element method was used when loading saved content, but also when adding new elements to the page. One usability tweak is to have the page scroll down to show a newly added component. The problem with scrolling down here is that height of the new element will not be known until the DOM has updated, so we will need to add a listener to handle the `dom-change` event. Now we can scroll down to see the element we have added.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">scrollDown</span><span class="p">:</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="nb">window</span><span class="p">.</span><span class="nx">scrollTo</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">scrollHeight</span><span class="p">);</span>
+<span class="p">},</span>
+
+<span class="nx">listeners</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s1">'dom-change'</span> <span class="p">:</span> <span class="s2">"scrollDown"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2>Saving dynamic content using Web Components</h2>
+<p>To save the dynamic content for each element I would need to be able to get the content as JSON. A nice way to handle this for all components is to use a shared behaviour. This would hold the `_id` property assigned by the database and also assign the element's type using the built-in method `this.localName`.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"import"</span> <span class="na">href=</span><span class="s">"../../../bower_components/polymer/polymer.html"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+  <span class="nb">window</span><span class="p">.</span><span class="nx">QuizBehaviors</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">QuizBehaviors</span> <span class="o">||</span> <span class="p">{};</span> <span class="c1">// Behavior namespace</span>
+  <span class="cm">/** @polymerBehavior QuizBehaviors.DataModelBehavior */</span>
+  <span class="nx">QuizBehaviors</span><span class="p">.</span><span class="nx">DataModelBehaviorImpl</span> <span class="o">=</span> <span class="p">{</span>
+
+    <span class="na">properties</span><span class="p">:</span> <span class="p">{</span>
+      <span class="cm">/**
+       * The `id` of the element for database
+       * @type {string}
+       */</span>
+      <span class="na">_id</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">type</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+        <span class="na">value</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="s2">""</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+
+    <span class="p">},</span>
+
+    <span class="cm">/**
+     * Returns the JSON data model for saving. 
+     * NB: To capture more properties the `getData` method can be overridden by the custom element.
+     */</span>
+     <span class="na">getData</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+       <span class="k">return</span> <span class="p">{</span>
+         <span class="na">_id</span> <span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span>
+         <span class="na">elementType</span> <span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">localName</span>
+       <span class="p">};</span>
+     <span class="p">}</span>
+
+  <span class="p">};</span>
+
+  <span class="nx">QuizBehaviors</span><span class="p">.</span><span class="nx">DataModelBehavior</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="nx">QuizBehaviors</span><span class="p">.</span><span class="nx">DataModelBehaviorImpl</span>
+  <span class="p">];</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p>Finally, when changes need to be saved it's just a case of returning a list of all our custom elements and grabbing the data as JSON using the element's `getData` behaviour. This data array can then be posted using Polymer's <a href="https://elements.polymer-project.org/elements/iron-ajax" target="_blank">`iron-ajax`</a> element for saving to the database.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">getElements</span><span class="p">:</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="k">return</span> <span class="nx">Polymer</span><span class="p">.</span><span class="nx">dom</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$</span><span class="p">.</span><span class="nx">components</span><span class="p">).</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">'.draggable'</span><span class="p">);</span>
+<span class="p">},</span>
+
+<span class="nx">getElementsData</span><span class="p">:</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="kd">var</span> <span class="nx">elementsData</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="kd">var</span> <span class="nx">elements</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getElements</span><span class="p">();</span>
+  <span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">elements</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+  <span class="k">while</span><span class="p">(</span><span class="nx">i</span><span class="o">--</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">el</span> <span class="o">=</span> <span class="nx">elements</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+    <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">el</span><span class="p">.</span><span class="nx">getData</span><span class="p">();</span>
+    <span class="nx">elementsData</span><span class="p">.</span><span class="nx">unshift</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">elementsData</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>You can find the <a href="https://github.com/ideaaward/badge-builder">Badge Builder project</a> on github and if you want to know more you can read the full code story on the <a href="https://www.microsoft.com/developerblog/2017/05/31/digital-badge-building-reusable-web-components/">Microsoft Developer blog</a>.</p>
+
+</div>
+
+<div class="large-4 cell">
+  <!-- <a href="http://example.com/bar.html#disqus_thread">Link</a> -->
+
+</div>
+
+<div id="pagination" class="large-12 cell">
+  <div>
+    <a href="/code/creating-content-with-web-components">Creating content with Web Components</a>
+    <span>
+      
+      <span>by David Douglas</span>
+      
+    </span>
+  </div>
+  <ul class="tags">
+    
+    <li>Javascript</li>
+    
+    <li>Polymer</li>
+    
+    <li>Web Components</li>
+    
+  </ul>
+
+  <div class="grid-x grid-margin-x grid-padding-y">
+    <div class="large-6 cell">
+      
+      <span class="next">Next</span>
+      <a href="/code/swift-json-parsing-for-ios-development">Swift JSON parsing for iOS development</a>
+      
+    </div>
+    <div class="large-6 cell">
+      
+      <span class="prev">Previous</span>
+      <a href="/tutorial/azure-app-services-for-unity3d">Azure App Services for Unity3D</a>
+      
+    </div>
+  </div>
+  <div class="top"><a href="#" class="top">Top</a></div>
+</div>
+    </div>
+  </div>
+
+  <!-- scripts -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+</body>

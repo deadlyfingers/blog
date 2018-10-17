@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Developer blog">
+  <title>Merging Unity scenes, prefabs and assets with git</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/assets/main.css" rel="stylesheet">
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Deadlyfingers.net" />
+</head>
+
+<body>
+  <div class="grid-container">
+    <!-- nav -->
+    <div class="grid-x">
+  <div class="small-6 cell">
+    <h1><a href="/">Deadlyfingers.net</a></h1>
+  </div>
+  <div class="small-6 cell right">
+    <a class="icon twitter" href="https://twitter.com/deadlyfingers"></a>
+    <a class="icon github" href="https://github.com/deadlyfingers"></a>
+    <a class="icon youtube" href="https://youtube.com/deadlyfingerstv"></a>
+  </div>
+</div>
+    <!-- body content -->
+    <div class="grid-x grid-margin-x">
+      <div id="post" class="large-8 cell post">
+  
+  <time datetime="2016-09-19 10:30:38 +0100" class="date">19 Sep 2016</time>
+  
+  <h1 class="post-title">Merging Unity scenes, prefabs and assets with git</h1>
+  <div class="post-line"></div>
+  <p>When it comes to working as a team on the same project we are all thankful for source control. But even if you’re cool with <a href="https://git-scm.com/">git</a> there are some things to be aware of when starting new source controlled Unity projects that should help to reduce the chance of nasty merge conflicts.</p>
+
+<h2 id="solo-scenes">Solo Scenes</h2>
+
+<p>Something to generally avoid in Unity is working on the same scene. Thats why the question of <a href="http://forum.unity3d.com/threads/how-do-several-people-work-inside-the-same-scene-and-resolve-merging-conflicts-under-git.291468/">how to merge a scene when a team of developers are working on it</a> is a fairly hot topic. One basic strategy is for each person to clone the main scene and work on their own version, then nominate a scene master to combine the various elements into in the main scene to avoid conflicts. But because this is quite a restricted way of working Unity 5 introduced <a href="https://docs.unity3d.com/Manual/SmartMerge.html">Smart Merge</a> and the <strong>UnityYAMLMerge</strong> tool that can merge scenes and prefabs semantically.</p>
+
+<h2 id="asset-serialization-using-force-text">Asset Serialization using “Force Text”</h2>
+
+<p>By default Unity will save scenes and prefabs as binary files. But there is an option to force Unity to save scenes as <a href="https://docs.unity3d.com/Manual/TextSceneFormat.html">YAML text based files</a> instead. This setting can be found under the <strong>Edit &gt; Project Settings &gt; Editor</strong> menu and then under <strong>Asset Serialization Mode</strong> choose <strong>Force Text</strong>.</p>
+
+<p><img src="/assets/images/Unity-Edit-ProjectSettings-Editor-AssetSerializationMode-ForceText.png" alt="unity-edit-projectsettings-editor-assetserializationmode-forcetext" /></p>
+
+<p>But as this is not the default setting make sure when applying this mode that everyone else on the team is happy to switch.<br />
+If you select “Force Text” to save files in YAML format you should add a <em>.gitattributes</em> file that tells git to treat <em>*.unity</em>, <em>*.prefab</em> and <em>*.asset</em> files as binary to ensure git doesn’t try to merge scenes automatically. Paste the following into the <em>.gitconfig</em> file inside your Unity project:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*.unity binary
+*.prefab binary
+*.asset binary
+</code></pre></div></div>
+
+<p>Another result of saving in text file mode is that you can see the changes in source control commits.</p>
+
+<h2 id="setting-up-unityyamlmerge-with-git">Setting up UnityYAMLMerge with Git</h2>
+
+<p>You can access the <strong>UnityYAMLMerge</strong> tool from command line and also hook it up with version control software. Paste the following into the <em>.gitconfig</em> file inside your Unity project:</p>
+
+<h4 id="unityyamlmerge-windows">UnityYAMLMerge (Windows):</h4>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>merge]
+tool <span class="o">=</span> unityyamlmerge
+
+<span class="o">[</span>mergetool <span class="s2">"unityyamlmerge"</span><span class="o">]</span>
+trustExitCode <span class="o">=</span> <span class="nb">false
+</span>cmd <span class="o">=</span> <span class="s1">'C:\Program Files\Unity\Editor\Data\Tools\UnityYAMLMerge.exe'</span> merge -p <span class="s2">"</span><span class="nv">$BASE</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$REMOTE</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$LOCAL</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$MERGED</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<h4 id="unityyamlmerge-mac">UnityYAMLMerge (Mac):</h4>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>merge]
+tool <span class="o">=</span> unityyamlmerge
+
+<span class="o">[</span>mergetool <span class="s2">"unityyamlmerge"</span><span class="o">]</span>
+trustExitCode <span class="o">=</span> <span class="nb">false
+</span>cmd <span class="o">=</span> <span class="s1">'/Applications/Unity/Unity.app/Contents/Tools/UnityYAMLMerge'</span> merge -p <span class="s2">"</span><span class="nv">$BASE</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$REMOTE</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$LOCAL</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$MERGED</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<h2 id="gitmerge-for-unity">GitMerge for Unity</h2>
+
+<p>Worth a mention is the free <a href="https://flashg.github.io/GitMerge-for-Unity/">GitMerge tool for Unity</a> for merging scene and prefabs inside Unity Editor but unfortunately <a href="https://github.com/FlaShG/GitMerge-for-Unity/issues/17">this editor plugin is currently broken in Unity 5</a>. Once you start merging and are in a git merge state you can resolve the conflicts inside the Unity app using <a href="https://flashg.github.io/GitMerge-for-Unity/#instructions-start">GitMerge Window for Unity</a> which is opened via menu <strong>Window &gt; GitMerge</strong>.</p>
+
+<h2 id="merging-unity-c-script-conflicts-with-p4merge-app">Merging Unity C# script conflicts with P4Merge app</h2>
+
+<p>For merging conflicts I prefer to use the free <a href="https://www.perforce.com/product/components/perforce-visual-merge-and-diff-tools">P4Merge</a> visual merge tool which is available for <a href="https://www.perforce.com/downloads/register/helix?return_url=http://www.perforce.com/downloads/perforce/r15.2/bin.macosx107x86_64/P4V.dmg&amp;platform_family=MACINTOSH&amp;platform=OS%20X%2010.8%2B%20%28x64%29&amp;version=2015.2/1312139&amp;product_selected=Perforce&amp;edition_selected=helix&amp;product_name=Helix%20P4V:%20:%20Visual%20Client&amp;prod_num=9">Mac</a> and <a href="https://www.perforce.com/downloads/register/helix?return_url=http://www.perforce.com/downloads/perforce/r15.2/bin.ntx64/p4vinst64.exe&amp;platform_family=WINDOWS&amp;platform=Windows%20%28x64%29&amp;version=2015.2/1312139&amp;product_selected=Perforce&amp;edition_selected=helix&amp;product_name=Helix%20P4V:%20:%20Visual%20Client&amp;prod_num=9">Windows</a>. Here’s how to hook up the P4Merge app as the <strong>global</strong> git merge tool when issuing the <code class="highlighter-rouge">git mergetool</code> command:</p>
+
+<h4 id="p4merge-windows">P4Merge (Windows):</h4>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config --global merge.tool p4merge
+git config --global mergetool.p4merge.path <span class="s1">'C:/Program Files/Perforce/p4merge.exe'</span>
+</code></pre></div></div>
+
+<h4 id="p4merge-mac">P4Merge (Mac):</h4>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Setup p4merge as a visual mergetool</span>
+git config --global merge.tool p4mergetool
+git config --global mergetool.p4mergetool.cmd <span class="s2">"/Applications/p4merge.app/Contents/MacOS/p4merge \"</span><span class="nv">$BASE</span>\<span class="s2">" \"</span><span class="nv">$LOCAL</span>\<span class="s2">" \"</span><span class="nv">$REMOTE</span>\<span class="s2">" \"</span><span class="nv">$MERGED</span>\<span class="s2">"
+
+git config --global mergetool.p4mergetool.keepTemporaries false
+git config --global mergetool.p4mergetool.trustExitCode false
+git config --global mergetool.p4mergetool.keepBackup false
+git config --global mergetool.p4mergetool.prompt false
+
+# Setup p4merge as a visual diff tool
+git config --global diff.tool p4mergetool
+git config --global difftool.p4mergetool.cmd "</span>/Applications/p4merge.app/Contents/Resources/launchp4merge \<span class="s2">"</span><span class="nv">$LOCAL</span><span class="s2">\"</span> \<span class="s2">"</span><span class="nv">$REMOTE</span><span class="s2">\"</span>
+
+<span class="c1"># show updated git config</span>
+git config --global --list
+</code></pre></div></div>
+
+<h2 id="setup-a-gitignore-file-for-unity-projects">Setup a .gitignore file for Unity projects</h2>
+
+<p>First up there are certain Unity folders and files you don’t want to include in the repo. Only ‘Assets’ and ‘ProjectSettings’ need to be included. Other Unity generated folders like ‘Library’, ‘obj’, ‘Temp’ should be added to the <em>.gitignore</em> file. Or you can just copy the boilerplate Unity <a href="https://www.gitignore.io/api/unity">.gitignore</a> file. I also suggest ignoring generated files like OS and source control temp files:</p>
+
+<div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Source control temp files
+</span>*.<span class="n">orig</span>
+<span class="c"># OS generated
+</span>.<span class="n">DS_Store</span>
+</code></pre></div></div>
+
+<p>Unfortunately I made the over zealous mistake of adding all <em>*.meta</em> files to the <em>.gitignore</em> file. At first this seemed like a good idea until the repo gets cloned and you end up with broken script and resource links in the Unity Editor scene. The <a href="https://docs.unity3d.com/Manual/ExternalVersionControlSystemSupport.html">Unity source control documentation</a> mentions that these <em>.meta</em> files should be added to source control. However I found that its only the meta files associated with resource files and scripts that are linked to a <a href="https://docs.unity3d.com/ScriptReference/GameObject.html">GameObject</a> in the Unity Editor that are required. By using the <a href="https://git-scm.com/docs/gitignore">exclusion rule in gitignore</a> I can limit it so the only <em>.meta</em> files to be saved are those within the <a href="https://docs.unity3d.com/Manual/SpecialFolders.html">Unity special folders</a> like: ‘Prefabs’, ‘Resources’, ‘Scenes’ as well as a ‘Scripts’ folder. So if you wish to limit the meta files just add the following rules to the <em>.gitignore</em>:</p>
+
+<div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Include only the .meta files in specific folders
+</span>*.<span class="n">meta</span>
+!<span class="n">Assets</span>/[<span class="n">Ee</span>]<span class="n">ditor</span>/**/*.<span class="n">meta</span>
+!<span class="n">Assets</span>/<span class="n">Editor</span> <span class="n">Default</span> <span class="n">Resources</span>/**/*.<span class="n">meta</span>
+!<span class="n">Assets</span>/[<span class="n">Gg</span>]<span class="n">izmos</span>/**/*.<span class="n">meta</span>
+!<span class="n">Assets</span>/[<span class="n">Pp</span>]<span class="n">refabs</span>/**/*.<span class="n">meta</span>
+!<span class="n">Assets</span>/[<span class="n">Rr</span>]<span class="n">esources</span>/**/*.<span class="n">meta</span>
+!<span class="n">Assets</span>/[<span class="n">Ss</span>]<span class="n">cenes</span>/**/*.<span class="n">meta</span>
+!<span class="n">Assets</span>/[<span class="n">Ss</span>]<span class="n">cripts</span>/**/*.<span class="n">meta</span>
+!<span class="n">Assets</span>/<span class="n">Standard</span> <span class="n">Assets</span>/**/*.<span class="n">meta</span>
+!<span class="n">Assets</span>/<span class="n">StreamingAssets</span>/**/*.<span class="n">meta</span>
+</code></pre></div></div>
+
+<p>For example if I import the <a href="https://github.com/Unity3dAzure/AppServices">Azure AppServices library for Unity</a> by copying it into the <em>Assets/AppServices</em> directory that would mean no meta files would be pushed in commits for this folder as it’s outside the <em>Assets/Scripts</em> folder. But what if I use a library that will be linked with GameObjects like <a href="https://bitbucket.org/tacticsoft/tstableview">TSTableView</a> for example which attaches to a Unity UI Scroll View. Either I can drop the <em>TSTableView</em> folder inside the <em>Assets/Scripts</em> directory, or if you prefer to keep third party scripts outside as I do then you also need to add the <em>Assets/TSTableView</em> directory to the list of exceptions in the <em>.gitignore</em> file:</p>
+
+<div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code>!<span class="n">Assets</span>/<span class="n">TSTableView</span>/**/*.<span class="n">meta</span>
+</code></pre></div></div>
+
+<p>If you adopt this convention just be aware that every time you add third party <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html">MonoBehaviour</a> script libraries outside the <em>Assets/Scripts</em> folder then these directories will need to be added as <em>.gitignore</em> exceptions to save the associated <em>.meta</em> files.</p>
+
+
+</div>
+
+<div class="large-4 cell">
+  <!-- <a href="http://example.com/bar.html#disqus_thread">Link</a> -->
+
+</div>
+
+<div id="pagination" class="large-12 cell">
+  <div>
+    <a href="/info/unity-git">Merging Unity scenes, prefabs and assets with git</a>
+    <span>
+      
+      <span>by David Douglas</span>
+      
+    </span>
+  </div>
+  <ul class="tags">
+    
+    <li>git</li>
+    
+    <li>Unity3D</li>
+    
+    <li>Visual Studio</li>
+    
+  </ul>
+
+  <div class="grid-x grid-margin-x grid-padding-y">
+    <div class="large-6 cell">
+      
+      <span class="next">Next</span>
+      <a href="/tutorial/unity3d-and-azure-blob-storage">Unity3d and Azure Blob Storage</a>
+      
+    </div>
+    <div class="large-6 cell">
+      
+      <span class="prev">Previous</span>
+      <a href="/code/swift-json-parsing-for-ios-development">Swift JSON parsing for iOS development</a>
+      
+    </div>
+  </div>
+  <div class="top"><a href="#" class="top">Top</a></div>
+</div>
+    </div>
+  </div>
+
+  <!-- scripts -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+</body>

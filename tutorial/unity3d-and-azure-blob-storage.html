@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Developer blog">
+  <title>Unity3d and Azure Blob Storage</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/assets/main.css" rel="stylesheet">
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Deadlyfingers.net" />
+</head>
+
+<body>
+  <div class="grid-container">
+    <!-- nav -->
+    <div class="grid-x">
+  <div class="small-6 cell">
+    <h1><a href="/">Deadlyfingers.net</a></h1>
+  </div>
+  <div class="small-6 cell right">
+    <a class="icon twitter" href="https://twitter.com/deadlyfingers"></a>
+    <a class="icon github" href="https://github.com/deadlyfingers"></a>
+    <a class="icon youtube" href="https://youtube.com/deadlyfingerstv"></a>
+  </div>
+</div>
+    <!-- body content -->
+    <div class="grid-x grid-margin-x">
+      <div id="post" class="large-8 cell post">
+  
+  <time datetime="2017-03-10 12:14:11 +0100" class="date">10 Mar 2017</time>
+  
+  <h1 class="post-title">Unity3d and Azure Blob Storage</h1>
+  <div class="post-line"></div>
+  <p>Previously I’ve looked at using <a href="http://www.deadlyfingers.net/azure/azure-app-services-for-unity3d/">Azure App Services for Unity</a>, which provided a backend for Unity applications or games using Easy Tables and Easy APIs. But what if I wanted to lift and shift heavier data such as audio files, image files, or Unity Asset Bundles binaries? For storing these types of files, I would be better using <a href="https://azure.microsoft.com/en-gb/services/storage/blobs/">Azure Blob storage</a>. Recently I created an <a href="https://github.com/Unity3dAzure/StorageServicesDemo">Azure Blob storage demo project in Unity</a> to show how to save and load these various asset types in Unity. One of the exciting new applications for Unity is developing <acronym title="Virtual Reality">VR</acronym>, <acronym title="Augmented Reality">AR</acronym> or <acronym title="Mixed Reality">MR</acronym> experiences for HoloLens where a backend could serve media content dynamically whether it’s images, audio, or prefabs with models, materials and referenced scripts. When thinking of cloud gaming the tendency is to consider it in terms of end user scenarios like massive multiplayer online games. While Azure is designed to scale, it is also helpful to use during early stage development and testing. There is an opportunity to create productive cloud tools for artists, designers and developers especially when extensive hardware testing is required in Virtual Reality, Augmented Reality or Mixed Reality development. For example, imagine being able to see and test updates on the hardware without having to rebuild the binaries in Unity or Visual Studio each time. There are many more use cases than IΓÇÖve mentioned here like offering user generated downloadable content for extending your game or app.</p>
+
+<p>I’ll be covering the load and save code snippets from the <a href="https://youtu.be/0gpg2xwusjM">Unity and Azure Blob storage demo commentary</a> which you can watch to see how you can save and load image textures, audio clips as <em>.wav</em> files, and Asset Bundles. The Unity Asset Bundle demo will also include loading Prefabs and dynamically adding them into a Unity Scene using XML or JSON data which should give you some ideas of how you might like to use Blob storage in your Unity development or end user scenario.</p>
+
+<div class="video"><iframe src="https://www.youtube.com/embed/0gpg2xwusjM?ecver=2" frameborder="0" allowfullscreen=""></iframe></div>
+
+<h2 id="setup-azure-blob-storage">Setup Azure Blob Storage</h2>
+
+<p>Setting up Blob Storage for the Unity demo can be done quickly in just a couple of steps:</p>
+
+<ol>
+  <li>Sign in to your <a href="https://portal.azure.com">Azure portal</a> and create a new Storage Account.
+ <img src="/assets/images/01-StorageAccount.png" alt="01-StorageAccount" /></li>
+  <li>Once the Storage account is provisioned then select the add new container button which will be used for storing the blobs.</li>
+</ol>
+
+<p><img src="/assets/images/02-CreateContainer.png" alt="02-CreateContainer" /></p>
+<ol>
+  <li>Create the ‘<string>Blob' type container which permits public read access for the purposes of this demo.</string></li>
+</ol>
+
+<p><img src="/assets/images/03-NewContainer-BlobAccess.png" alt="03-NewContainer-BlobAccess" /></p>
+
+<h2 id="audio-files">Audio files</h2>
+
+<h3 id="saving-unity-audio-clips-into-blob-storage">Saving Unity Audio Clips into Blob Storage</h3>
+
+<p>For the <a href="https://github.com/Unity3dAzure/StorageServicesDemo/tree/master/Assets/Demos/Audio">Unity audio blob demo</a> I created a <a href="https://github.com/deadlyfingers/UnityWav">helper script to convert Unity Audio Clip recording to .wav files</a> for the purpose of saving to Azure Blob Storage.<br />
+Once the audio has been recorded in Unity I can upload the file using the <code class="highlighter-rouge">PutAudioAudio</code> method which takes a callback function, the wav bytes, the container resource path, the filename and the file’s mime type. By the way this method must be wrapped using <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.StartCoroutine.html">StartCoroutine</a> which is the way Unity 5 handles asynchronous requests. Once the request is completed it will trigger the <code class="highlighter-rouge">PutAudioCompleted</code> callback function I have provided my script with a response object. If the response is successful you will see the wav file blob added in your Blob Container.</p>
+
+<p>☞ Tip: Grab the <a href="http://storageexplorer.com/">Storage Explorer app</a> for viewing all the blobs!</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="k">void</span> <span class="nf">PutAudio</span> <span class="p">()</span>
+<span class="p">{</span>
+	<span class="kt">byte</span><span class="p">[]</span> <span class="n">wavBytes</span> <span class="p">=</span> <span class="n">File</span><span class="p">.</span><span class="nf">ReadAllBytes</span> <span class="p">(</span><span class="n">localPath</span><span class="p">);</span>
+	<span class="kt">string</span> <span class="n">filename</span> <span class="p">=</span> <span class="n">Path</span><span class="p">.</span><span class="nf">GetFileName</span> <span class="p">(</span><span class="n">localPath</span><span class="p">);</span>
+	<span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span> <span class="p">(</span><span class="s">"Put audio file: "</span> <span class="p">+</span> <span class="n">filename</span><span class="p">);</span>
+	<span class="nf">StartCoroutine</span> <span class="p">(</span><span class="n">blobService</span><span class="p">.</span><span class="nf">PutAudioBlob</span> <span class="p">(</span><span class="n">PutAudioCompleted</span><span class="p">,</span> <span class="n">wavBytes</span><span class="p">,</span> <span class="n">container</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="s">"audio/wav"</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">void</span> <span class="nf">PutAudioCompleted</span> <span class="p">(</span><span class="n">RestResponse</span> <span class="n">response</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">IsError</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">Debug</span><span class="p">.</span><span class="nf">LogError</span><span class="p">(</span> <span class="s">"Put audio file error: "</span> <span class="p">+</span> <span class="n">response</span><span class="p">.</span><span class="n">ErrorMessage</span> <span class="p">);</span>
+		<span class="k">return</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span> <span class="p">(</span><span class="s">"Put audio blob success: "</span> <span class="p">+</span> <span class="n">response</span><span class="p">.</span><span class="n">Url</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="loading-wav-files-from-blob-storage">Loading .wav files from Blob Storage</h3>
+
+<p>As we used the Blob type container with public read access you can use the <a href="https://docs.unity3d.com/ScriptReference/Networking.UnityWebRequest.GetAudioClip.html"><code class="highlighter-rouge">UnityWebRequest.GetAudioClip</code></a> method to directly load the .wav file from Azure Blob Storage and handle it as a native Unity AudioClip type for playback.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">void</span> <span class="nf">TappedLoad</span> <span class="p">()</span>
+<span class="p">{</span>
+	<span class="kt">string</span> <span class="n">filename</span> <span class="p">=</span> <span class="n">Path</span><span class="p">.</span><span class="nf">GetFileName</span> <span class="p">(</span><span class="n">localPath</span><span class="p">);</span>
+	<span class="kt">string</span> <span class="n">url</span> <span class="p">=</span> <span class="n">Path</span><span class="p">.</span><span class="nf">Combine</span> <span class="p">(</span><span class="n">client</span><span class="p">.</span><span class="nf">PrimaryEndpoint</span> <span class="p">()</span> <span class="p">+</span> <span class="n">container</span><span class="p">,</span> <span class="n">filename</span><span class="p">);</span>
+	<span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span> <span class="p">(</span><span class="s">"Load audio blob: "</span> <span class="p">+</span> <span class="n">url</span><span class="p">);</span>
+	<span class="nf">StartCoroutine</span> <span class="p">(</span><span class="nf">LoadAudioURL</span> <span class="p">(</span><span class="n">url</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="k">private</span> <span class="n">IEnumerator</span> <span class="nf">LoadAudioURL</span> <span class="p">(</span><span class="kt">string</span> <span class="n">url</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">UnityWebRequest</span> <span class="n">www</span> <span class="p">=</span> <span class="n">UnityWebRequest</span><span class="p">.</span><span class="nf">GetAudioClip</span> <span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">AudioType</span><span class="p">.</span><span class="n">WAV</span><span class="p">);</span>
+	<span class="k">yield</span> <span class="k">return</span> <span class="n">www</span><span class="p">.</span><span class="nf">Send</span> <span class="p">();</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">www</span><span class="p">.</span><span class="n">isError</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">Debug</span><span class="p">.</span><span class="nf">LogError</span><span class="p">(</span> <span class="s">"Load audio url error: "</span> <span class="p">+</span> <span class="n">www</span><span class="p">.</span><span class="n">error</span> <span class="p">);</span>
+	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+		<span class="n">AudioClip</span> <span class="n">audioClip</span> <span class="p">=</span> <span class="p">((</span><span class="n">DownloadHandlerAudioClip</span><span class="p">)</span><span class="n">www</span><span class="p">.</span><span class="n">downloadHandler</span><span class="p">).</span><span class="n">audioClip</span><span class="p">;</span>
+		<span class="n">audioSource</span><span class="p">.</span><span class="n">clip</span> <span class="p">=</span> <span class="n">audioClip</span><span class="p">;</span>
+		<span class="n">audioSource</span><span class="p">.</span><span class="nf">Play</span> <span class="p">();</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="image-files">Image files</h2>
+
+<p>For the <a href="https://github.com/Unity3dAzure/StorageServicesDemo/tree/master/Assets/Demos/Image">Unity image blob demo</a> I used Unity’s <a href="https://docs.unity3d.com/ScriptReference/Application.CaptureScreenshot.html"><code class="highlighter-rouge">Application.CaptureScreenshot</code></a> method to generate a png image representation of the current state of the game screen.</p>
+
+<h3 id="saving-images-into-blob-storage">Saving Images into Blob Storage</h3>
+
+<p>The image is saved using the <code class="highlighter-rouge">PutImageBlob</code> method which is similar to the audio blob except we pass the image bytes and mime type.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="k">void</span> <span class="nf">PutImage</span> <span class="p">(</span><span class="kt">byte</span><span class="p">[]</span> <span class="n">imageBytes</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">string</span> <span class="n">filename</span> <span class="p">=</span> <span class="n">Path</span><span class="p">.</span><span class="nf">GetFileName</span> <span class="p">(</span><span class="n">localPath</span><span class="p">);</span>
+	<span class="nf">StartCoroutine</span> <span class="p">(</span><span class="n">blobService</span><span class="p">.</span><span class="nf">PutImageBlob</span> <span class="p">(</span><span class="n">PutImageCompleted</span><span class="p">,</span> <span class="n">imageBytes</span><span class="p">,</span> <span class="n">container</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="s">"image/png"</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="k">private</span> <span class="k">void</span> <span class="nf">PutImageCompleted</span> <span class="p">(</span><span class="n">RestResponse</span> <span class="n">response</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">IsError</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">Debug</span><span class="p">.</span><span class="nf">LogError</span><span class="p">(</span> <span class="s">"Put image file error: "</span> <span class="p">+</span> <span class="n">response</span><span class="p">.</span><span class="n">ErrorMessage</span> <span class="p">);</span>
+		<span class="k">return</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span> <span class="p">(</span><span class="s">"Put image blob:"</span> <span class="p">+</span> <span class="n">response</span><span class="p">.</span><span class="n">Url</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="loading-image-textures-from-blob-storage">Loading Image Textures from Blob Storage</h3>
+
+<p>As we used the Blob type container with public read access you can use the <a href="https://docs.unity3d.com/ScriptReference/Networking.UnityWebRequest.GetTexture.html"><code class="highlighter-rouge">UnityWebRequest.GetTexture</code></a> method to directly load the .png file from Azure Blob Storage and handle it as a native Unity Texture type for use. As I want to use the Texture in Unity UI to display as an <a href="https://docs.unity3d.com/ScriptReference/UI.Image.html">Image</a> I need to convert it to a sprite using my <code class="highlighter-rouge">ChangeImage</code> function.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">void</span> <span class="nf">TappedLoad</span> <span class="p">()</span>
+<span class="p">{</span>
+	<span class="nf">ChangeImage</span> <span class="p">(</span><span class="k">new</span> <span class="nf">Texture2D</span> <span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">));</span>
+	<span class="kt">string</span> <span class="n">filename</span> <span class="p">=</span> <span class="n">Path</span><span class="p">.</span><span class="nf">GetFileName</span> <span class="p">(</span><span class="n">localPath</span><span class="p">);</span>
+	<span class="kt">string</span> <span class="n">url</span> <span class="p">=</span> <span class="n">Path</span><span class="p">.</span><span class="nf">Combine</span> <span class="p">(</span><span class="n">client</span><span class="p">.</span><span class="nf">PrimaryEndpoint</span> <span class="p">()</span> <span class="p">+</span> <span class="n">container</span><span class="p">,</span> <span class="n">filename</span><span class="p">);</span>
+	<span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span> <span class="p">(</span><span class="s">"Load image: "</span> <span class="p">+</span> <span class="n">url</span><span class="p">);</span>
+	<span class="nf">StartCoroutine</span> <span class="p">(</span><span class="nf">LoadImageURL</span> <span class="p">(</span><span class="n">url</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="n">IEnumerator</span> <span class="nf">LoadImageURL</span> <span class="p">(</span><span class="kt">string</span> <span class="n">url</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">UnityWebRequest</span> <span class="n">www</span> <span class="p">=</span> <span class="n">UnityWebRequest</span><span class="p">.</span><span class="nf">GetTexture</span> <span class="p">(</span><span class="n">url</span><span class="p">);</span>
+	<span class="k">yield</span> <span class="k">return</span> <span class="n">www</span><span class="p">.</span><span class="nf">Send</span> <span class="p">();</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">www</span><span class="p">.</span><span class="n">isError</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">Debug</span><span class="p">.</span><span class="nf">LogError</span><span class="p">(</span> <span class="s">"Load image url error: "</span> <span class="p">+</span> <span class="n">www</span><span class="p">.</span><span class="n">error</span> <span class="p">);</span>
+	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+		<span class="n">Texture</span> <span class="n">texture</span> <span class="p">=</span> <span class="p">((</span><span class="n">DownloadHandlerTexture</span><span class="p">)</span><span class="n">www</span><span class="p">.</span><span class="n">downloadHandler</span><span class="p">).</span><span class="n">texture</span><span class="p">;</span>
+		<span class="nf">ChangeImage</span> <span class="p">(</span><span class="n">texture</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">private</span> <span class="k">void</span> <span class="nf">ChangeImage</span> <span class="p">(</span><span class="n">Texture2D</span> <span class="n">texture</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">Sprite</span> <span class="n">sprite</span> <span class="p">=</span> <span class="n">Sprite</span><span class="p">.</span><span class="nf">Create</span> <span class="p">(</span><span class="n">texture</span><span class="p">,</span> <span class="k">new</span> <span class="nf">Rect</span> <span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">texture</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">texture</span><span class="p">.</span><span class="n">height</span><span class="p">),</span> <span class="n">Vector2</span><span class="p">.</span><span class="n">zero</span><span class="p">);</span>
+	<span class="n">image</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">Image</span><span class="p">&gt;</span> <span class="p">().</span><span class="n">sprite</span> <span class="p">=</span> <span class="n">sprite</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">private</span> <span class="k">void</span> <span class="nf">ChangeImage</span> <span class="p">(</span><span class="n">Texture</span> <span class="n">texture</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="nf">ChangeImage</span> <span class="p">(</span><span class="n">texture</span> <span class="k">as</span> <span class="n">Texture2D</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="unity-asset-bundles">Unity Asset Bundles</h2>
+
+<p><a href="https://docs.unity3d.com/ScriptReference/AssetBundle.html">Unity Asset Bundles</a> provide a way to dynamically load in assets in your project. This <a href="https://github.com/Unity3dAzure/StorageServicesDemo/tree/master/Assets/Demos/AssetBundle">Asset Bundle demo for Blob Storage</a> is a little more complicated than the other examples. An important note to remember is that Asset Bundle binaries need to be build for each target platform. Refer to Unity documentation on <a href="https://docs.unity3d.com/Manual/BuildingAssetBundles.html">building Asset Bundles</a> for more info on building Asset Bundles. Also make sure to review the code stripping section if you want to be able to use referenced scripts in your Prefabs when you do a build.</p>
+
+<h3 id="building-and-uploading-the-asset-bundles-for-each-platform-to-blob-storage">Building and uploading the Asset Bundles for each platform to Blob Storage</h3>
+
+<p>I have included the Editor scripts with the demo to build the Asset Bundle for each platform. NB: Windows 10 Store App (or HoloLens) bundles can only be built on the Windows Unity Editor at time of writing this. Building the Asset Bundles and uploading them is performed inside Unity Editor:</p>
+
+<ol>
+  <li>Select Assets &gt; Build Asset Bundles</li>
+  <li>Select Window &gt; Upload Asset Bundles…</li>
+</ol>
+
+<h3 id="loading-asset-bundles-from-blob-storage">Loading Asset Bundles from Blob Storage</h3>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">void</span> <span class="nf">TappedLoadAssetBundle</span> <span class="p">()</span>
+<span class="p">{</span>
+	<span class="kt">string</span> <span class="n">filename</span> <span class="p">=</span> <span class="n">assetBundleName</span> <span class="p">+</span> <span class="s">"-"</span> <span class="p">+</span> <span class="nf">GetAssetBundlePlatformName</span> <span class="p">()</span> <span class="p">+</span> <span class="s">".unity3d"</span><span class="p">;</span>
+	<span class="kt">string</span> <span class="n">url</span> <span class="p">=</span> <span class="n">Path</span><span class="p">.</span><span class="nf">Combine</span> <span class="p">(</span><span class="n">client</span><span class="p">.</span><span class="nf">SecondaryEndpoint</span> <span class="p">()</span> <span class="p">+</span> <span class="n">container</span><span class="p">,</span> <span class="n">filename</span><span class="p">);</span>
+	<span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span> <span class="p">(</span><span class="s">"Load asset bundle: "</span> <span class="p">+</span> <span class="n">url</span><span class="p">);</span>
+	<span class="nf">StartCoroutine</span> <span class="p">(</span><span class="nf">LoadAssetBundleURL</span> <span class="p">(</span><span class="n">url</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="n">IEnumerator</span> <span class="nf">LoadAssetBundleURL</span> <span class="p">(</span><span class="kt">string</span> <span class="n">url</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">UnityWebRequest</span> <span class="n">www</span> <span class="p">=</span> <span class="n">UnityWebRequest</span><span class="p">.</span><span class="nf">GetAssetBundle</span> <span class="p">(</span><span class="n">url</span><span class="p">);</span>
+	<span class="k">yield</span> <span class="k">return</span> <span class="n">www</span><span class="p">.</span><span class="nf">Send</span> <span class="p">();</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">www</span><span class="p">.</span><span class="n">isError</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">Debug</span><span class="p">.</span><span class="nf">LogError</span><span class="p">(</span> <span class="s">"Load Asset Bundle url error: "</span> <span class="p">+</span> <span class="n">www</span><span class="p">.</span><span class="n">error</span> <span class="p">);</span>
+		<span class="k">yield</span> <span class="k">break</span><span class="p">;</span>
+	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+		<span class="n">assetBundle</span> <span class="p">=</span> <span class="p">((</span><span class="n">DownloadHandlerAssetBundle</span><span class="p">)</span><span class="n">www</span><span class="p">.</span><span class="n">downloadHandler</span><span class="p">).</span><span class="n">assetBundle</span><span class="p">;</span>
+		<span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"Load url: "</span> <span class="p">+</span> <span class="n">url</span><span class="p">);</span>
+		<span class="nf">StartCoroutine</span> <span class="p">(</span><span class="nf">LoadAssets</span> <span class="p">(</span><span class="n">assetBundle</span><span class="p">,</span> <span class="s">"CloudCube"</span><span class="p">));</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">private</span> <span class="kt">string</span> <span class="nf">GetAssetBundlePlatformName</span> <span class="p">()</span>
+<span class="p">{</span>
+	<span class="k">switch</span> <span class="p">(</span><span class="n">Application</span><span class="p">.</span><span class="n">platform</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">case</span> <span class="n">RuntimePlatform</span><span class="p">.</span><span class="n">WindowsEditor</span><span class="p">:</span>
+	<span class="k">case</span> <span class="n">RuntimePlatform</span><span class="p">.</span><span class="n">WindowsPlayer</span><span class="p">:</span>
+		<span class="k">return</span> <span class="n">SystemInfo</span><span class="p">.</span><span class="n">operatingSystem</span><span class="p">.</span><span class="nf">Contains</span> <span class="p">(</span><span class="s">"64 bit"</span><span class="p">)</span> <span class="p">?</span> <span class="s">"x64"</span> <span class="p">:</span> <span class="s">"x86"</span><span class="p">;</span>
+	<span class="k">case</span> <span class="n">RuntimePlatform</span><span class="p">.</span><span class="n">WSAPlayerX86</span><span class="p">:</span>
+	<span class="k">case</span> <span class="n">RuntimePlatform</span><span class="p">.</span><span class="n">WSAPlayerX64</span><span class="p">:</span>
+	<span class="k">case</span> <span class="n">RuntimePlatform</span><span class="p">.</span><span class="n">WSAPlayerARM</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">"WSA"</span><span class="p">;</span>
+	<span class="k">case</span> <span class="n">RuntimePlatform</span><span class="p">.</span><span class="n">Android</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">"Android"</span><span class="p">;</span>
+	<span class="k">case</span> <span class="n">RuntimePlatform</span><span class="p">.</span><span class="n">IPhonePlayer</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">"iOS"</span><span class="p">;</span>
+	<span class="k">case</span> <span class="n">RuntimePlatform</span><span class="p">.</span><span class="n">OSXEditor</span><span class="p">:</span>
+	<span class="k">case</span> <span class="n">RuntimePlatform</span><span class="p">.</span><span class="n">OSXPlayer</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">"OSX"</span><span class="p">;</span>
+	<span class="k">default</span><span class="p">:</span>
+		<span class="k">throw</span> <span class="k">new</span> <span class="nf">Exception</span> <span class="p">(</span><span class="s">"Platform not listed"</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>If you like the <a href="https://github.com/Unity3dAzure/StorageServices">Azure Storage Services library for Unity</a> let me know about it on <a href="https://twitter.com/deadlyfingers">Twitter</a>. Any issues, features or blob storage demo requests please create it as an issue on github for others to learn from and collaborate.</p>
+
+
+</div>
+
+<div class="large-4 cell">
+  <!-- <a href="http://example.com/bar.html#disqus_thread">Link</a> -->
+
+</div>
+
+<div id="pagination" class="large-12 cell">
+  <div>
+    <a href="/tutorial/unity3d-and-azure-blob-storage">Unity3d and Azure Blob Storage</a>
+    <span>
+      
+      <span>by David Douglas</span>
+      
+    </span>
+  </div>
+  <ul class="tags">
+    
+    <li>Azure</li>
+    
+    <li>Blob Storage</li>
+    
+    <li>Unity3D</li>
+    
+  </ul>
+
+  <div class="grid-x grid-margin-x grid-padding-y">
+    <div class="large-6 cell">
+      
+      <span class="next">Next</span>
+      <a href="/code/querying-application-insights-for-data-visualisation">Querying Application Insights for data visualisation</a>
+      
+    </div>
+    <div class="large-6 cell">
+      
+      <span class="prev">Previous</span>
+      <a href="/info/unity-git">Merging Unity scenes, prefabs and assets with git</a>
+      
+    </div>
+  </div>
+  <div class="top"><a href="#" class="top">Top</a></div>
+</div>
+    </div>
+  </div>
+
+  <!-- scripts -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+</body>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Developer blog">
+  <title>Using Azure CLI on Mac OS X to create Mobile Service</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/assets/main.css" rel="stylesheet">
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Deadlyfingers.net" />
+</head>
+
+<body>
+  <div class="grid-container">
+    <!-- nav -->
+    <div class="grid-x">
+  <div class="small-6 cell">
+    <h1><a href="/">Deadlyfingers.net</a></h1>
+  </div>
+  <div class="small-6 cell right">
+    <a class="icon twitter" href="https://twitter.com/deadlyfingers"></a>
+    <a class="icon github" href="https://github.com/deadlyfingers"></a>
+    <a class="icon youtube" href="https://youtube.com/deadlyfingerstv"></a>
+  </div>
+</div>
+    <!-- body content -->
+    <div class="grid-x grid-margin-x">
+      <div id="post" class="large-8 cell post">
+  
+  <time datetime="2015-04-10 15:20:34 +0100" class="date">10 Apr 2015</time>
+  
+  <h1 class="post-title">Using Azure CLI on Mac OS X to create Mobile Service</h1>
+  <div class="post-line"></div>
+  <p>One of our startups at <a href="https://www.microsoftventures.com/locations/london">MS Ventures</a> was looking to use the command line to manage their Azure account on Mac. If you prefer using Mac OS X Terminal or <a href="https://iterm2.com/downloads.html">iTerm</a> and have an <a href="http://bit.ly/azureportal">Azure account</a> then you should check out the Azure CLI tools for Mac.</p>
+
+<p><img src="/assets/images/azure-cli.png" alt="Azure CLI" /></p>
+
+<h2 id="install-azure-cli-for-mac">Install Azure CLI for Mac</h2>
+
+<p>You can either download the <a href="http://go.microsoft.com/fwlink/?LinkId=252249">Azure Command Line tools installer for Mac</a> or install the Azure command line tools using <strong>nodejs</strong>. I have previously written a post covering <a href="http://www.deadlyfingers.net/webdev/ember-cli-todo-example-app-with-azure-mobile-services/#nodejs-mac">installing nodejs using NVM</a>.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install <span class="nt">-g</span> azure-cli@0.8.17
+</code></pre></div></div>
+
+<p>Test Azure command works with help:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>azure <span class="nt">-h</span>
+</code></pre></div></div>
+
+<h2 id="download-azure-publish-settings-file">Download Azure Publish Settings file</h2>
+
+<p>Sign in to your <a href="http://bit.ly/azureportal">Azure account</a> and <a href="http://go.microsoft.com/fwlink/?LinkID=301775">download your <strong>*.publishsettings</strong> subscription file.</a></p>
+
+<h2 id="import-publish-settings-file">Import Publish Settings file</h2>
+
+<p>Import path to downloaded Azure Publish Settings file:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>azure account import &lt;file.publishsettings&gt;
+</code></pre></div></div>
+
+<blockquote>
+  <p>Tip: You can drag &amp; drop the file into Terminal instead of typing the link.</p>
+</blockquote>
+
+<p>Show Azure account subscriptions:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>azure account list
+</code></pre></div></div>
+
+<h2 id="create-mobile-service-with-azure-cli">Create Mobile Service with Azure CLI</h2>
+
+<h5 id="create-mobile-service-terminaltest">Create Mobile Service <em>TerminalTest</em>:</h5>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>azure mobile create TerminalTest <span class="nt">--push</span> <span class="s2">"nh"</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>You will be prompted to enter SQL admin user name and password. 
+The Mobile Service should only take a couple of minutes to provision.</p>
+</blockquote>
+
+<h5 id="show-mobile-service-details-including-applicationurl-and-applicationkey">Show Mobile Service details including <em>applicationUrl</em> and <em>applicationKey</em>:</h5>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>azure mobile show TerminalTest
+</code></pre></div></div>
+
+<blockquote>
+  <p>You will want to make a note of your <em>applicationUrl</em> and <em>applicationKey</em> for CRUD examples below.</p>
+</blockquote>
+
+<h5 id="create-table-items">Create Table <em>Items</em>:</h5>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>azure mobile table create TerminalTest Items
+</code></pre></div></div>
+
+<h5 id="show-tables">Show Tables:</h5>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>azure mobile table list TerminalTest
+</code></pre></div></div>
+
+<h5 id="read-table-items">Read Table <em>Items</em>:</h5>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>azure mobile data <span class="nb">read </span>TerminalTest Items
+</code></pre></div></div>
+
+<h2 id="crud-examples-with-mobile-service-using-curl">CRUD examples with Mobile Service using <strong>curl</strong></h2>
+
+<p>You can quickly execute Create, Read, Update and Delete operations with Mobile Services using <code class="highlighter-rouge">curl</code> commands. Here’s a quick overview of Mobile Service CRUD operations and methods:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Operation</th>
+      <th>Method</th>
+      <th>REST URL format</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Create / Insert</td>
+      <td>POST</td>
+      <td>https://&lt;service_name&gt;.azure-mobile.net/tables/&lt;table_name&gt;</td>
+    </tr>
+    <tr>
+      <td>Read / Query</td>
+      <td>GET</td>
+      <td>https://&lt;service_name&gt;.azure-mobile.net/tables/&lt;table_name&gt;</td>
+    </tr>
+    <tr>
+      <td>Update</td>
+      <td>PATCH</td>
+      <td>https://&lt;service_name&gt;.azure-mobile.net/tables/&lt;table_name&gt;/&lt;item_id&gt;</td>
+    </tr>
+    <tr>
+      <td>Delete</td>
+      <td>DELETE</td>
+      <td>https://&lt;service_name&gt;.azure-mobile.net/tables/&lt;table_name&gt;/&lt;item_id&gt;</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>You will need to replace the <code class="highlighter-rouge">X-ZUMO-APPLICATION</code> header value below with your own Mobile Service <em>applicationKey</em>.</p>
+
+<ol>
+  <li>Create / Insert
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> curl <span class="nt">--request</span> POST <span class="se">\</span>
+ <span class="nt">--header</span> <span class="s1">'X-ZUMO-APPLICATION: RLKPKSRTzFUFgXqVLRPkUTOKorqRQV65'</span> <span class="se">\</span>
+ <span class="nt">--header</span> <span class="s1">'Content-Type: application/json; charset=UTF-8'</span> <span class="se">\</span>
+ <span class="nt">--data</span> <span class="s1">'{"text":"hello mac","complete":false}'</span> <span class="se">\</span>
+ <span class="nt">--location</span> <span class="s1">'https://terminaltest.azure-mobile.net/tables/Items'</span>
+</code></pre></div>    </div>
+
+    <p>Change the data <code class="highlighter-rouge">text</code> to submit a couple of items… Note you will get a JSON response with the <code class="highlighter-rouge">id</code> of the inserted item. This item id value is to be used in the Update and Delete examples below.</p>
+  </li>
+  <li>Read / Query
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> curl <span class="nt">--request</span> GET <span class="se">\</span>
+ <span class="nt">--header</span> <span class="s1">'X-ZUMO-APPLICATION: RLKPKSRTzFUFgXqVLRPkUTOKorqRQV65'</span> <span class="se">\</span>
+ <span class="nt">--header</span> <span class="s1">'Content-Type: application/json; charset=UTF-8'</span> <span class="se">\</span>
+ <span class="nt">--location</span> <span class="s1">'https://terminaltest.azure-mobile.net/tables/Items'</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Update
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> curl <span class="nt">--request</span> PATCH <span class="se">\</span>
+ <span class="nt">--header</span> <span class="s1">'X-ZUMO-APPLICATION: RLKPKSRTzFUFgXqVLRPkUTOKorqRQV65'</span> <span class="se">\</span>
+ <span class="nt">--header</span> <span class="s1">'Content-Type: application/json; charset=UTF-8'</span> <span class="se">\</span>
+ <span class="nt">--data</span> <span class="s1">'{"complete":true}'</span> <span class="se">\</span>
+ <span class="nt">--location</span> <span class="s1">'https://terminaltest.azure-mobile.net/tables/Items/C9CCC7F7-4F16-4F63-8ACD-BD2DCC32F4CC'</span>
+</code></pre></div>    </div>
+    <figure>
+ <img src="/assets/images/azure_hello_mac.png" alt="azure_hello_mac" width="768" height="219" class="aligncenter size-full wp-image-6841" />
+ <figcaption>^ Data updates shown in Azure Mobile Service table.</figcaption>
+ </figure>
+  </li>
+  <li>Delete
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> curl --request DELETE \
+ --header 'X-ZUMO-APPLICATION: RLKPKSRTzFUFgXqVLRPkUTOKorqRQV65' \
+ --header 'Content-Type: application/json; charset=UTF-8' \
+ --location 'https://terminaltest.azure-mobile.net/tables/Items/C9CCC7F7-4F16-4F63-8ACD-BD2DCC32F4CC'
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p><a href="http://azure.microsoft.com/en-gb/documentation/articles/xplat-cli" target="_blank">More documentation on Azure xplat-cli</a></p>
+
+<h2 id="how-to-query-and-filter-mobile-service-table-data-with-curl">How to query and filter Mobile Service table data with curl</h2>
+
+<p>Get items marked as <strong><code class="highlighter-rouge">complete</code></strong></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">--request</span> GET <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'X-ZUMO-APPLICATION: RLKPKSRTzFUFgXqVLRPkUTOKorqRQV65'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json; charset=UTF-8'</span> <span class="se">\</span>
+<span class="nt">--location</span> <span class="s2">"https://terminaltest.azure-mobile.net/tables/Items?</span><span class="se">\$</span><span class="s2">filter=(complete%20eq%20true)"</span>
+</code></pre></div></div>
+
+<p>Get items starting with text <strong>‘hello’</strong> with total count of results:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">--request</span> GET <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'X-ZUMO-APPLICATION: RLKPKSRTzFUFgXqVLRPkUTOKorqRQV65'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json; charset=UTF-8'</span> <span class="se">\</span>
+<span class="nt">--location</span> <span class="s2">"https://terminaltest.azure-mobile.net/tables/Items?</span><span class="se">\$</span><span class="s2">filter=(startswith(text,'hello'))&amp;</span><span class="se">\$</span><span class="s2">inlinecount=allpages"</span>
+</code></pre></div></div>
+
+<p>Get a collection of items in order (eg. pagination):</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">--request</span> GET <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'X-ZUMO-APPLICATION: RLKPKSRTzFUFgXqVLRPkUTOKorqRQV65'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json; charset=UTF-8'</span> <span class="se">\</span>
+<span class="nt">--location</span> <span class="s2">"https://terminaltest.azure-mobile.net/tables/Items?</span><span class="se">\$</span><span class="s2">orderby=text%20desc&amp;</span><span class="se">\$</span><span class="s2">skip=1&amp;</span><span class="se">\$</span><span class="s2">top=1"</span>
+</code></pre></div></div>
+
+<p>NB: Just be aware if you use double quotes for <code class="highlighter-rouge">--location</code> then you must escape the dollar signs that prefix the params with a backslash (eg. <strong><code class="highlighter-rouge">\$</code></strong>). Single quotes don’t require dollar escaping but you may have trouble encapsulating filters with quoted strings hence I have opted for double quotes in these query examples.</p>
+
+
+</div>
+
+<div class="large-4 cell">
+  <!-- <a href="http://example.com/bar.html#disqus_thread">Link</a> -->
+
+</div>
+
+<div id="pagination" class="large-12 cell">
+  <div>
+    <a href="/tutorial/using-azure-cli-on-mac-os-x-to-create-mobile-service">Using Azure CLI on Mac OS X to create Mobile Service</a>
+    <span>
+      
+      <span>by David Douglas</span>
+      
+    </span>
+  </div>
+  <ul class="tags">
+    
+    <li>Azure</li>
+    
+    <li>Mobile Services</li>
+    
+    <li>Azure-CLI</li>
+    
+  </ul>
+
+  <div class="grid-x grid-margin-x grid-padding-y">
+    <div class="large-6 cell">
+      
+      <span class="next">Next</span>
+      <a href="/info/developing-a-peer-to-peer-web-for-ios">Developing a peer to peer web for iOS</a>
+      
+    </div>
+    <div class="large-6 cell">
+      
+      <span class="prev">Previous</span>
+      <a href="/tutorial/ember-cli-todo-example-app-with-azure-mobile-services">Ember-CLI ToDo example app with Azure Mobile Services</a>
+      
+    </div>
+  </div>
+  <div class="top"><a href="#" class="top">Top</a></div>
+</div>
+    </div>
+  </div>
+
+  <!-- scripts -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+</body>

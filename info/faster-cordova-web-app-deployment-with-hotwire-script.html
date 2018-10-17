@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Developer blog">
+  <title>Faster Cordova web app deployment with hotwire script</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/assets/main.css" rel="stylesheet">
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Deadlyfingers.net" />
+</head>
+
+<body>
+  <div class="grid-container">
+    <!-- nav -->
+    <div class="grid-x">
+  <div class="small-6 cell">
+    <h1><a href="/">Deadlyfingers.net</a></h1>
+  </div>
+  <div class="small-6 cell right">
+    <a class="icon twitter" href="https://twitter.com/deadlyfingers"></a>
+    <a class="icon github" href="https://github.com/deadlyfingers"></a>
+    <a class="icon youtube" href="https://youtube.com/deadlyfingerstv"></a>
+  </div>
+</div>
+    <!-- body content -->
+    <div class="grid-x grid-margin-x">
+      <div id="post" class="large-8 cell post">
+  
+  <time datetime="2015-10-16 14:00:03 +0100" class="date">16 Oct 2015</time>
+  
+  <h1 class="post-title">Faster Cordova web app deployment with hotwire script</h1>
+  <div class="post-line"></div>
+  <p>Building for iOS can be very time consuming. Every time you make changes to a Cordova web app you need to do a <code class="highlighter-rouge">cordova build</code> to update the app project. Then you have to go into Xcode to debug on device. But if you don’t need to make changes to native code and you only need to update web elements like HTML, Javascript, image and media files then you can save time by just updating those bits.</p>
+
+<p>I’ve made a <a href="https://github.com/deadlyfingers/hotwire-ipa">Hotwire IPA</a> bash script to replace the ‘www’ web app folder with the updated directory. All you need to do is create an ‘*.ipa’ archive and the hotwire script can quickly update it with all web app changes and deploy to device (without need to jailbreak).</p>
+
+<h2 id="example-usage">Example usage:</h2>
+
+<p><code class="highlighter-rouge">sh hotwire-ipa.sh -f ~/Desktop/app.ipa -d "www" -p ~/Cordova/app/www -b ~/Cordova/app/platforms/ios/www -i</code></p>
+
+<p>where:<br />
+<strong>-f</strong> <em>is the path to *.ipa archive</em><br />
+<strong>-d</strong> <em>is the dir to delete inside app</em><br />
+<strong>-p</strong> <em>is the dir to copy in place</em><br />
+<strong>-b</strong> <em>is the dir with Cordova build plugins and scripts</em></p>
+
+<p>Setup and instructions for <a href="https://github.com/deadlyfingers/hotwire-ipa">deploying iOS app using hotwire-ipa</a> over on GitHub.</p>
+
+<h2 id="time-results-for-ios-cordova-app">Time results for iOS Cordova app:</h2>
+
+<p>3m 09s - Each time you update web files you need to execute <code class="highlighter-rouge">cordova build ios</code> to stage the updates.<br />
+0m 38s - Open in Xcode<br />
+8m 10s - Debug from Xcode</p>
+
+<h4 id="total-11m-57s">Total: 11m 57s</h4>
+
+<p>To run the script we need to first create an Archive and export it as an *.ipa archive in Xcode. Once this is done then future updates can be pushed using the script.<br />
+2m 53s - Create Archive<br />
+2m 13s - Export as .ipa<br />
+4m 39s - Deploy to device using hotwire-ipa script with <code class="highlighter-rouge">-i</code> switch to install as *.ipa instead of *.app.</p>
+
+<h4 id="total-8m-45s-11m-54s-if-you-include-initial-cordova-build-ios">Total: 8m 45s (11m 54s if you include initial <code class="highlighter-rouge">cordova build ios</code>)</h4>
+
+<p>That’s 3 minutes 12 seconds saved the first time if you have already done <code class="highlighter-rouge">cordova build ios</code> just to compile the native code, then <strong>7 minutes 18 seconds saved</strong> to deploy repeated web app updates.</p>
+
+<p>All times recorded using <a href="https://github.com/thaliproject/postcardapp">Postcard web app</a> (using ‘Story_0’ branch) on MacBook 1.2 GHz Intel Core M</p>
+
+
+</div>
+
+<div class="large-4 cell">
+  <!-- <a href="http://example.com/bar.html#disqus_thread">Link</a> -->
+
+</div>
+
+<div id="pagination" class="large-12 cell">
+  <div>
+    <a href="/info/faster-cordova-web-app-deployment-with-hotwire-script">Faster Cordova web app deployment with hotwire script</a>
+    <span>
+      
+      <span>by David Douglas</span>
+      
+    </span>
+  </div>
+  <ul class="tags">
+    
+    <li>Cordova</li>
+    
+    <li>iOS</li>
+    
+  </ul>
+
+  <div class="grid-x grid-margin-x grid-padding-y">
+    <div class="large-6 cell">
+      
+      <span class="next">Next</span>
+      <a href="/info/making-sense-of-web-app-debug-logs-on-multiple-android-and-ios-devices">Making sense of web app debug logs on multiple Android and iOS devices</a>
+      
+    </div>
+    <div class="large-6 cell">
+      
+      <span class="prev">Previous</span>
+      <a href="/tutorial/azure-mobile-services-for-unity3d">Azure Mobile Services for Unity3d</a>
+      
+    </div>
+  </div>
+  <div class="top"><a href="#" class="top">Top</a></div>
+</div>
+    </div>
+  </div>
+
+  <!-- scripts -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+</body>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Developer blog">
+  <title>How to record screen of iPhone, iPad, Android and WindowsPhone device</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/assets/main.css" rel="stylesheet">
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Deadlyfingers.net" />
+</head>
+
+<body>
+  <div class="grid-container">
+    <!-- nav -->
+    <div class="grid-x">
+  <div class="small-6 cell">
+    <h1><a href="/">Deadlyfingers.net</a></h1>
+  </div>
+  <div class="small-6 cell right">
+    <a class="icon twitter" href="https://twitter.com/deadlyfingers"></a>
+    <a class="icon github" href="https://github.com/deadlyfingers"></a>
+    <a class="icon youtube" href="https://youtube.com/deadlyfingerstv"></a>
+  </div>
+</div>
+    <!-- body content -->
+    <div class="grid-x grid-margin-x">
+      <div id="post" class="large-8 cell post">
+  
+  <time datetime="2014-08-12 08:27:24 +0100" class="date">12 Aug 2014</time>
+  
+  <h1 class="post-title">How to record screen of iPhone, iPad, Android and WindowsPhone device</h1>
+  <div class="post-line"></div>
+  <p>If you’ve developed an app you might want to make a promo video showing your app working across devices or multiple screens.</p>
+
+<p>Of course you can record an iOS Simulator, Android Virtual Device, or WindowsPhone emulator easy enough using a screen recording tool like <a href="http://www.techsmith.com/camtasia.html">Camtasia</a> but it’s often a bit tricker to record real footage from the device hardware. Also it might be necessary to demonstrate app functionality not supported by a simulator.</p>
+
+<figure>
+  <img src="/assets/images/Camtasia-custom-region.jpg" alt="Camtasia Screen Record Custom Region" />
+<figcaption>Recording simulator window using Custom Region recording in Camtasia.</figcaption>
+</figure>
+
+<p>Windows Phone 8.1 already comes with the screen projection functionality built-in. This makes Windows the easiest platform to record app interaction.</p>
+
+<h3 id="how-to-present-and-record-screen-of-windowsphone-device-using-pcmac">How to present and record screen of WindowsPhone device using PC/Mac</h3>
+
+<p>On PC you will need Windows 8 installed. On Mac you will need a Bootcamp partition or VMware Fusion Virtual Machine with Windows 8 installed.<br />
+The WindowsPhone should have the latest 8.1 update installed.</p>
+
+<ol>
+  <li>Connect the Phone over USB.</li>
+  <li>Open Windows Phone Settings and select “Project my screen”.</li>
+  <li>Install the “<a href="http://www.microsoft.com/en-gb/download/details.aspx?id=42536">Project My Screen App</a>” for Windows 8. <img src="/assets/images/ProjectMyPhoneAppCapture.jpg" alt="Project My Screen app" /></li>
+  <li>Tap ‘yes’ when prompt to allow screen projection on WindowsPhone appears.</li>
+</ol>
+
+<p><img src="/assets/images/wp_allow_project_my_screen.jpg" alt="Allow screen projection" /></p>
+
+<blockquote>
+  <p>Tip: In the Windows “Project My Screen” application press ‘ <strong>F</strong>’ key to toggle fullscreen mode and ‘ <strong>B</strong>’ key to hide the phone background chrome.</p>
+</blockquote>
+
+<p>Unfortunately there is no way to display or record the touch gestures, but this can be dummied using Camtasia mouse effects. Simply ‘mirror’ with the mouse pointer what your other hand does on the device at the same time. Once the screen footage is recorded in Camtasia you can hide the mouse cursor by setting the Cursor Opacity to zero and add a Cursor Highlight effect to simulate the touch input.</p>
+
+<hr />
+
+<h3 id="how-to-present-and-record-screen-of-iphoneipad-device-using-pcmac">How to present and record screen of iPhone/iPad device using PC/Mac</h3>
+
+<p>To record an iPhone or iPad you can try out the third party <a href="http://www.airsquirrels.com/reflector/">Reflector</a> app. This makes your PC/Mac act as an AirPlay device allowing you to display and record the screen.</p>
+
+<ol>
+  <li>Connect PC/Mac and iPhone/iPad to the same wifi network.</li>
+  <li>Launch Reflector application.</li>
+  <li>On iOS7 or higher device, swipe up from bottom of screen to open ‘Control Center’ to select the Reflector Airplay device and enable video ‘Mirroring’.</li>
+</ol>
+
+<p>Unfortunately there is no way to display the touch gestures, but this can be dummied using Camtasia mouse effects. Simply ‘mirror’ with the mouse pointer what your other hand does on the device at the same time. Then once your Reflector footage is recorded in Camtasia you can hide the mouse cursor by setting the Cursor Opacity to zero and add a Cursor Highlight effect to simulate the touch input.</p>
+
+<hr />
+
+<h3 id="how-to-record-screen-of-android-device-using-pcmac">How to record screen of Android device using PC/Mac</h3>
+
+<p>To record an Android device without rooting your device requires an install of the Android SDK on your PC/Mac. Once your SDK Environment is setup you can run commands in the command prompt / Terminal:</p>
+
+<ol>
+  <li>Check Android device is connected to PC/Mac using USB connection. NB: You will have to enable ‘Developer’ mode on your device by tapping <em>Build number</em> seven times (found under <em>Settings &gt; About device</em>). Then enable <em>USB debugging</em> (found under new <em>Developer options</em> settings).<br />
+<code class="highlighter-rouge">adb devices</code></li>
+  <li>Record screen using adb shell. NB: Requires Android 4.4 <em>KitKat</em> (API level 19) or above.<br />
+<code class="highlighter-rouge">adb shell
+screenrecord /sdcard/recording.mp4</code></li>
+  <li>Stop recording (Control+C) and exit shell.<br />
+<code class="highlighter-rouge">exit</code></li>
+  <li>Copy screen recording from device’s /sdcard onto PC/Mac<br />
+<code class="highlighter-rouge">adb pull /sdcard/recording.mp4</code></li>
+  <li>Move / rename recording<br />
+<code class="highlighter-rouge">mv recording.mp4 ~/Desktop/</code></li>
+</ol>
+
+<p><img src="/assets/images/GalaxyNote3.jpg" alt="Recording screen of Galaxy Note 3" /></p>
+
+<p>Unfortunately there is no way to record the touch gestures at the same time using this technique. What you can do is play the original screen recording and mimic the touch gestures over the top while recording using Camtasia.</p>
+
+
+</div>
+
+<div class="large-4 cell">
+  <!-- <a href="http://example.com/bar.html#disqus_thread">Link</a> -->
+
+</div>
+
+<div id="pagination" class="large-12 cell">
+  <div>
+    <a href="/tutorial/how-to-record-screen-of-iphone-ipad-android-and-windowsphone-device">How to record screen of iPhone, iPad, Android and WindowsPhone device</a>
+    <span>
+      
+      <span>by David Douglas</span>
+      
+    </span>
+  </div>
+  <ul class="tags">
+    
+    <li>Android</li>
+    
+    <li>iPad</li>
+    
+    <li>iPhone</li>
+    
+    <li>Windows Phone</li>
+    
+  </ul>
+
+  <div class="grid-x grid-margin-x grid-padding-y">
+    <div class="large-6 cell">
+      
+      <span class="next">Next</span>
+      <a href="/tutorial/unity3d-and-cloud-backend-using-azure-mobile-services-and-prime31-plugin">Unity3D and Cloud backend using Azure Mobile Services and Prime31 plugin</a>
+      
+    </div>
+    <div class="large-6 cell">
+      
+      <span class="prev">Previous</span>
+      <a href="/info/addictive-mini-games-for-surface">Addictive mini games for Surface</a>
+      
+    </div>
+  </div>
+  <div class="top"><a href="#" class="top">Top</a></div>
+</div>
+    </div>
+  </div>
+
+  <!-- scripts -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+</body>

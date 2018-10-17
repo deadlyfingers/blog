@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Developer blog">
+  <title>Unity3D Leaderboard demo using BitRave Azure plugin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/assets/main.css" rel="stylesheet">
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Deadlyfingers.net" />
+</head>
+
+<body>
+  <div class="grid-container">
+    <!-- nav -->
+    <div class="grid-x">
+  <div class="small-6 cell">
+    <h1><a href="/">Deadlyfingers.net</a></h1>
+  </div>
+  <div class="small-6 cell right">
+    <a class="icon twitter" href="https://twitter.com/deadlyfingers"></a>
+    <a class="icon github" href="https://github.com/deadlyfingers"></a>
+    <a class="icon youtube" href="https://youtube.com/deadlyfingerstv"></a>
+  </div>
+</div>
+    <!-- body content -->
+    <div class="grid-x grid-margin-x">
+      <div id="post" class="large-8 cell post">
+  
+  <time datetime="2014-11-26 11:37:14 +0100" class="date">26 Nov 2014</time>
+  
+  <h1 class="post-title">Unity3D Leaderboard demo using BitRave Azure plugin</h1>
+  <div class="post-line"></div>
+  <blockquote>
+  <p>Azure Mobile Service is now App Service, please follow the updated <a href="http://www.deadlyfingers.net/azure/azure-app-services-for-unity3d/">tutorial for App Services for Unity3D</a> instead.</p>
+</blockquote>
+
+<p>This is a quick Unity3D game developer tutorial showing how to save, update and query high scores stored in the Cloud using a Mobile Service and the BitRave Azure plugin.</p>
+
+<p><a href="https://www.youtube.com/watch?v=KGEabheqcRA&amp;list=UUjk0-NQz-za6C0OULRWq_Gg">Watch how to create a Leaderboard in the cloud using the Unity3D BitRave plugin.</a></p>
+
+<div class="video"><iframe src="//www.youtube.com/embed/KGEabheqcRA" frameborder="0" allowfullscreen=""></iframe></div>
+
+<ol>
+  <li>
+    <p>To save scores in the Leaderboard table you will need to <a href="http://bit.ly/azureportal">create a Mobile Service.</a><br />
+  <img src="/assets/images/Slide07.jpg" alt="" /></p>
+  </li>
+  <li>
+    <p><a href="http://bit.ly/getbitrave">Get the BitRave plugin with Leaderboard scripts on my GitHub fork.</a>
+  <img src="/assets/images/Unity3D-BitRave-Azure-Leaderboard_00.png" alt="Unity3D BitRave Fork with Leaderboard script demo" /></p>
+  </li>
+  <li>
+    <p>Create new Unity project.
+  <img src="/assets/images/Unity3D-BitRave-Azure-Leaderboard_01.png" alt="Unity3D BitRave Fork with Leaderboard script demo" /></p>
+  </li>
+  <li>
+    <p>Copy contents of the BitRave Universal Plugin <em>Assets</em> folder into your Unity3D project’s <em>Assets</em> folder.
+ <img src="/assets/images/Unity3D-BitRave-Azure-Leaderboard_02.png" alt="Unity3D BitRave Fork with Leaderboard script demo" /></p>
+  </li>
+  <li>
+    <p>Import <a href="http://bit.ly/bitravejson">JSON.NET</a> dependancy from Unity Asset Store.
+ <img src="/assets/images/Unity3D-BitRave-Azure-Leaderboard_03a.png" alt="Unity3D BitRave Fork with Leaderboard script demo" /></p>
+  </li>
+  <li>
+    <p>Open the <em>TestAzure</em> scene.
+  <img src="/assets/images/Unity3D-BitRave-Azure-Leaderboard_04.png" alt="Unity3D BitRave Fork with Leaderboard script demo" />
+  Select <em>Main Camera</em> and remove Script in the Inspector panel. (This will be replaced later.)
+  <img src="/assets/images/Unity3D-BitRave-Azure-Leaderboard_05.png" alt="Unity3D BitRave Fork with Leaderboard script demo" /></p>
+  </li>
+  <li>
+    <p>Create ‘ <strong>Leaderboard</strong> ’ table in Azure Mobile Services.
+  <img src="/assets/images/Unity3D-BitRave-Azure-Leaderboard_06a.png" alt="Unity3D BitRave Fork with Leaderboard script demo" /></p>
+  </li>
+  <li>
+    <p>Open <em>AzureUILeaderboard.cs</em> script and replace Azure Mobile Service connection strings.
+  <img src="/assets/images/Unity3D-BitRave-Azure-Leaderboard_07.png" alt="Unity3D BitRave Fork with Leaderboard script demo" /></p>
+  </li>
+  <li>
+    <p>Drag &amp; drop <em>AzureUILeaderboard.cs</em> script to attach it to the Main Camera.
+  <img src="/assets/images/Unity3D-BitRave-Azure-Leaderboard_08.png" alt="Unity3D BitRave Fork with Leaderboard script demo" /></p>
+  </li>
+  <li>
+    <p>Now you’re ready to play in Unity Editor add post some high scores!
+ <img src="/assets/images/Unity3D-BitRave-Azure-Leaderboard_09.png" alt="Unity3D BitRave Fork with Leaderboard script demo" />
+ <img src="/assets/images/Unity3D-BitRave-Azure-Leaderboard_09b.png" alt="Unity3D BitRave Fork with Leaderboard script demo" /></p>
+  </li>
+</ol>
+
+<p>In this demo project you can submit new scores, return list of all scores and update them. You can also query to show only high scores or get list of a user’s scores.</p>
+
+<h2 id="check-it-out">Check it out!</h2>
+
+<p><a href="http://blogs.msdn.com/b/cdndevs/archive/2014/09/15/how-i-used-azure-mobile-services-in-my-unity-game.aspx">Karma Labs on Azure Mobile Services and BitRave plugin</a> in their Unity3D game development.</p>
+
+<p>If you are also looking to handle user identity with Mobile Services and configure build settings for iOS and Android development I touch on this in my first <a href="http://www.deadlyfingers.net/azure/unity3d-game-dev-with-azure-mobile-services-using-bitrave-plugin/">getting started with BitRave Azure plugin tutorial.</a></p>
+
+<p>Share your Unity3D <a href="https://twitter.com/search?q=%23GameDev&amp;src=typd">#GameDev</a> with <a href="https://twitter.com/deadlyfingers">@deadlyfingers</a></p>
+
+
+</div>
+
+<div class="large-4 cell">
+  <!-- <a href="http://example.com/bar.html#disqus_thread">Link</a> -->
+
+</div>
+
+<div id="pagination" class="large-12 cell">
+  <div>
+    <a href="/tutorial/unity3d-leaderboard-demo-using-bitrave-azure-plugin">Unity3D Leaderboard demo using BitRave Azure plugin</a>
+    <span>
+      
+      <span>by David Douglas</span>
+      
+    </span>
+  </div>
+  <ul class="tags">
+    
+    <li>Android</li>
+    
+    <li>GameDev</li>
+    
+    <li>iOS</li>
+    
+    <li>Azure</li>
+    
+    <li>Mobile Services</li>
+    
+    <li>Unity3D</li>
+    
+  </ul>
+
+  <div class="grid-x grid-margin-x grid-padding-y">
+    <div class="large-6 cell">
+      
+      <span class="next">Next</span>
+      <a href="/tutorial/ember-cli-todo-example-app-with-azure-mobile-services">Ember-CLI ToDo example app with Azure Mobile Services</a>
+      
+    </div>
+    <div class="large-6 cell">
+      
+      <span class="prev">Previous</span>
+      <a href="/tutorial/unity3d-game-dev-with-azure-mobile-services-using-bitrave-plugin">Unity3D game dev with Azure Mobile Services using BitRave plugin</a>
+      
+    </div>
+  </div>
+  <div class="top"><a href="#" class="top">Top</a></div>
+</div>
+    </div>
+  </div>
+
+  <!-- scripts -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+</body>

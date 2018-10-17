@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Developer blog">
+  <title>Setting up a Wordpress website with Azure</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/assets/main.css" rel="stylesheet">
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Deadlyfingers.net" />
+</head>
+
+<body>
+  <div class="grid-container">
+    <!-- nav -->
+    <div class="grid-x">
+  <div class="small-6 cell">
+    <h1><a href="/">Deadlyfingers.net</a></h1>
+  </div>
+  <div class="small-6 cell right">
+    <a class="icon twitter" href="https://twitter.com/deadlyfingers"></a>
+    <a class="icon github" href="https://github.com/deadlyfingers"></a>
+    <a class="icon youtube" href="https://youtube.com/deadlyfingerstv"></a>
+  </div>
+</div>
+    <!-- body content -->
+    <div class="grid-x grid-margin-x">
+      <div id="post" class="large-8 cell post">
+  
+  <time datetime="2014-04-02 11:50:05 +0100" class="date">02 Apr 2014</time>
+  
+  <h1 class="post-title">Setting up a Wordpress website with Azure</h1>
+  <div class="post-line"></div>
+  <blockquote>
+  <p>This tutorial has been deprecated. Please check the <a href="https://blogs.msdn.microsoft.com/appserviceteam/2017/05/16/wiki-wordpress-on-app-service/">wiki</a> for setting up Wordpress with the new Azure App Service.</p>
+</blockquote>
+
+<div class="video"><iframe src="//www.youtube.com/embed/__Zj9zaGKLU" frameborder="0" allowfullscreen=""></iframe></div>
+
+<ol>
+  <li>Start an <a href="http://aka.ms/azure_trial">Azure trial</a> or <a href="https://manage.windowsazure.com/">sign-in</a> into your Microsoft Azure management portal.</li>
+  <li>Select <strong>WEB SITES</strong> and choose <strong>NEW &gt; WEB SITE &gt; FROM GALLERY</strong>
+  <img src="/assets/images/AZURE_WP01-Azure-Website-Gallery-Wordpress.png" alt="AZURE_WP01-Azure-Website-Gallery-Wordpress" /></li>
+  <li>Select <strong>BLOGS &gt; WordPress</strong>
+  <img src="/assets/images/AZURE_WP02-Azure-Apps-Wordpress.png" alt="AZURE_WP02-Azure-Apps-Wordpress" /></li>
+  <li>Enter unique site URL at <strong>*.azurewebsites.net</strong> (you will be able to add your own domain name later). Choose MySQL database option and preferred region. Deployment Settings are optional and can be skipped.
+  <img src="/assets/images/AZURE_WP03-Azure-Wordpress.png" alt="AZURE_WP03-Azure-Wordpress" /></li>
+  <li>Setup your Wordpress site by visiting your Azure Website’s URL <strong>http://*.azurewebsites.net</strong> in your browser.</li>
+  <li>To setup custom domain name URL you will have to upscale from FREE to STANDARD. In your website menu select <strong>SCALE &gt; STANDARD</strong>.
+  <img src="/assets/images/AZURE_WP04-Azure-Wordpress-Custom-Domain-Name-Scale-Standard.png" alt="AZURE_WP04-Azure-Wordpress-Custom-Domain-Name-Scale-Standard" /></li>
+  <li>Select <strong>CONFIGURE &gt; domain names &gt; manage domains</strong>
+  <img src="/assets/images/AZURE_WP05-Azure-Wordpress-Manage-Domains.png" alt="AZURE_WP05-Azure-Wordpress-Manage-Domains" /></li>
+  <li>Enter your custom URL. You will also need to make a note of the CNAME record <strong>awverify.www.*.azurewebsites.net</strong> to verify ownership and the <strong>IP ADDRESS</strong> provided to update your DNS A-Record.
+  <img src="/assets/images/AZURE_WP06-Azure-Wordpress-Manage-Custom-Domains-IP-Address-.png" alt="AZURE_WP06-Azure-Wordpress-Manage-Custom-Domains-IP-Address-" /></li>
+  <li>Go to your domain registrar control panel to modify the domain’s DNS Records.<br />
+Add the CNAME record <strong>awverify.www.*.azurewebsites.net</strong><br />
+  (Note: some registrars require Canonical names to have an extra ‘.’ at the end)
+  <img src="/assets/images/AZURE_WP07-DNS-Records-Add-CNAME-300x212.png" alt="AZURE_WP07-DNS-Records-Add-CNAME" /></li>
+  <li>You will also need to remove any existing A Records and replace with a new A Record pointing to your Azure Website’s IP Address.
+  <img src="/assets/images/AZURE_WP07-DNS-Records-ARecord.png" alt="AZURE_WP07-DNS-Records-ARecord" />
+  <img src="/assets/images/AZURE_WP07-DNS-Records-Updated.png" alt="AZURE_WP07-DNS-Records-Updated" /></li>
+  <li>Once your DNS changes are in sync (usually 1-2 hours), you can update the domain settings in your Azure Website’s Wordpress control panel to match your domain.
+  <img src="/assets/images/AZURE_WP08-Azure-Update-Wordpress-Site-Address-URL.png" alt="AZURE_WP08-Azure-Update-Wordpress-Site-Address-URL" />
+  <img src="/assets/images/AZURE_WP08-Azure-Updated-Wordpress-Site-Address-URL.png" alt="AZURE_WP08-Azure-Updated-Wordpress-Site-Address-URL" /></li>
+  <li>Finally, I would activate <strong>Settings &gt; Permalinks</strong> using one of the presets or a custom structure. This enables a number of benefits including SEO friendly URLs so your keywords can appear in the URL address bar. Also advanced users can navigate using your URL address. Tip: for huge blogs it maybe advisable to start with a number (like <em>%year%</em> or <em>%post_id%</em>) for speed.
+  <img src="/assets/images/AZURE_WP09-Azure-Wordpress-SEO-Friendly-URLs-Permalinks.png" alt="AZURE_WP09-Azure-Wordpress-SEO-Friendly-URLs-Permalinks" /></li>
+  <li>Just one more thing… It’s probably a good idea to backup your Wordpress website so you can rollback if a Wordpress update ever goes wrong. Azure BACKUPS is a new feature which automatically backs up to a STORAGE data service. When creating a new Storage component I would select a different region and set replication to ‘Locally Redundant’ which is the most cost effective option.
+  <img src="/assets/images/AZURE_WP10-Azure-Backups.png" alt="AZURE_WP10-Azure-Backups" /></li>
+</ol>
+
+<p>Thanks <a href="http://twitter.com/plankytronixx">@plankytronixx</a> for the Azure Websites bootcamp!
+For custom domains checkout out the post on <a href="http://blogs.msdn.com/b/kaushal/archive/2013/07/06/windows-azure-web-sites-how-to-configure-a-custom-domain.aspx">advanced DNS settings for Azure Websites</a>.</p>
+
+
+</div>
+
+<div class="large-4 cell">
+  <!-- <a href="http://example.com/bar.html#disqus_thread">Link</a> -->
+
+</div>
+
+<div id="pagination" class="large-12 cell">
+  <div>
+    <a href="/tutorial/setting-up-a-wordpress-website-with-azure">Setting up a Wordpress website with Azure</a>
+    <span>
+      
+      <span>by David Douglas</span>
+      
+    </span>
+  </div>
+  <ul class="tags">
+    
+    <li>Azure</li>
+    
+    <li>Blog</li>
+    
+    <li>Wordpress</li>
+    
+    <li>Website</li>
+    
+  </ul>
+
+  <div class="grid-x grid-margin-x grid-padding-y">
+    <div class="large-6 cell">
+      
+      <span class="next">Next</span>
+      <a href="/tutorial/enabling-additional-wordpress-azure-websites-to-reuse-existing-mysql-database">Enabling additional Wordpress Azure websites to reuse existing MySQL database</a>
+      
+    </div>
+    <div class="large-6 cell">
+      
+    </div>
+  </div>
+  <div class="top"><a href="#" class="top">Top</a></div>
+</div>
+    </div>
+  </div>
+
+  <!-- scripts -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+</body>

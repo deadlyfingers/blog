@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Developer blog">
+  <title>Swift JSON parsing for iOS development</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/assets/main.css" rel="stylesheet">
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Deadlyfingers.net" />
+</head>
+
+<body>
+  <div class="grid-container">
+    <!-- nav -->
+    <div class="grid-x">
+  <div class="small-6 cell">
+    <h1><a href="/">Deadlyfingers.net</a></h1>
+  </div>
+  <div class="small-6 cell right">
+    <a class="icon twitter" href="https://twitter.com/deadlyfingers"></a>
+    <a class="icon github" href="https://github.com/deadlyfingers"></a>
+    <a class="icon youtube" href="https://youtube.com/deadlyfingerstv"></a>
+  </div>
+</div>
+    <!-- body content -->
+    <div class="grid-x grid-margin-x">
+      <div id="post" class="large-8 cell post">
+  
+  <time datetime="2016-08-23 09:37:01 +0100" class="date">23 Aug 2016</time>
+  
+  <h1 class="post-title">Swift JSON parsing for iOS development</h1>
+  <div class="post-line"></div>
+  <p>Recently I started a new iOS Swift project and spent way more time than I would like trying to find a JSON parser that could handle the various JSON data models I was working with. In this post I will document some real code samples that should prove useful for other iOS developers looking to get off to head start with data modelling in Swift.</p>
+
+<h2 id="the-search-for-a-swift-json-parser">The search for a Swift JSON parser…</h2>
+
+<p>Handling JSON is a very common task with modern app development whether its consuming some REST Service API, loading a JSON file or document objects from database. With regards to Windows C# apps <a href="http://www.newtonsoft.com/json">Newtonsoft JSON</a> is the popular choice and similarly with Java for Android there is <a href="https://github.com/google/gson">GSON</a>. But what library to use for iOS apps? Previously I had used libraries like <a href="https://github.com/jsonmodel/jsonmodel">JSONModel</a> to parse JSON data into native objects and it worked pretty well. But the iOS developer landscape has changed with the shift from Objective C to Swift so I wanted to find a Swift based framework. There are a number of open source Swift JSON parsers, but the ones I tried resulted in code mountains just to parse some format of JSON. This felt like a fail compared to the elegant manner of Newtonsoft or GSON object models. I was surprised how hard it was to pinpoint the one Swift library that could satisfy all my parsing needs. But with <a href="https://github.com/thoughtbot/Argo">Argo</a> I feel I’ve discovered the golden JSON parsing library for iOS Swift development.</p>
+
+<h2 id="getting-on-board-with-argo">Getting on board with Argo</h2>
+
+<p>I’m a long time user of <a href="https://cocoapods.org/">CocoaPods</a> for Xcode source control projects as it makes it easier to avoid jamming up a repro with binaries. However the precompiled versions on CocoaPods don’t always provide the latest version available on GitHub. This is where <a href="https://github.com/Carthage/Carthage">Carthage</a> comes in as you specifically request a tag version or branch on GitHub. Carthage can be quickly installed using <a href="http://brew.sh/">Homebrew</a> as mentioned in the [installing Carthage docs].(https://github.com/Carthage/Carthage#installing-carthage)</p>
+
+<p><code class="highlighter-rouge">brew install carthage</code></p>
+
+<p>To setup create a new text file and save it as ‘<strong>Cartfile</strong>’ inside your Xcode project folder. (In this case I’m requesting a specific version of Argo and Curry for use with Swift 2)</p>
+
+<div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">github</span> <span class="s2">"thoughtbot/Argo"</span> == <span class="m">3</span>.<span class="m">0</span>.<span class="m">2</span>
+<span class="n">github</span> <span class="s2">"thoughtbot/Curry"</span> == <span class="m">2</span>.<span class="m">2</span>
+</code></pre></div></div>
+
+<p>Once you have installed Carthage and saved a ‘Cartfile’ then you need to build the frameworks.</p>
+
+<ol>
+  <li>In Terminal navigate to the project folder and run <code class="highlighter-rouge">carthage update</code> to build frameworks for all platforms. NB: For packages that can only be built for a single platform use <code class="highlighter-rouge">carthage build --platform iOS</code></li>
+  <li>Drop built ‘*.framework’ folder into Xcode project</li>
+  <li>Add Build Phases &gt; Run Script <code class="highlighter-rouge">carthage copy-frameworks</code> and add Input Files path to ‘*.framework’</li>
+</ol>
+
+<h2 id="json-data-modelling-with-argo">JSON data modelling with Argo</h2>
+
+<p>Argo decodes standard property types (<code class="highlighter-rouge">String, Int, UInt, Int64, UInt64, Double, Float, Bool</code>) as well as arrays and optional properties. You can decode a nested object or an array of nested objects that conform to the ‘Decodable’ protocol. In fact you can even do inception - using the same struct within itself as shown below. One thing that might require explanation is <a href="https://github.com/thoughtbot/Argo/blob/master/Documentation/Basic-Usage.md#safely-pulling-values-from-json">Argo’s sugar syntax</a>. The summary of the sugar syntax is this:</p>
+
+<ul>
+  <li><strong><code class="highlighter-rouge">&lt;^&gt;</code></strong> syntax pulls the first property, and <code class="highlighter-rouge">&lt;*&gt;</code> pulls subsequent properties.</li>
+  <li><strong><code class="highlighter-rouge">&lt;|</code></strong> syntax relates to a property.</li>
+  <li><strong><code class="highlighter-rouge">&lt;|?</code></strong> syntax relates to an optional property.</li>
+  <li><strong><code class="highlighter-rouge">&lt;||</code></strong> syntax relates to an array of ‘decodable’ objects.</li>
+  <li><strong><code class="highlighter-rouge">&lt;||?</code></strong> syntax relates to an array of optional ‘decodable’ objects</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">import</span> <span class="kt">Foundation</span>
+<span class="kd">import</span> <span class="kt">Argo</span>
+<span class="kd">import</span> <span class="kt">Curry</span>
+
+<span class="kd">struct</span> <span class="kt">SomeModel</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">id</span> <span class="p">:</span> <span class="kt">String</span>
+    <span class="k">let</span> <span class="nv">name</span> <span class="p">:</span> <span class="kt">String</span>
+    <span class="k">let</span> <span class="nv">total</span> <span class="p">:</span> <span class="kt">Int</span>
+    <span class="k">let</span> <span class="nv">isHighlighted</span> <span class="p">:</span> <span class="kt">Bool</span>
+    <span class="k">let</span> <span class="nv">optional</span> <span class="p">:</span> <span class="kt">String</span><span class="p">?</span>
+    <span class="k">let</span> <span class="nv">children</span> <span class="p">:</span> <span class="p">[</span><span class="kt">SomeModel</span><span class="p">]?</span>
+<span class="p">}</span>
+
+<span class="kd">extension</span> <span class="kt">SomeModel</span><span class="p">:</span> <span class="kt">Decodable</span> <span class="p">{</span>
+    <span class="kd">static</span> <span class="kd">func</span> <span class="nf">decode</span><span class="p">(</span><span class="nv">j</span><span class="p">:</span> <span class="kt">JSON</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Decoded</span><span class="o">&lt;</span><span class="kt">SomeModel</span><span class="o">&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nf">curry</span><span class="p">(</span><span class="kt">SomeModel</span><span class="o">.</span><span class="kd">init</span><span class="p">)</span>
+            <span class="o">&lt;^&gt;</span> <span class="n">j</span> <span class="o">&lt;|</span> <span class="s">"_id"</span>
+            <span class="o">&lt;*&gt;</span> <span class="n">j</span> <span class="o">&lt;|</span> <span class="s">"name"</span>
+            <span class="o">&lt;*&gt;</span> <span class="n">j</span> <span class="o">&lt;|</span> <span class="s">"total"</span>
+            <span class="o">&lt;*&gt;</span> <span class="n">j</span> <span class="o">&lt;|</span> <span class="s">"highlighted"</span>
+            <span class="o">&lt;*&gt;</span> <span class="n">j</span> <span class="o">&lt;|</span><span class="p">?</span> <span class="s">"optional"</span>
+            <span class="o">&lt;*&gt;</span> <span class="n">j</span> <span class="o">&lt;||</span><span class="p">?</span> <span class="s">"children"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="what-about-decoding-json-values-into-native-types-like-nsurl-and-nsdate">What about decoding JSON values into native types like NSURL and NSDate?</h2>
+
+<p>It can be advantageous to parse URL and date values as native types instead of String types. To get this to work with Argo you need to make a parser which wraps NSURL and NSDate in the ‘Decoded’ type. But first I made a Uri helper to encode url strings as NSURL and a Date helper to convert a date string (of a known format) to NSDate.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">import</span> <span class="kt">Foundation</span>
+<span class="kd">class</span> <span class="kt">Uri</span> <span class="p">{</span>
+    <span class="kd">static</span> <span class="kd">func</span> <span class="nf">encodeURLString</span><span class="p">(</span><span class="nv">urlString</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">characterSet</span> <span class="o">=</span> <span class="kt">NSMutableCharacterSet</span><span class="p">()</span>
+        <span class="n">characterSet</span><span class="o">.</span><span class="nf">formUnionWithCharacterSet</span><span class="p">(</span><span class="kt">NSCharacterSet</span><span class="o">.</span><span class="kt">URLPathAllowedCharacterSet</span><span class="p">())</span>
+        <span class="n">characterSet</span><span class="o">.</span><span class="nf">formUnionWithCharacterSet</span><span class="p">(</span><span class="kt">NSCharacterSet</span><span class="o">.</span><span class="kt">URLQueryAllowedCharacterSet</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">urlString</span><span class="o">.</span><span class="nf">stringByAddingPercentEncodingWithAllowedCharacters</span><span class="p">(</span> <span class="n">characterSet</span> <span class="p">)</span> <span class="p">??</span> <span class="n">urlString</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">import</span> <span class="kt">Foundation</span>
+
+<span class="kd">enum</span> <span class="kt">DateFormats</span> <span class="p">:</span> <span class="kt">String</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="kt">Milliseconds</span> <span class="o">=</span> <span class="s">"yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'"</span>
+    <span class="k">case</span> <span class="kt">Seconds</span> <span class="o">=</span> <span class="s">"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="kt">Date</span> <span class="p">{</span>
+    <span class="kd">static</span> <span class="kd">private</span> <span class="k">let</span> <span class="nv">dateFormatter</span> <span class="o">=</span> <span class="kt">NSDateFormatter</span><span class="p">()</span>
+    
+    <span class="c1">// converts String (using array of potential date formats) to Date</span>
+    <span class="kd">static</span> <span class="kd">func</span> <span class="kt">StringToDate</span><span class="p">(</span><span class="nv">dateString</span> <span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">NSDate</span><span class="p">?</span> <span class="p">{</span>
+        <span class="k">var</span> <span class="nv">date</span> <span class="p">:</span> <span class="kt">NSDate</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+        <span class="k">let</span> <span class="nv">dateFormats</span> <span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kt">DateFormats</span><span class="o">.</span><span class="kt">Milliseconds</span><span class="o">.</span><span class="n">rawValue</span><span class="p">,</span> <span class="kt">DateFormats</span><span class="o">.</span><span class="kt">Seconds</span><span class="o">.</span><span class="n">rawValue</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">dateFormat</span> <span class="k">in</span> <span class="n">dateFormats</span> <span class="p">{</span>
+            <span class="n">dateFormatter</span><span class="o">.</span><span class="n">dateFormat</span> <span class="o">=</span> <span class="n">dateFormat</span>
+            <span class="k">if</span> <span class="k">let</span> <span class="nv">formatedDate</span> <span class="o">=</span> <span class="n">dateFormatter</span><span class="o">.</span><span class="nf">dateFromString</span><span class="p">(</span><span class="n">dateString</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">date</span> <span class="o">=</span> <span class="n">formatedDate</span>
+                <span class="k">break</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">date</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The Parser helper returns objects wrapped in Decoded type:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">import</span> <span class="kt">Foundation</span>
+<span class="kd">import</span> <span class="kt">Argo</span>
+
+<span class="kd">class</span> <span class="kt">Parser</span> <span class="p">{</span>
+    
+    <span class="kd">static</span> <span class="kd">func</span> <span class="nf">toNSURL</span><span class="p">(</span><span class="nv">urlString</span> <span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Decoded</span><span class="o">&lt;</span><span class="kt">NSURL</span><span class="o">&gt;</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">urlEncodedString</span> <span class="o">=</span> <span class="kt">Uri</span><span class="o">.</span><span class="nf">encodeURLString</span><span class="p">(</span><span class="n">urlString</span><span class="p">)</span>
+        <span class="k">guard</span> <span class="k">let</span> <span class="nv">url</span> <span class="o">=</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="n">urlEncodedString</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kt">Decoded</span><span class="o">.</span><span class="kt">Failure</span><span class="p">(</span><span class="kt">DecodeError</span><span class="o">.</span><span class="kt">Custom</span><span class="p">(</span><span class="s">"Failed to parse String to NSURL"</span><span class="p">))</span>
+        <span class="p">}</span>
+        <span class="c1">// Return NSURL wrapped in .Success</span>
+        <span class="k">return</span> <span class="nf">pure</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="kd">static</span> <span class="kd">func</span> <span class="nf">toNSDate</span><span class="p">(</span><span class="nv">dateString</span> <span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Decoded</span><span class="o">&lt;</span><span class="kt">NSDate</span><span class="o">&gt;</span> <span class="p">{</span>
+        <span class="k">guard</span> <span class="k">let</span> <span class="nv">date</span> <span class="o">=</span> <span class="kt">Date</span><span class="o">.</span><span class="kt">StringToDate</span><span class="p">(</span><span class="n">dateString</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kt">Decoded</span><span class="o">.</span><span class="kt">Failure</span><span class="p">(</span><span class="kt">DecodeError</span><span class="o">.</span><span class="kt">Custom</span><span class="p">(</span><span class="s">"Failed to parse String to NSDate"</span><span class="p">))</span>
+        <span class="p">}</span>
+        <span class="c1">// Return NSDate wrapped in .Success</span>
+        <span class="k">return</span> <span class="nf">pure</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// optional (nil values are allowed)</span>
+    
+    <span class="kd">static</span> <span class="kd">func</span> <span class="nf">toOptionalNSDate</span><span class="p">(</span><span class="nv">dateString</span> <span class="p">:</span> <span class="kt">String</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Decoded</span><span class="o">&lt;</span><span class="kt">NSDate</span><span class="p">?</span><span class="o">&gt;</span> <span class="p">{</span>
+        <span class="k">guard</span> <span class="k">let</span> <span class="nv">str</span> <span class="o">=</span> <span class="n">dateString</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nf">pure</span><span class="p">(</span><span class="kc">nil</span><span class="p">)</span> <span class="c1">// No date string</span>
+        <span class="p">}</span>
+        <span class="k">guard</span> <span class="k">let</span> <span class="nv">date</span> <span class="o">=</span> <span class="kt">Date</span><span class="o">.</span><span class="kt">StringToDate</span><span class="p">(</span><span class="n">str</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kt">Decoded</span><span class="o">.</span><span class="kt">Failure</span><span class="p">(</span><span class="kt">DecodeError</span><span class="o">.</span><span class="kt">Custom</span><span class="p">(</span><span class="s">"Failed to parse String to NSDate"</span><span class="p">))</span>
+        <span class="p">}</span>
+        <span class="c1">// Return NSDate wrapped in .Success</span>
+        <span class="k">return</span> <span class="nf">pure</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Example model with NSURL and NSDate using the Parser helper (note the extra brackets):</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">import</span> <span class="kt">Foundation</span>
+<span class="kd">import</span> <span class="kt">Argo</span>
+<span class="kd">import</span> <span class="kt">Curry</span>
+
+<span class="kd">struct</span> <span class="kt">SomeModel</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">id</span> <span class="p">:</span> <span class="kt">String</span>
+    <span class="k">let</span> <span class="nv">url</span> <span class="p">:</span> <span class="kt">NSURL</span>
+    <span class="k">let</span> <span class="nv">dateCreated</span> <span class="p">:</span> <span class="kt">NSDate</span><span class="p">?</span>
+<span class="p">}</span>
+
+<span class="kd">extension</span> <span class="kt">SomeModel</span><span class="p">:</span> <span class="kt">Decodable</span> <span class="p">{</span>
+    <span class="kd">static</span> <span class="kd">func</span> <span class="nf">decode</span><span class="p">(</span><span class="nv">j</span><span class="p">:</span> <span class="kt">JSON</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Decoded</span><span class="o">&lt;</span><span class="kt">SomeModel</span><span class="o">&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nf">curry</span><span class="p">(</span><span class="kt">SomeModel</span><span class="o">.</span><span class="kd">init</span><span class="p">)</span>
+            <span class="o">&lt;^&gt;</span> <span class="n">j</span> <span class="o">&lt;|</span> <span class="s">"_id"</span>
+            <span class="o">&lt;*&gt;</span> <span class="p">(</span><span class="n">j</span> <span class="o">&lt;|</span> <span class="s">"url"</span> <span class="o">&gt;&gt;-</span> <span class="kt">Parser</span><span class="o">.</span><span class="n">toNSURL</span><span class="p">)</span>
+            <span class="o">&lt;*&gt;</span> <span class="p">(</span><span class="n">j</span> <span class="o">&lt;|</span><span class="p">?</span> <span class="s">"date_created"</span> <span class="o">&gt;&gt;-</span> <span class="kt">Parser</span><span class="o">.</span><span class="n">toOptionalNSDate</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="three-things-to-avoid-in-your-json-models-for-smoother-sailing-with-argo">Three things to avoid in your JSON models for smoother sailing with Argo</h2>
+
+<ol>
+  <li>Two dimensional arrays (arrays within an array) aren’t handled out of the box. There are <a href="https://github.com/thoughtbot/Argo/issues/166">multi-dimensional array workarounds</a> but it can cause compiler melt down if your model is particularly complex. Better to avoid this complexity by flattening arrays to a single array or use nested property arrays.</li>
+  <li>Best to limit object model to no more than 10 properties. This is because there are limits of how many things can be curried with Argo before the complier gives up. Try to use nested objects to group things together, but if that is not possible then there are techniques to deal with <a href="https://github.com/thoughtbot/Argo/blob/master/Documentation/Compilation-Errors.md#complex-expressions">complex expressions</a>.</li>
+  <li>Array of mixed objects (dynamic types). Argo can be made to <a href="https://github.com/thoughtbot/Argo/issues/325">decode an array of different types</a> but it will increase complexity as you will have to use subclasses instead of structs.</li>
+</ol>
+
+<h2 id="how-to-load-json-file-within-ios-app-bundle-in-swift">How to load JSON file within iOS app bundle in Swift</h2>
+
+<p>Often the first thing I like to do is to load a JSON file to configure my app. For example you might have various JSON config files for localhost, staging and production settings.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"app_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://someapp.azurewebsites.net"</span><span class="p">,</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>The data model using <a href="https://github.com/thoughtbot/Argo">Argo</a> &amp; <a href="https://github.com/thoughtbot/Curry">Curry</a> would look like this in Swift:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">import</span> <span class="kt">Foundation</span>
+<span class="kd">import</span> <span class="kt">Argo</span>
+<span class="kd">import</span> <span class="kt">Curry</span>
+
+<span class="kd">struct</span> <span class="kt">ConfigModel</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">appUrl</span><span class="p">:</span> <span class="kt">String</span>
+<span class="p">}</span>
+
+<span class="kd">extension</span> <span class="kt">ConfigModel</span><span class="p">:</span> <span class="kt">Decodable</span> <span class="p">{</span>
+    <span class="kd">static</span> <span class="kd">func</span> <span class="nf">decode</span><span class="p">(</span><span class="nv">j</span><span class="p">:</span> <span class="kt">JSON</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Decoded</span><span class="o">&lt;</span><span class="kt">ConfigModel</span><span class="o">&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nf">curry</span><span class="p">(</span><span class="kt">ConfigModel</span><span class="o">.</span><span class="kd">init</span><span class="p">)</span>
+            <span class="o">&lt;^&gt;</span> <span class="n">j</span> <span class="o">&lt;|</span> <span class="s">"app_url"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>To load the JSON file within the app bundle I use a file helper:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// returns json from file</span>
+<span class="kd">static</span> <span class="kd">func</span> <span class="nf">loadJSON</span><span class="p">(</span><span class="nv">file</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AnyObject</span><span class="p">?</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">path</span> <span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kt">NSBundle</span><span class="o">.</span><span class="nf">mainBundle</span><span class="p">()</span><span class="o">.</span><span class="nf">pathForResource</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="nv">ofType</span><span class="p">:</span> <span class="s">"json"</span><span class="p">)</span>
+    <span class="k">guard</span> <span class="k">let</span> <span class="nv">unwrappedPath</span> <span class="o">=</span> <span class="n">path</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">nil</span>
+    <span class="p">}</span>
+    <span class="k">let</span> <span class="nv">fileContents</span> <span class="p">:</span> <span class="kt">NSData</span><span class="p">?</span> <span class="o">=</span> <span class="kt">NSData</span><span class="p">(</span><span class="nv">contentsOfFile</span><span class="p">:</span> <span class="n">unwrappedPath</span><span class="p">)</span>
+    <span class="k">guard</span> <span class="k">let</span> <span class="nv">data</span> <span class="o">=</span> <span class="n">fileContents</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">nil</span>
+    <span class="p">}</span>
+    <span class="k">do</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">try</span> <span class="kt">NSJSONSerialization</span><span class="o">.</span><span class="kt">JSONObjectWithData</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nv">options</span><span class="p">:</span> <span class="kt">NSJSONReadingOptions</span><span class="o">.</span><span class="kt">AllowFragments</span><span class="p">)</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="k">let</span> <span class="nv">error</span> <span class="k">as</span> <span class="kt">NSError</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">localizedDescription</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The loaded JSON can be parsed into the ‘ConfigModel’ using Argo’s decode method.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">loadConfig</span><span class="p">(</span><span class="nv">file</span><span class="p">:</span><span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ConfigModel</span><span class="p">?</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">json</span> <span class="p">:</span> <span class="kt">AnyObject</span><span class="p">?</span> <span class="o">=</span> <span class="nf">loadJSON</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">j</span> <span class="o">=</span> <span class="n">json</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nf">decode</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="nf">debugPrint</span><span class="p">(</span><span class="s">"Error with </span><span class="se">\(</span><span class="n">file</span><span class="se">)</span><span class="s">.json file"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>While this is fine for converting one type of object, what if you have multiple data models? You could quickly end up with a lot of repetitive code. One of the powerful things with Swift 2 is that it supports Abstract Types. Argo needs a little help to ensure the abstract type conforms to the Decodable type so there is slightly more boilerplate in this case, but it should help keep things DRY.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="n">loadJSONFile</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt">Decodable</span> <span class="k">where</span> <span class="kt">T</span> <span class="o">==</span> <span class="kt">T</span><span class="o">.</span><span class="kt">DecodedType</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">file</span> <span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">T</span><span class="p">?</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">json</span> <span class="p">:</span> <span class="kt">AnyObject</span><span class="p">?</span> <span class="o">=</span> <span class="nf">loadJSON</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">j</span><span class="p">:</span> <span class="kt">AnyObject</span> <span class="o">=</span> <span class="n">json</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nf">decode</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="nf">debugPrint</span><span class="p">(</span><span class="s">"Error with </span><span class="se">\(</span><span class="n">file</span><span class="se">)</span><span class="s">.json file"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The JSON config file can be loaded in AppDelegate in the ‘didFinishLaunchingWithOptions’ method:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="nv">config</span><span class="p">:</span> <span class="kt">ConfigModel</span><span class="p">?</span> 
+<span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="nv">application</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span> <span class="nv">launchOptions</span><span class="p">:</span> <span class="p">[</span><span class="kt">NSObject</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">]?)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="nf">loadJSONFile</span><span class="p">(</span><span class="s">"config"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">true</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="parsing-json-response-from-rest-service">Parsing JSON response from REST service</h2>
+
+<p>I also needed to parse various JSON results provided by via REST service API. To handle the REST request here I’ll be using the <a href="https://github.com/Alamofire/Alamofire">Alamofire</a> library for Swift. Alamofire can also be added to the Cartfile:</p>
+
+<div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">github</span> <span class="s2">"Alamofire/Alamofire"</span> ~\&gt; <span class="m">3</span>.<span class="m">4</span>
+</code></pre></div></div>
+
+<p>Below is an example snippet taken from a login POST request. When using Alamofire the JSON data is available as <code class="highlighter-rouge">response.result.value</code> which can be parsed with the Argo decode method.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">login</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">authURL</span> <span class="p">:</span> <span class="kt">NSURL</span> <span class="o">=</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://some_auth_endpoint"</span><span class="p">)</span>
+    
+    <span class="c1">// Request body params</span>
+    <span class="k">let</span> <span class="nv">parameters</span> <span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s">"username"</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span>
+        <span class="s">"password"</span><span class="p">:</span> <span class="n">password</span>
+    <span class="p">]</span>
+    
+    <span class="c1">// Initiate async request using Alamofire </span>
+    <span class="kt">Alamofire</span><span class="o">.</span><span class="nf">request</span><span class="p">(</span><span class="o">.</span><span class="kt">POST</span><span class="p">,</span> <span class="n">authURL</span><span class="p">,</span> <span class="nv">parameters</span><span class="p">:</span> <span class="n">parameters</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="o">.</span><span class="kt">JSON</span><span class="p">)</span><span class="o">.</span><span class="n">responseJSON</span> <span class="p">{</span>
+        <span class="n">response</span> <span class="k">in</span>
+        
+        <span class="c1">// Return early on failure</span>
+        <span class="k">guard</span> <span class="n">response</span><span class="o">.</span><span class="n">response</span><span class="p">?</span><span class="o">.</span><span class="n">statusCode</span> <span class="o">==</span> <span class="mi">200</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">let</span> <span class="nv">alert</span> <span class="o">=</span> <span class="kt">UIAlertController</span><span class="o">.</span><span class="nf">init</span><span class="p">(</span><span class="nv">title</span><span class="p">:</span> <span class="s">"Error"</span><span class="p">,</span> <span class="nv">message</span><span class="p">:</span> <span class="s">"Failed to login, please check username and password."</span><span class="p">,</span> <span class="nv">preferredStyle</span><span class="p">:</span> <span class="o">.</span><span class="kt">Alert</span><span class="p">)</span>
+            <span class="n">alert</span><span class="o">.</span><span class="nf">addAction</span><span class="p">(</span><span class="kt">UIAlertAction</span><span class="p">(</span><span class="nv">title</span><span class="p">:</span> <span class="s">"Ok"</span><span class="p">,</span> <span class="nv">style</span><span class="p">:</span> <span class="o">.</span><span class="kt">Cancel</span><span class="p">,</span> <span class="nv">handler</span><span class="p">:</span> <span class="p">{(</span><span class="nv">alertAction</span><span class="p">:</span> <span class="kt">UIAlertAction</span><span class="p">)</span> <span class="k">in</span>
+                <span class="n">alert</span><span class="o">.</span><span class="nf">dismissViewControllerAnimated</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+            <span class="p">}))</span>
+            <span class="k">self</span><span class="o">.</span><span class="nf">presentViewController</span><span class="p">(</span><span class="n">alert</span><span class="p">,</span> <span class="nv">animated</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// Parse JSON result value using Argo</span>
+        <span class="k">guard</span> <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+              <span class="k">let</span> <span class="nv">authToken</span><span class="p">:</span> <span class="kt">AuthTokenModel</span> <span class="o">=</span> <span class="nf">decode</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nf">debugPrint</span><span class="p">(</span><span class="s">"Auth token model parse error"</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// Login was successful, do stuff here and then navigate to home screen...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>One thing to point out: I have used very simple parse error detection here - it either decodes or it doesn’t and there is no indication of what went wrong during the decode process. With smaller data models this form of indication is perfectly adequate. But when you are working with complex data models then this type of error reporting is not granular enough to pinpoint the exact the problem if you get a parse error. Fortunately Argo provides a way to parse with failure reporting by using a Decoded type.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Get JSON data from Alamofire response</span>
+<span class="k">guard</span> <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">value</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"No request result"</span><span class="p">)</span>
+    <span class="k">return</span>
+<span class="p">}</span>
+
+<span class="c1">// Try decoding model with failure reporting by using Argo's Decoded type</span>
+<span class="k">let</span> <span class="nv">decodeResult</span><span class="p">:</span> <span class="kt">Decoded</span><span class="o">&lt;</span><span class="kt">SomeModel</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nf">decode</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="k">switch</span><span class="p">(</span><span class="n">decodeResult</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">case</span> <span class="o">.</span><span class="kt">Failure</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Failed to decode model: </span><span class="se">\(</span><span class="n">decodeResult</span><span class="o">.</span><span class="n">error</span><span class="p">?</span><span class="o">.</span><span class="n">description</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+    <span class="k">return</span>
+<span class="k">case</span> <span class="o">.</span><span class="kt">Success</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Decode success"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// Assign decoded value to data model</span>
+<span class="k">guard</span> <span class="k">let</span> <span class="nv">report</span> <span class="p">:</span> <span class="kt">SomeModel</span> <span class="o">=</span> <span class="n">decodeResult</span><span class="o">.</span><span class="n">value</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Error unwrapping Report result"</span><span class="p">)</span>
+    <span class="k">return</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>I found this an absolutely invaluable technique to be able to debug issues with my complex models, especially as models are pretty verbose and its always hard to spot that one string mistake.</p>
+
+<h2 id="whats-next">What’s next…</h2>
+
+<p>What about storing loaded data for offline use? JSON documents can be stored with revisions using a <a href="http://developer.couchbase.com/documentation/mobile/1.3/develop/references/couchbase-lite/couchbase-lite/index.html">Couchbase Lite</a> database. The problem here is Argo only accommodates decode, but the native objects will need encoded back into JSON for use with Couchbase. This is where <a href="https://github.com/edwardaux/Ogra">Ogra</a> (Argo in reverse) comes in. The only thing is you will need to extend the data object with an encode method. If you found this post useful or if you would be interested to see some Ogra to Couch examples just fire me a tweet <a href="https://twitter.com/deadlyfingers">@deadlyfingers</a>.</p>
+
+
+</div>
+
+<div class="large-4 cell">
+  <!-- <a href="http://example.com/bar.html#disqus_thread">Link</a> -->
+
+</div>
+
+<div id="pagination" class="large-12 cell">
+  <div>
+    <a href="/code/swift-json-parsing-for-ios-development">Swift JSON parsing for iOS development</a>
+    <span>
+      
+      <span>by David Douglas</span>
+      
+    </span>
+  </div>
+  <ul class="tags">
+    
+    <li>Alamofire</li>
+    
+    <li>Argo</li>
+    
+    <li>JSON</li>
+    
+    <li>Swift</li>
+    
+  </ul>
+
+  <div class="grid-x grid-margin-x grid-padding-y">
+    <div class="large-6 cell">
+      
+      <span class="next">Next</span>
+      <a href="/info/unity-git">Merging Unity scenes, prefabs and assets with git</a>
+      
+    </div>
+    <div class="large-6 cell">
+      
+      <span class="prev">Previous</span>
+      <a href="/code/creating-content-with-web-components">Creating content with Web Components</a>
+      
+    </div>
+  </div>
+  <div class="top"><a href="#" class="top">Top</a></div>
+</div>
+    </div>
+  </div>
+
+  <!-- scripts -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+</body>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Developer blog">
+  <title>Unity Web Sockets for Mixed Reality</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/assets/main.css" rel="stylesheet">
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Deadlyfingers.net" />
+</head>
+
+<body>
+  <div class="grid-container">
+    <!-- nav -->
+    <div class="grid-x">
+  <div class="small-6 cell">
+    <h1><a href="/">Deadlyfingers.net</a></h1>
+  </div>
+  <div class="small-6 cell right">
+    <a class="icon twitter" href="https://twitter.com/deadlyfingers"></a>
+    <a class="icon github" href="https://github.com/deadlyfingers"></a>
+    <a class="icon youtube" href="https://youtube.com/deadlyfingerstv"></a>
+  </div>
+</div>
+    <!-- body content -->
+    <div class="grid-x grid-margin-x">
+      <div id="post" class="large-8 cell post">
+  
+  <time datetime="2018-09-16 13:17:16 +0100" class="date">16 Sep 2018</time>
+  
+  <h1 class="post-title">Unity Web Sockets for Mixed Reality</h1>
+  <div class="post-line"></div>
+  <p>Certain cloud services may offer a Web Socket streaming connection as an alternative to firing repeated REST requests or polling. To make working with REST APIs in Unity more convenient I built a <a href="https://github.com/Unity3dAzure/RESTClient">REST client for Unity</a> based on <a href="https://docs.unity3d.com/ScriptReference/Networking.UnityWebRequest.html">UnityWebRequest</a> which supports abstract types for JSON / XML serialisation. But given a real-time scenario like “speech to text” using a Web Socket client instead of REST gives an option to stream the audio data and get intermediate results back which provides responsive feedback to users for an improved user experience.</p>
+
+<h6 id="using-bing-speech-api-as-an-example-we-can-see-some-limitations-of-using-rest-api-versus-the-web-socket-protocol">Using Bing Speech API as an example we can see some limitations of using REST API versus the Web Socket protocol:</h6>
+
+<table>
+  <thead>
+    <tr>
+      <th>Bing Speech</th>
+      <th>REST</th>
+      <th>Web Socket</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Audio stream duration</td>
+      <td>15 secs</td>
+      <td>180 secs - 10 mins</td>
+    </tr>
+    <tr>
+      <td>Stream audio with intermediate results</td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Also when it comes to client app development in Unity there are a couple of very useful message events you receive from the WebSockets server:</p>
+<ul>
+  <li><strong>End-of-speech detection</strong> so you stop recording on client device.</li>
+  <li><strong>Phrase detection</strong> so you can pass phrases to <a href="https://www.luis.ai/">natural language understanding services (LUIS)</a> model.</li>
+</ul>
+
+<p>To use Web Sockets in Unity you can use the <a href="https://github.com/sta/websocket-sharp">WebSocket-Sharp library</a>, but this only supports the Unity Editor and the mono target platforms. In order to use Web Sockets when targeting Windows Mixed Reality headsets you have to use Universal Windows Platform (UWP) APIs like <a href="https://docs.microsoft.com/en-us/uwp/api/windows.networking.sockets.messagewebsocket">MessageWebSocket</a>. To make things easier I have created a common <a href="https://github.com/Unity3dAzure/UnityWebSocket">Unity Web Socket</a> interface to use WebSocket-Sharp inside the Editor and mono platforms and then use <code class="highlighter-rouge">MessageWebSocket</code> when targeting the Windows Store App platform for MR headsets.</p>
+
+<h3 id="unity-web-socket-interface">Unity Web Socket interface</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>API</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ConfigureWebSocket(url)</td>
+      <td>Configures web socket with url and optional headers</td>
+    </tr>
+    <tr>
+      <td>ConnectAsync()</td>
+      <td>Connect to web socket</td>
+    </tr>
+    <tr>
+      <td>CloseAsync()</td>
+      <td>Close web socket connection</td>
+    </tr>
+    <tr>
+      <td>SendAsync(data)</td>
+      <td>Send binary byte[] or UTF-8 text string with optional callback</td>
+    </tr>
+    <tr>
+      <td>IsOpen()</td>
+      <td>Check if web socket status is open</td>
+    </tr>
+    <tr>
+      <td>Url()</td>
+      <td>Return the URL being used by the web socket</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="interface-events">Interface events</h3>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">OnError</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">WebSocketErrorEventArgs</span> <span class="n">e</span><span class="p">);</span>
+<span class="nf">OnOpen</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">EventArgs</span> <span class="n">e</span><span class="p">);</span>
+<span class="nf">OnMessage</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">WebSocketMessageEventArgs</span> <span class="n">e</span><span class="p">);</span>
+<span class="nf">OnClose</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">WebSocketCloseEventArgs</span> <span class="n">e</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>If you are interested in the example above there I have also prepared a <a href="https://github.com/Unity3dAzure/UnityWebSocketDemo">Unity Web Socket demo project</a> to show Bing Speech service to LUIS for controlling scene game objects using natural speech commands for Mixed Reality scenarios.</p>
+
+
+</div>
+
+<div class="large-4 cell">
+  <!-- <a href="http://example.com/bar.html#disqus_thread">Link</a> -->
+
+</div>
+
+<div id="pagination" class="large-12 cell">
+  <div>
+    <a href="/code/unity-web-sockets-mixed-reality-uwp">Unity Web Sockets for Mixed Reality</a>
+    <span>
+      
+      <span>by David Douglas</span>
+      
+    </span>
+  </div>
+  <ul class="tags">
+    
+    <li>Unity3D</li>
+    
+    <li>UWP</li>
+    
+    <li>Web Sockets</li>
+    
+    <li>Mixed Reality</li>
+    
+    <li>HoloLens</li>
+    
+  </ul>
+
+  <div class="grid-x grid-margin-x grid-padding-y">
+    <div class="large-6 cell">
+      
+      <span class="next">Next</span>
+      <a href="/code/analytics-for-mixed-reality">Analytics for Mixed Reality</a>
+      
+    </div>
+    <div class="large-6 cell">
+      
+      <span class="prev">Previous</span>
+      <a href="/code/querying-application-insights-for-data-visualisation">Querying Application Insights for data visualisation</a>
+      
+    </div>
+  </div>
+  <div class="top"><a href="#" class="top">Top</a></div>
+</div>
+    </div>
+  </div>
+
+  <!-- scripts -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+</body>
