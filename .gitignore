@@ -12,6 +12,9 @@ Gemfile.lock
 /node_modules
 package-lock.json
 
+# gulp deploy
+.publish
+
 # local drafts
 _drafts
 
