@@ -39,15 +39,25 @@ But I’ve longer for something leaner for writing developer code stories as the
 <p>Initially I thought about writing a custom blog web app but decided it would be better to consider existing platforms that can handle my requirements.
 Ultimately I decided to migrate my Wordpress blog to GitHub pages.</p>
 
-<p>Here’s a bunch of things I like with GitHub Pages compared to Wordpress:</p>
+<p>Here’s a bunch of things I like with GitHub Pages compared with my self-hosted Wordpress site:</p>
 <ul>
-  <li>Rather than edit posts in small scroll view I can use a desktop code editor like <a href="https://code.visualstudio.com/">VS Code</a> which supports full screen editing of text and <a href="https://code.visualstudio.com/docs/languages/markdown#_editor-and-preview-synchronization">live code preview</a>.</li>
-  <li>Use GitHub as server - I don’t need to provide my own hosting or database.</li>
+  <li>Rather than edit posts in small scroll view I can use a desktop code editor like <a href="https://code.visualstudio.com/">VS Code</a> which supports full screen editing of text and <a href="https://code.visualstudio.com/docs/languages/markdown#_editor-and-preview-synchronization">live code preview</a>. (I’m aware this might not be everyone’s cup of tea but writing developer blog posts inside a developer tool feels right at home for me!)</li>
   <li>Markdown is much easier for writing developer documentation and inline code snippets, but I can also inject HTML when needed.</li>
+  <li>Use GitHub as server - I don’t need to provide my own hosting or database. Free hosting is nice!</li>
+  <li>Easy to setup <strong>custom domain</strong> - just add some <a href="https://help.github.com/articles/setting-up-an-apex-domain/#configuring-a-records-with-your-dns-provider"><strong>A Records</strong> with your DNS provider</a>.
+    <ul>
+      <li><code class="highlighter-rouge">185.199.108.153</code></li>
+      <li><code class="highlighter-rouge">185.199.109.153</code></li>
+      <li><code class="highlighter-rouge">185.199.110.153</code></li>
+      <li><code class="highlighter-rouge">185.199.111.153</code></li>
+    </ul>
+  </li>
+  <li><a href="https://blog.github.com/2018-05-01-github-pages-custom-domains-https/">GitHub has partnered with Let’s Encrypt</a> so you get <strong>HTTPS</strong> for free - just check a box!</li>
 </ul>
 
 <p>However there are some downsides during this process:</p>
 <ul>
+  <li>Not as easy to setup as Wordpress.</li>
   <li>Don’t expect the migration of Wordpress HTML to MD files to be perfect! In my case the conversion tool had problems preserving spacing in code blocks and some character conversions may need fixed.</li>
   <li>By default all updates will be public on github so you have to think about that if you need to support private posts.</li>
 </ul>
@@ -55,13 +65,15 @@ Ultimately I decided to migrate my Wordpress blog to GitHub pages.</p>
 <h2 id="how-to-migrate-from-wordpress-to-github-pages-jekyll">How to migrate from Wordpress to GitHub Pages (Jekyll)</h2>
 
 <blockquote>
-  <p>GitHub Pages is powered by <a href="https://jekyllrb.com/">Jekyll</a>. To import your Wordpress archive and run Jekyll locally you will need to install <a href="https://www.ruby-lang.org/en/downloads/">Ruby 2.1</a> or better.</p>
+  <p>GitHub Pages is powered by <a href="https://jekyllrb.com/">Jekyll</a>. To import your Wordpress XML archive and run Jekyll locally you will need to install <a href="https://www.ruby-lang.org/en/downloads/">Ruby 2.1</a> or better.</p>
 </blockquote>
 
 <ol>
-  <li>
-    <p>If you are migrating an existing blog you have to export your content from the Wordpress admin control panel.<br />
+  <li>If you are migrating an existing blog you have to export your content from the Wordpress admin control panel.
+    <blockquote>
+      <p>The general form of the URL is as follows:<br />
  <code class="highlighter-rouge">https://YOUR-USER-NAME.wordpress.com/wp-admin/export.php</code></p>
+    </blockquote>
   </li>
   <li>
     <p>Import the Wordpress XML archive file as mentioned on the <a href="http://import.jekyllrb.com/docs/wordpressdotcom/">import wordpress to Jekyll docs</a></p>
@@ -109,8 +121,7 @@ Ultimately I decided to migrate my Wordpress blog to GitHub pages.</p>
       <p>NB. Don’t use “\” in path otherwise you will get file not found error, use “/” in path instead.</p>
     </blockquote>
   </li>
-  <li>
-    <p>To show code syntax highlights you will need to add some styles for <a href="https://github.com/jneen/rouge">Rouge</a> (GitHub Page’s syntax highlighter). You can use Rougify to copy GitHub’s code syntax highlighting to a stylesheet.</p>
+  <li>To show code syntax highlights you will need to add some styles for <a href="https://github.com/jneen/rouge">Rouge</a> (GitHub Page’s syntax highlighter). You can use Rougify to copy GitHub’s code syntax highlighting to a stylesheet.
     <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> gem install rouge
 </code></pre></div>    </div>
     <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> rougify style github <span class="o">&gt;</span> _sass/styles/_rouge.scss
@@ -118,13 +129,16 @@ Ultimately I decided to migrate my Wordpress blog to GitHub pages.</p>
   </li>
 </ol>
 
-<p>After this you might decide to apply one of the <a href="https://pages.github.com/themes/">built-in GitHub Pages themes</a> or use a <a href="https://github.com/benbalter/jekyll-remote-theme">remote theme</a> or <a href="https://jekyllrb.com/docs/themes/">create your own theme</a>. In my case I added the <a href="https://foundation.zurb.com/sites/docs/xy-grid.html">Foundation XY-Grid</a> module for responsive design grid layouts. I have also included a list of references below which I found useful during the creation of this new blog.</p>
+<p>After this you might decide to apply one of the <a href="https://pages.github.com/themes/">built-in GitHub Pages themes</a> or use a <a href="https://github.com/benbalter/jekyll-remote-theme">remote theme</a> or <a href="https://jekyllrb.com/docs/themes/">create your own theme</a>. In my case I added the <a href="https://foundation.zurb.com/sites/docs/xy-grid.html">Foundation XY-Grid</a> module for responsive design grid layouts. One thing I would like to see supported in GitHub Pages is support for <strong>npm packages</strong>. Everyone seems to have their own way for building this out and it would be nice just to provide a <code class="highlighter-rouge">package.json</code> file and let GitHub take take of the rest. One nice solution however might be to roll out the <code class="highlighter-rouge">node_modules</code> dependencies as part of a remote theme. But at this early stage I prefer to keep it all together in one repo until I have proved everything <em>just works</em> over time.</p>
 
 <h2 id="references">References</h2>
+
+<p>I’ve included a list of references below which I found useful during the creation of this new GitHub Pages blog.</p>
 
 <h3 id="github-pages-settings">GitHub Pages settings</h3>
 <ul>
   <li><a href="https://pages.github.com/">GitHub Pages</a></li>
+  <li><a href="https://help.github.com/articles/user-organization-and-project-pages/#project-pages-sites">GitHub Project Pages</a></li>
   <li><a href="https://help.github.com/articles/using-jekyll-as-a-static-site-generator-with-github-pages/">Using Jekyll</a></li>
   <li><a href="https://pages.github.com/themes/">Themes</a></li>
   <li><a href="https://help.github.com/articles/configuring-jekyll-plugins/#default-plugins">Default Plugins</a></li>
@@ -134,6 +148,7 @@ Ultimately I decided to migrate my Wordpress blog to GitHub pages.</p>
 
 <h3 id="jekyll-blog">Jekyll blog</h3>
 <ul>
+  <li><a href="http://import.jekyllrb.com/docs/wordpressdotcom/">Import posts from Wordpress blog</a></li>
   <li><a href="https://jekyllrb.com/docs/structure/">Jekyll structure</a></li>
   <li><a href="https://devhints.io/jekyll">Jekyll cheatsheet</a></li>
   <li><a href="https://github.com/rstacruz/cheatsheets/blob/master/jekyll.md">Jekyll md cheatsheet</a></li>
@@ -161,6 +176,11 @@ Ultimately I decided to migrate my Wordpress blog to GitHub pages.</p>
 <h3 id="foundation">Foundation</h3>
 <ul>
   <li><a href="https://foundation.zurb.com/sites/docs/xy-grid.html">XY-Grid</a></li>
+</ul>
+
+<h3 id="gulp">Gulp</h3>
+<ul>
+  <li><a href="https://www.npmjs.com/package/gulp-gh-pages">Publish build to GitHub Pages</a></li>
 </ul>
 
 </div>
