@@ -16,20 +16,28 @@ But I've longer for something leaner for writing developer code stories as the r
 Initially I thought about writing a custom blog web app but decided it would be better to consider existing platforms that can handle my requirements.
 Ultimately I decided to migrate my Wordpress blog to GitHub pages.
 
-Here's a bunch of things I like with GitHub Pages compared to Wordpress:
-- Rather than edit posts in small scroll view I can use a desktop code editor like [VS Code](https://code.visualstudio.com/) which supports full screen editing of text and [live code preview](https://code.visualstudio.com/docs/languages/markdown#_editor-and-preview-synchronization).
-- Use GitHub as server - I don't need to provide my own hosting or database.
+Here's a bunch of things I like with GitHub Pages compared with my self-hosted Wordpress site:
+- Rather than edit posts in small scroll view I can use a desktop code editor like [VS Code](https://code.visualstudio.com/) which supports full screen editing of text and [live code preview](https://code.visualstudio.com/docs/languages/markdown#_editor-and-preview-synchronization). (I'm aware this might not be everyone's cup of tea but writing developer blog posts inside a developer tool feels right at home for me!)
 - Markdown is much easier for writing developer documentation and inline code snippets, but I can also inject HTML when needed.
+- Use GitHub as server - I don't need to provide my own hosting or database. Free hosting is nice!
+- Easy to setup **custom domain** - just add some [**A Records** with your DNS provider](https://help.github.com/articles/setting-up-an-apex-domain/#configuring-a-records-with-your-dns-provider).
+    - `185.199.108.153`
+    - `185.199.109.153`
+    - `185.199.110.153`
+    - `185.199.111.153`
+- [GitHub has partnered with Let's Encrypt](https://blog.github.com/2018-05-01-github-pages-custom-domains-https/) so you get **HTTPS** for free - just check a box!
 
 However there are some downsides during this process:
+- Not as easy to setup as Wordpress. 
 - Don't expect the migration of Wordpress HTML to MD files to be perfect! In my case the conversion tool had problems preserving spacing in code blocks and some character conversions may need fixed.
 - By default all updates will be public on github so you have to think about that if you need to support private posts.
 
 ## How to migrate from Wordpress to GitHub Pages (Jekyll)
 
-> GitHub Pages is powered by [Jekyll](https://jekyllrb.com/). To import your Wordpress archive and run Jekyll locally you will need to install [Ruby 2.1](https://www.ruby-lang.org/en/downloads/) or better.
+> GitHub Pages is powered by [Jekyll](https://jekyllrb.com/). To import your Wordpress XML archive and run Jekyll locally you will need to install [Ruby 2.1](https://www.ruby-lang.org/en/downloads/) or better.
 
-1. If you are migrating an existing blog you have to export your content from the Wordpress admin control panel.  
+1. If you are migrating an existing blog you have to export your content from the Wordpress admin control panel. 
+    > The general form of the URL is as follows:  
     `https://YOUR-USER-NAME.wordpress.com/wp-admin/export.php`
 
 2. Import the Wordpress XML archive file as mentioned on the [import wordpress to Jekyll docs](http://import.jekyllrb.com/docs/wordpressdotcom/)
@@ -79,12 +87,15 @@ However there are some downsides during this process:
     rougify style github > _sass/styles/_rouge.scss
     ```
 
-After this you might decide to apply one of the [built-in GitHub Pages themes](https://pages.github.com/themes/) or use a [remote theme](https://github.com/benbalter/jekyll-remote-theme) or [create your own theme](https://jekyllrb.com/docs/themes/). In my case I added the [Foundation XY-Grid](https://foundation.zurb.com/sites/docs/xy-grid.html) module for responsive design grid layouts. I have also included a list of references below which I found useful during the creation of this new blog.
+After this you might decide to apply one of the [built-in GitHub Pages themes](https://pages.github.com/themes/) or use a [remote theme](https://github.com/benbalter/jekyll-remote-theme) or [create your own theme](https://jekyllrb.com/docs/themes/). In my case I added the [Foundation XY-Grid](https://foundation.zurb.com/sites/docs/xy-grid.html) module for responsive design grid layouts. One thing I would like to see supported in GitHub Pages is support for **npm packages**. Everyone seems to have their own way for building this out and it would be nice just to provide a `package.json` file and let GitHub take take of the rest. One nice solution however might be to roll out the `node_modules` dependencies as part of a remote theme. But at this early stage I prefer to keep it all together in one repo until I have proved everything _just works_ over time. 
 
 ## References
 
+I've included a list of references below which I found useful during the creation of this new GitHub Pages blog.
+
 ### GitHub Pages settings
 - [GitHub Pages](https://pages.github.com/)
+- [GitHub Project Pages](https://help.github.com/articles/user-organization-and-project-pages/#project-pages-sites)
 - [Using Jekyll](https://help.github.com/articles/using-jekyll-as-a-static-site-generator-with-github-pages/)
 - [Themes](https://pages.github.com/themes/)
 - [Default Plugins](https://help.github.com/articles/configuring-jekyll-plugins/#default-plugins)
@@ -92,6 +103,7 @@ After this you might decide to apply one of the [built-in GitHub Pages themes](h
 - [highlighter: rouge](https://help.github.com/articles/using-syntax-highlighting-on-github-pages/)
 
 ### Jekyll blog
+- [Import posts from Wordpress blog](http://import.jekyllrb.com/docs/wordpressdotcom/)
 - [Jekyll structure](https://jekyllrb.com/docs/structure/)
 - [Jekyll cheatsheet](https://devhints.io/jekyll)
 - [Jekyll md cheatsheet](https://github.com/rstacruz/cheatsheets/blob/master/jekyll.md)
@@ -113,3 +125,6 @@ After this you might decide to apply one of the [built-in GitHub Pages themes](h
 
 ### Foundation
 - [XY-Grid](https://foundation.zurb.com/sites/docs/xy-grid.html)
+
+### Gulp
+- [Publish build to GitHub Pages](https://www.npmjs.com/package/gulp-gh-pages)
