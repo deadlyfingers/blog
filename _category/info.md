@@ -1,0 +1,4 @@
+---
+tag: info
+permalink: "/info/"
+---

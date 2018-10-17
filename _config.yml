@@ -1,0 +1,108 @@
+# Site settings
+title: "Deadlyfingers.net"
+description: "Developer blog"
+
+# Author
+author:
+  name: David Douglas
+  picture: /assets/avatars/david-douglas.jpg
+  url: http://www.deadlyfingers.com
+  twitter: deadlyfingers
+  youtube: deadlyfingerstv
+  github: deadlyfingers
+
+# Google Analytics
+google_analytics:
+  tracking_code: UA-140437-35
+
+# Disqus Comments
+disqus:
+  shortname: deadlyfingers
+
+# Links
+links:
+  categories: "/categories"
+  tags: "/tags"
+
+# Collections
+collections:
+  category:
+    output: true
+
+# Theme
+#theme: minima # https://pages.github.com/themes/
+
+# Styles
+sass:
+  sass_dir: _sass
+  style: compressed
+
+# Handling Reading
+#safe: true
+encoding: UTF-8
+strict_front_matter : true
+
+include:
+  - "node_modules/@fortawesome/fontawesome-free/webfonts"
+
+exclude:
+  - package.json
+  - package-lock.json
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - LICENSE
+  - node_modules
+  - node_modules/**/*.md
+  - _attachments
+  - _nav_menu_items
+  - gulpfile.js
+  - "*.rb"
+  - "^*"
+
+keep_files: 
+  - "node_modules/@fortawesome/fontawesome-free/webfonts"
+
+# Filtering Content
+show_drafts: false
+future: false
+unpublished: false
+
+# Plugins
+plugins:
+  - jekyll-github-metadata
+  - jekyll-paginate
+  - jekyll-optional-front-matter
+  - jekyll-readme-index
+  - jekyll-default-layout
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jemoji
+
+# Conversion
+excerpt_separator: <!--more-->
+
+# Serving
+baseurl: "" # does not include hostname
+show_dir_listing: false
+
+# Outputting
+permalink: /:categories/:title
+paginate: 4
+timezone: Europe/London # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+
+# GitHub Flavoured Markdown (GFM)
+markdown: kramdown
+highlighter: rouge
+
+# GitHub defaults - https://help.github.com/articles/configuring-jekyll/
+github: [metadata]
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
+jailed: false
+gfm_quirks: paragraph_end
+theme: jekyll-theme-primer
+

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include head.html %}
+
+<body>
+  <div class="grid-container">
+    <!-- nav -->
+    {% include nav.html %}
+    <!-- body content -->
+    <div class="grid-x grid-margin-x">
+      {{ content }}
+    </div>
+  </div>
+
+  <!-- scripts -->
+  {% include google_analytics.html %}
+</body>
