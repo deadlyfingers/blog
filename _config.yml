@@ -61,7 +61,7 @@ exclude:
   - "*.rb"
   - "^*"
 
-keep_files: 
+keep_files:
   - node_modules/@fortawesome/fontawesome-free/webfonts
 
 # Filtering Content
@@ -85,7 +85,7 @@ plugins:
 excerpt_separator: <!--more-->
 
 # Serving
-baseurl: "/blog" # "/project-name" NB: does not include hostname
+baseurl: "" # "/project-name" NB: does not include hostname
 show_dir_listing: false
 
 # Outputting
