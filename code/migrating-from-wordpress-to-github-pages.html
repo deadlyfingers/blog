@@ -31,7 +31,7 @@
   
   <h1 class="post-title">Migrating from Wordpress blog to GitHub Pages</h1>
   <div class="post-line"></div>
-  <p>Wordpress has done a decent job of running my blog. 
+  <p>Wordpress has done a decent job of running my blog.
 But I’ve longer for something leaner for writing developer code stories as the rich <strong>HTML</strong> text editor tends to introduce too much complexity.</p>
 
 <!--more-->
@@ -40,22 +40,33 @@ But I’ve longer for something leaner for writing developer code stories as the
 Ultimately I decided to migrate my Wordpress blog to GitHub pages.</p>
 
 <p>Here’s a bunch of things I like with GitHub Pages compared with my self-hosted Wordpress site:</p>
+
 <ul>
   <li>Rather than edit posts in small scroll view I can use a desktop code editor like <a href="https://code.visualstudio.com/">VS Code</a> which supports full screen editing of text and <a href="https://code.visualstudio.com/docs/languages/markdown#_editor-and-preview-synchronization">live code preview</a>. (I’m aware this might not be everyone’s cup of tea but writing developer blog posts inside a developer tool feels right at home for me!)</li>
   <li>Markdown is much easier for writing developer documentation and inline code snippets, but I can also inject HTML when needed.</li>
   <li>Use GitHub as server - I don’t need to provide my own hosting or database. Free hosting is nice!</li>
-  <li>Easy to setup <strong>custom domain</strong> - just add some <a href="https://help.github.com/articles/setting-up-an-apex-domain/#configuring-a-records-with-your-dns-provider"><strong>A Records</strong> with your DNS provider</a>.
-    <ul>
-      <li><code class="highlighter-rouge">185.199.108.153</code></li>
-      <li><code class="highlighter-rouge">185.199.109.153</code></li>
-      <li><code class="highlighter-rouge">185.199.110.153</code></li>
-      <li><code class="highlighter-rouge">185.199.111.153</code></li>
-    </ul>
-  </li>
   <li><a href="https://blog.github.com/2018-05-01-github-pages-custom-domains-https/">GitHub has partnered with Let’s Encrypt</a> so you get <strong>HTTPS</strong> for free - just check a box!</li>
+  <li>You can setup a <strong>custom domain</strong> for both an <a href="https://help.github.com/articles/setting-up-an-apex-domain/">apex domain</a> and <a href="https://help.github.com/articles/setting-up-a-www-subdomain/">www subdomain</a> and GitHub Pages will handle the redirect.
+    <ol>
+      <li>Add <a href="https://help.github.com/articles/setting-up-an-apex-domain/#configuring-a-records-with-your-dns-provider"><strong>A Records</strong> with your DNS provider</a> for <strong>apex domain</strong> (<em>without www.</em>):
+| Domain | IP address |
+| — | — |
+| <em>YOUR_DOMAIN</em>.com. | <code class="highlighter-rouge">185.199.108.153</code> |
+| <em>YOUR_DOMAIN</em>.com. | <code class="highlighter-rouge">185.199.109.153</code> |
+| <em>YOUR_DOMAIN</em>.com. | <code class="highlighter-rouge">185.199.110.153</code> |
+| <em>YOUR_DOMAIN</em>.com. | <code class="highlighter-rouge">185.199.111.153</code> |</li>
+      <li>Add one <strong>CNAME</strong> record for <strong>www subdomain</strong>.
+| Domain | Canonical name |
+| — | — |
+| www | <em>USERNAME</em>.github.io. |</li>
+      <li>Update the GitHub Pages &gt; Settings &gt; <strong>Custom Domain</strong> field to <strong>www.<em>YOURDOMAIN</em>.com</strong> (this will add a <strong>CNAME</strong> file to the root directory in the GitHub Pages branch)</li>
+      <li>You can then enable <strong>Enforce HTTPS</strong> in GitHub Pages &gt; Settings.</li>
+    </ol>
+  </li>
 </ul>
 
 <p>However there are some downsides during this process:</p>
+
 <ul>
   <li>Not as easy to setup as Wordpress.</li>
   <li>Don’t expect the migration of Wordpress HTML to MD files to be perfect! In my case the conversion tool had problems preserving spacing in code blocks and some character conversions may need fixed.</li>
@@ -83,20 +94,21 @@ Ultimately I decided to migrate my Wordpress blog to GitHub pages.</p>
       <p>Install Ruby Gems</p>
     </blockquote>
 
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> gem install jekyll-import
- gem install hpricot
- gem install open_uri_redirections
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem install jekyll-import
+gem install hpricot
+gem install open_uri_redirections
 </code></pre></div>    </div>
+
     <blockquote>
       <p>Convert Wordpress XML archive to HTML files and download images to ‘assets’ directory.</p>
     </blockquote>
 
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ruby <span class="nt">-rubygems</span> <span class="nt">-e</span> <span class="s1">'require "jekyll-import";
- JekyllImport::Importers::WordpressDotCom.run({
-   "source" =&gt; "C:/Users/USERNAME/Downloads/REPLACE_USING_YOUR_FILE_NAME.wordpress.YYYY-MM-DD.xml",
-   "no_fetch_images" =&gt; false,
-   "assets_folder" =&gt; "assets/images"
- })'</span>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ruby <span class="nt">-rubygems</span> <span class="nt">-e</span> <span class="s1">'require "jekyll-import";
+JekyllImport::Importers::WordpressDotCom.run({
+  "source" =&gt; "C:/Users/USERNAME/Downloads/REPLACE_USING_YOUR_FILE_NAME.wordpress.YYYY-MM-DD.xml",
+  "no_fetch_images" =&gt; false,
+  "assets_folder" =&gt; "assets/images"
+})'</span>
 </code></pre></div>    </div>
   </li>
   <li>
@@ -106,27 +118,30 @@ Ultimately I decided to migrate my Wordpress blog to GitHub pages.</p>
       <p><strong>‘wordpress-html-to-md.rb’</strong> gist usage:</p>
     </blockquote>
 
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> gem install reverse_markdown
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem install reverse_markdown
 </code></pre></div>    </div>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ruby ./wordpress-html-to-md.rb <span class="s2">"_posts"</span>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ruby ./wordpress-html-to-md.rb <span class="s2">"_posts"</span>
 </code></pre></div>    </div>
+
     <script src="https://gist.github.com/deadlyfingers/2023c61cbac83bb613393f262693cdf4.js"></script>
 
     <blockquote>
       <p><strong>html2text</strong> usage:</p>
     </blockquote>
 
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ./html2text.py C:/Users/USERNAME/git/blog/_posts/YYYY-MM-DD-filename.html
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./html2text.py C:/Users/USERNAME/git/blog/_posts/YYYY-MM-DD-filename.html
 </code></pre></div>    </div>
+
     <blockquote>
       <p>NB. Don’t use “\” in path otherwise you will get file not found error, use “/” in path instead.</p>
     </blockquote>
   </li>
   <li>
     <p>To show code syntax highlights you will need to add some styles for <a href="https://github.com/jneen/rouge">Rouge</a> (GitHub Page’s syntax highlighter). You can use Rougify to copy GitHub’s code syntax highlighting to a stylesheet.</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> gem install rouge
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem install rouge
 </code></pre></div>    </div>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> rougify style github <span class="o">&gt;</span> _sass/styles/_rouge.scss
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rougify style github <span class="o">&gt;</span> _sass/styles/_rouge.scss
 </code></pre></div>    </div>
   </li>
 </ol>
@@ -138,6 +153,7 @@ Ultimately I decided to migrate my Wordpress blog to GitHub pages.</p>
 <p>I’ve included a list of references below which I found useful during the creation of this new GitHub Pages blog.</p>
 
 <h3 id="github-pages-settings">GitHub Pages settings</h3>
+
 <ul>
   <li><a href="https://pages.github.com/">GitHub Pages</a></li>
   <li><a href="https://help.github.com/articles/user-organization-and-project-pages/#project-pages-sites">GitHub Project Pages</a></li>
@@ -149,6 +165,7 @@ Ultimately I decided to migrate my Wordpress blog to GitHub pages.</p>
 </ul>
 
 <h3 id="jekyll-blog">Jekyll blog</h3>
+
 <ul>
   <li><a href="http://import.jekyllrb.com/docs/wordpressdotcom/">Import posts from Wordpress blog</a></li>
   <li><a href="https://jekyllrb.com/docs/structure/">Jekyll structure</a></li>
@@ -162,6 +179,7 @@ Ultimately I decided to migrate my Wordpress blog to GitHub pages.</p>
 </ul>
 
 <h3 id="yml-config-reference-docs">YML Config reference docs</h3>
+
 <ul>
   <li><a href="https://help.github.com/articles/page-build-failed-config-file-error/#troubleshooting-_configyml-syntax-errors">YML Syntax</a></li>
   <li><a href="https://jekyllrb.com/docs/configuration/default/">Jekyll Configuration</a></li>
@@ -171,16 +189,19 @@ Ultimately I decided to migrate my Wordpress blog to GitHub pages.</p>
 </ul>
 
 <h3 id="disqus">Disqus</h3>
+
 <ul>
   <li><a href="http://sgeos.github.io/jekyll/disqus/2016/02/15/adding-disqus-to-a-jekyll-blog.html">Adding Disqus to Jekyll blog</a></li>
 </ul>
 
 <h3 id="foundation">Foundation</h3>
+
 <ul>
   <li><a href="https://foundation.zurb.com/sites/docs/xy-grid.html">XY-Grid</a></li>
 </ul>
 
 <h3 id="gulp">Gulp</h3>
+
 <ul>
   <li><a href="https://www.npmjs.com/package/gulp-gh-pages">Publish build to GitHub Pages</a></li>
 </ul>
@@ -194,7 +215,7 @@ Ultimately I decided to migrate my Wordpress blog to GitHub pages.</p>
 
 <div id="pagination" class="large-12 cell">
   <div>
-    <a href="/info/migrating-from-wordpress-to-github-pages">Migrating from Wordpress blog to GitHub Pages</a>
+    <a href="/code/migrating-from-wordpress-to-github-pages">Migrating from Wordpress blog to GitHub Pages</a>
     <span>
       
       <span>by David Douglas</span>

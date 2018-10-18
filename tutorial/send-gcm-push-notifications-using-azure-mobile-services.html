@@ -46,210 +46,241 @@
 <div class="video"><iframe src="//www.youtube.com/embed/Zx78vrELgXk" frameborder="0" allowfullscreen=""></iframe></div>
 
 <ol>
-  <li>First install <em>Google Play Services</em> package in the Android SDK Manager.<br />
-  <img src="/assets/images/MS302_Android-SDK-Install-Google-APIs-Google-Play-Services.png" alt="" /><br />
-  <img src="}/assets/images/MS301_AVD_Android-Virtual-Device-Target-Google-APIs-Push-Notifications.png" alt="" />
+  <li>
+    <p>First install <em>Google Play Services</em> package in the Android SDK Manager.<br />
+<img src="/assets/images/MS302_Android-SDK-Install-Google-APIs-Google-Play-Services.png" alt="" /><br />
+<img src="}/assets/images/MS301_AVD_Android-Virtual-Device-Target-Google-APIs-Push-Notifications.png" alt="" /></p>
+
     <blockquote>
       <p>NB: If using an Android Virtual Device then ensure your <em>Target</em> is set to <strong>Google APIs</strong> to allow Push Notifications to work.</p>
     </blockquote>
   </li>
   <li>
-    <p>Create a new project in <a href="http://console.develepers.google.com">Google Developers Console</a>.
-  <img src="/assets/images/MS303_GoogleDevelopersConsole-Create-Project.png" alt="" />
-  Turn on <em>Google Cloud Messaging for Android</em>.
-  <img src="/assets/images/MS304_Google-Project-APIs-Enable-Cloud-Messaging-for-Android.png" alt="" />
-  Create a new <em>Public API access</em> key.
-  <img src="/assets/images/MS305_Google-Project-Credentials-Create-Public-API-access-key.png" alt="" />
-  Create a new <em>Server key</em>.
-  <img src="/assets/images/MS306_Credentials-Create-Server-key.png" alt="" /><br />
-  <img src="/assets/images/MS307_Create-Server-key.png" alt="" /></p>
+    <p>Create a new project in <a href="http://console.develepers.google.com">Google Developers Console</a>.<br />
+<img src="/assets/images/MS303*GoogleDevelopersConsole-Create-Project.png" alt="" />
+Turn on _Google Cloud Messaging for Android<em>.
+<img src="/assets/images/MS304*Google-Project-APIs-Enable-Cloud-Messaging-for-Android.png" alt="" />
+Create a new _Public API access</em> key.
+<img src="/assets/images/MS305*Google-Project-Credentials-Create-Public-API-access-key.png" alt="" />
+Create a new _Server key*.
+<img src="/assets/images/MS306_Credentials-Create-Server-key.png" alt="" /><br />
+<img src="/assets/images/MS307_Create-Server-key.png" alt="" /></p>
   </li>
   <li>
     <p>Copy the public <strong>API key</strong>
-  <img src="/assets/images/MS308_Copy-Public-API-key.png" alt="" />
-  Paste <strong>API key</strong> into Mobile Service’s <strong>Push &gt; Google Cloud Messaging settings</strong>
-  <img src="/assets/images/MS309_MobileService-Push-Google-Cloud-Messaging-settings-API-key.png" alt="" />
-  Save changes.
-  <img src="/assets/images/MS309_MobileService-Push-Google-Cloud-Messaging-settings-API-key.png" alt="" /></p>
+<img src="/assets/images/MS308_Copy-Public-API-key.png" alt="" />
+Paste <strong>API key</strong> into Mobile Service’s <strong>Push &gt; Google Cloud Messaging settings</strong>
+<img src="/assets/images/MS309_MobileService-Push-Google-Cloud-Messaging-settings-API-key.png" alt="" />
+Save changes.
+<img src="/assets/images/MS309_MobileService-Push-Google-Cloud-Messaging-settings-API-key.png" alt="" /></p>
   </li>
   <li>
     <p>Copy <em>google-play-services.jar</em> (from Android SDK libs) and <em>notifications.jar</em> (from <a href="https://go.microsoft.com/fwLink/?LinkID=280126&amp;clcid=0x409">Azure Mobiles Services SDK for Android</a>) into the Android project’s <strong>libs</strong> folder.
-  <img src="/assets/images/MS310_CopyPushNotificationsLibraries.png" alt="" /></p>
-  </li>
-  <li>Add Push Notification permissions to the project’s <em>AndroidManifest.xml</em>.
-    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;permission</span> <span class="na">android:name=</span><span class="s">"**my_app_package**.permission.C2D_MESSAGE"</span> 
-     <span class="na">android:protectionLevel=</span><span class="s">"signature"</span> <span class="nt">/&gt;</span>
- <span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"**my_app_package**.permission.C2D_MESSAGE"</span> <span class="nt">/&gt;</span> 
- <span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"com.google.android.c2dm.permission.RECEIVE"</span> <span class="nt">/&gt;</span>
- <span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.GET_ACCOUNTS"</span> <span class="nt">/&gt;</span>
- <span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.WAKE_LOCK"</span> <span class="nt">/&gt;</span>
-</code></pre></div>    </div>
-    <p>NB: Replace all occurrences of <em>**my_app_package**</em> with the manifest’s <strong>package</strong> name attribute.
-  <img src="/assets/images/MS311_AndroidManifest-AddPushNotificationsPermissions.png" alt="" />
-  Add the receiver block just before the application closing tag. <br />
-  eg. <em>… &lt;/application&gt;</em></p>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> &lt;receiver android:name="com.microsoft.windowsazure.notifications.NotificationsBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND"&gt;
-     &lt;intent-filter&gt;
-         &lt;action android:name="com.google.android.c2dm.intent.RECEIVE"&gt;&lt;/action&gt;
-         &lt;category android:name=" **my_app_package**"&gt;&lt;/category&gt;
-     &lt;/intent-filter&gt;
- &lt;/receiver&gt;
-</code></pre></div>    </div>
-    <p>NB: Replace <em>**my_app_package**</em> with the manifest’s <strong>package</strong> name attribute.<br />
-  <img src="/assets/images/MS314_AndroidManifest-receiver-replace-app-package-name.png" alt="" />
-  NB: If you get a red text error on receiver <em>notifications.NotificationsBroadcastReceiver</em> then add dependencies to the <em>build.gradle</em> file and sync project libraries.</p>
-    <div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">dependencies</span> {
-   <span class="n">compile</span> <span class="s1">'com.android.support:support-v4:+'</span>
-   <span class="n">compile</span> <span class="s1">'com.google.code.gson:gson:2.2.2'</span>
-   <span class="n">compile</span> <span class="n">fileTree</span>(<span class="n">dir</span>: <span class="s1">'libs'</span>, <span class="n">include</span>: [<span class="s1">'*.jar'</span>])
-  }
-</code></pre></div>    </div>
-    <p><img src="/assets/images/MS313_AndroidStudio-build-gradle-dependencies-libs-jar-project-sync.png" alt="" /></p>
-  </li>
-  <li>Copy Google <strong>Project Number</strong> in overview section.
-  <img src="/assets/images/MS315_GoogleProject-Overview-copy-Project-Number.png" alt="" />
-  Paste value into <em>ToDoActivity.java</em> as a String constant.
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">PROJECT_ID</span> <span class="o">=</span> <span class="s">"**project-number**"</span><span class="o">;</span>
-</code></pre></div>    </div>
-    <p><img src="/assets/images/MS316_Activity-paste-Project-Number-constant.png" alt="" />
-  In the <em>onCreate</em> method of <em>ToDoActivity.java</em> add a <strong>Notifications Manager</strong> handler.</p>
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">NotificationsManager</span><span class="o">.</span><span class="na">handleNotifications</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">PROJECT_ID</span><span class="o">,</span> <span class="n">MyPushNotificationsHandler</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</code></pre></div>    </div>
-    <p><img src="/assets/images/MS317_NotificationsManager-handleNotifications.png" alt="" /></p>
-  </li>
-  <li>Create a <em>Channel</em> class
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Channel</span> <span class="o">{</span>
-   <span class="c1">// Push Notifications - creates handle column in db table (dynamic schema)</span>
-   <span class="nd">@com</span><span class="o">.</span><span class="na">google</span><span class="o">.</span><span class="na">gson</span><span class="o">.</span><span class="na">annotations</span><span class="o">.</span><span class="na">SerializedName</span><span class="o">(</span><span class="s">"handle"</span><span class="o">)</span>
-   <span class="kd">private</span> <span class="n">String</span> <span class="n">mHandle</span><span class="o">;</span>
-      
-   <span class="c1">// Returns the handle</span>
-   <span class="kd">public</span> <span class="n">String</span> <span class="nf">getHandle</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">mHandle</span><span class="o">;</span> <span class="o">}</span>
-      
-   <span class="c1">// Sets the handle</span>
-   <span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">setHandle</span><span class="o">(</span><span class="n">String</span> <span class="n">handle</span><span class="o">)</span> <span class="o">{</span> <span class="n">mHandle</span> <span class="o">=</span> <span class="n">handle</span><span class="o">;</span> <span class="o">}</span>
-
-   <span class="c1">// Item Id</span>
-   <span class="nd">@com</span><span class="o">.</span><span class="na">google</span><span class="o">.</span><span class="na">gson</span><span class="o">.</span><span class="na">annotations</span><span class="o">.</span><span class="na">SerializedName</span><span class="o">(</span><span class="s">"id"</span><span class="o">)</span>
-   <span class="kd">private</span> <span class="n">String</span> <span class="n">mId</span><span class="o">;</span>
-
-   <span class="c1">//Returns the item id</span>
-   <span class="kd">public</span> <span class="n">String</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">mId</span><span class="o">;</span> <span class="o">}</span>
-
-   <span class="c1">//Sets the item id - @param id : id to set</span>
-   <span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">setId</span><span class="o">(</span><span class="n">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span> <span class="n">mId</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span> <span class="o">}</span>
-  <span class="o">}</span>
-</code></pre></div>    </div>
-    <p><img src="/assets/images/MS318_Channel-model-class-handle-property.png" alt="" /></p>
-  </li>
-  <li>Create <em>MyPushNotificationsHandler</em> class
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyPushNotificationsHandler</span> <span class="kd">extends</span> <span class="n">NotificationsHandler</span>
-  <span class="o">{</span>
-   <span class="nd">@Override</span>
-   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onRegistered</span><span class="o">(</span><span class="n">Context</span> <span class="n">context</span><span class="o">,</span> <span class="n">String</span> <span class="n">gcmRegistrationId</span><span class="o">)</span>
-   <span class="o">{</span>
-       <span class="kd">super</span><span class="o">.</span><span class="na">onRegistered</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">gcmRegistrationId</span><span class="o">);</span>
-          
-       <span class="c1">// + Support push notifications to users...</span>
-       <span class="n">MobileServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">ToDoActivity</span><span class="o">.</span><span class="na">getClient</span><span class="o">();</span>
-       <span class="n">MobileServiceTable</span><span class="o">&amp;</span><span class="n">lt</span><span class="o">;</span><span class="n">Channel</span><span class="o">&amp;</span><span class="n">gt</span><span class="o">;</span> <span class="n">registrations</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">getTable</span><span class="o">(</span><span class="n">Channel</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-
-       <span class="c1">// Create a new Registration</span>
-       <span class="n">Channel</span> <span class="n">channel</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Channel</span><span class="o">();</span>
-       <span class="n">channel</span><span class="o">.</span><span class="na">setHandle</span><span class="o">(</span><span class="n">gcmRegistrationId</span><span class="o">);</span>
-
-       <span class="c1">// Insert the new Registration</span>
-       <span class="n">registrations</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="n">channel</span><span class="o">,</span> <span class="k">new</span> <span class="n">TableOperationCallback</span><span class="o">&amp;</span><span class="n">lt</span><span class="o">;</span><span class="n">Channel</span><span class="o">&amp;</span><span class="n">gt</span><span class="o">;()</span> <span class="o">{</span>
-
-           <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCompleted</span><span class="o">(</span><span class="n">Channel</span> <span class="n">entity</span><span class="o">,</span> <span class="n">Exception</span> <span class="n">exception</span><span class="o">,</span> <span class="n">ServiceFilterResponse</span> <span class="n">response</span><span class="o">)</span> <span class="o">{</span>
-
-               <span class="k">if</span> <span class="o">(</span><span class="n">exception</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-                   <span class="n">Log</span><span class="o">.</span><span class="na">e</span><span class="o">(</span><span class="s">"PushHandler"</span><span class="o">,</span> <span class="n">exception</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
-               <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-                   <span class="n">Log</span><span class="o">.</span><span class="na">i</span><span class="o">(</span><span class="s">"PushHandler"</span><span class="o">,</span> <span class="s">"Registration OK"</span><span class="o">);</span>
-               <span class="o">}</span>
-           <span class="o">}</span>
-       <span class="o">});</span>
-   <span class="o">}</span>
-  <span class="o">}</span>
-</code></pre></div>    </div>
-    <p><img src="/assets/images/MS319_PushNotificationsHandler-class.png" alt="" />
-  Tip: To auto import classes in Android Studio enable <em>Add umabiguous imports on the fly</em>
-  <img src="/assets/images/MS320_AndroidStudio-Auto-Import-Add-unambiguous-imports-on-the-fly.png" alt="" /></p>
+<img src="/assets/images/MS310_CopyPushNotificationsLibraries.png" alt="" /></p>
   </li>
   <li>
-    <p>Create new <em>Channel</em> table in Azure Mobile Services.
-  <img src="/assets/images/MS321_Azure-MobileServices-create-Table-Channel.png" alt="" /></p>
+    <p>Add Push Notification permissions to the project’s <em>AndroidManifest.xml</em>.</p>
+    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;permission</span> <span class="na">android:name=</span><span class="s">"**my_app_package**.permission.C2D_MESSAGE"</span>
+    <span class="na">android:protectionLevel=</span><span class="s">"signature"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"**my_app_package**.permission.C2D_MESSAGE"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"com.google.android.c2dm.permission.RECEIVE"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.GET_ACCOUNTS"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.WAKE_LOCK"</span> <span class="nt">/&gt;</span>
+</code></pre></div>    </div>
+    <p>NB: Replace all occurrences of <em>**my_app_package**</em> with the manifest’s <strong>package</strong> name attribute.
+<img src="/assets/images/MS311_AndroidManifest-AddPushNotificationsPermissions.png" alt="" />
+Add the receiver block just before the application closing tag.<br />
+eg. <em>… &lt;/application&gt;</em></p>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;receiver android:name="com.microsoft.windowsazure.notifications.NotificationsBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND"&gt;
+    &lt;intent-filter&gt;
+        &lt;action android:name="com.google.android.c2dm.intent.RECEIVE"&gt;&lt;/action&gt;
+        &lt;category android:name=" **my_app_package**"&gt;&lt;/category&gt;
+    &lt;/intent-filter&gt;
+&lt;/receiver&gt;
+</code></pre></div>    </div>
+    <p>NB: Replace <em>**my_app_package**</em> with the manifest’s <strong>package</strong> name attribute.<br />
+<img src="/assets/images/MS314*AndroidManifest-receiver-replace-app-package-name.png" alt="" />
+NB: If you get a red text error on receiver _notifications.NotificationsBroadcastReceiver* then add dependencies to the <em>build.gradle</em> file and sync project libraries.</p>
   </li>
-  <li>Edit TodoItem table <strong>Script &gt; Insert</strong>
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">function</span> <span class="nf">insert</span><span class="o">(</span><span class="n">item</span><span class="o">,</span> <span class="n">user</span><span class="o">,</span> <span class="n">request</span><span class="o">)</span> <span class="o">{</span>
-  <span class="n">item</span><span class="o">.</span><span class="na">userId</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="na">userId</span><span class="o">;</span>
-  <span class="c1">//request.execute();</span>
-      
-  <span class="n">request</span><span class="o">.</span><span class="na">execute</span><span class="o">({</span>
-      <span class="nl">success:</span> <span class="n">function</span><span class="o">()</span> <span class="o">{</span>
-          <span class="c1">// Write to the response and then send the notification in the background</span>
-          <span class="n">request</span><span class="o">.</span><span class="na">respond</span><span class="o">();</span>
-          <span class="n">sendNotifications</span><span class="o">(</span><span class="n">item</span><span class="o">.</span><span class="na">text</span><span class="o">);</span>
-      <span class="o">}</span>
-  <span class="o">});</span>
+</ol>
 
-  <span class="c1">// This insert script sends a push notification (with the text of the inserted item) to all channels stored in the Channel table.</span>
-  <span class="n">function</span> <span class="nf">sendNotifications</span><span class="o">(</span><span class="n">item_text</span><span class="o">)</span> <span class="o">{</span>
-      <span class="n">var</span> <span class="n">channelTable</span> <span class="o">=</span> <span class="n">tables</span><span class="o">.</span><span class="na">getTable</span><span class="o">(</span><span class="err">'</span><span class="n">Channel</span><span class="err">'</span><span class="o">);</span>
-      <span class="n">channelTable</span><span class="o">.</span><span class="na">read</span><span class="o">({</span>
-          <span class="nl">success:</span> <span class="n">function</span><span class="o">(</span><span class="n">channels</span><span class="o">)</span> <span class="o">{</span>
-              <span class="n">channels</span><span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">function</span><span class="o">(</span><span class="n">channel</span><span class="o">)</span> <span class="o">{</span>
-              
-                  <span class="c1">// Google Cloud Messaging</span>
-                  <span class="n">push</span><span class="o">.</span><span class="na">gcm</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">channel</span><span class="o">.</span><span class="na">handle</span><span class="o">,</span> <span class="n">item_text</span><span class="o">,</span> <span class="o">{</span>
-                      <span class="nl">success:</span> <span class="n">function</span><span class="o">(</span><span class="n">response</span><span class="o">)</span> <span class="o">{</span>
-                          <span class="n">console</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="err">'</span><span class="n">Push</span> <span class="n">notification</span> <span class="nl">sent:</span> <span class="err">'</span><span class="o">,</span> <span class="n">response</span><span class="o">);</span>
-                      <span class="o">},</span> <span class="nl">error:</span> <span class="n">function</span><span class="o">(</span><span class="n">error</span><span class="o">)</span> <span class="o">{</span>
-                          <span class="n">console</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="err">'</span><span class="n">Error</span> <span class="n">sending</span> <span class="n">push</span> <span class="nl">notification:</span> <span class="err">'</span><span class="o">,</span> <span class="n">error</span><span class="o">);</span>
-                      <span class="o">}</span>
-                  <span class="o">});</span>
-              
-              <span class="o">});</span>
-          <span class="o">}</span>
-      <span class="o">});</span>
-  <span class="o">}</span>
-  <span class="o">}</span>
-</code></pre></div>    </div>
-    <p><img src="/assets/images/MS322_Azure-MobileServices-TodoItem-Table-Script-Insert-sendNotifications.png" alt="" /><br />
-  <em>This will send a push notification upon successful insert of a Todo item.</em></p>
+<div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dependencies</span> {
+    <span class="n">compile</span> <span class="s1">'com.android.support:support-v4:+'</span>
+    <span class="n">compile</span> <span class="s1">'com.google.code.gson:gson:2.2.2'</span>
+    <span class="n">compile</span> <span class="n">fileTree</span>(<span class="n">dir</span>: <span class="s1">'libs'</span>, <span class="n">include</span>: [<span class="s1">'*.jar'</span>])
+}
+</code></pre></div></div>
+
+<p><img src="/assets/images/MS313_AndroidStudio-build-gradle-dependencies-libs-jar-project-sync.png" alt="" /></p>
+
+<ol>
+  <li>Copy Google <strong>Project Number</strong> in overview section.
+<img src="/assets/images/MS315*GoogleProject-Overview-copy-Project-Number.png" alt="" />
+Paste value into _ToDoActivity.java* as a String constant.</li>
+</ol>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">PROJECT_ID</span> <span class="o">=</span> <span class="s">"**project-number**"</span><span class="o">;</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/MS316*Activity-paste-Project-Number-constant.png" alt="" />
+In the _onCreate* method of <em>ToDoActivity.java</em> add a <strong>Notifications Manager</strong> handler.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">NotificationsManager</span><span class="o">.</span><span class="na">handleNotifications</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">PROJECT_ID</span><span class="o">,</span> <span class="n">MyPushNotificationsHandler</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/MS317_NotificationsManager-handleNotifications.png" alt="" /></p>
+
+<ol>
+  <li>Create a <em>Channel</em> class</li>
+</ol>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Channel</span> <span class="o">{</span>
+    <span class="c1">// Push Notifications - creates handle column in db table (dynamic schema)</span>
+    <span class="nd">@com</span><span class="o">.</span><span class="na">google</span><span class="o">.</span><span class="na">gson</span><span class="o">.</span><span class="na">annotations</span><span class="o">.</span><span class="na">SerializedName</span><span class="o">(</span><span class="s">"handle"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">mHandle</span><span class="o">;</span>
+
+    <span class="c1">// Returns the handle</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getHandle</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">mHandle</span><span class="o">;</span> <span class="o">}</span>
+
+    <span class="c1">// Sets the handle</span>
+    <span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">setHandle</span><span class="o">(</span><span class="n">String</span> <span class="n">handle</span><span class="o">)</span> <span class="o">{</span> <span class="n">mHandle</span> <span class="o">=</span> <span class="n">handle</span><span class="o">;</span> <span class="o">}</span>
+
+    <span class="c1">// Item Id</span>
+    <span class="nd">@com</span><span class="o">.</span><span class="na">google</span><span class="o">.</span><span class="na">gson</span><span class="o">.</span><span class="na">annotations</span><span class="o">.</span><span class="na">SerializedName</span><span class="o">(</span><span class="s">"id"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">mId</span><span class="o">;</span>
+
+    <span class="c1">//Returns the item id</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">mId</span><span class="o">;</span> <span class="o">}</span>
+
+    <span class="c1">//Sets the item id - @param id : id to set</span>
+    <span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">setId</span><span class="o">(</span><span class="n">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span> <span class="n">mId</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span> <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/MS318_Channel-model-class-handle-property.png" alt="" /></p>
+
+<ol>
+  <li>Create <em>MyPushNotificationsHandler</em> class</li>
+</ol>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyPushNotificationsHandler</span> <span class="kd">extends</span> <span class="n">NotificationsHandler</span>
+<span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onRegistered</span><span class="o">(</span><span class="n">Context</span> <span class="n">context</span><span class="o">,</span> <span class="n">String</span> <span class="n">gcmRegistrationId</span><span class="o">)</span>
+    <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onRegistered</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">gcmRegistrationId</span><span class="o">);</span>
+
+        <span class="c1">// + Support push notifications to users...</span>
+        <span class="n">MobileServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">ToDoActivity</span><span class="o">.</span><span class="na">getClient</span><span class="o">();</span>
+        <span class="n">MobileServiceTable</span><span class="o">&amp;</span><span class="n">lt</span><span class="o">;</span><span class="n">Channel</span><span class="o">&amp;</span><span class="n">gt</span><span class="o">;</span> <span class="n">registrations</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">getTable</span><span class="o">(</span><span class="n">Channel</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+
+        <span class="c1">// Create a new Registration</span>
+        <span class="n">Channel</span> <span class="n">channel</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Channel</span><span class="o">();</span>
+        <span class="n">channel</span><span class="o">.</span><span class="na">setHandle</span><span class="o">(</span><span class="n">gcmRegistrationId</span><span class="o">);</span>
+
+        <span class="c1">// Insert the new Registration</span>
+        <span class="n">registrations</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="n">channel</span><span class="o">,</span> <span class="k">new</span> <span class="n">TableOperationCallback</span><span class="o">&amp;</span><span class="n">lt</span><span class="o">;</span><span class="n">Channel</span><span class="o">&amp;</span><span class="n">gt</span><span class="o">;()</span> <span class="o">{</span>
+
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCompleted</span><span class="o">(</span><span class="n">Channel</span> <span class="n">entity</span><span class="o">,</span> <span class="n">Exception</span> <span class="n">exception</span><span class="o">,</span> <span class="n">ServiceFilterResponse</span> <span class="n">response</span><span class="o">)</span> <span class="o">{</span>
+
+                <span class="k">if</span> <span class="o">(</span><span class="n">exception</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">Log</span><span class="o">.</span><span class="na">e</span><span class="o">(</span><span class="s">"PushHandler"</span><span class="o">,</span> <span class="n">exception</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                    <span class="n">Log</span><span class="o">.</span><span class="na">i</span><span class="o">(</span><span class="s">"PushHandler"</span><span class="o">,</span> <span class="s">"Registration OK"</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/MS319*PushNotificationsHandler-class.png" alt="" />
+Tip: To auto import classes in Android Studio enable _Add umabiguous imports on the fly*
+<img src="/assets/images/MS320_AndroidStudio-Auto-Import-Add-unambiguous-imports-on-the-fly.png" alt="" /></p>
+
+<ol>
+  <li>
+    <p>Create new <em>Channel</em> table in Azure Mobile Services.
+<img src="/assets/images/MS321_Azure-MobileServices-create-Table-Channel.png" alt="" /></p>
   </li>
-  <li>Edit Channel table <strong>Script &gt; Insert</strong>
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">function</span> <span class="nf">insert</span><span class="o">(</span><span class="n">item</span><span class="o">,</span> <span class="n">user</span><span class="o">,</span> <span class="n">request</span><span class="o">)</span> <span class="o">{</span>
-<span class="c1">//request.execute();</span>
-    
-<span class="c1">// prevents duplicated channels</span>
-<span class="n">var</span> <span class="n">channelTable</span> <span class="o">=</span> <span class="n">tables</span><span class="o">.</span><span class="na">getTable</span><span class="o">(</span><span class="err">'</span><span class="n">Channel</span><span class="err">'</span><span class="o">);</span>
-  <span class="n">channelTable</span>
-      <span class="o">.</span><span class="na">where</span><span class="o">({</span> <span class="nl">handle:</span> <span class="n">item</span><span class="o">.</span><span class="na">handle</span> <span class="o">})</span>
-      <span class="o">.</span><span class="na">read</span><span class="o">({</span> <span class="nl">success:</span> <span class="n">insertRegistrationIfNotFound</span> <span class="o">});</span>
-  <span class="n">function</span> <span class="nf">insertRegistrationIfNotFound</span><span class="o">(</span><span class="n">existingRegistrations</span><span class="o">)</span> <span class="o">{</span>
-      <span class="k">if</span> <span class="o">(</span><span class="n">existingRegistrations</span><span class="o">.</span><span class="na">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-          <span class="n">request</span><span class="o">.</span><span class="na">respond</span><span class="o">(</span><span class="mi">200</span><span class="o">,</span> <span class="n">existingRegistrations</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
-      <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-          <span class="n">request</span><span class="o">.</span><span class="na">execute</span><span class="o">();</span>
-      <span class="o">}</span>
-  <span class="o">}</span>
-  <span class="o">}</span>
-</code></pre></div>    </div>
-    <p><img src="/assets/images/MS323_Azure-MobileServices-Channel-Table-Script-Insert-unique-Channel-handle.png" alt="" /><br />
-  <em>This will prevent duplicate registrations of user and device handles.</em></p>
+  <li>
+    <p>Edit TodoItem table <strong>Script &gt; Insert</strong></p>
   </li>
+</ol>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">function</span> <span class="nf">insert</span><span class="o">(</span><span class="n">item</span><span class="o">,</span> <span class="n">user</span><span class="o">,</span> <span class="n">request</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">item</span><span class="o">.</span><span class="na">userId</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="na">userId</span><span class="o">;</span>
+    <span class="c1">//request.execute();</span>
+
+    <span class="n">request</span><span class="o">.</span><span class="na">execute</span><span class="o">({</span>
+        <span class="nl">success:</span> <span class="n">function</span><span class="o">()</span> <span class="o">{</span>
+            <span class="c1">// Write to the response and then send the notification in the background</span>
+            <span class="n">request</span><span class="o">.</span><span class="na">respond</span><span class="o">();</span>
+            <span class="n">sendNotifications</span><span class="o">(</span><span class="n">item</span><span class="o">.</span><span class="na">text</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">});</span>
+
+    <span class="c1">// This insert script sends a push notification (with the text of the inserted item) to all channels stored in the Channel table.</span>
+    <span class="n">function</span> <span class="nf">sendNotifications</span><span class="o">(</span><span class="n">item_text</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">var</span> <span class="n">channelTable</span> <span class="o">=</span> <span class="n">tables</span><span class="o">.</span><span class="na">getTable</span><span class="o">(</span><span class="err">'</span><span class="n">Channel</span><span class="err">'</span><span class="o">);</span>
+        <span class="n">channelTable</span><span class="o">.</span><span class="na">read</span><span class="o">({</span>
+            <span class="nl">success:</span> <span class="n">function</span><span class="o">(</span><span class="n">channels</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">channels</span><span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">function</span><span class="o">(</span><span class="n">channel</span><span class="o">)</span> <span class="o">{</span>
+
+                    <span class="c1">// Google Cloud Messaging</span>
+                    <span class="n">push</span><span class="o">.</span><span class="na">gcm</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">channel</span><span class="o">.</span><span class="na">handle</span><span class="o">,</span> <span class="n">item_text</span><span class="o">,</span> <span class="o">{</span>
+                        <span class="nl">success:</span> <span class="n">function</span><span class="o">(</span><span class="n">response</span><span class="o">)</span> <span class="o">{</span>
+                            <span class="n">console</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="err">'</span><span class="n">Push</span> <span class="n">notification</span> <span class="nl">sent:</span> <span class="err">'</span><span class="o">,</span> <span class="n">response</span><span class="o">);</span>
+                        <span class="o">},</span> <span class="nl">error:</span> <span class="n">function</span><span class="o">(</span><span class="n">error</span><span class="o">)</span> <span class="o">{</span>
+                            <span class="n">console</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="err">'</span><span class="n">Error</span> <span class="n">sending</span> <span class="n">push</span> <span class="nl">notification:</span> <span class="err">'</span><span class="o">,</span> <span class="n">error</span><span class="o">);</span>
+                        <span class="o">}</span>
+                    <span class="o">});</span>
+
+                <span class="o">});</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/MS322*Azure-MobileServices-TodoItem-Table-Script-Insert-sendNotifications.png" alt="" /><br />
+ _This will send a push notification upon successful insert of a Todo item.*</p>
+
+<ol>
+  <li>Edit Channel table <strong>Script &gt; Insert</strong></li>
+</ol>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">function</span> <span class="nf">insert</span><span class="o">(</span><span class="n">item</span><span class="o">,</span> <span class="n">user</span><span class="o">,</span> <span class="n">request</span><span class="o">)</span> <span class="o">{</span>
+  <span class="c1">//request.execute();</span>
+
+  <span class="c1">// prevents duplicated channels</span>
+  <span class="n">var</span> <span class="n">channelTable</span> <span class="o">=</span> <span class="n">tables</span><span class="o">.</span><span class="na">getTable</span><span class="o">(</span><span class="err">'</span><span class="n">Channel</span><span class="err">'</span><span class="o">);</span>
+    <span class="n">channelTable</span>
+        <span class="o">.</span><span class="na">where</span><span class="o">({</span> <span class="nl">handle:</span> <span class="n">item</span><span class="o">.</span><span class="na">handle</span> <span class="o">})</span>
+        <span class="o">.</span><span class="na">read</span><span class="o">({</span> <span class="nl">success:</span> <span class="n">insertRegistrationIfNotFound</span> <span class="o">});</span>
+    <span class="n">function</span> <span class="nf">insertRegistrationIfNotFound</span><span class="o">(</span><span class="n">existingRegistrations</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">existingRegistrations</span><span class="o">.</span><span class="na">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">request</span><span class="o">.</span><span class="na">respond</span><span class="o">(</span><span class="mi">200</span><span class="o">,</span> <span class="n">existingRegistrations</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">request</span><span class="o">.</span><span class="na">execute</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/MS323*Azure-MobileServices-Channel-Table-Script-Insert-unique-Channel-handle.png" alt="" /><br />
+ _This will prevent duplicate registrations of user and device handles.*</p>
+
+<ol>
   <li>In the app add a Todo item to trigger a Push Notification
-  <img src="/assets/images/MS324_Android-app-add-todo-push-notification.png" alt="" />
-  <em>The Push Notification will appear with the Todo item text.</em>
-  <img src="/assets/images/MS325_Android-app-push-notification.png" alt="" />
-  That’s all there is to it! If you wanted to take it to the next level you could use this backend Mobile Service and roll it out across other platforms like Windows Store, Windows Phone, iOS, or use cross platform tools like Xamerin or Phonegap.
-  <img src="/assets/images/MS326_Azure-MobileService-app-platforms.png" alt="" /></li>
+<img src="/assets/images/MS324*Android-app-add-todo-push-notification.png" alt="" />
+_The Push Notification will appear with the Todo item text.*
+<img src="/assets/images/MS325_Android-app-push-notification.png" alt="" />
+That’s all there is to it! If you wanted to take it to the next level you could use this backend Mobile Service and roll it out across other platforms like Windows Store, Windows Phone, iOS, or use cross platform tools like Xamerin or Phonegap.
+<img src="/assets/images/MS326_Azure-MobileService-app-platforms.png" alt="" /></li>
 </ol>
 
 <p><em>For latest platform support, how to connect to other identities and push notification services check out the <a href="http://azure.microsoft.com/en-us/documentation/">Azure online docs</a>.</em></p>
-
 
 </div>
 

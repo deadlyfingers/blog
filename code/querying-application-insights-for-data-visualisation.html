@@ -49,7 +49,7 @@
 
 <p>To help to illustrate this we can look at the Application Insights query for tracking a bot to human hand-off during a user’s conversation session. For this scenario we built a <a href="https://qnamaker.ai/">QnA bot</a> with the <a href="https://www.npmjs.com/package/botbuilder-handoff">hand-off module</a> installed. If a customer asks the QnA bot a question and no answer was found in the knowledge base we trigger an automatic hand-off to human. We want to show the fastest, longest and average times for customer waiting for an human agent to respond in the dashboard.</p>
 
-<p>We can start by writing a basic query in Application Insights to get all the transcripts from the ‘customEvents’ table and ‘project’ only the information we need.</p>
+<p>We can start by writing a basic query in Application Insights to get all the transcripts from the ‘customEvents’ table and ‘project’ only thecategories: codermation we need.</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">customEvents</span> 
 <span class="nx">where</span> <span class="nx">name</span> <span class="o">==</span> <span class="s1">'Transcript'</span>

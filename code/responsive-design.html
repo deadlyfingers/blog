@@ -77,11 +77,11 @@
 
 <h3 id="design-tools">Design tools</h3>
 
-<p>When I started designing for web there was only the desktop browser to think about so the basic approach of designing for the lowest common resolution worked well. Initially I used Photoshop for web designs with pixel perfect layouts. But as consumer monitors became capable of displaying greater resolutions it was possible to reproduce richer layouts influenced by print design. Illustrator became a superior tool for web design as it offered advanced control of grids and guides originally used for print design. Illustrator was also vector based and that made it easier to stretch out graphics as screens got bigger. Because of this I feel vector based tools are vastly more equipped for responsive design work than pixel-based design tools. But while Illustrator is a great tool for seasoned print design professionals, some digital designers might prefer something a little lighter and easier to use like Sketch or the new Experience Design app. However, the problem with all these design tools is that none can produce design with responsive information. Even the new digital design apps still feel like design for print tools stuck with static canvas layouts and limited bitmap resizing that fail to scale in a way that mimics the production process (ie. CSS background properties). Because of the lack of professional tools capable of responsive design that means the designer has to do extra work. For responsive designs I will design at least two size layouts for each page. I like to design a page in portrait aspect to represent a mobile view, and landscape aspect to represent desktop or tablet. So as long as a designer understands how responsive grids or dynamic columns work, then these designs should be easily fused together during development or production stage.</p>
+<p>When I started designing for web there was only the desktop browser to think about so the basic approach of designing for the lowest common resolution worked well. Initially I used Photoshop for web designs with pixel perfect layouts. But as consumer monitors became capable of displaying greater resolutions it was possible to reproduce richer layouts influenced by print design. Illustrator became a superior tool for web design as it offered advanced control of grids and guides originally used for print design. Illustrator was also vector based and that made it easier to stretch out graphics as screens got bigger. Because of this I feel vector based tools are vastly more equipped for responsive design work than pixel-based design tools. But while Illustrator is a great tool for seasoned print design professionals, some digital designers might prefer something a little lighter and easier to use like Sketch or the new Experience Design app. However, the problem with all these design tools is that none can produce design with responsivecategories: codermation. Even the new digital design apps still feel like design for print tools stuck with static canvas layouts and limited bitmap resizing that fail to scale in a way that mimics the production process (ie. CSS background properties). Because of the lack of professional tools capable of responsive design that means the designer has to do extra work. For responsive designs I will design at least two size layouts for each page. I like to design a page in portrait aspect to represent a mobile view, and landscape aspect to represent desktop or tablet. So as long as a designer understands how responsive grids or dynamic columns work, then these designs should be easily fused together during development or production stage.</p>
 
 <h2 id="responsive-design-for-developers">Responsive Design for developers</h2>
 
-<p>There is an abundance of tools for developing responsive websites. But just like I mentioned that it was important for designers to think about the development or production I also feel responsive web developers should be mindful of the design side. Developers need to be aware of the current problem that professional design tools don’t contain responsive information and that means they will need to work closer with designers to figure out how to merge separate designs into one single responsive design. Responsive web developers will need to be familiar with the design grid so that they can turn page designs into a single dynamic layout of HTML and CSS.</p>
+<p>There is an abundance of tools for developing responsive websites. But just like I mentioned that it was important for designers to think about the development or production I also feel responsive web developers should be mindful of the design side. Developers need to be aware of the current problem that professional design tools don’t contain responsivecategories: codermation and that means they will need to work closer with designers to figure out how to merge separate designs into one single responsive design. Responsive web developers will need to be familiar with the design grid so that they can turn page designs into a single dynamic layout of HTML and CSS.</p>
 
 <h3 id="the-language-of-responsive-web-design">The language of responsive web design</h3>
 
@@ -125,27 +125,27 @@
 
 <div class="language-scss highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Bootstrap 3 four tier grid */</span>
 
-<span class="k">@mixin</span> <span class="nf">media-xs</span><span class="p">()</span> <span class="p">{</span>	
+<span class="k">@mixin</span> <span class="nf">media-xs</span><span class="p">()</span> <span class="p">{</span>
   <span class="k">@media</span> <span class="p">(</span><span class="n">max-width</span><span class="o">:</span> <span class="m">767px</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">@content</span><span class="p">;</span>	
+    <span class="k">@content</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="k">@mixin</span> <span class="nf">media-sm</span><span class="p">()</span> <span class="p">{</span>	
+<span class="k">@mixin</span> <span class="nf">media-sm</span><span class="p">()</span> <span class="p">{</span>
   <span class="k">@media</span> <span class="p">(</span><span class="n">min-width</span><span class="o">:</span> <span class="m">768px</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">@content</span><span class="p">;</span>	
+    <span class="k">@content</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="k">@mixin</span> <span class="nf">media-md</span><span class="p">()</span> <span class="p">{</span>	
+<span class="k">@mixin</span> <span class="nf">media-md</span><span class="p">()</span> <span class="p">{</span>
   <span class="k">@media</span> <span class="p">(</span><span class="n">min-width</span><span class="o">:</span> <span class="m">992px</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">@content</span><span class="p">;</span>	
+    <span class="k">@content</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="k">@mixin</span> <span class="nf">media-lg</span><span class="p">()</span> <span class="p">{</span>	
+<span class="k">@mixin</span> <span class="nf">media-lg</span><span class="p">()</span> <span class="p">{</span>
   <span class="k">@media</span> <span class="p">(</span><span class="n">min-width</span><span class="o">:</span> <span class="m">1200px</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">@content</span><span class="p">;</span>	
+    <span class="k">@content</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
@@ -154,27 +154,31 @@
 
 <p>Retina displays are everywhere these days! If you walk into a phone shop today, I reckon it would be harder to find a phone without an HD display. The new <a href="https://software.intel.com/en-us/html5/hub/blogs/html5-picture-element">HTML5 picture element</a> allows developers to specify higher resolution images so the graphics will display sharper. But I still prefer to use CSS media queries to handle ‘Retina’ (@2x) and ‘Retina HD’ (@3x) images.</p>
 
-<div class="language-scss highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">@mixin</span> <span class="nf">media-2x</span><span class="p">()</span> <span class="p">{</span>	
-  <span class="k">@media</span> <span class="p">(</span><span class="n">min-resolution</span><span class="o">:</span> <span class="m">144dpi</span><span class="p">)</span><span class="o">,</span> <span class="p">(</span><span class="n">min-device-pixel-ratio</span><span class="o">:</span> <span class="m">1</span><span class="mi">.25</span><span class="p">)</span><span class="o">,</span> <span class="p">(</span><span class="o">-</span><span class="n">webkit-min-device-pixel-ratio</span><span class="o">:</span> <span class="m">2</span><span class="p">)</span> <span class="p">{</span>
-   <span class="k">@content</span><span class="p">;</span>
- <span class="p">}</span>
+<div class="language-scss highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">@mixin</span> <span class="nf">media-2x</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">@media</span> <span class="p">(</span><span class="n">min-resolution</span><span class="o">:</span> <span class="m">144dpi</span><span class="p">)</span><span class="o">,</span>
+    <span class="p">(</span><span class="n">min-device-pixel-ratio</span><span class="o">:</span> <span class="m">1</span><span class="mi">.25</span><span class="p">)</span><span class="o">,</span>
+    <span class="p">(</span><span class="o">-</span><span class="n">webkit-min-device-pixel-ratio</span><span class="o">:</span> <span class="m">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">@content</span><span class="p">;</span>
+  <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="k">@mixin</span> <span class="nf">media-3x</span><span class="p">()</span> <span class="p">{</span>	
- <span class="k">@media</span> <span class="p">(</span><span class="n">min-resolution</span><span class="o">:</span> <span class="m">288dpi</span><span class="p">)</span><span class="o">,</span> <span class="p">(</span><span class="n">min-device-pixel-ratio</span><span class="o">:</span> <span class="m">2</span><span class="mi">.25</span><span class="p">)</span><span class="o">,</span> <span class="p">(</span><span class="o">-</span><span class="n">webkit-min-device-pixel-ratio</span><span class="o">:</span> <span class="m">3</span><span class="p">)</span> <span class="p">{</span>
-   <span class="k">@content</span><span class="p">;</span>
- <span class="p">}</span>
+<span class="k">@mixin</span> <span class="nf">media-3x</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">@media</span> <span class="p">(</span><span class="n">min-resolution</span><span class="o">:</span> <span class="m">288dpi</span><span class="p">)</span><span class="o">,</span>
+    <span class="p">(</span><span class="n">min-device-pixel-ratio</span><span class="o">:</span> <span class="m">2</span><span class="mi">.25</span><span class="p">)</span><span class="o">,</span>
+    <span class="p">(</span><span class="o">-</span><span class="n">webkit-min-device-pixel-ratio</span><span class="o">:</span> <span class="m">3</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">@content</span><span class="p">;</span>
+  <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
 <p>I find the CSS method gives more control over scaling, cropping and positioning which can be advantageous for responsive designers. With the CSS background image methods I can also use an image sprite technique to load in a texture map (or texture atlas) of tiled images and this improves page load times as there will be less http requests.</p>
 
 <div class="language-scss highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">@mixin</span> <span class="nf">bg-position</span><span class="p">(</span><span class="nv">$row</span><span class="o">,</span> <span class="nv">$col</span><span class="o">,</span> <span class="nv">$width</span><span class="o">,</span> <span class="nv">$height</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nl">background-position</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="nv">$col</span> <span class="o">*</span> <span class="nv">$width</span><span class="p">)</span> <span class="p">(</span><span class="o">-</span><span class="nv">$row</span> <span class="o">*</span> <span class="nv">$height</span><span class="p">);</span>
+  <span class="nl">background-position</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="nv">$col</span> <span class="o">*</span> <span class="nv">$width</span><span class="p">)</span> <span class="p">(</span><span class="o">-</span><span class="nv">$row</span> <span class="o">*</span> <span class="nv">$height</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="k">@mixin</span> <span class="nf">bg-size</span><span class="p">(</span><span class="nv">$rows</span><span class="o">,</span> <span class="nv">$cols</span><span class="o">,</span> <span class="nv">$width</span><span class="o">,</span> <span class="nv">$height</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nl">background-size</span><span class="p">:</span> <span class="p">(</span><span class="nv">$cols</span> <span class="o">*</span> <span class="nv">$width</span><span class="p">)</span> <span class="p">(</span><span class="nv">$rows</span> <span class="o">*</span> <span class="nv">$height</span><span class="p">);</span>
+  <span class="nl">background-size</span><span class="p">:</span> <span class="p">(</span><span class="nv">$cols</span> <span class="o">*</span> <span class="nv">$width</span><span class="p">)</span> <span class="p">(</span><span class="nv">$rows</span> <span class="o">*</span> <span class="nv">$height</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -214,29 +218,29 @@
 
 <ol>
   <li>Page bounce or spring behaviour can be disabled by setting Cordova’s ‘DisallowOverscroll’ preference to ‘true’.
-    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;preference</span> <span class="na">name=</span><span class="s">"DisallowOverscroll"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">&gt;&lt;/preference&gt;</span>
+    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;preference</span> <span class="na">name=</span><span class="s">"DisallowOverscroll"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">&gt;&lt;/preference&gt;</span>
 </code></pre></div>    </div>
   </li>
-  <li>Double tap zoom behaviour can be disabled by setting Cordova’s ‘EnableViewportScale’ preference to ‘true’ and setting the HTML5 viewport meta tag (http://www.w3schools.com/css/css_rwd_viewport.asp) to disable user scaling.
-    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;preference</span> <span class="na">name=</span><span class="s">"EnableViewportScale"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">&gt;&lt;/preference&gt;</span>
+  <li>Double tap zoom behaviour can be disabled by setting Cordova’s ‘EnableViewportScale’ preference to ‘true’ and setting the <a href="https://www.w3schools.com/css/css_rwd_viewport.asp">HTML5 viewport meta tag</a> to disable user scaling.
+    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;preference</span> <span class="na">name=</span><span class="s">"EnableViewportScale"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">&gt;&lt;/preference&gt;</span>
 </code></pre></div>    </div>
-    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1, user-scalable=no"</span><span class="nt">&gt;</span>
+    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1, user-scalable=no"</span><span class="nt">&gt;</span>
 </code></pre></div>    </div>
   </li>
   <li>The 300ms click delay is fixable on Chrome by <a href="https://developers.google.com/web/updates/2013/12/300ms-tap-delay-gone-away?hl=en">setting the device width on the HTML5 viewport meta tag</a> (shown above).</li>
   <li>Long tap inline magnification can be disable by setting Cordova’s ‘Suppresses3DTouchGesture’ preference to ‘true’.
-    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;preference</span> <span class="na">name=</span><span class="s">"Suppresses3DTouchGesture"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">&gt;&lt;/preference&gt;</span>
+    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;preference</span> <span class="na">name=</span><span class="s">"Suppresses3DTouchGesture"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">&gt;&lt;/preference&gt;</span>
 </code></pre></div>    </div>
   </li>
   <li>Global user selection can be disabled with CSS ‘user-select’ set to ‘none’ (including the usual browser prefixes (https://developer.mozilla.org/en-US/docs/Web/CSS/user-select)). With iOS ‘-webkit-touch-callout’ also needs to set to ‘none’ to disable the <a href="https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariCSSRef/Articles/StandardCSSProperties.html#//apple_ref/doc/uid/TP30001266-_webkit_touch_callout">touch callout</a>.
-    <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">body</span> <span class="p">{</span>
-   <span class="nl">-webkit-touch-callout</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
-   <span class="nl">-webkit-user-select</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
-   <span class="nl">-moz-user-select</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
-   <span class="nl">-ms-user-select</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
-   <span class="py">user-select</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
-   <span class="nl">cursor</span><span class="p">:</span> <span class="nb">default</span><span class="p">;</span>
- <span class="p">}</span>
+    <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">body</span> <span class="p">{</span>
+  <span class="nl">-webkit-touch-callout</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+  <span class="nl">-webkit-user-select</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+  <span class="nl">-moz-user-select</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+  <span class="nl">-ms-user-select</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+  <span class="py">user-select</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+  <span class="nl">cursor</span><span class="p">:</span> <span class="nb">default</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div>    </div>
   </li>
 </ol>
@@ -314,7 +318,7 @@
 
 <div id="pagination" class="large-12 cell">
   <div>
-    <a href="/info/responsive-design">Responsive Design from problem to production</a>
+    <a href="/code/responsive-design">Responsive Design from problem to production</a>
     <span>
       
       <span>by David Douglas</span>
@@ -341,7 +345,7 @@
     <div class="large-6 cell">
       
       <span class="prev">Previous</span>
-      <a href="/info/making-sense-of-web-app-debug-logs-on-multiple-android-and-ios-devices">Making sense of web app debug logs on multiple Android and iOS devices</a>
+      <a href="/code/making-sense-of-web-app-debug-logs-on-multiple-android-and-ios-devices">Making sense of web app debug logs on multiple Android and iOS devices</a>
       
     </div>
   </div>
