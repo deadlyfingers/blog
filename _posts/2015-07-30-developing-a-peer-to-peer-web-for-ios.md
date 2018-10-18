@@ -5,12 +5,13 @@ date: 2015-07-30 12:00:26.000000000 +01:00
 published: true
 categories: code
 tags:
-- iOS
+  - iOS
 meta:
-  dsq_thread_id: '5669652195'
+  dsq_thread_id: "5669652195"
 comments: true
 author: David Douglas
 ---
+
 To establish peer to peer (p2p) communication on iOS devices there is an API for that known as the [Multipeer Connectivity framework](https://developer.apple.com/library/ios/documentation/MultipeerConnectivity/Reference/MultipeerConnectivityFramework/). There are a couple of things to bear in mind about this framework:
 
 - Discovers and connects with iOS devices but will not discover devices on other platforms like Android
@@ -47,7 +48,7 @@ cordova create ~/$HOME_DIR/$PROJECT_DIR com.test.thalitest ThaliTest
 cd $PROJECT_DIR
 cordova platform add ios
 cordova plugin add https://github.com/thaliproject/Thali_CordovaPlugin.git#story-1-dadougla
-# copy sample 'www' dir 
+# copy sample 'www' dir
 cp -a -R -v plugins/org.thaliproject.p2p/sample/ios/www ./
 # build iOS project
 cordova build
@@ -60,17 +61,21 @@ open platforms/ios/ThaliTest.xcodeproj
 There are three main parts or layers in the Thali iOS project:
 
 1. ### Cordova
-  - All demo UI code is handled by "thali\_main.js" script.
+
+- All demo UI code is handled by "thali_main.js" script.
+
 2. ### JXCore
-  - UI actions will trigger a call to functions in "app.js" script which is responsible for running all our Node.js code and calling the native methods as documented in the [Thali common API.](https://github.com/thaliproject/Thali_CordovaPlugin/blob/story_0_matthewp/doc/api/connectivity.md)
+
+- UI actions will trigger a call to functions in "app.js" script which is responsible for running all our Node.js code and calling the native methods as documented in the [Thali common API.](https://github.com/thaliproject/Thali_CordovaPlugin/blob/story_0_matthewp/doc/api/connectivity.md)
+
 3. ### Native Plugins
-  - All native methods called from JXCore are registered in "THEAppContext.m" `defineJavaScriptExtensions` method
+
+- All native methods called from JXCore are registered in "THEAppContext.m" `defineJavaScriptExtensions` method
 
 ## What about Android p2p?
 
-Morecategories: code about Thali for Android is available on [Dr Jukka's blog](http://www.drjukka.com/blog/wordpress/?p=140).
+More info about Thali for Android is available on [Dr Jukka's blog](http://www.drjukka.com/blog/wordpress/?p=140).
 
 ## What about iOS and Android p2p?
 
-Morecategories: code about future Thali development including iOS and Android p2p interoperability is documented on [Thali stories](http://thaliproject.org/stories).
-
+More info about future Thali development including iOS and Android p2p interoperability is documented on [Thali stories](http://thaliproject.org/stories).
