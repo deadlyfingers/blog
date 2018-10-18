@@ -26,22 +26,29 @@ author: David Douglas
 
 This article builds on top of the [previous tutorial](http://www.deadlyfingers.net/azure/create-mobile-service-in-azure) where an Android Todo app was created with Azure Mobile Services. However most steps can be adapted for any Mobile Services Android app.
 
-1. Edit _TodoItem_ table **insert** permissions to _Only Authenticated Users_.
+1. Edit _TodoItem_ table **insert** permissions to _Only Authenticated Users_.  
    ![]({{ site.baseurl }}/assets/images/MS201_TablePermissions-OnlyAuthenticationUsers.png)
-2. [Create twitter app](http://apps.twitter.com).
-   ![]({{ site.baseurl }}/assets/images/MS202*TwitterApps-CreateNewApp.png)
-   Copy \_Mobile Service URL* from Azure Mobile Service Dashboard
+2. [Create twitter app](http://apps.twitter.com).  
+   ![]({{ site.baseurl }}/assets/images/MS202\*TwitterApps-CreateNewApp.png)
+
+   Copy \_Mobile Service URL* from Azure Mobile Service Dashboard  
    ![]({{ site.baseurl }}/assets/images/MS203*CopyMobileServiceURL.png)
-   Paste the Azure \_Mobile Service URL* into Twitter app's _Website_ and _Callback URL_ fields and save. Then in _Settings_ tab tick the _‘Allow this application to be used Sign in with Twitter’_ checkbox.
+
+   Paste the Azure \_Mobile Service URL\* into Twitter app's _Website_ and _Callback URL_ fields and save. Then in _Settings_ tab tick the _‘Allow this application to be used Sign in with Twitter’_ checkbox.  
    ![]({{ site.baseurl }}/assets/images/MS204_AllowThisAppToSignInWithTwitter.png)
-3. In Twitter app's API Keys tab copy the _API key_ & _API secret_.
+
+3. In Twitter app's API Keys tab copy the _API key_ & _API secret_.  
    ![]({{ site.baseurl }}/assets/images/MS205_CopyTwitterAPIKeyAndSecret.png)
+
    And paste them into **Identity \> Twitter settings**.
    ![]({{ site.baseurl }}/assets/images/MS206_PasteTwitterAPIKeyAndSecret-AzureIdentity.png)
-4. In **Android Studio** _ToDoActivity_ cut the code block under the new Mobile Service client.
-   ![]({{ site.baseurl }}/assets/images/MS207*CreateTableMethod.png)
-   And paste into a new method \_createTable()*.
+
+4. In **Android Studio** _ToDoActivity_ cut the code block under the new Mobile Service client.  
+   ![]({{ site.baseurl }}/assets/images/MS207\*CreateTableMethod.png)
+
+   And paste into a new method \_createTable()\*.  
    ![]({{ site.baseurl }}/assets/images/MS208_CreateTableMethod.png)
+
 5. Replace the code block with a new _authenticate()_ method.
    ```java
    private void authenticate() {
@@ -60,9 +67,9 @@ This article builds on top of the [previous tutorial](http://www.deadlyfingers.n
      });
    }
    ```
-   Then build and run
+   Then build and run  
    ![]({{ site.baseurl }}/assets/images/MS209_AuthenticateMethod-BuildandRun.png)
-6. Sign-in with Twitter.
+6. Sign-in with Twitter.  
    ![]({{ site.baseurl }}/assets/images/MS210_TwitterSignIn.png)
 7. You can record the _userId_ on the server-side. Edit table **Script \> Insert**
    ```js
@@ -72,11 +79,11 @@ This article builds on top of the [previous tutorial](http://www.deadlyfingers.n
    }
    ```
    ![]({{ site.baseurl }}/assets/images/MS211_TodoItem-Script-Insert-UserId.png)
-8. Add another Todo item in the app.
+8. Add another Todo item in the app.  
    ![]({{ site.baseurl }}/assets/images/MS212*Add-TodoItem-UserId.png)
-   Refresh the \_ToDoItem* table to see the new item with _userId_.
+   Refresh the \_ToDoItem* table to see the new item with _userId_.  
    ![]({{ site.baseurl }}/assets/images/MS213_Browse-TodoItem-userId-Refresh.png)
-9. Now change **Script \> Read** so app shows only the authenticated user's items.
+9. Now change **Script \> Read** so app shows only the authenticated user's items.  
    ![]({{ site.baseurl }}/assets/images/MS214_TodoItem-Table-Script-Read-where-userId.png)
 
 ```js
@@ -86,11 +93,11 @@ function read(query, user, request) {
 }
 ```
 
-10. Refresh app to see changes.
+10. Refresh app to see changes.  
     ![]({{ site.baseurl }}/assets/images/MS215_Refresh-Todo-Items.png)
     The list should only show ToDo items that belong to that user now.
     ![]({{ site.baseurl }}/assets/images/MS216_Refresh-Todo-Items.png)
 
-### Impressive — with just a couple of lines of code the app is updated to enable user authentication and handle identity requests.
+Impressive - with just a couple of lines of code the app is updated to enable user authentication and handle identity requests.
 
 Azure Mobile Services also allows you to send Push Notifications which is covered in the [next tutorial]({{ site.baseurl }}{% link _posts/2014-05-30-send-gcm-push-notifications-using-azure-mobile-services.md %}).

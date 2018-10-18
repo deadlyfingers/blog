@@ -3,7 +3,7 @@ layout: post
 title: Addictive mini games for Surface
 date: 2014-06-19 23:28:00.000000000 +01:00
 published: true
-categories:categories: info
+categories: info
 tags:
   - App Store
   - Apps
@@ -15,7 +15,7 @@ meta:
 author: David Douglas
 ---
 
-When you need a breakout from work here are 10 fun mini games to play on your Windows 8 device. Touch [Surface](http://www.microsoft.com/surface/en-gb/products/surface-pro-3) recommended! ;)
+When you need a breakout from work here are 10 fun mini games to play on your Windows device. Touch [Surface](http://www.microsoft.com/surface/en-gb/products/surface-pro-3) recommended! ;)
 
 1. ### Reckless Racing Ultimate
    Top down mini car racing game featuring offroad and race track competitions. A must have game!

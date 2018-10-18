@@ -2,7 +2,7 @@
 layout: post
 title: "Migrating from Wordpress blog to GitHub Pages"
 author: "David Douglas"
-categories:categories: code
+categories: code
 tags: [GitHub Pages, Jekyll, Ruby, Wordpress, Blog, Markdown, Website]
 published: true
 comments: true

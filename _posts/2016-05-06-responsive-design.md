@@ -3,7 +3,7 @@ layout: post
 title: Responsive Design from problem to production
 date: 2016-05-06 12:06:45.000000000 +01:00
 published: true
-categories:categories: code
+categories: code
 tags:
   - Cordova
   - Design

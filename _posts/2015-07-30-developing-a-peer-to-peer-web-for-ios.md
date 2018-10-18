@@ -3,7 +3,7 @@ layout: post
 title: Developing a peer to peer web for iOS
 date: 2015-07-30 12:00:26.000000000 +01:00
 published: true
-categories:categories: code
+categories: code
 tags:
 - iOS
 meta:

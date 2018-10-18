@@ -3,7 +3,7 @@ layout: post
 title: Making sense of web app debug logs on multiple Android and iOS devices
 date: 2015-11-13 16:39:00.000000000 +00:00
 published: true
-categories:categories: code
+categories: code
 tags:
 - Android
 - Cordova
