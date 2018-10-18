@@ -233,7 +233,7 @@
   </tbody>
 </table>
 
-<p>For morecategories: code on designing VuMarks you can <a href="https://developer.vuforia.com/sites/default/files/VuMark%20Design%20Guide.pdf">download the VuMark design guide</a> or <a href="https://library.vuforia.com/articles/Training/VuMark-Design-Guide">view design guide docs</a>. I also found the <a href="https://www.youtube.com/watch?v=YXMiDRyvqzk">video explaining the VuMark design process</a> to be most helpful. NB: To design your own custom VuMarks you will need <a href="https://www.adobe.com/uk/products/illustrator.html">Adobe Illustrator</a> to run the <a href="https://developer.vuforia.com/vui/auth/login?url=/downloads/tool%3Fd%3Dwindows-4851025-17-4124%26retU">VuMark template scripts</a>.</p>
+<p>For more info on designing VuMarks you can <a href="https://developer.vuforia.com/sites/default/files/VuMark%20Design%20Guide.pdf">download the VuMark design guide</a> or <a href="https://library.vuforia.com/articles/Training/VuMark-Design-Guide">view design guide docs</a>. I also found the <a href="https://www.youtube.com/watch?v=YXMiDRyvqzk">video explaining the VuMark design process</a> to be most helpful. NB: To design your own custom VuMarks you will need <a href="https://www.adobe.com/uk/products/illustrator.html">Adobe Illustrator</a> to run the <a href="https://developer.vuforia.com/vui/auth/login?url=/downloads/tool%3Fd%3Dwindows-4851025-17-4124%26retU">VuMark template scripts</a>.</p>
 
 <p><strong>Illustrator / VuMark Scripts troubleshooting notes:</strong></p>
 
@@ -253,23 +253,23 @@
 
 <ol>
   <li>If you haven’t used VuForia before you will have to create a developer account and get a free license key for development in Unity.
- <img src="/assets/images/VuForia-Developer-License-Key.png" alt="" /></li>
+<img src="/assets/images/VuForia-Developer-License-Key.png" alt="" /></li>
   <li>Create a new VuMarks database.
- <img src="/assets/images/VuForia-Database.png" alt="" /></li>
+<img src="/assets/images/VuForia-Database.png" alt="" /></li>
   <li>Upload the <a href="/assets/media/guidVumark.svg">custom VuMark SVG artwork file</a> into your VuMark database. <strong>Note:</strong> You should set the width of the VuMark in relation to Unity’s unit of measurement which is in <strong>meters</strong>. In my case I want to recognize the VuMark on my iPhone which is 6 cm wide therefore I use a value of “ <strong>0.06</strong>” m.
- <img src="/assets/images/VuMark-Upload-Export-SVG.png" alt="" /></li>
+<img src="/assets/images/VuMark-Upload-Export-SVG.png" alt="" /></li>
   <li>Select your VuMark template target to <strong>download</strong> as your VuMark database.
- <img src="/assets/images/VuForia-VuMark-Database.png" alt="" /></li>
+<img src="/assets/images/VuForia-VuMark-Database.png" alt="" /></li>
   <li>Download database for <strong>Unity Editor</strong>.
- <img src="/assets/images/VuForia-Unity-Database.png" alt="" /></li>
+<img src="/assets/images/VuForia-Unity-Database.png" alt="" /></li>
   <li><strong>Import</strong> your VuMarks database package into Unity project. If you don’t have your own Unity project you can setup the <a href="https://github.com/deadlyfingers/MixedRealityIoTMonitoring">Mixed Reality IoT Monitoring sample</a> to get started.
- <img src="/assets/images/Unity-Import-VuMarks-Package.png" alt="" /></li>
+<img src="/assets/images/Unity-Import-VuMarks-Package.png" alt="" /></li>
   <li>In Unity scene check the VuMark Behavior is setup correctly with your custom <strong>VuMark Database and Template</strong> and has <strong>Extended Tracking</strong> enabled for Mixed Reality.
- <img src="/assets/images/Unity-VuMark-Behaviour.png" alt="" /></li>
+<img src="/assets/images/Unity-VuMark-Behaviour.png" alt="" /></li>
   <li>Open the VuForia AR Camera configuration settings to enter your <strong>VuForia developer license key</strong> and to <strong>load and activate the VuMark database</strong>.
- <img src="/assets/images/VuForia-ARCamera-Config.jpg" alt="" /></li>
+<img src="/assets/images/VuForia-ARCamera-Config.jpg" alt="" /></li>
   <li>Generate the VuMark images for each Device Id you want to recognize.
- <img src="/assets/images/VuForia-Generate-VuMark-GUID.png" alt="" /></li>
+<img src="/assets/images/VuForia-Generate-VuMark-GUID.png" alt="" /></li>
 </ol>
 
 <p>For my sample IoT devices I generated the following device Ids; “chiller-01.0”, “chiller-02.0”, “elevator-01.0”, “elevator-02.0”, “furnace-01.0”.</p>
@@ -304,15 +304,18 @@
   <li>Fork the <a href="https://github.com/deadlyfingers/IoTDeviceFunctions">Azure IoT Device Functions project</a> on github.</li>
   <li>Sign in to your <a href="https://portal.azure.com">Azure portal</a></li>
   <li>Create a new Azure Function. NB: Ensure your <strong>Function app settings</strong> is using <strong>version 2</strong></li>
-  <li>Add the following environment variables using your <strong>Azure Function app settings</strong> :
-    <ul>
-      <li>IOTHUB_CONNECTION_STRING</li>
-      <li>TSI_FQDN</li>
-      <li>AD_APP_ID</li>
-      <li>AD_APP_KEY</li>
-      <li>AD_TENANT_DOMAIN NAME “*.onmicrosoft.com”</li>
-    </ul>
-  </li>
+  <li>Add the following environment variables using your <strong>Azure Function app settings</strong> :</li>
+</ol>
+
+<ul>
+  <li>IOTHUB_CONNECTION_STRING</li>
+  <li>TSI_FQDN</li>
+  <li>AD_APP_ID</li>
+  <li>AD_APP_KEY</li>
+  <li>AD_TENANT_DOMAIN NAME “*.onmicrosoft.com”</li>
+</ul>
+
+<ol>
   <li>To deploy your Function app select <strong>Platform Features &gt; Deployment Options &gt; Setup &gt; GitHub</strong> and choose your forked repo.</li>
 </ol>
 

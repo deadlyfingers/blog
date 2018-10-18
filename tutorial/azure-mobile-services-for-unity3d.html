@@ -33,7 +33,7 @@
   <div class="post-line"></div>
   <h2 id="state-of-play">State of play</h2>
 
-<p>If you’ve followed my previous Unity3D Azure tutorials I’ve covered two well known Unity Azure plugins - <a href="http://www.deadlyfingers.net/azure/unity3d-and-cloud-backend-using-azure-mobile-services-and-prime31-plugin/">Prime31</a> and <a href="http://www.deadlyfingers.net/azure/unity3d-game-dev-with-azure-mobile-services-using-bitrave-plugin/">Bitrave</a>. Bitrave had better multi-platform support, however it required the ‘JSON.NET’ paid asset to support iOS and Android. But then there was issues with iOS <abbr title="Ahead Of Time">AOT</abbr> compiler. Because of this I decided to start a new <a href="https://github.com/Unity3dAzure/">Azure Mobile Services library for Unity3d</a> to support multi-platforms like Unity3d - iOS, Android and Windows without need for paid plugins.</p>
+<p>If you’ve followed my previous Unity3d Azure tutorials I’ve covered two well known Unity Azure plugins - <a href="http://www.deadlyfingers.net/azure/unity3d-and-cloud-backend-using-azure-mobile-services-and-prime31-plugin/">Prime31</a> and <a href="http://www.deadlyfingers.net/azure/unity3d-game-dev-with-azure-mobile-services-using-bitrave-plugin/">Bitrave</a>. Bitrave had better multi-platform support, however it required the ‘JSON.NET’ paid asset to support iOS and Android. But then there was issues with iOS <abbr title="Ahead Of Time">AOT</abbr> compiler. Because of this I decided to start a new <a href="https://github.com/Unity3dAzure/">Azure Mobile Services library for Unity3d</a> to support multi-platforms like Unity3d - iOS, Android and Windows without need for paid plugins.</p>
 
 <h2 id="using-azure-mobile-services-in-unity3d">Using Azure Mobile Services in Unity3d</h2>
 
@@ -42,41 +42,52 @@
 <h2 id="getting-started">Getting started</h2>
 
 <ol>
-  <li><a href="https://github.com/Unity3dAzure/MobileServicesDemo/archive/master.zip">Download the Unity3d Azure demo project</a> or use git to clone the project:
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/Unity3dAzure/MobileServicesDemo.git
-</code></pre></div>    </div>
-  </li>
-  <li><a href="https://manage.windowsazure.com/">Create a Mobile Service</a>
-    <ul>
-      <li>Create ‘Highscores’ table for app data</li>
-      <li>Modify ‘Highscores’ table Insert node script to save userId</li>
-      <li>Create a custom API called ‘hello’</li>
-    </ul>
-  </li>
-  <li>In Unity3d <strong>open scene</strong> <code class="highlighter-rouge">Scenes/HighscoresDemo.unity</code>
-    <ul>
-      <li>Check the Demo UI script is attached to the Camera. (The script can be attached by dragging &amp; dropping the <code class="highlighter-rouge">Scripts/HighscoresDemoUI.cs</code> script unto the Scene’s ‘Main Camera’ in the Hierarchy panel.)</li>
-    </ul>
-  </li>
-  <li>Paste Azure Mobile Service app’s connection strings into Unity Editor Inspector fields (or else directly into script <code class="highlighter-rouge">Scripts/HighscoresDemoUI.cs</code>)
-    <ul>
-      <li>Mobile Service URL</li>
-      <li>Mobile Service Application Key</li>
-    </ul>
-  </li>
-  <li>If you want to save score with userId then <a href="https://developers.facebook.com/apps/async/create/platform-setup/dialog/">create Facebook app</a>
-    <ul>
-      <li>Fill in Azure Mobile Service’s Identity &gt; Facebook settings (App Id &amp; App Secret)</li>
-      <li>Paste <a href="https://developers.facebook.com/tools/accesstoken/">Facebook access user token</a> into Unity Editor Inspector field (or else directly into <code class="highlighter-rouge">Scripts/HighscoresDemoUI.cs</code>)<br />
-Play in UnityEditor</li>
-    </ul>
-  </li>
+  <li><a href="https://github.com/Unity3dAzure/MobileServicesDemo/archive/master.zip">Download the Unity3d Azure demo project</a> or use git to clone the project:</li>
 </ol>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/Unity3dAzure/MobileServicesDemo.git
+</code></pre></div></div>
+
+<ol>
+  <li><a href="https://manage.windowsazure.com/">Create a Mobile Service</a></li>
+</ol>
+
+<ul>
+  <li>Create ‘Highscores’ table for app data</li>
+  <li>Modify ‘Highscores’ table Insert node script to save userId</li>
+  <li>Create a custom API called ‘hello’</li>
+</ul>
+
+<ol>
+  <li>In Unity3d <strong>open scene</strong> <code class="highlighter-rouge">Scenes/HighscoresDemo.unity</code></li>
+</ol>
+
+<ul>
+  <li>Check the Demo UI script is attached to the Camera. (The script can be attached by dragging &amp; dropping the <code class="highlighter-rouge">Scripts/HighscoresDemoUI.cs</code> script unto the Scene’s ‘Main Camera’ in the Hierarchy panel.)</li>
+</ul>
+
+<ol>
+  <li>Paste Azure Mobile Service app’s connection strings into Unity Editor Inspector fields (or else directly into script <code class="highlighter-rouge">Scripts/HighscoresDemoUI.cs</code>)</li>
+</ol>
+
+<ul>
+  <li>Mobile Service URL</li>
+  <li>Mobile Service Application Key</li>
+</ul>
+
+<ol>
+  <li>If you want to save score with userId then <a href="https://developers.facebook.com/apps/async/create/platform-setup/dialog/">create Facebook app</a></li>
+</ol>
+
+<ul>
+  <li>Fill in Azure Mobile Service’s Identity &gt; Facebook settings (App Id &amp; App Secret)</li>
+  <li>Paste <a href="https://developers.facebook.com/tools/accesstoken/">Facebook access user token</a> into Unity Editor Inspector field (or else directly into <code class="highlighter-rouge">Scripts/HighscoresDemoUI.cs</code>)<br />
+Play in UnityEditor</li>
+</ul>
 
 <h2 id="credits">Credits</h2>
 
 <p>Special thanks to <a href="https://twitter.com/jasongfox">Jason Fox</a> and <a href="https://twitter.com/awehellyeah">Bret Bentzinger</a> who put together the <a href="https://github.com/ProjectStratus/UnityRestClient">UnityRestClient</a> library using the <a href="https://bitbucket.org/TowerOfBricks/jsonfx-for-unity3d-git/overview">JsonFX plugin</a>.</p>
-
 
 </div>
 
@@ -98,7 +109,7 @@ Play in UnityEditor</li>
     
     <li>Mobile Services</li>
     
-    <li>Unity3D</li>
+    <li>Unity3d</li>
     
   </ul>
 

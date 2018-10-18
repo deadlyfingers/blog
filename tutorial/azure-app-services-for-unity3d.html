@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="description" content="Developer blog">
-  <title>Azure App Services for Unity3D</title>
+  <title>Azure App Services for Unity3d</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="/assets/main.css" rel="stylesheet">
   <!-- RSS -->
@@ -29,7 +29,7 @@
   
   <time datetime="2016-05-16 15:42:13 +0100" class="date">16 May 2016</time>
   
-  <h1 class="post-title">Azure App Services for Unity3D</h1>
+  <h1 class="post-title">Azure App Services for Unity3d</h1>
   <div class="post-line"></div>
   <p><a href="https://azure.microsoft.com/en-us/blog/transition-of-azure-mobile-services/">Azure Mobile Services will be migrated to App Services</a> on Sept 1st 2016. To prepare for this migration I’ve renamed and updated the open source <a href="https://github.com/Unity3dAzure/AppServices">Mobile Service Unity3d projects to support <strong>Azure App Service</strong></a> going forward.</p>
 
@@ -41,39 +41,42 @@
 
 <ol>
   <li>Open <em>Settings</em>, search for <strong>Easy Tables</strong> and add a <strong>‘Highscores’</strong> table.
- <img src="/assets/images/AppService_1-EasyTables.png" alt="AppService_1-EasyTables" /></li>
-  <li>Set all table permissions to allow anonymous access to start with. 
- <img src="/assets/images/AppService_2-TablePermissions.png" alt="AppService_2-TablePermissions" /></li>
+<img src="/assets/images/AppService_1-EasyTables.png" alt="AppService_1-EasyTables" /></li>
+  <li>Set all table permissions to allow anonymous access to start with.
+<img src="/assets/images/AppService_2-TablePermissions.png" alt="AppService_2-TablePermissions" /></li>
   <li>Manage schema to add <em>Number</em> column for <strong>‘score’</strong> and <em>String</em> column for <strong>‘userId’</strong>
- <img src="/assets/images/AppService_3-ManageSchema.png" alt="AppService_3-ManageSchema" /></li>
+<img src="/assets/images/AppService_3-ManageSchema.png" alt="AppService_3-ManageSchema" /></li>
   <li>Additionally, if you want to store user data or game scores you can enable authentication using Facebook, Twitter, Microsoft account or Google account. If you want to use the Facebook login in this demo you will need to <a href="https://developers.facebook.com/docs/apps/register#create-app">create a Facebook app</a>. Once you’ve created the Facebook app add the Facebook App ID and Secret to your Azure App Service Facebook Authentication settings.
- <img src="/assets/images/AppService_Auth.png" alt="AppService_Auth" />
-  Then configure the Facebook App Basic and Advanced settings with your Azure App Service URL:
- <img src="/assets/images/FacebookAppDomains.png" alt="FacebookAppDomains" />
- <img src="/assets/images/FacebookAppSecureCanvasURL.png" alt="FacebookAppSecureCanvasURL" />
- <img src="/assets/images/FacebookAppAdvancedSettings.png" alt="FacebookAppAdvancedSettings" />
-  If in doubt how to configure these settings check out the <a href="https://azure.microsoft.com/en-gb/documentation/articles/app-service-mobile-how-to-configure-facebook-authentication/">Azure App Service documentation</a>.</li>
-  <li>Once authentication is setup the <strong>‘Highscores’</strong> table script can be edited to save <strong>‘userId’</strong>categories: codermation.
- <img src="/assets/images/AppService_4-TableInsertScript.png" alt="AppService_4-TableInsertScript" />
-    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">table</span><span class="p">.</span><span class="nx">insert</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
- <span class="k">if</span> <span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
-     <span class="nx">context</span><span class="p">.</span><span class="nx">item</span><span class="p">.</span><span class="nx">userId</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
- <span class="p">}</span>
- <span class="k">return</span> <span class="nx">context</span><span class="p">.</span><span class="nx">execute</span><span class="p">();</span>
-<span class="p">});</span>
-</code></pre></div>    </div>
-  </li>
-  <li>In addition to table scripts you can also create custom APIs. In <em>Settings</em>, search for <strong>Easy APIs</strong> and add an example <strong>‘hello’</strong> API.
- <img src="/assets/images/AppService_EasyAPIs.png" alt="AppService_EasyAPIs" />
- <img src="/assets/images/AppService_EasyAPIs-hello.js.png" alt="AppService_EasyAPIs-hello.js" />
-    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
- <span class="s2">"get"</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
-     <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span> <span class="na">message</span> <span class="p">:</span> <span class="s2">"Hello Unity!"</span> <span class="p">});</span>
- <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>    </div>
-  </li>
+<img src="/assets/images/AppService_Auth.png" alt="AppService_Auth" />
+Then configure the Facebook App Basic and Advanced settings with your Azure App Service URL:
+<img src="/assets/images/FacebookAppDomains.png" alt="FacebookAppDomains" />
+<img src="/assets/images/FacebookAppSecureCanvasURL.png" alt="FacebookAppSecureCanvasURL" />
+<img src="/assets/images/FacebookAppAdvancedSettings.png" alt="FacebookAppAdvancedSettings" />
+If in doubt how to configure these settings check out the <a href="https://azure.microsoft.com/en-gb/documentation/articles/app-service-mobile-how-to-configure-facebook-authentication/">Azure App Service documentation</a>.</li>
+  <li>Once authentication is setup the <strong>‘Highscores’</strong> table script can be edited to save <strong>‘userId’</strong>information.
+<img src="/assets/images/AppService_4-TableInsertScript.png" alt="AppService_4-TableInsertScript" /></li>
 </ol>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">table</span><span class="p">.</span><span class="nx">insert</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">context</span><span class="p">.</span><span class="nx">item</span><span class="p">.</span><span class="nx">userId</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">context</span><span class="p">.</span><span class="nx">execute</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<ol>
+  <li>In addition to table scripts you can also create custom APIs. In <em>Settings</em>, search for <strong>Easy APIs</strong> and add an example <strong>‘hello’</strong> API.
+<img src="/assets/images/AppService_EasyAPIs.png" alt="AppService_EasyAPIs" />
+<img src="/assets/images/AppService_EasyAPIs-hello.js.png" alt="AppService_EasyAPIs-hello.js" /></li>
+</ol>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">get</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span> <span class="na">message</span><span class="p">:</span> <span class="s2">"Hello Unity!"</span> <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
 
 <p>Once you have setup Azure App Service you can update the Unity scene with your App Service <strong>‘https’</strong> url and hit run!</p>
 
@@ -86,7 +89,7 @@
 
 <div id="pagination" class="large-12 cell">
   <div>
-    <a href="/tutorial/azure-app-services-for-unity3d">Azure App Services for Unity3D</a>
+    <a href="/tutorial/azure-app-services-for-unity3d">Azure App Services for Unity3d</a>
     <span>
       
       <span>by David Douglas</span>
@@ -99,7 +102,7 @@
     
     <li>App Services</li>
     
-    <li>Unity3D</li>
+    <li>Unity3d</li>
     
   </ul>
 

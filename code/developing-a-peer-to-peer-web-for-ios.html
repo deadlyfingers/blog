@@ -67,7 +67,7 @@ cordova create ~/<span class="nv">$HOME_DIR</span>/<span class="nv">$PROJECT_DIR
 <span class="nb">cd</span> <span class="nv">$PROJECT_DIR</span>
 cordova platform add ios
 cordova plugin add https://github.com/thaliproject/Thali_CordovaPlugin.git#story-1-dadougla
-<span class="c"># copy sample 'www' dir </span>
+<span class="c"># copy sample 'www' dir</span>
 cp <span class="nt">-a</span> <span class="nt">-R</span> <span class="nt">-v</span> plugins/org.thaliproject.p2p/sample/ios/www ./
 <span class="c"># build iOS project</span>
 cordova build
@@ -82,32 +82,40 @@ open platforms/ios/ThaliTest.xcodeproj
 <ol>
   <li>
     <h3 id="cordova">Cordova</h3>
-    <ul>
-      <li>All demo UI code is handled by “thali_main.js” script.</li>
-    </ul>
-  </li>
-  <li>
-    <h3 id="jxcore">JXCore</h3>
-    <ul>
-      <li>UI actions will trigger a call to functions in “app.js” script which is responsible for running all our Node.js code and calling the native methods as documented in the <a href="https://github.com/thaliproject/Thali_CordovaPlugin/blob/story_0_matthewp/doc/api/connectivity.md">Thali common API.</a></li>
-    </ul>
-  </li>
-  <li>
-    <h3 id="native-plugins">Native Plugins</h3>
-    <ul>
-      <li>All native methods called from JXCore are registered in “THEAppContext.m” <code class="highlighter-rouge">defineJavaScriptExtensions</code> method</li>
-    </ul>
   </li>
 </ol>
 
+<ul>
+  <li>All demo UI code is handled by “thali_main.js” script.</li>
+</ul>
+
+<ol>
+  <li>
+    <h3 id="jxcore">JXCore</h3>
+  </li>
+</ol>
+
+<ul>
+  <li>UI actions will trigger a call to functions in “app.js” script which is responsible for running all our Node.js code and calling the native methods as documented in the <a href="https://github.com/thaliproject/Thali_CordovaPlugin/blob/story_0_matthewp/doc/api/connectivity.md">Thali common API.</a></li>
+</ul>
+
+<ol>
+  <li>
+    <h3 id="native-plugins">Native Plugins</h3>
+  </li>
+</ol>
+
+<ul>
+  <li>All native methods called from JXCore are registered in “THEAppContext.m” <code class="highlighter-rouge">defineJavaScriptExtensions</code> method</li>
+</ul>
+
 <h2 id="what-about-android-p2p">What about Android p2p?</h2>
 
-<p>Morecategories: code about Thali for Android is available on <a href="http://www.drjukka.com/blog/wordpress/?p=140">Dr Jukka’s blog</a>.</p>
+<p>More info about Thali for Android is available on <a href="http://www.drjukka.com/blog/wordpress/?p=140">Dr Jukka’s blog</a>.</p>
 
 <h2 id="what-about-ios-and-android-p2p">What about iOS and Android p2p?</h2>
 
-<p>Morecategories: code about future Thali development including iOS and Android p2p interoperability is documented on <a href="http://thaliproject.org/stories">Thali stories</a>.</p>
-
+<p>More info about future Thali development including iOS and Android p2p interoperability is documented on <a href="http://thaliproject.org/stories">Thali stories</a>.</p>
 
 </div>
 

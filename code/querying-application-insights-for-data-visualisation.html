@@ -49,30 +49,30 @@
 
 <p>To help to illustrate this we can look at the Application Insights query for tracking a bot to human hand-off during a user’s conversation session. For this scenario we built a <a href="https://qnamaker.ai/">QnA bot</a> with the <a href="https://www.npmjs.com/package/botbuilder-handoff">hand-off module</a> installed. If a customer asks the QnA bot a question and no answer was found in the knowledge base we trigger an automatic hand-off to human. We want to show the fastest, longest and average times for customer waiting for an human agent to respond in the dashboard.</p>
 
-<p>We can start by writing a basic query in Application Insights to get all the transcripts from the ‘customEvents’ table and ‘project’ only thecategories: codermation we need.</p>
+<p>We can start by writing a basic query in Application Insights to get all the transcripts from the ‘customEvents’ table and ‘project’ only the information we need.</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">customEvents</span> 
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">customEvents</span>
 <span class="nx">where</span> <span class="nx">name</span> <span class="o">==</span> <span class="s1">'Transcript'</span>
-<span class="o">|</span> <span class="nx">extend</span> <span class="nx">customerName</span><span class="o">=</span><span class="nx">tostring</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="nx">customerName</span><span class="p">),</span> 
-  <span class="nx">text</span><span class="o">=</span><span class="nx">tostring</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="nx">text</span><span class="p">),</span> 
-  <span class="nx">userTime</span><span class="o">=</span><span class="nx">tostring</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">),</span> 
-  <span class="nx">state</span><span class="o">=</span><span class="nx">toint</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="nx">state</span><span class="p">),</span> 
-  <span class="nx">agentName</span><span class="o">=</span><span class="nx">tostring</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="nx">agentName</span><span class="p">),</span> 
-  <span class="k">from</span><span class="o">=</span><span class="nx">tostring</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="k">from</span><span class="p">)</span>  
-<span class="o">|</span> <span class="nx">project</span> <span class="k">from</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">customerName</span><span class="p">,</span> <span class="nx">agentName</span><span class="p">,</span> <span class="nx">state</span><span class="p">,</span> <span class="nx">userTime</span> 
+<span class="o">|</span> <span class="nx">extend</span> <span class="nx">customerName</span><span class="o">=</span><span class="nx">tostring</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="nx">customerName</span><span class="p">),</span>
+  <span class="nx">text</span><span class="o">=</span><span class="nx">tostring</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="nx">text</span><span class="p">),</span>
+  <span class="nx">userTime</span><span class="o">=</span><span class="nx">tostring</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">),</span>
+  <span class="nx">state</span><span class="o">=</span><span class="nx">toint</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="nx">state</span><span class="p">),</span>
+  <span class="nx">agentName</span><span class="o">=</span><span class="nx">tostring</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="nx">agentName</span><span class="p">),</span>
+  <span class="k">from</span><span class="o">=</span><span class="nx">tostring</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="k">from</span><span class="p">)</span>
+<span class="o">|</span> <span class="nx">project</span> <span class="k">from</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">customerName</span><span class="p">,</span> <span class="nx">agentName</span><span class="p">,</span> <span class="nx">state</span><span class="p">,</span> <span class="nx">userTime</span>
 <span class="o">|</span> <span class="nx">order</span> <span class="nx">by</span> <span class="nx">userTime</span> <span class="nx">asc</span>
 </code></pre></div></div>
 
 <p>But in this example we are not using Application Insights to aggregate the results so we end up with a lot of results to process. Given the query above the following code snippet is the amount of Javascript required.</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">calculated</span><span class="p">:</span> <span class="p">(</span><span class="nx">transcripts</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="kd">const</span> <span class="nx">key</span> <span class="o">=</span> <span class="s1">'customerId'</span><span class="p">;</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">calculated</span><span class="p">:</span> <span class="nx">transcripts</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">key</span> <span class="o">=</span> <span class="s2">"customerId"</span><span class="p">;</span>
   <span class="kd">const</span> <span class="nx">transcriptsGrouped</span> <span class="o">=</span> <span class="nx">transcripts</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="kd">const</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">a</span><span class="p">.</span><span class="nx">findIndex</span><span class="p">(</span><span class="nx">col</span> <span class="o">=&gt;</span> <span class="nx">col</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="nx">c</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">i</span> <span class="o">===</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
       <span class="kd">let</span> <span class="nx">collection</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">'id'</span><span class="p">:</span> <span class="nx">c</span><span class="p">[</span><span class="nx">key</span><span class="p">],</span>
-        <span class="s1">'transcripts'</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="na">id</span><span class="p">:</span> <span class="nx">c</span><span class="p">[</span><span class="nx">key</span><span class="p">],</span>
+        <span class="na">transcripts</span><span class="p">:</span> <span class="p">[]</span>
       <span class="p">};</span>
       <span class="nx">a</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">collection</span><span class="p">);</span> <span class="c1">// new group</span>
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
@@ -87,7 +87,11 @@
   <span class="nx">transcriptsGrouped</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">userTranscript</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="kd">let</span> <span class="nx">prevTranscript</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
     <span class="nx">userTranscript</span><span class="p">.</span><span class="nx">transcripts</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">transcript</span> <span class="o">=&gt;</span> <span class="p">{</span>
-      <span class="k">if</span> <span class="p">(</span><span class="nx">prevTranscript</span> <span class="o">&amp;&amp;</span> <span class="nx">prevTranscript</span><span class="p">.</span><span class="nx">state</span> <span class="o">===</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">transcript</span><span class="p">.</span><span class="nx">state</span> <span class="o">===</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span>
+        <span class="nx">prevTranscript</span> <span class="o">&amp;&amp;</span>
+        <span class="nx">prevTranscript</span><span class="p">.</span><span class="nx">state</span> <span class="o">===</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span>
+        <span class="nx">transcript</span><span class="p">.</span><span class="nx">state</span> <span class="o">===</span> <span class="mi">2</span>
+      <span class="p">)</span> <span class="p">{</span>
         <span class="kd">let</span> <span class="nx">date1</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">prevTranscript</span><span class="p">.</span><span class="nx">userTime</span><span class="p">);</span>
         <span class="kd">let</span> <span class="nx">date2</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">transcript</span><span class="p">.</span><span class="nx">userTime</span><span class="p">);</span>
         <span class="kd">let</span> <span class="nx">diff</span> <span class="o">=</span> <span class="p">(</span><span class="nx">date2</span> <span class="o">-</span> <span class="nx">date1</span><span class="p">)</span> <span class="o">/</span> <span class="nx">SEC_PER_DAY</span><span class="p">;</span>
@@ -97,36 +101,35 @@
     <span class="p">});</span>
   <span class="p">});</span>
 
-  <span class="kd">const</span> <span class="nx">avgTimeWaiting</span> <span class="o">=</span> <span class="nx">times</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">c</span> <span class="p">},</span> <span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="nx">times</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">avgTimeWaiting</span> <span class="o">=</span>
+    <span class="nx">times</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">c</span><span class="p">;</span>
+    <span class="p">},</span> <span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="nx">times</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
   <span class="kd">const</span> <span class="nx">maxTimeWaiting</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(...</span><span class="nx">times</span><span class="p">);</span>
   <span class="kd">const</span> <span class="nx">minTimeWaiting</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(...</span><span class="nx">times</span><span class="p">);</span>
 
   <span class="k">return</span> <span class="p">{</span>
-    <span class="s1">'transcriptsAverageTimeWaiting-value'</span><span class="p">:</span> <span class="nx">avgTimeWaiting</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
-    <span class="s1">'transcriptsLongestTimeWaiting-value'</span><span class="p">:</span> <span class="nx">maxTimeWaiting</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
-    <span class="s1">'transcriptsShortestTimeWaiting-value'</span><span class="p">:</span> <span class="nx">minTimeWaiting</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+    <span class="s2">"transcriptsAverageTimeWaiting-value"</span><span class="p">:</span> <span class="nx">avgTimeWaiting</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+    <span class="s2">"transcriptsLongestTimeWaiting-value"</span><span class="p">:</span> <span class="nx">maxTimeWaiting</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+    <span class="s2">"transcriptsShortestTimeWaiting-value"</span><span class="p">:</span> <span class="nx">minTimeWaiting</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
   <span class="p">};</span>
-<span class="p">}</span>
+<span class="p">};</span>
 </code></pre></div></div>
 
 <p>The first ‘reduce’ block is required to group the transcripts per user Id. Then for every user we track the state change from waiting and talking to human agent and calculate the time difference in seconds. Where ‘state’ is an integer value that marks the current status of the conversion.<br />
-`
-0 = Bot
-1 = Waiting
-2 = Human agent
-`</p>
+<code class="highlighter-rouge">0 = Bot 1 = Waiting 2 = Human agent</code></p>
 
 <p>But we can optimise the code by doing the aggregation within the Application Insights query by using the ‘summarize’ operator and ‘count’ function.</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">customEvents</span>
 <span class="nx">where</span> <span class="nx">name</span> <span class="o">==</span> <span class="s1">'Transcript'</span>
-<span class="o">|</span> <span class="nx">extend</span> <span class="nx">conversationId</span><span class="o">=</span><span class="nx">tostring</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="nx">userConversationId</span><span class="p">),</span> 
-  <span class="nx">customerId</span><span class="o">=</span><span class="nx">tostring</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="nx">customerId</span><span class="p">),</span> 
-  <span class="nx">state</span><span class="o">=</span><span class="nx">toint</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="nx">state</span><span class="p">)</span>  
+<span class="o">|</span> <span class="nx">extend</span> <span class="nx">conversationId</span><span class="o">=</span><span class="nx">tostring</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="nx">userConversationId</span><span class="p">),</span>
+  <span class="nx">customerId</span><span class="o">=</span><span class="nx">tostring</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="nx">customerId</span><span class="p">),</span>
+  <span class="nx">state</span><span class="o">=</span><span class="nx">toint</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="nx">state</span><span class="p">)</span>
 <span class="o">|</span> <span class="nx">where</span> <span class="nx">state</span><span class="o">==</span><span class="mi">1</span> <span class="nx">or</span> <span class="nx">state</span><span class="o">==</span><span class="mi">2</span>
 <span class="o">|</span> <span class="nx">order</span> <span class="nx">by</span> <span class="nx">timestamp</span> <span class="nx">asc</span>
 <span class="o">|</span> <span class="nx">summarize</span> <span class="nx">total</span><span class="o">=</span><span class="nx">count</span><span class="p">(),</span> <span class="nx">times</span><span class="o">=</span><span class="nx">makelist</span><span class="p">(</span><span class="nx">timestamp</span><span class="p">)</span> <span class="nx">by</span> <span class="nx">conversationId</span><span class="p">,</span> <span class="nx">customerId</span><span class="p">,</span> <span class="nx">bin</span><span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="o">|</span> <span class="nx">project</span> <span class="nx">conversationId</span><span class="p">,</span> <span class="nx">customerId</span><span class="p">,</span> <span class="nx">state</span><span class="p">,</span> <span class="nx">startTime</span><span class="o">=</span><span class="nx">times</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> 
+<span class="o">|</span> <span class="nx">project</span> <span class="nx">conversationId</span><span class="p">,</span> <span class="nx">customerId</span><span class="p">,</span> <span class="nx">state</span><span class="p">,</span> <span class="nx">startTime</span><span class="o">=</span><span class="nx">times</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="o">|</span> <span class="nx">summarize</span> <span class="nx">result</span><span class="o">=</span><span class="nx">count</span><span class="p">(</span><span class="nx">state</span><span class="p">),</span> <span class="nx">startEndTimes</span><span class="o">=</span><span class="nx">makelist</span><span class="p">(</span><span class="nx">startTime</span><span class="p">)</span> <span class="nx">by</span> <span class="nx">conversationId</span><span class="p">,</span> <span class="nx">customerId</span>
 <span class="o">|</span> <span class="nx">where</span> <span class="nx">result</span> <span class="o">==</span> <span class="mi">2</span>
 <span class="o">|</span> <span class="nx">project</span> <span class="nx">conversationId</span><span class="p">,</span> <span class="nx">customerId</span><span class="p">,</span> <span class="nx">timeTaken</span><span class="o">=</span><span class="nx">todatetime</span><span class="p">(</span><span class="nx">startEndTimes</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">-</span><span class="nx">todatetime</span><span class="p">(</span><span class="nx">startEndTimes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -134,25 +137,28 @@
 
 <p>Notice how you can apply aggregations in multiple passes, in this case the ‘summarize’ operator and ‘count’ function is used to aggregate results twice in conjunction with multiple ‘where’ statements that are used to filter the results. Now the javascript ‘calculated’ function code can be greatly simplified:</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">calculated</span><span class="p">:</span> <span class="p">(</span><span class="nx">results</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="kd">const</span> <span class="nx">times</span> <span class="o">=</span> <span class="nx">results</span><span class="p">.</span><span class="nx">reduce</span><span class="p">(</span>
-    <span class="p">(</span><span class="nx">acc</span><span class="p">,</span> <span class="nx">cur</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-      <span class="c1">// converts time hh:mm:ss format to value in seconds</span>
-      <span class="nx">acc</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">cur</span><span class="p">.</span><span class="nx">timeTaken</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">':'</span><span class="p">).</span><span class="nx">reverse</span><span class="p">().</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">c</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">c</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="nx">i</span><span class="p">),</span> <span class="mi">0</span><span class="p">));</span>
-      <span class="k">return</span> <span class="nx">acc</span><span class="p">;</span>
-    <span class="p">},</span>
-    <span class="p">[]);</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">calculated</span><span class="p">:</span> <span class="nx">results</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">times</span> <span class="o">=</span> <span class="nx">results</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">acc</span><span class="p">,</span> <span class="nx">cur</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// converts time hh:mm:ss format to value in seconds</span>
+    <span class="nx">acc</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span>
+      <span class="nx">cur</span><span class="p">.</span><span class="nx">timeTaken</span>
+        <span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">":"</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">reverse</span><span class="p">()</span>
+        <span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">c</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">c</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="nx">i</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">);</span>
+    <span class="k">return</span> <span class="nx">acc</span><span class="p">;</span>
+  <span class="p">},</span> <span class="p">[]);</span>
 
   <span class="kd">const</span> <span class="nx">avgTimeWaiting</span> <span class="o">=</span> <span class="nx">times</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="nx">times</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
   <span class="kd">const</span> <span class="nx">maxTimeWaiting</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(...</span><span class="nx">times</span><span class="p">);</span>
   <span class="kd">const</span> <span class="nx">minTimeWaiting</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(...</span><span class="nx">times</span><span class="p">);</span>
 
   <span class="k">return</span> <span class="p">{</span>
-    <span class="s1">'transcriptsAverageTimeWaiting-value'</span><span class="p">:</span> <span class="nx">avgTimeWaiting</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
-    <span class="s1">'transcriptsLongestTimeWaiting-value'</span><span class="p">:</span> <span class="nx">maxTimeWaiting</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
-    <span class="s1">'transcriptsShortestTimeWaiting-value'</span><span class="p">:</span> <span class="nx">minTimeWaiting</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+    <span class="s2">"transcriptsAverageTimeWaiting-value"</span><span class="p">:</span> <span class="nx">avgTimeWaiting</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+    <span class="s2">"transcriptsLongestTimeWaiting-value"</span><span class="p">:</span> <span class="nx">maxTimeWaiting</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+    <span class="s2">"transcriptsShortestTimeWaiting-value"</span><span class="p">:</span> <span class="nx">minTimeWaiting</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
   <span class="p">};</span>
-<span class="p">}</span>
+<span class="p">};</span>
 </code></pre></div></div>
 
 <p>The only thing we do is a ‘reduce’ function to convert the time format ‘hh:mm:ss’ returned from the Application Insights query into a number of seconds for the various calculations for displaying in a score card element.</p>
