@@ -34,7 +34,7 @@ To demonstrate the Azure App Service I have created a sample [Highscores demo fo
  ![FacebookAppSecureCanvasURL]({{ site.baseurl }}/assets/images/FacebookAppSecureCanvasURL.png)
  ![FacebookAppAdvancedSettings]({{ site.baseurl }}/assets/images/FacebookAppAdvancedSettings.png)
   If in doubt how to configure these settings check out the [Azure App Service documentation](https://azure.microsoft.com/en-gb/documentation/articles/app-service-mobile-how-to-configure-facebook-authentication/).
-5. Once authentication is setup the **'Highscores'** table script can be edited to save **'userId'** information.
+5. Once authentication is setup the **'Highscores'** table script can be edited to save **'userId'**categories: codermation.
  ![AppService_4-TableInsertScript]({{ site.baseurl }}/assets/images/AppService_4-TableInsertScript.png)
 ```js
 table.insert(function (context) {

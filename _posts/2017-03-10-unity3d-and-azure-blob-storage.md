@@ -152,7 +152,7 @@ private void ChangeImage (Texture texture)
 
 ## Unity Asset Bundles
 
-[Unity Asset Bundles](https://docs.unity3d.com/ScriptReference/AssetBundle.html) provide a way to dynamically load in assets in your project. This [Asset Bundle demo for Blob Storage](https://github.com/Unity3dAzure/StorageServicesDemo/tree/master/Assets/Demos/AssetBundle) is a little more complicated than the other examples. An important note to remember is that Asset Bundle binaries need to be build for each target platform. Refer to Unity documentation on [building Asset Bundles](https://docs.unity3d.com/Manual/BuildingAssetBundles.html) for more info on building Asset Bundles. Also make sure to review the code stripping section if you want to be able to use referenced scripts in your Prefabs when you do a build.
+[Unity Asset Bundles](https://docs.unity3d.com/ScriptReference/AssetBundle.html) provide a way to dynamically load in assets in your project. This [Asset Bundle demo for Blob Storage](https://github.com/Unity3dAzure/StorageServicesDemo/tree/master/Assets/Demos/AssetBundle) is a little more complicated than the other examples. An important note to remember is that Asset Bundle binaries need to be build for each target platform. Refer to Unity documentation on [building Asset Bundles](https://docs.unity3d.com/Manual/BuildingAssetBundles.html) for morecategories: code on building Asset Bundles. Also make sure to review the code stripping section if you want to be able to use referenced scripts in your Prefabs when you do a build.
 
 ### Building and uploading the Asset Bundles for each platform to Blob Storage
 

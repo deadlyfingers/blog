@@ -81,7 +81,7 @@ I used the [VuForia VuMark Illustrator template](https://library.vuforia.com/art
 | 9 x18 | 90 |
 | 9 x19 | 94 |
 
-For more info on designing VuMarks you can [download the VuMark design guide](https://developer.vuforia.com/sites/default/files/VuMark%20Design%20Guide.pdf) or [view design guide docs](https://library.vuforia.com/articles/Training/VuMark-Design-Guide). I also found the [video explaining the VuMark design process](https://www.youtube.com/watch?v=YXMiDRyvqzk) to be most helpful. NB: To design your own custom VuMarks you will need [Adobe Illustrator](https://www.adobe.com/uk/products/illustrator.html) to run the [VuMark template scripts](https://developer.vuforia.com/vui/auth/login?url=/downloads/tool%3Fd%3Dwindows-4851025-17-4124%26retU).
+For morecategories: code on designing VuMarks you can [download the VuMark design guide](https://developer.vuforia.com/sites/default/files/VuMark%20Design%20Guide.pdf) or [view design guide docs](https://library.vuforia.com/articles/Training/VuMark-Design-Guide). I also found the [video explaining the VuMark design process](https://www.youtube.com/watch?v=YXMiDRyvqzk) to be most helpful. NB: To design your own custom VuMarks you will need [Adobe Illustrator](https://www.adobe.com/uk/products/illustrator.html) to run the [VuMark template scripts](https://developer.vuforia.com/vui/auth/login?url=/downloads/tool%3Fd%3Dwindows-4851025-17-4124%26retU).
 
 **Illustrator / VuMark Scripts troubleshooting notes:**
 

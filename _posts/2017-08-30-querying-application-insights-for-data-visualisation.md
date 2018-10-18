@@ -34,7 +34,7 @@ The [Ibex dashboard schema](https://github.com/CatalystCode/ibex-dashboard/blob/
 
 To help to illustrate this we can look at the Application Insights query for tracking a bot to human hand-off during a user's conversation session. For this scenario we built a [QnA bot](https://qnamaker.ai/) with the [hand-off module](https://www.npmjs.com/package/botbuilder-handoff) installed. If a customer asks the QnA bot a question and no answer was found in the knowledge base we trigger an automatic hand-off to human. We want to show the fastest, longest and average times for customer waiting for an human agent to respond in the dashboard.
 
-We can start by writing a basic query in Application Insights to get all the transcripts from the 'customEvents' table and 'project' only the information we need.
+We can start by writing a basic query in Application Insights to get all the transcripts from the 'customEvents' table and 'project' only thecategories: codermation we need.
 
 ```js
 customEvents 

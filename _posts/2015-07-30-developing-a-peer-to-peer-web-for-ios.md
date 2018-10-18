@@ -3,7 +3,7 @@ layout: post
 title: Developing a peer to peer web for iOS
 date: 2015-07-30 12:00:26.000000000 +01:00
 published: true
-categories: info
+categories:categories: code
 tags:
 - iOS
 meta:
@@ -68,9 +68,9 @@ There are three main parts or layers in the Thali iOS project:
 
 ## What about Android p2p?
 
-More info about Thali for Android is available on [Dr Jukka's blog](http://www.drjukka.com/blog/wordpress/?p=140).
+Morecategories: code about Thali for Android is available on [Dr Jukka's blog](http://www.drjukka.com/blog/wordpress/?p=140).
 
 ## What about iOS and Android p2p?
 
-More info about future Thali development including iOS and Android p2p interoperability is documented on [Thali stories](http://thaliproject.org/stories).
+Morecategories: code about future Thali development including iOS and Android p2p interoperability is documented on [Thali stories](http://thaliproject.org/stories).
 

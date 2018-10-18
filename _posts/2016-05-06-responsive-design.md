@@ -3,16 +3,17 @@ layout: post
 title: Responsive Design from problem to production
 date: 2016-05-06 12:06:45.000000000 +01:00
 published: true
-categories: info
+categories:categories: code
 tags:
-- Cordova
-- Design
-- Responsive Design
+  - Cordova
+  - Design
+  - Responsive Design
 meta:
-  dsq_thread_id: '5670805712'
+  dsq_thread_id: "5670805712"
 comments: true
 author: David Douglas
 ---
+
 Responsive Design is often seen in terms of technical execution or production. In this article I will describe what it means to design responsively as a design process from problem to production.
 
 Contents:
@@ -55,11 +56,11 @@ If you are a designer for print it helps to have an understanding of the print p
 
 ### Design tools
 
-When I started designing for web there was only the desktop browser to think about so the basic approach of designing for the lowest common resolution worked well. Initially I used Photoshop for web designs with pixel perfect layouts. But as consumer monitors became capable of displaying greater resolutions it was possible to reproduce richer layouts influenced by print design. Illustrator became a superior tool for web design as it offered advanced control of grids and guides originally used for print design. Illustrator was also vector based and that made it easier to stretch out graphics as screens got bigger. Because of this I feel vector based tools are vastly more equipped for responsive design work than pixel-based design tools. But while Illustrator is a great tool for seasoned print design professionals, some digital designers might prefer something a little lighter and easier to use like Sketch or the new Experience Design app. However, the problem with all these design tools is that none can produce design with responsive information. Even the new digital design apps still feel like design for print tools stuck with static canvas layouts and limited bitmap resizing that fail to scale in a way that mimics the production process (ie. CSS background properties). Because of the lack of professional tools capable of responsive design that means the designer has to do extra work. For responsive designs I will design at least two size layouts for each page. I like to design a page in portrait aspect to represent a mobile view, and landscape aspect to represent desktop or tablet. So as long as a designer understands how responsive grids or dynamic columns work, then these designs should be easily fused together during development or production stage.
+When I started designing for web there was only the desktop browser to think about so the basic approach of designing for the lowest common resolution worked well. Initially I used Photoshop for web designs with pixel perfect layouts. But as consumer monitors became capable of displaying greater resolutions it was possible to reproduce richer layouts influenced by print design. Illustrator became a superior tool for web design as it offered advanced control of grids and guides originally used for print design. Illustrator was also vector based and that made it easier to stretch out graphics as screens got bigger. Because of this I feel vector based tools are vastly more equipped for responsive design work than pixel-based design tools. But while Illustrator is a great tool for seasoned print design professionals, some digital designers might prefer something a little lighter and easier to use like Sketch or the new Experience Design app. However, the problem with all these design tools is that none can produce design with responsivecategories: codermation. Even the new digital design apps still feel like design for print tools stuck with static canvas layouts and limited bitmap resizing that fail to scale in a way that mimics the production process (ie. CSS background properties). Because of the lack of professional tools capable of responsive design that means the designer has to do extra work. For responsive designs I will design at least two size layouts for each page. I like to design a page in portrait aspect to represent a mobile view, and landscape aspect to represent desktop or tablet. So as long as a designer understands how responsive grids or dynamic columns work, then these designs should be easily fused together during development or production stage.
 
 ## Responsive Design for developers
 
-There is an abundance of tools for developing responsive websites. But just like I mentioned that it was important for designers to think about the development or production I also feel responsive web developers should be mindful of the design side. Developers need to be aware of the current problem that professional design tools don't contain responsive information and that means they will need to work closer with designers to figure out how to merge separate designs into one single responsive design. Responsive web developers will need to be familiar with the design grid so that they can turn page designs into a single dynamic layout of HTML and CSS.
+There is an abundance of tools for developing responsive websites. But just like I mentioned that it was important for designers to think about the development or production I also feel responsive web developers should be mindful of the design side. Developers need to be aware of the current problem that professional design tools don't contain responsivecategories: codermation and that means they will need to work closer with designers to figure out how to merge separate designs into one single responsive design. Responsive web developers will need to be familiar with the design grid so that they can turn page designs into a single dynamic layout of HTML and CSS.
 
 ### The language of responsive web design
 
@@ -104,27 +105,27 @@ When it comes to responsive web design the use of a popular grid system like Boo
 ```scss
 /* Bootstrap 3 four tier grid */
 
-@mixin media-xs() {	
+@mixin media-xs() {
   @media (max-width: 767px) {
-    @content;	
+    @content;
   }
 }
 
-@mixin media-sm() {	
+@mixin media-sm() {
   @media (min-width: 768px) {
-    @content;	
+    @content;
   }
 }
 
-@mixin media-md() {	
+@mixin media-md() {
   @media (min-width: 992px) {
-    @content;	
+    @content;
   }
 }
 
-@mixin media-lg() {	
+@mixin media-lg() {
   @media (min-width: 1200px) {
-    @content;	
+    @content;
   }
 }
 ```
@@ -134,16 +135,20 @@ When it comes to responsive web design the use of a popular grid system like Boo
 Retina displays are everywhere these days! If you walk into a phone shop today, I reckon it would be harder to find a phone without an HD display. The new [HTML5 picture element](https://software.intel.com/en-us/html5/hub/blogs/html5-picture-element) allows developers to specify higher resolution images so the graphics will display sharper. But I still prefer to use CSS media queries to handle 'Retina' (@2x) and 'Retina HD' (@3x) images.
 
 ```scss
-@mixin media-2x() {	
-  @media (min-resolution: 144dpi), (min-device-pixel-ratio: 1.25), (-webkit-min-device-pixel-ratio: 2) {
-   @content;
- }
+@mixin media-2x() {
+  @media (min-resolution: 144dpi),
+    (min-device-pixel-ratio: 1.25),
+    (-webkit-min-device-pixel-ratio: 2) {
+    @content;
+  }
 }
 
-@mixin media-3x() {	
- @media (min-resolution: 288dpi), (min-device-pixel-ratio: 2.25), (-webkit-min-device-pixel-ratio: 3) {
-   @content;
- }
+@mixin media-3x() {
+  @media (min-resolution: 288dpi),
+    (min-device-pixel-ratio: 2.25),
+    (-webkit-min-device-pixel-ratio: 3) {
+    @content;
+  }
 }
 ```
 
@@ -151,11 +156,11 @@ I find the CSS method gives more control over scaling, cropping and positioning 
 
 ```scss
 @mixin bg-position($row, $col, $width, $height) {
-	background-position: (-$col * $width) (-$row * $height);
+  background-position: (-$col * $width) (-$row * $height);
 }
 
 @mixin bg-size($rows, $cols, $width, $height) {
-	background-size: ($cols * $width) ($rows * $height);
+  background-size: ($cols * $width) ($rows * $height);
 }
 ```
 
@@ -184,7 +189,7 @@ With responsive design there is always a need to scale graphics. Vector graphics
 The web view provided by iOS and Android come with a number of behaviours that are designed to improve user experience with websites. In a website context this is true, but when it comes to responsively designed web apps these web view behaviours result in undesirable effects as far as an app experience is concerned:
 
 1. Page bounce or spring – pages have a bounce or spring effect, but apps don't bounce.
-2. Double tap zoom – pages allow double tap regional zooming, but apps don't zoom. 
+2. Double tap zoom – pages allow double tap regional zooming, but apps don't zoom.
 3. 300ms tap delay – page interactions are artificially slower to accommodate the double tap zoom gesture, but apps don't exhibit unresponsiveness.
 4. Long tap inline magnification – pages allow prolonged selection for inline magnification, but apps don't show inline magnification everywhere.
 5. Global user selection – page selection is everywhere, but apps only provide selection where user input is desired.
@@ -192,32 +197,32 @@ The web view provided by iOS and Android come with a number of behaviours that a
 Fortunately, most of these web view behaviours can be tamed so a hybrid app can behave in a native app manner that a user would expect.
 
 1. Page bounce or spring behaviour can be disabled by setting Cordova's 'DisallowOverscroll' preference to 'true'.
-    ```xml
-    <preference name="DisallowOverscroll" value="true"></preference>
-    ```  
-2. Double tap zoom behaviour can be disabled by setting Cordova's 'EnableViewportScale' preference to 'true' and setting the HTML5 viewport meta tag (http://www.w3schools.com/css/css\_rwd\_viewport.asp) to disable user scaling.
-    ```xml
-    <preference name="EnableViewportScale" value="true"></preference>
-    ```
-    ```xml
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    ```  
+   ```xml
+   <preference name="DisallowOverscroll" value="true"></preference>
+   ```
+2. Double tap zoom behaviour can be disabled by setting Cordova's 'EnableViewportScale' preference to 'true' and setting the [HTML5 viewport meta tag](https://www.w3schools.com/css/css_rwd_viewport.asp) to disable user scaling.
+   ```xml
+   <preference name="EnableViewportScale" value="true"></preference>
+   ```
+   ```xml
+   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+   ```
 3. The 300ms click delay is fixable on Chrome by [setting the device width on the HTML5 viewport meta tag](https://developers.google.com/web/updates/2013/12/300ms-tap-delay-gone-away?hl=en) (shown above).
-4. Long tap inline magnification can be disable by setting Cordova's 'Suppresses3DTouchGesture' preference to 'true'.  
-    ```xml
-    <preference name="Suppresses3DTouchGesture" value="true"></preference>
-    ```  
+4. Long tap inline magnification can be disable by setting Cordova's 'Suppresses3DTouchGesture' preference to 'true'.
+   ```xml
+   <preference name="Suppresses3DTouchGesture" value="true"></preference>
+   ```
 5. Global user selection can be disabled with CSS 'user-select' set to 'none' (including the usual browser prefixes (https://developer.mozilla.org/en-US/docs/Web/CSS/user-select)). With iOS '-webkit-touch-callout' also needs to set to 'none' to disable the [touch callout](https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariCSSRef/Articles/StandardCSSProperties.html#//apple_ref/doc/uid/TP30001266-_webkit_touch_callout).
-    ```css
-    body {
-      -webkit-touch-callout: none;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      cursor: default;
-    }
-    ```
+   ```css
+   body {
+     -webkit-touch-callout: none;
+     -webkit-user-select: none;
+     -moz-user-select: none;
+     -ms-user-select: none;
+     user-select: none;
+     cursor: default;
+   }
+   ```
 
 NB: As this turns off all user selection, you might need certain elements or form inputs to allow user selection. In this case certain exceptions can be added using the _:not()_ CSS selector.
 

@@ -3,7 +3,7 @@ layout: post
 title: Faster Cordova web app deployment with hotwire script
 date: 2015-10-16 14:00:03.000000000 +01:00
 published: true
-categories: info
+categories:categories: code
 tags:
 - Cordova
 - iOS

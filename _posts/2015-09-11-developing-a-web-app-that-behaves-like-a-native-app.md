@@ -3,7 +3,7 @@ layout: post
 title: Developing a web app that behaves like a native app
 date: 2015-09-11 10:09:52.000000000 +01:00
 published: true
-categories: info
+categories:categories: code
 tags:
 - Android
 - Cordova
