@@ -118,22 +118,25 @@ pre {
 
 /* post table */
 
-.post>table {
+.post>table,
+.post li>table,
+.post li>table {
   border-collapse: collapse;
-}
 
-.post>table th,
-.post>table td {
-  text-align: left;
-  padding: 10px;
-}
+  th,
+  td {
+    text-align: left;
+    padding: 10px;
+  }
 
-.post>table tr {
-  border-bottom: 1px solid $color-dim;
-}
+  thead,
+  tr {
+    border-bottom: 1px solid $color-dim;
 
-.post>table tr:last-child {
-  border-bottom: 0;
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
 }
 
 /* post images */

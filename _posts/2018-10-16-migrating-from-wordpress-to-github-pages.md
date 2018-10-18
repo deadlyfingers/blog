@@ -23,17 +23,22 @@ Here's a bunch of things I like with GitHub Pages compared with my self-hosted W
 - Use GitHub as server - I don't need to provide my own hosting or database. Free hosting is nice!
 - [GitHub has partnered with Let's Encrypt](https://blog.github.com/2018-05-01-github-pages-custom-domains-https/) so you get **HTTPS** for free - just check a box!
 - You can setup a **custom domain** for both an [apex domain](https://help.github.com/articles/setting-up-an-apex-domain/) and [www subdomain](https://help.github.com/articles/setting-up-a-www-subdomain/) and GitHub Pages will handle the redirect.
+
   1.  Add [**A Records** with your DNS provider](https://help.github.com/articles/setting-up-an-apex-domain/#configuring-a-records-with-your-dns-provider) for **apex domain** (_without www._):
-      | Domain | IP address |
-      | --- | --- |
+
+      | Domain             | IP address        |
+      | ------------------ | ----------------- |
       | _YOUR_DOMAIN_.com. | `185.199.108.153` |
       | _YOUR_DOMAIN_.com. | `185.199.109.153` |
       | _YOUR_DOMAIN_.com. | `185.199.110.153` |
       | _YOUR_DOMAIN_.com. | `185.199.111.153` |
+
   2.  Add one **CNAME** record for **www subdomain**.
-      | Domain | Canonical name |
-      | --- | --- |
-      | www | _USERNAME_.github.io. |
+
+      | Domain | Canonical name        |
+      | ------ | --------------------- |
+      | www    | _USERNAME_.github.io. |
+
   3.  Update the GitHub Pages > Settings > **Custom Domain** field to **www._YOURDOMAIN_.com** (this will add a **CNAME** file to the root directory in the GitHub Pages branch)
   4.  You can then enable **Enforce HTTPS** in GitHub Pages > Settings.
 
