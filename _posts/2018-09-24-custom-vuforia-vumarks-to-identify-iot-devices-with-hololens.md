@@ -150,11 +150,11 @@ To run the [Mixed Reality IoT Monitoring Unity project](https://github.com/deadl
 3. Create a new Azure Function. NB: Ensure your **Function app settings** is using **version 2**
 4. Add the following environment variables using your **Azure Function app settings** :
 
-- IOTHUB_CONNECTION_STRING
-- TSI_FQDN
-- AD_APP_ID
-- AD_APP_KEY
-- AD_TENANT_DOMAIN NAME "\*.onmicrosoft.com"
+   - IOTHUB_CONNECTION_STRING
+   - TSI_FQDN
+   - AD_APP_ID
+   - AD_APP_KEY
+   - AD_TENANT_DOMAIN NAME "\*.onmicrosoft.com"
 
 5. To deploy your Function app select **Platform Features \> Deployment Options \> Setup \> GitHub** and choose your forked repo.
 
