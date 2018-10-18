@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2018-10-18T09:23:46+01:00</updated><id>/</id><title type="html">Deadlyfingers.net</title><subtitle>Developer blog</subtitle><author><name>David Douglas</name></author><entry><title type="html">Migrating from Wordpress blog to GitHub Pages</title><link href="/code/migrating-from-wordpress-to-github-pages" rel="alternate" type="text/html" title="Migrating from Wordpress blog to GitHub Pages" /><published>2018-10-16T00:00:00+01:00</published><updated>2018-10-16T00:00:00+01:00</updated><id>/code/migrating-from-wordpress-to-github-pages</id><content type="html" xml:base="/code/migrating-from-wordpress-to-github-pages">&lt;p&gt;Wordpress has done a decent job of running my blog.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2018-10-18T10:00:48+01:00</updated><id>/</id><title type="html">Deadlyfingers.net</title><subtitle>Developer blog</subtitle><author><name>David Douglas</name></author><entry><title type="html">Migrating from Wordpress blog to GitHub Pages</title><link href="/code/migrating-from-wordpress-to-github-pages" rel="alternate" type="text/html" title="Migrating from Wordpress blog to GitHub Pages" /><published>2018-10-16T00:00:00+01:00</published><updated>2018-10-16T00:00:00+01:00</updated><id>/code/migrating-from-wordpress-to-github-pages</id><content type="html" xml:base="/code/migrating-from-wordpress-to-github-pages">&lt;p&gt;Wordpress has done a decent job of running my blog.
 But I’ve longer for something leaner for writing developer code stories as the rich &lt;strong&gt;HTML&lt;/strong&gt; text editor tends to introduce too much complexity.&lt;/p&gt;
 
 &lt;!--more--&gt;
@@ -13,19 +13,58 @@ Ultimately I decided to migrate my Wordpress blog to GitHub pages.&lt;/p&gt;
   &lt;li&gt;Markdown is much easier for writing developer documentation and inline code snippets, but I can also inject HTML when needed.&lt;/li&gt;
   &lt;li&gt;Use GitHub as server - I don’t need to provide my own hosting or database. Free hosting is nice!&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://blog.github.com/2018-05-01-github-pages-custom-domains-https/&quot;&gt;GitHub has partnered with Let’s Encrypt&lt;/a&gt; so you get &lt;strong&gt;HTTPS&lt;/strong&gt; for free - just check a box!&lt;/li&gt;
-  &lt;li&gt;You can setup a &lt;strong&gt;custom domain&lt;/strong&gt; for both an &lt;a href=&quot;https://help.github.com/articles/setting-up-an-apex-domain/&quot;&gt;apex domain&lt;/a&gt; and &lt;a href=&quot;https://help.github.com/articles/setting-up-a-www-subdomain/&quot;&gt;www subdomain&lt;/a&gt; and GitHub Pages will handle the redirect.
+  &lt;li&gt;
+    &lt;p&gt;You can setup a &lt;strong&gt;custom domain&lt;/strong&gt; for both an &lt;a href=&quot;https://help.github.com/articles/setting-up-an-apex-domain/&quot;&gt;apex domain&lt;/a&gt; and &lt;a href=&quot;https://help.github.com/articles/setting-up-a-www-subdomain/&quot;&gt;www subdomain&lt;/a&gt; and GitHub Pages will handle the redirect.&lt;/p&gt;
+
     &lt;ol&gt;
-      &lt;li&gt;Add &lt;a href=&quot;https://help.github.com/articles/setting-up-an-apex-domain/#configuring-a-records-with-your-dns-provider&quot;&gt;&lt;strong&gt;A Records&lt;/strong&gt; with your DNS provider&lt;/a&gt; for &lt;strong&gt;apex domain&lt;/strong&gt; (&lt;em&gt;without www.&lt;/em&gt;):
-| Domain | IP address |
-| — | — |
-| &lt;em&gt;YOUR_DOMAIN&lt;/em&gt;.com. | &lt;code class=&quot;highlighter-rouge&quot;&gt;185.199.108.153&lt;/code&gt; |
-| &lt;em&gt;YOUR_DOMAIN&lt;/em&gt;.com. | &lt;code class=&quot;highlighter-rouge&quot;&gt;185.199.109.153&lt;/code&gt; |
-| &lt;em&gt;YOUR_DOMAIN&lt;/em&gt;.com. | &lt;code class=&quot;highlighter-rouge&quot;&gt;185.199.110.153&lt;/code&gt; |
-| &lt;em&gt;YOUR_DOMAIN&lt;/em&gt;.com. | &lt;code class=&quot;highlighter-rouge&quot;&gt;185.199.111.153&lt;/code&gt; |&lt;/li&gt;
-      &lt;li&gt;Add one &lt;strong&gt;CNAME&lt;/strong&gt; record for &lt;strong&gt;www subdomain&lt;/strong&gt;.
-| Domain | Canonical name |
-| — | — |
-| www | &lt;em&gt;USERNAME&lt;/em&gt;.github.io. |&lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Add &lt;a href=&quot;https://help.github.com/articles/setting-up-an-apex-domain/#configuring-a-records-with-your-dns-provider&quot;&gt;&lt;strong&gt;A Records&lt;/strong&gt; with your DNS provider&lt;/a&gt; for &lt;strong&gt;apex domain&lt;/strong&gt; (&lt;em&gt;without www.&lt;/em&gt;):&lt;/p&gt;
+
+        &lt;table&gt;
+          &lt;thead&gt;
+            &lt;tr&gt;
+              &lt;th&gt;Domain&lt;/th&gt;
+              &lt;th&gt;IP address&lt;/th&gt;
+            &lt;/tr&gt;
+          &lt;/thead&gt;
+          &lt;tbody&gt;
+            &lt;tr&gt;
+              &lt;td&gt;&lt;em&gt;YOUR_DOMAIN&lt;/em&gt;.com.&lt;/td&gt;
+              &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;185.199.108.153&lt;/code&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;td&gt;&lt;em&gt;YOUR_DOMAIN&lt;/em&gt;.com.&lt;/td&gt;
+              &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;185.199.109.153&lt;/code&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;td&gt;&lt;em&gt;YOUR_DOMAIN&lt;/em&gt;.com.&lt;/td&gt;
+              &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;185.199.110.153&lt;/code&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;td&gt;&lt;em&gt;YOUR_DOMAIN&lt;/em&gt;.com.&lt;/td&gt;
+              &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;185.199.111.153&lt;/code&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Add one &lt;strong&gt;CNAME&lt;/strong&gt; record for &lt;strong&gt;www subdomain&lt;/strong&gt;.&lt;/p&gt;
+
+        &lt;table&gt;
+          &lt;thead&gt;
+            &lt;tr&gt;
+              &lt;th&gt;Domain&lt;/th&gt;
+              &lt;th&gt;Canonical name&lt;/th&gt;
+            &lt;/tr&gt;
+          &lt;/thead&gt;
+          &lt;tbody&gt;
+            &lt;tr&gt;
+              &lt;td&gt;www&lt;/td&gt;
+              &lt;td&gt;&lt;em&gt;USERNAME&lt;/em&gt;.github.io.&lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt;
+      &lt;/li&gt;
       &lt;li&gt;Update the GitHub Pages &amp;gt; Settings &amp;gt; &lt;strong&gt;Custom Domain&lt;/strong&gt; field to &lt;strong&gt;www.&lt;em&gt;YOURDOMAIN&lt;/em&gt;.com&lt;/strong&gt; (this will add a &lt;strong&gt;CNAME&lt;/strong&gt; file to the root directory in the GitHub Pages branch)&lt;/li&gt;
       &lt;li&gt;You can then enable &lt;strong&gt;Enforce HTTPS&lt;/strong&gt; in GitHub Pages &amp;gt; Settings.&lt;/li&gt;
     &lt;/ol&gt;

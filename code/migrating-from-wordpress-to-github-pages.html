@@ -46,19 +46,58 @@ Ultimately I decided to migrate my Wordpress blog to GitHub pages.</p>
   <li>Markdown is much easier for writing developer documentation and inline code snippets, but I can also inject HTML when needed.</li>
   <li>Use GitHub as server - I don’t need to provide my own hosting or database. Free hosting is nice!</li>
   <li><a href="https://blog.github.com/2018-05-01-github-pages-custom-domains-https/">GitHub has partnered with Let’s Encrypt</a> so you get <strong>HTTPS</strong> for free - just check a box!</li>
-  <li>You can setup a <strong>custom domain</strong> for both an <a href="https://help.github.com/articles/setting-up-an-apex-domain/">apex domain</a> and <a href="https://help.github.com/articles/setting-up-a-www-subdomain/">www subdomain</a> and GitHub Pages will handle the redirect.
+  <li>
+    <p>You can setup a <strong>custom domain</strong> for both an <a href="https://help.github.com/articles/setting-up-an-apex-domain/">apex domain</a> and <a href="https://help.github.com/articles/setting-up-a-www-subdomain/">www subdomain</a> and GitHub Pages will handle the redirect.</p>
+
     <ol>
-      <li>Add <a href="https://help.github.com/articles/setting-up-an-apex-domain/#configuring-a-records-with-your-dns-provider"><strong>A Records</strong> with your DNS provider</a> for <strong>apex domain</strong> (<em>without www.</em>):
-| Domain | IP address |
-| — | — |
-| <em>YOUR_DOMAIN</em>.com. | <code class="highlighter-rouge">185.199.108.153</code> |
-| <em>YOUR_DOMAIN</em>.com. | <code class="highlighter-rouge">185.199.109.153</code> |
-| <em>YOUR_DOMAIN</em>.com. | <code class="highlighter-rouge">185.199.110.153</code> |
-| <em>YOUR_DOMAIN</em>.com. | <code class="highlighter-rouge">185.199.111.153</code> |</li>
-      <li>Add one <strong>CNAME</strong> record for <strong>www subdomain</strong>.
-| Domain | Canonical name |
-| — | — |
-| www | <em>USERNAME</em>.github.io. |</li>
+      <li>
+        <p>Add <a href="https://help.github.com/articles/setting-up-an-apex-domain/#configuring-a-records-with-your-dns-provider"><strong>A Records</strong> with your DNS provider</a> for <strong>apex domain</strong> (<em>without www.</em>):</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Domain</th>
+              <th>IP address</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><em>YOUR_DOMAIN</em>.com.</td>
+              <td><code class="highlighter-rouge">185.199.108.153</code></td>
+            </tr>
+            <tr>
+              <td><em>YOUR_DOMAIN</em>.com.</td>
+              <td><code class="highlighter-rouge">185.199.109.153</code></td>
+            </tr>
+            <tr>
+              <td><em>YOUR_DOMAIN</em>.com.</td>
+              <td><code class="highlighter-rouge">185.199.110.153</code></td>
+            </tr>
+            <tr>
+              <td><em>YOUR_DOMAIN</em>.com.</td>
+              <td><code class="highlighter-rouge">185.199.111.153</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>
+        <p>Add one <strong>CNAME</strong> record for <strong>www subdomain</strong>.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Domain</th>
+              <th>Canonical name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>www</td>
+              <td><em>USERNAME</em>.github.io.</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
       <li>Update the GitHub Pages &gt; Settings &gt; <strong>Custom Domain</strong> field to <strong>www.<em>YOURDOMAIN</em>.com</strong> (this will add a <strong>CNAME</strong> file to the root directory in the GitHub Pages branch)</li>
       <li>You can then enable <strong>Enforce HTTPS</strong> in GitHub Pages &gt; Settings.</li>
     </ol>
