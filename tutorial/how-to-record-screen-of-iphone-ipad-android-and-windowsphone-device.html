@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="description" content="Developer blog">
+  <meta name="description" content="Blog for technical designers and developers featuring code stories, experimental tech and tutorials by David Douglas">
   <title>How to record screen of iPhone, iPad, Android and WindowsPhone device</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="/assets/main.css" rel="stylesheet">
@@ -106,28 +106,8 @@ screenrecord /sdcard/recording.mp4</code></li>
 <div class="large-4 cell">
   <!-- <a href="http://example.com/bar.html#disqus_thread">Link</a> -->
 
-<h6 title="">Comments</h6>
+<h6 title=".disqus.com">Comments</h6>
 <div id="disqus_thread"></div>
-<script>
-  // RECOMMENDED CONFIGURATION VARIABLES 
-  // https://disqus.com/admin/universalcode/#configuration-variables*/
-  //*
-  var disqus_config = function () {
-    // Replace PAGE_URL with your page's canonical URL variable
-    this.page.url = "//www.deadlyfingers.net/tutorial/how-to-record-screen-of-iphone-ipad-android-and-windowsphone-device";
-    // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-    this.page.identifier = "5666766258";
-    console.info("disqus_config:", this.page.url, this.page.identifier);
-  };
-  //*/
-  (function () { // DON'T EDIT BELOW THIS LINE
-    var d = document,
-      s = d.createElement('script');
-    s.src = 'https://deadlyfingers.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-  })();
-</script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
 </div>
@@ -169,6 +149,25 @@ screenrecord /sdcard/recording.mp4</code></li>
   </div>
   <div class="top"><a href="#" class="top">Top</a></div>
 </div>
+
+<!-- disqus script -->
+
+<script>
+  var disqus_config = function () {
+    this.page.url = "//www.deadlyfingers.net/tutorial/how-to-record-screen-of-iphone-ipad-android-and-windowsphone-device";
+    this.page.identifier =
+      "5666766258";
+    console.info("disqus_config:", this.page.identifier, "url:", this.page.url);
+  };
+  (function () {
+    var d = document,
+      s = d.createElement('script');
+    s.src = 'https://deadlyfingers.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
     </div>
   </div>
 
