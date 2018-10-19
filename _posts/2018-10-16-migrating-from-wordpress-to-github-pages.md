@@ -14,7 +14,7 @@ But I've longer for something leaner for writing developer code stories as the r
 <!--more-->
 
 Initially I thought about writing a custom blog web app but decided it would be better to consider existing platforms that can handle my requirements.
-Ultimately I decided to migrate my Wordpress blog to GitHub pages.
+Ultimately I decided to migrate my Wordpress blog to [GitHub Pages](https://pages.github.com/).
 
 Here's a bunch of things I like with GitHub Pages compared with my self-hosted Wordpress site:
 
@@ -154,3 +154,4 @@ I've included a list of references below which I found useful during the creatio
 ### Gulp
 
 - [Publish build to GitHub Pages](https://www.npmjs.com/package/gulp-gh-pages)
+- [gulp 3 to gulp 4 task guide](https://www.joezimjs.com/javascript/complete-guide-upgrading-gulp-4/)

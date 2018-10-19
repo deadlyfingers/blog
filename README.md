@@ -12,13 +12,17 @@ Requires installation of **gulp-cli** v4 and **gulp-gh-pages** for deployment.
 
 ```shell
 npm install -g gulp-cli
-npm install
+npm install --only=dev
 ```
 
 ## Setup
 
 #### Install dependencies
-`npm install`
+`npm install --only=prod`
+
+Copy required dependencies from *node_modules* into *_dev* build dir
+
+`gulp copy:dev`
 
 #### Install Ruby Gems
 ```shell
@@ -33,42 +37,41 @@ gem install tzinfo-data
 gem install wdm
 ```
 
+#### Install bundle
+`bundle install`
+
 ## Development
 
 ### Build
 
-`bundle install`
-
+`npm run build:dev` 
+or
 `bundle exec jekyll build -d ./_dev --config _config.yml,_config_dev.yml --incremental --watch`
-
-> Copy dependencies from node_modules into dev build dir
-
-`gulp copy:dev`
 
 ### Serve
 
+`npm run serve:dev`
+or
 `bundle exec jekyll serve -d ./_dev --config _config.yml,_config_dev.yml`
 
-### Serve (with auto-reload)
+#### Or serve with **auto-reload** to external devices using [BrowserSync](https://browsersync.io/docs/command-line):
 
-`npm run dev`
+`browser-sync start --server '_dev' --files '_dev/**/*' --extensions 'html' --port 3000 --reload-debounce 200 --no-ui --no-open`
 
-or offline mode:
-
-`browser-sync start --server '_dev' --files '_dev' --extensions 'html' --port 3000 --reload-delay 100 --no-open --no-ui --no-online`
+> NB: Include `--no-online` if there's no internet connection or device is in flight mode!
 
 ## GitHub Pages
 
 ### Build
 
-`bundle install`
-
+`npm run build` 
+or 
 `bundle exec jekyll build`
 
 ### Deploy
 
-Deploy '_site' files to 'gh-pages' branch
+Deploys build to 'gh-pages' branch
 
 `gulp deploy`
 
-> This deploys changes to the the live site!
+> NB: This publishes all changes to the the live site!

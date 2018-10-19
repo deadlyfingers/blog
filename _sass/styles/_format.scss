@@ -86,6 +86,11 @@ ul.list {
   color: $color-dim;
 }
 
+li>p {
+  padding: 0;
+  margin: 0;
+}
+
 /* quotes */
 
 blockquote,

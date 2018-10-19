@@ -13,6 +13,9 @@
     "gulp-gh-pages": "^0.5.4"
   },
   "scripts": {
-    "dev": "browser-sync start --server '_dev' --files '_dev' --extensions 'html' --port 3000 --no-ui"
+    "build:dev": "bundle exec jekyll build -d ./_dev --config _config.yml,_config_dev.yml --incremental --watch",
+    "serve:dev": "bundle exec jekyll serve -d ./_dev --config _config.yml,_config_dev.yml",
+    "build": "bundle exec jekyll build",
+    "serve": "bundle exec jekyll serve"
   }
 }

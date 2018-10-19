@@ -2,7 +2,8 @@
     "files.exclude": {
         ".sass-cache": true,
         "_site": true,
-        "_dev": true
+        "_dev": true,
+        ".publish": true
     },
     "editor.insertSpaces": true,
     "editor.tabSize": 2,
