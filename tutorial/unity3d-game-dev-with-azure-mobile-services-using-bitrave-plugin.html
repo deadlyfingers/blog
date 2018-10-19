@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="/assets/main.css" rel="stylesheet">
   <!-- RSS -->
-  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Deadlyfingers.net" />
+  <link type="application/atom+xml" rel="alternate" href="//www.deadlyfingers.net/feed.xml" title="Deadlyfingers.net" />
 </head>
 
 <body>
@@ -164,11 +164,35 @@ Connect to Mobile Services by logging in to add some items.
 <div class="large-4 cell">
   <!-- <a href="http://example.com/bar.html#disqus_thread">Link</a> -->
 
+<h6 title="">Comments</h6>
+<div id="disqus_thread"></div>
+<script>
+  // RECOMMENDED CONFIGURATION VARIABLES 
+  // https://disqus.com/admin/universalcode/#configuration-variables*/
+  //*
+  var disqus_config = function () {
+    // Replace PAGE_URL with your page's canonical URL variable
+    this.page.url = "//www.deadlyfingers.net/tutorial/unity3d-game-dev-with-azure-mobile-services-using-bitrave-plugin";
+    // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    this.page.identifier = "5665809124";
+    console.info("disqus_config:", this.page.url, this.page.identifier);
+  };
+  //*/
+  (function () { // DON'T EDIT BELOW THIS LINE
+    var d = document,
+      s = d.createElement('script');
+    s.src = 'https://deadlyfingers.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
 </div>
 
 <div id="pagination" class="large-12 cell">
   <div>
-    <a href="/tutorial/unity3d-game-dev-with-azure-mobile-services-using-bitrave-plugin">Unity3d game dev with Azure Mobile Services using BitRave plugin</a>
+    <a href="//www.deadlyfingers.net/tutorial/unity3d-game-dev-with-azure-mobile-services-using-bitrave-plugin">Unity3d game dev with Azure Mobile Services using BitRave plugin</a>
     <span>
       
       <span>by David Douglas</span>
@@ -210,5 +234,16 @@ Connect to Mobile Services by logging in to add some items.
 
   <!-- scripts -->
   <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-140437-35"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'UA-140437-35');
+</script>
 
 </body>
