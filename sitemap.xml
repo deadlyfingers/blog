@@ -2,15 +2,15 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>/code/</loc>
-<lastmod>2018-10-18T21:51:42+01:00</lastmod>
+<lastmod>2018-10-19T15:06:30+01:00</lastmod>
 </url>
 <url>
 <loc>/info/</loc>
-<lastmod>2018-10-18T21:51:42+01:00</lastmod>
+<lastmod>2018-10-19T15:06:30+01:00</lastmod>
 </url>
 <url>
 <loc>/tutorial/</loc>
-<lastmod>2018-10-18T21:51:42+01:00</lastmod>
+<lastmod>2018-10-19T15:06:30+01:00</lastmod>
 </url>
 <url>
 <loc>/tutorial/setting-up-a-wordpress-website-with-azure</loc>
@@ -50,15 +50,15 @@
 </url>
 <url>
 <loc>/tutorial/unity3d-game-dev-with-azure-mobile-services-using-bitrave-plugin</loc>
-<lastmod>2014-11-21T15:02:28+00:00</lastmod>
+<lastmod>2014-11-21T16:02:28+01:00</lastmod>
 </url>
 <url>
 <loc>/tutorial/unity3d-leaderboard-demo-using-bitrave-azure-plugin</loc>
-<lastmod>2014-11-26T10:37:14+00:00</lastmod>
+<lastmod>2014-11-26T11:37:14+01:00</lastmod>
 </url>
 <url>
 <loc>/tutorial/ember-cli-todo-example-app-with-azure-mobile-services</loc>
-<lastmod>2015-02-28T17:52:59+00:00</lastmod>
+<lastmod>2015-02-28T18:52:59+01:00</lastmod>
 </url>
 <url>
 <loc>/tutorial/using-azure-cli-on-mac-os-x-to-create-mobile-service</loc>
@@ -82,7 +82,7 @@
 </url>
 <url>
 <loc>/code/making-sense-of-web-app-debug-logs-on-multiple-android-and-ios-devices</loc>
-<lastmod>2015-11-13T16:39:00+00:00</lastmod>
+<lastmod>2015-11-13T17:39:00+01:00</lastmod>
 </url>
 <url>
 <loc>/code/responsive-design</loc>
@@ -106,7 +106,7 @@
 </url>
 <url>
 <loc>/tutorial/unity3d-and-azure-blob-storage</loc>
-<lastmod>2017-03-10T11:14:11+00:00</lastmod>
+<lastmod>2017-03-10T12:14:11+01:00</lastmod>
 </url>
 <url>
 <loc>/code/querying-application-insights-for-data-visualisation</loc>
@@ -160,6 +160,6 @@
 </url>
 <url>
 <loc>/assets/media/AzureMobileServices-Android-GettingStarted.pdf</loc>
-<lastmod>2018-10-17T19:48:47+01:00</lastmod>
+<lastmod>2018-10-05T10:30:09+01:00</lastmod>
 </url>
 </urlset>
