@@ -10,11 +10,12 @@
 <h6>Comments</h6>
 <div id="disqus_thread"></div>
 <script>
+  /*
   var disqus_config = function () {
     this.page.url = "{{ page.url | absolute_url }}";
-    this.page.identifier =
-      "{% if page.meta.dsq_thread_id %}{{ page.meta.dsq_thread_id }}{% else %}{{ page.id }}{% endif %}";
+    this.page.identifier = "{{ page.id }}";
   };
+  //*/
   (function () {
     var d = document,
       s = d.createElement('script');
