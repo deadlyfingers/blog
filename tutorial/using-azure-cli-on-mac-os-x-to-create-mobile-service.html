@@ -214,10 +214,27 @@ The Mobile Service should only take a couple of minutes to provision.</p>
 </div>
 
 <div class="large-4 cell">
-  <!-- <a href="http://example.com/bar.html#disqus_thread">Link</a> -->
+  <!-- disqus comments -->
 
-<h6 title=".disqus.com">Comments</h6>
+
+
+<h6>Comments</h6>
 <div id="disqus_thread"></div>
+<script>
+  var disqus_config = function () {
+    this.page.url = "//www.deadlyfingers.net/tutorial/using-azure-cli-on-mac-os-x-to-create-mobile-service";
+    this.page.identifier =
+      "5691494323";
+  };
+  (function () {
+    var d = document,
+      s = d.createElement('script');
+    s.async = true;
+    s.src = 'https://deadlyfingers.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
 </div>
@@ -257,25 +274,6 @@ The Mobile Service should only take a couple of minutes to provision.</p>
   </div>
   <div class="top"><a href="#" class="top">Top</a></div>
 </div>
-
-<!-- disqus script -->
-
-<script>
-  var disqus_config = function () {
-    this.page.url = "//www.deadlyfingers.net/tutorial/using-azure-cli-on-mac-os-x-to-create-mobile-service";
-    this.page.identifier =
-      "5691494323";
-    console.info("disqus_config:", this.page.identifier, "url:", this.page.url);
-  };
-  (function () {
-    var d = document,
-      s = d.createElement('script');
-    s.src = 'https://deadlyfingers.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-  })();
-</script>
-
     </div>
   </div>
 
