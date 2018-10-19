@@ -1,0 +1,17 @@
+{% if jekyll.environment == 'production' and page.comments %}
+<script>
+  var disqus_config = function () {
+    this.page.url = "{{ page.url | absolute_url }}";
+    this.page.identifier =
+      "{% if page.meta.dsq_thread_id %}{{ page.meta.dsq_thread_id }}{% else %}{{ page.id }}{% endif %}";
+    console.info("disqus_config:", this.page.identifier, "url:", this.page.url);
+  };
+  (function () {
+    var d = document,
+      s = d.createElement('script');
+    s.src = 'https://{{ site.disqus.shortname }}.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+{% endif %}

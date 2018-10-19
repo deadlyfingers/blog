@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Migrating from Wordpress blog to GitHub Pages"
+description: "How to export your Wordpress blog and setup GitHub Pages with https and custom domain."
 author: "David Douglas"
 categories: code
 tags: [GitHub Pages, Jekyll, Ruby, Wordpress, Blog, Markdown, Website]
@@ -109,9 +110,9 @@ However there are some downsides during this process:
 
 After this you might decide to apply one of the [built-in GitHub Pages themes](https://pages.github.com/themes/) or use a [remote theme](https://github.com/benbalter/jekyll-remote-theme) or [create your own theme](https://jekyllrb.com/docs/themes/). In my case I added the [Foundation XY-Grid](https://foundation.zurb.com/sites/docs/xy-grid.html) module for responsive design grid layouts. One thing I would like to see supported in GitHub Pages is support for **npm packages**. Everyone seems to have their own way for building this out and it would be nice just to provide a `package.json` file and let GitHub take take of the rest. One nice solution however might be to roll out the `node_modules` dependencies as part of a remote theme. But at this early stage I prefer to keep it all together in one repo until I have proved everything _just works_ over time.
 
-## References
+## Resources
 
-I've included a list of references below which I found useful during the creation of this new GitHub Pages blog.
+You can find the source code of this website on my [GitHub Page's blog repo](https://github.com/deadlyfingers/blog). I've also included a list of references below which I found useful during the creation of this new GitHub Pages blog. 
 
 ### GitHub Pages settings
 
