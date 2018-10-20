@@ -107,6 +107,6 @@ jailed: false
 gfm_quirks: paragraph_end
 theme: jekyll-theme-primer
 
-# GitHub Metadata
-url: //www.deadlyfingers.net
+# GitHub Metadata and sitemap url
+url: https://www.deadlyfingers.net
 repository: deadlyfingers.github.io
