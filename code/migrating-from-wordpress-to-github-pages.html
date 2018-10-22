@@ -231,6 +231,7 @@ JekyllImport::Importers::WordpressDotCom.run({
 
 <ul>
   <li><a href="http://sgeos.github.io/jekyll/disqus/2016/02/15/adding-disqus-to-a-jekyll-blog.html">Adding Disqus to Jekyll blog</a></li>
+  <li><a href="https://help.disqus.com/developer/javascript-configuration-variables">Disqus config</a></li>
 </ul>
 
 <h3 id="foundation">Foundation</h3>
@@ -256,10 +257,11 @@ JekyllImport::Importers::WordpressDotCom.run({
 <h6>Comments</h6>
 <div id="disqus_thread"></div>
 <script>
-  /*
+  //*
   var disqus_config = function () {
-    this.page.url = "https://www.deadlyfingers.net/code/migrating-from-wordpress-to-github-pages";
-    this.page.identifier = "/code/migrating-from-wordpress-to-github-pages";
+    this.page.identifier =
+      "/code/migrating-from-wordpress-to-github-pages";
+    this.page.url = window.location.href;
   };
   //*/
   (function () {
