@@ -84,7 +84,7 @@ Check out these links which will show you how to make a leaderboard using Azure 
 - [Building Unity projects for Windows 8 and WindowsPhone 8](http://blogs.msdn.com/b/dave_voyles_for_gaming_html5_and_xbox/archive/2014/08/13/prime-31-azure-mobile-services-plugin-for-win8-amp-wp8-unity-games.aspx)
 
 **Additional Resources:**  
-http://www.slideshare.net/deadlyfingers/unity-and-azure-mobile-services
+- [Slides for Unity and Mobile Services](https://www.slideshare.net/deadlyfingers/unity-and-azure-mobile-services)
 
 ## One more thing…
 

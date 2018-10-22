@@ -278,4 +278,4 @@ cordova plugin add cordova-plugin-wkwebview-engine --save
 
 ### Additional media:
 
-- [Responsive Design slidedeck](http://www.slideshare.net/deadlyfingers/responsive-design-from-problem-to-production) from talk at DECODED 2016 Conference in Dublin.
+- [Responsive Design slidedeck](https://www.slideshare.net/deadlyfingers/responsive-design-from-problem-to-production) from talk at DECODED 2016 Conference in Dublin.

@@ -12,6 +12,7 @@ tags:
 meta:
   _wp_old_slug: top-windows-8-apps-and-games
   dsq_thread_id: "5664736820"
+comments: true
 author: David Douglas
 ---
 

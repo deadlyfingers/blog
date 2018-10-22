@@ -147,6 +147,7 @@ You can find the source code of this website on my [GitHub Page's blog repo](htt
 ### Disqus
 
 - [Adding Disqus to Jekyll blog](http://sgeos.github.io/jekyll/disqus/2016/02/15/adding-disqus-to-a-jekyll-blog.html)
+- [Disqus config](https://help.disqus.com/developer/javascript-configuration-variables)
 
 ### Foundation
 
