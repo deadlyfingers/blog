@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="description" content="
-">
-  <title>Vumark</title>
+  <meta name="description" content="Blog for technical designers and developers featuring code stories, experimental tech and tutorials by David Douglas">
+  <title>Search</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="/assets/main.css" rel="stylesheet">
   <!-- RSS -->
@@ -27,72 +26,21 @@
     <!-- body content -->
     <div class="grid-x grid-margin-x">
       <div class="small-12 cell">
-  
-  <h3><a href="/tag/">Tags</a> &gt; VuMark</h3>
-  <ul>
-    
-    
-    
-    
-    <li><a href="/code/custom-vuforia-vumarks-to-identify-iot-devices-with-hololens">Custom Vuforia VuMarks to identify and monitor IoT Devices with HoloLens</a></li>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-  </ul>
+  <form id="form">
+    <input id="search" type="search" placeholder="search" />
+    <input type="submit" value="Find">
+  </form>
 </div>
+
+<div class="small-12 cell">
+  <ul id="results"></ul>
+</div>
+
+<!-- lunr search -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.3/lunr.min.js"></script>
+
+<script src="./search.js"></script>
     </div>
   </div>
 
