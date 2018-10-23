@@ -18,8 +18,9 @@ layout: default
     {% endif %}
   </p>
   <ul class="tags">
+    {% assign tagUrl = site.links.tag | prepend: site.baseurl %}
     {% for tag in post.tags %}
-    <li>{{ tag }}</li>
+    <li><a href="{{ tag | slugify | prepend: tagUrl }}">{{ tag }}</a></li>
     {% endfor %}
   </ul>
   <hr class="show-for-small-only" />

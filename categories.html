@@ -6,7 +6,7 @@ permalink: /categories/
 
 {% assign sortedCategories = site.categories | sort %}
 {% for category in sortedCategories %}
-<div class="cell large-12">
+<div class="small-12 cell">
   <h3>{{ category[0] | capitalize }}</h3>
   <ul>
     {% for post in category[1] %}

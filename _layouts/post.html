@@ -27,8 +27,9 @@ layout: default
     </span>
   </div>
   <ul class="tags">
+    {% assign tagUrl = site.links.tag | prepend: site.baseurl %}
     {% for tag in page.tags %}
-    <li>{{ tag }}</li>
+    <li><a href="{{ tag | slugify | prepend: tagUrl }}">{{ tag }}</a></li>
     {% endfor %}
   </ul>
 

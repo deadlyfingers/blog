@@ -1,0 +1,15 @@
+---
+layout: default
+---
+
+<div class="small-12 cell">
+  {% assign pageTag = page.tag %}
+  <h3><a href="{{ site.links.tag | prepend: site.baseurl }}">Tags</a> &gt; {{ pageTag }}</h3>
+  <ul>
+    {% for post in site.posts %}
+    {% if post.tags contains pageTag %}
+    <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+</div>

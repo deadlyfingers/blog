@@ -23,11 +23,15 @@ disqus:
 links:
   categories: "/categories"
   tags: "/tags"
+  tag: "/tag/"
 
 # Collections
 collections:
   category:
     output: true
+  tag:
+    output: true
+    permalink: /tag/:name
 
 # Theme
 #theme: minima # https://pages.github.com/themes/

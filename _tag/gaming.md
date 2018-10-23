@@ -1,0 +1,4 @@
+---
+tag: Gaming
+layout: tag
+---

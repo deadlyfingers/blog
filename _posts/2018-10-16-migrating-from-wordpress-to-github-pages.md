@@ -10,7 +10,7 @@ comments: true
 ---
 
 Wordpress has done a decent job of running my blog.
-But I've longer for something leaner for writing developer code stories as the rich **HTML** text editor tends to introduce too much complexity.
+But I've longed for something leaner for writing developer code stories as the rich **HTML** text editor tends to introduce too much complexity.
 
 <!--more-->
 
@@ -112,7 +112,7 @@ After this you might decide to apply one of the [built-in GitHub Pages themes](h
 
 ## Resources
 
-You can find the source code of this website on my [GitHub Page's blog repo](https://github.com/deadlyfingers/blog). I've also included a list of references below which I found useful during the creation of this new GitHub Pages blog. 
+You can find the source code of this website on my [GitHub Page's blog repo](https://github.com/deadlyfingers/blog). I've also included a list of references below which I found useful during the creation of this new GitHub Pages blog.
 
 ### GitHub Pages settings
 

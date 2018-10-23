@@ -1,0 +1,4 @@
+---
+tag: iPad
+layout: tag
+---
