@@ -1,0 +1,23 @@
+---
+layout: page
+title: Search
+---
+
+<div class="small-12 cell">
+  <form id="form">
+    <input id="search" type="search" placeholder="search" />
+    <input type="submit" value="Find">
+  </form>
+</div>
+
+<div class="small-12 cell">
+  <ul id="results"></ul>
+</div>
+
+<!-- lunr search -->
+{% if jekyll.environment == 'development' %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.3/lunr.js"></script>
+{% else %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.3/lunr.min.js"></script>
+{% endif %}
+<script src="./search.js"></script>

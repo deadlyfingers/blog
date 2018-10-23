@@ -6,7 +6,8 @@
   "preview": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.3.1",
-    "foundation-sites": "^6.5.0-rc.3"
+    "foundation-sites": "^6.5.0-rc.3",
+    "lunr": "^2.3.4"
   },
   "devDependencies": {
     "cross-env": "^5.2.0",
