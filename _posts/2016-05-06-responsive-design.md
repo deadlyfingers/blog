@@ -8,6 +8,7 @@ tags:
   - Cordova
   - Design
   - Responsive Design
+  - RWD
 meta:
   dsq_thread_id: "5670805712"
 comments: true

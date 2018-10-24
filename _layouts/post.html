@@ -4,7 +4,7 @@ layout: default
 
 <div id="post" class="large-8 cell post">
   {% if page.date %}
-  <time datetime="{{ page.date }}" class="date">{{ page.date | date: "%d %b %Y" }}</time>
+  <time datetime="{{ page.date | date_to_xmlschema }}" class="date">{{ page.date | date: "%d %b %Y" }}</time>
   {% endif %}
   <h1 class="post-title">{{ page.title }}</h1>
   <div class="post-line"></div>

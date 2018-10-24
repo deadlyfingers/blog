@@ -1,5 +1,18 @@
 /* Font Awesome styles */
 
+/* solid .fas */
+
+.search {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-search);
+  }
+}
+
+/* brands .fab */
+
 .twitter {
   @extend %fa-icon;
   @extend .fab;

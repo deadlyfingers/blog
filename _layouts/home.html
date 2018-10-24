@@ -4,7 +4,7 @@ layout: default
 
 {% for post in paginator.posts %}
 <div class="large-3 medium-6 cell">
-  <time datetime="{{ post.date }}" class="date">{{ post.date | date: "%d %b %Y" }}</time>
+  <time datetime="{{ post.date | date_to_xmlschema }}" class="date">{{ post.date | date: "%d %b %Y" }}</time>
   <div class="title">
     <h1 class="title" title="{{ post.title }}"><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h1>
   </div>

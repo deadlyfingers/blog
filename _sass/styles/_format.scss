@@ -205,9 +205,46 @@ form {
   input {
     /* prevents iPhone input tap zoom-in feature */
     font-size: 16px;
+    /* remove iOS style */
+    -webkit-appearance: none;
+  }
+
+  input[type=search],
+  button[type=submit] {
+    display: block;
+    float: left;
+    box-sizing: border-box;
+    border: 1px solid $color-dim;
+    height: 44px;
+    padding: 0 10px;
+  }
+
+  input[type=search] {
+    background: white;
+    border-radius: 4px 0 0 4px;
+    width: calc(100% - 44px);
+  }
+
+  button[type=submit] {
+    background: $color-accent;
+    border-radius: 0 4px 4px 0;
+    border-left: none;
+    color: white;
+    cursor: pointer;
+    width: 44px;
+  }
+
+  button>i.icon {
+    font-size: 12px;
+  }
+
+  &::after {
+    content: "";
+    clear: both;
+    display: table;
   }
 }
 
-div.search {
+div.searchbar {
   padding-bottom: 10px;
 }
