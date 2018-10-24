@@ -7,7 +7,8 @@
   <title>Markdown</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="/assets/main.css" rel="stylesheet">
-  <!-- RSS -->
+  <!-- feed -->
+  <link rel="alternate" title="Deadlyfingers.net" type="application/json" href="https://www.deadlyfingers.net/search/feed.json" />
   <link type="application/atom+xml" rel="alternate" href="https://www.deadlyfingers.net/feed.xml" title="Deadlyfingers.net" />
 </head>
 
@@ -19,9 +20,21 @@
     <h1><a href="/">Deadlyfingers.net</a></h1>
   </div>
   <div class="small-6 cell right">
-    <a class="icon twitter" href="https://twitter.com/deadlyfingers"></a>
-    <a class="icon github" href="https://github.com/deadlyfingers"></a>
-    <a class="icon youtube" href="https://youtube.com/deadlyfingerstv"></a>
+    <div class="icons">
+      <a class="icon twitter" href="https://twitter.com/deadlyfingers"></a>
+      <a class="icon github" href="https://github.com/deadlyfingers"></a>
+      <a class="icon youtube" href="https://youtube.com/deadlyfingerstv"></a>
+    </div>
+  </div>
+  <div class="small-12 cell right">
+    
+    <div class="search">
+  <form id="search_form" method="GET" action="/search/">
+    <input id="search" name="q" type="search" placeholder="search site" results="5" />
+    <input type="submit" value="Search">
+  </form>
+</div>
+    
   </div>
 </div>
     <!-- body content -->
@@ -111,3 +124,5 @@
 </script>
 
 </body>
+
+</html>

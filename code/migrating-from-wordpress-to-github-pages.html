@@ -6,7 +6,8 @@
   <title>Migrating from Wordpress blog to GitHub Pages</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="/assets/main.css" rel="stylesheet">
-  <!-- RSS -->
+  <!-- feed -->
+  <link rel="alternate" title="Deadlyfingers.net" type="application/json" href="https://www.deadlyfingers.net/search/feed.json" />
   <link type="application/atom+xml" rel="alternate" href="https://www.deadlyfingers.net/feed.xml" title="Deadlyfingers.net" />
 </head>
 
@@ -18,9 +19,21 @@
     <h1><a href="/">Deadlyfingers.net</a></h1>
   </div>
   <div class="small-6 cell right">
-    <a class="icon twitter" href="https://twitter.com/deadlyfingers"></a>
-    <a class="icon github" href="https://github.com/deadlyfingers"></a>
-    <a class="icon youtube" href="https://youtube.com/deadlyfingerstv"></a>
+    <div class="icons">
+      <a class="icon twitter" href="https://twitter.com/deadlyfingers"></a>
+      <a class="icon github" href="https://github.com/deadlyfingers"></a>
+      <a class="icon youtube" href="https://youtube.com/deadlyfingerstv"></a>
+    </div>
+  </div>
+  <div class="small-12 cell right">
+    
+    <div class="search">
+  <form id="search_form" method="GET" action="/search/">
+    <input id="search" name="q" type="search" placeholder="search site" results="5" />
+    <input type="submit" value="Search">
+  </form>
+</div>
+    
   </div>
 </div>
     <!-- body content -->
@@ -197,7 +210,7 @@ JekyllImport::Importers::WordpressDotCom.run({
   <li><a href="https://pages.github.com/">GitHub Pages</a></li>
   <li><a href="https://help.github.com/articles/user-organization-and-project-pages/#project-pages-sites">GitHub Project Pages</a></li>
   <li><a href="https://help.github.com/articles/using-jekyll-as-a-static-site-generator-with-github-pages/">Using Jekyll</a></li>
-  <li><a href="https://pages.github.com/themes/">Themes</a></li>
+  <li><a href="https://pages.github.com/themes/">Built-in Themes</a></li>
   <li><a href="https://help.github.com/articles/configuring-jekyll-plugins/#default-plugins">Default Plugins</a></li>
   <li><a href="https://help.github.com/articles/updating-your-markdown-processor-to-kramdown/">markdown: kramdown</a></li>
   <li><a href="https://help.github.com/articles/using-syntax-highlighting-on-github-pages/">highlighter: rouge</a></li>
@@ -225,9 +238,11 @@ JekyllImport::Importers::WordpressDotCom.run({
   <li><a href="https://jekyllrb.com/docs/github-pages/">GitHub Pages setup</a></li>
   <li><a href="https://pages.github.com/versions/">GitHub Pages dependencies</a></li>
   <li><a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">List of TimeZones</a></li>
+  <li><a href="https://jekyllrb.com/docs/collections/">Jekyll Collections</a></li>
 </ul>
 
 <h3 id="disqus">Disqus</h3>
+<p><a href="https://disqus.com">Disqus</a> can be added to a Jekyll site to enable comments on blog posts.</p>
 
 <ul>
   <li><a href="http://sgeos.github.io/jekyll/disqus/2016/02/15/adding-disqus-to-a-jekyll-blog.html">Adding Disqus to Jekyll blog</a></li>
@@ -235,12 +250,24 @@ JekyllImport::Importers::WordpressDotCom.run({
 </ul>
 
 <h3 id="foundation">Foundation</h3>
+<p>I added the <a href="https://foundation.zurb.com/sites/docs/xy-grid.html#importing">XY-Grid SASS classes</a> for responsive design layouts.</p>
 
 <ul>
   <li><a href="https://foundation.zurb.com/sites/docs/xy-grid.html">XY-Grid</a></li>
 </ul>
 
+<h3 id="search">Search</h3>
+<p>A Jekyll generated <a href="https://jsonfeed.org">JSON feed</a> can be used as the search index for <a href="https://lunrjs.com/">lunr.js</a>.</p>
+
+<ul>
+  <li><a href="https://rayhightower.com/blog/2016/01/04/how-to-make-lunrjs-jekyll-work-together/">Jekyll and lunr search</a></li>
+  <li><a href="https://learn.cloudcannon.com/jekyll/jekyll-search-using-lunr-js/">Submit search query</a></li>
+  <li><a href="https://jsonfeed.org/version/1">JSON feed format</a></li>
+  <li><a href="https://stevenwestmoreland.com/2017/05/adding-json-feed-to-your-jekyll-site.html">Jekyll JSON feed</a></li>
+</ul>
+
 <h3 id="gulp">Gulp</h3>
+<p>One <a href="https://gulpjs.com/">gulp</a> command deploys the production build to my <code class="highlighter-rouge">gh-pages</code> branch!</p>
 
 <ul>
   <li><a href="https://www.npmjs.com/package/gulp-gh-pages">Publish build to GitHub Pages</a></li>
@@ -336,3 +363,5 @@ JekyllImport::Importers::WordpressDotCom.run({
 </script>
 
 </body>
+
+</html>

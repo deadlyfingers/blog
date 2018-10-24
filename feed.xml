@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="https://www.deadlyfingers.net/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.deadlyfingers.net/" rel="alternate" type="text/html" /><updated>2018-10-23T23:21:52+01:00</updated><id>https://www.deadlyfingers.net/</id><title type="html">Deadlyfingers.net</title><subtitle>Blog for technical designers and developers featuring code stories, experimental tech and tutorials by David Douglas</subtitle><author><name>David Douglas</name></author><entry><title type="html">Migrating from Wordpress blog to GitHub Pages</title><link href="https://www.deadlyfingers.net/code/migrating-from-wordpress-to-github-pages" rel="alternate" type="text/html" title="Migrating from Wordpress blog to GitHub Pages" /><published>2018-10-16T00:00:00+01:00</published><updated>2018-10-16T00:00:00+01:00</updated><id>https://www.deadlyfingers.net/code/migrating-from-wordpress-to-github-pages</id><content type="html" xml:base="https://www.deadlyfingers.net/code/migrating-from-wordpress-to-github-pages">&lt;p&gt;Wordpress has done a decent job of running my blog.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="https://www.deadlyfingers.net/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.deadlyfingers.net/" rel="alternate" type="text/html" /><updated>2018-10-24T15:12:31+01:00</updated><id>https://www.deadlyfingers.net/</id><title type="html">Deadlyfingers.net</title><subtitle>Blog for technical designers and developers featuring code stories, experimental tech and tutorials by David Douglas</subtitle><author><name>David Douglas</name></author><entry><title type="html">Migrating from Wordpress blog to GitHub Pages</title><link href="https://www.deadlyfingers.net/code/migrating-from-wordpress-to-github-pages" rel="alternate" type="text/html" title="Migrating from Wordpress blog to GitHub Pages" /><published>2018-10-16T00:00:00+01:00</published><updated>2018-10-16T00:00:00+01:00</updated><id>https://www.deadlyfingers.net/code/migrating-from-wordpress-to-github-pages</id><content type="html" xml:base="https://www.deadlyfingers.net/code/migrating-from-wordpress-to-github-pages">&lt;p&gt;Wordpress has done a decent job of running my blog.
 But I’ve longed for something leaner for writing developer code stories as the rich &lt;strong&gt;HTML&lt;/strong&gt; text editor tends to introduce too much complexity.&lt;/p&gt;
 
 &lt;!--more--&gt;
@@ -164,7 +164,7 @@ JekyllImport::Importers::WordpressDotCom.run({
   &lt;li&gt;&lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://help.github.com/articles/user-organization-and-project-pages/#project-pages-sites&quot;&gt;GitHub Project Pages&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://help.github.com/articles/using-jekyll-as-a-static-site-generator-with-github-pages/&quot;&gt;Using Jekyll&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://pages.github.com/themes/&quot;&gt;Themes&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pages.github.com/themes/&quot;&gt;Built-in Themes&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://help.github.com/articles/configuring-jekyll-plugins/#default-plugins&quot;&gt;Default Plugins&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://help.github.com/articles/updating-your-markdown-processor-to-kramdown/&quot;&gt;markdown: kramdown&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://help.github.com/articles/using-syntax-highlighting-on-github-pages/&quot;&gt;highlighter: rouge&lt;/a&gt;&lt;/li&gt;
@@ -192,9 +192,11 @@ JekyllImport::Importers::WordpressDotCom.run({
   &lt;li&gt;&lt;a href=&quot;https://jekyllrb.com/docs/github-pages/&quot;&gt;GitHub Pages setup&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://pages.github.com/versions/&quot;&gt;GitHub Pages dependencies&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/List_of_tz_database_time_zones&quot;&gt;List of TimeZones&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://jekyllrb.com/docs/collections/&quot;&gt;Jekyll Collections&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;disqus&quot;&gt;Disqus&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://disqus.com&quot;&gt;Disqus&lt;/a&gt; can be added to a Jekyll site to enable comments on blog posts.&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;http://sgeos.github.io/jekyll/disqus/2016/02/15/adding-disqus-to-a-jekyll-blog.html&quot;&gt;Adding Disqus to Jekyll blog&lt;/a&gt;&lt;/li&gt;
@@ -202,12 +204,24 @@ JekyllImport::Importers::WordpressDotCom.run({
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;foundation&quot;&gt;Foundation&lt;/h3&gt;
+&lt;p&gt;I added the &lt;a href=&quot;https://foundation.zurb.com/sites/docs/xy-grid.html#importing&quot;&gt;XY-Grid SASS classes&lt;/a&gt; for responsive design layouts.&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://foundation.zurb.com/sites/docs/xy-grid.html&quot;&gt;XY-Grid&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;h3 id=&quot;search&quot;&gt;Search&lt;/h3&gt;
+&lt;p&gt;A Jekyll generated &lt;a href=&quot;https://jsonfeed.org&quot;&gt;JSON feed&lt;/a&gt; can be used as the search index for &lt;a href=&quot;https://lunrjs.com/&quot;&gt;lunr.js&lt;/a&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://rayhightower.com/blog/2016/01/04/how-to-make-lunrjs-jekyll-work-together/&quot;&gt;Jekyll and lunr search&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://learn.cloudcannon.com/jekyll/jekyll-search-using-lunr-js/&quot;&gt;Submit search query&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://jsonfeed.org/version/1&quot;&gt;JSON feed format&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://stevenwestmoreland.com/2017/05/adding-json-feed-to-your-jekyll-site.html&quot;&gt;Jekyll JSON feed&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h3 id=&quot;gulp&quot;&gt;Gulp&lt;/h3&gt;
+&lt;p&gt;One &lt;a href=&quot;https://gulpjs.com/&quot;&gt;gulp&lt;/a&gt; command deploys the production build to my &lt;code class=&quot;highlighter-rouge&quot;&gt;gh-pages&lt;/code&gt; branch!&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.npmjs.com/package/gulp-gh-pages&quot;&gt;Publish build to GitHub Pages&lt;/a&gt;&lt;/li&gt;
