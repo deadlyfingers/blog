@@ -5,13 +5,14 @@
       // Search index json feed loaded
       const idx = lunr(function () {
         this.ref('id');
-        this.field('title');
-        this.field('content_text', {
+        this.field('title', {
           boost: 10
         });
-        this.field('tags');
-        this.field('categories');
-        this.field('author');
+        this.field('content_text');
+        this.field('tags', {
+          boost: 5
+        });
+        this.field('_categories');
 
         if (data && data.items && data.items.length > 0) {
           data.items.forEach(item => {
@@ -53,8 +54,8 @@
 
       // Search index
       const searchIndex = function (query) {
-        var fuzzyQuery = query.length > 0 ? query + "~1" : query;
-        var results = idx.search(fuzzyQuery);
+        //var fuzzyQuery = query.length > 0 ? query + "~1" : query;
+        var results = idx.search(query);
         updateTitle(query);
         updateResults(results);
       };

@@ -13,9 +13,11 @@
       "content_text": "Wordpress has done a decent job of running my blog.But I’ve longed for something leaner for writing developer code stories as the rich HTML text editor tends to introduce too much complexity.Initially I thought about writing a custom blog web app but decided it would be better to consider existing platforms that can handle my requirements.Ultimately I decided to migrate my Wordpress blog to GitHub Pages.Here’s a bunch of things I like with GitHub Pages compared with my self-hosted Wordpress site:  Rather than edit posts in small scroll view I can use a desktop code editor like VS Code which supports full screen editing of text and live code preview. (I’m aware this might not be everyone’s cup of tea but writing developer blog posts inside a developer tool feels right at home for me!)  Markdown is much easier for writing developer documentation and inline code snippets, but I can also inject HTML when needed.  Use GitHub as server - I don’t need to provide my own hosting or database. Free hosting is nice!  GitHub has partnered with Let’s Encrypt so you get HTTPS for free - just check a box!      You can setup a custom domain for both an apex domain and www subdomain and GitHub Pages will handle the redirect.                  Add A Records with your DNS provider for apex domain (without www.):                                            Domain              IP address                                                          YOUR_DOMAIN.com.              185.199.108.153                                      YOUR_DOMAIN.com.              185.199.109.153                                      YOUR_DOMAIN.com.              185.199.110.153                                      YOUR_DOMAIN.com.              185.199.111.153                                                  Add one CNAME record for www subdomain.                                            Domain              Canonical name                                                          www              USERNAME.github.io.                                          Update the GitHub Pages &gt; Settings &gt; Custom Domain field to www.YOURDOMAIN.com (this will add a CNAME file to the root directory in the GitHub Pages branch)      You can then enable Enforce HTTPS in GitHub Pages &gt; Settings.      However there are some downsides during this process:  Not as easy to setup as Wordpress.  Don’t expect the migration of Wordpress HTML to MD files to be perfect! In my case the conversion tool had problems preserving spacing in code blocks and some character conversions may need fixed.  By default all updates will be public on github so you have to think about that if you need to support private posts.How to migrate from Wordpress to GitHub Pages (Jekyll)  GitHub Pages is powered by Jekyll. To import your Wordpress XML archive and run Jekyll locally you will need to install Ruby 2.1 or better.      If you are migrating an existing blog you have to export your content from the Wordpress admin control panel.          The general form of the URL is as follows: https://YOUR-USER-NAME.wordpress.com/wp-admin/export.php            Import the Wordpress XML archive file as mentioned on the import wordpress to Jekyll docs          Install Ruby Gems        gem install jekyll-importgem install hpricotgem install open_uri_redirections              Convert Wordpress XML archive to HTML files and download images to ‘assets’ directory.        ruby -rubygems -e 'require \"jekyll-import\";JekyllImport::Importers::WordpressDotCom.run({  \"source\" =&gt; \"C:/Users/USERNAME/Downloads/REPLACE_USING_YOUR_FILE_NAME.wordpress.YYYY-MM-DD.xml\",  \"no_fetch_images\" =&gt; false,  \"assets_folder\" =&gt; \"assets/images\"})'            Convert HTML files to Markdown files. You can try any number of tools to see what works best for you. I tried various ones including the reverse_markdown Ruby gem and the html2text Python script. To help batch process the files I created a Wordpress HTML to MD gist to find any *.html files in the ‘_posts’ directory and convert them all to *.md files using reverse_markdown gem.          ‘wordpress-html-to-md.rb’ gist usage:        gem install reverse_markdown        ruby ./wordpress-html-to-md.rb \"_posts\"                  html2text usage:        ./html2text.py C:/Users/USERNAME/git/blog/_posts/YYYY-MM-DD-filename.html              NB. Don’t use “\\” in path otherwise you will get file not found error, use “/” in path instead.            To show code syntax highlights you will need to add some styles for Rouge (GitHub Page’s syntax highlighter). You can use Rougify to copy GitHub’s code syntax highlighting to a stylesheet.    gem install rouge        rougify style github &gt; _sass/styles/_rouge.scss      After this you might decide to apply one of the built-in GitHub Pages themes or use a remote theme or create your own theme. In my case I added the Foundation XY-Grid module for responsive design grid layouts. One thing I would like to see supported in GitHub Pages is support for npm packages. Everyone seems to have their own way for building this out and it would be nice just to provide a package.json file and let GitHub take take of the rest. One nice solution however might be to roll out the node_modules dependencies as part of a remote theme. But at this early stage I prefer to keep it all together in one repo until I have proved everything just works over time.ResourcesYou can find the source code of this website on my GitHub Page’s blog repo. I’ve also included a list of references below which I found useful during the creation of this new GitHub Pages blog.GitHub Pages settings  GitHub Pages  GitHub Project Pages  Using Jekyll  Built-in Themes  Default Plugins  markdown: kramdown  highlighter: rougeJekyll blog  Import posts from Wordpress blog  Jekyll structure  Jekyll cheatsheet  Jekyll md cheatsheet  Posts  Assets  Sass/SCSS  Generate GitHub Rouge SASS  Linking to pagesYML Config reference docs  YML Syntax  Jekyll Configuration  GitHub Pages setup  GitHub Pages dependencies  List of TimeZones  Jekyll CollectionsDisqusDisqus can be added to a Jekyll site to enable comments on blog posts.  Adding Disqus to Jekyll blog  Disqus configFoundationI added the XY-Grid SASS classes for responsive design layouts.  XY-GridSearchA Jekyll generated JSON feed can be used as the search index for lunr.js.  Jekyll and lunr search  Submit search query  JSON feed format  Jekyll JSON feedGulpOne gulp command deploys the production build to my gh-pages branch!  Publish build to GitHub Pages  gulp 3 to gulp 4 task guide",
       "summary": "How to export your Wordpress blog and setup GitHub Pages with https and custom domain.",
       "date_published": "2018-10-16T00:00:00+01:00",
-      "tags": "GitHub Pages, Jekyll, Ruby, Wordpress, Blog, Markdown, Website",
-      "categories": "code",
-      "author": "David Douglas"
+      "tags": ["GitHub Pages","Jekyll","Ruby","Wordpress","Blog","Markdown","Website"],
+      "_categories": "code",
+      "author": {
+        "name": "David Douglas"
+      }
     },
     
     {
@@ -26,9 +28,11 @@
       "summary": 
       "Some of the most popular experiences of Augmented or Mixed Reality are currently in a gaming or an immersive 3D form. But what makes headsets like the HoloLens so different and special is the ability to still see into the physical world. It is this link that opens up so...",
       "date_published": "2018-09-24T15:47:27+01:00",
-      "tags": "IoT, HoloLens, Mixed Reality, VuForia, VuMark, Data Visualisation",
-      "categories": "code",
-      "author": "David Douglas"
+      "tags": ["IoT","HoloLens","Mixed Reality","VuForia","VuMark","Data Visualisation"],
+      "_categories": "code",
+      "author": {
+        "name": "David Douglas"
+      }
     },
     
     {
@@ -39,9 +43,11 @@
       "summary": 
       "Behind every good user experience is great analyticsIf you ever designed or developed client side applications or websites you’ve probably integrated with an analytics service to provide telemetry data to help make informed design choices and development decisions to improve user experience and business outcomes.One of the key performance indicators...",
       "date_published": "2018-09-17T16:36:26+01:00",
-      "tags": "Application Insights, Ibex Dashboard, Data Visualisation, Azure, Unity3d, Mixed Reality, HoloLens",
-      "categories": "code",
-      "author": "David Douglas"
+      "tags": ["Application Insights","Ibex Dashboard","Data Visualisation","Azure","Unity3d","Mixed Reality","HoloLens"],
+      "_categories": "code",
+      "author": {
+        "name": "David Douglas"
+      }
     },
     
     {
@@ -52,9 +58,11 @@
       "summary": 
       "Certain cloud services may offer a Web Socket streaming connection as an alternative to firing repeated REST requests or polling. To make working with REST APIs in Unity more convenient I built a REST client for Unity based on UnityWebRequest which supports abstract types for JSON / XML serialisation. But...",
       "date_published": "2018-09-16T13:17:16+01:00",
-      "tags": "Unity3d, UWP, Web Sockets, Mixed Reality, HoloLens",
-      "categories": "code",
-      "author": "David Douglas"
+      "tags": ["Unity3d","UWP","Web Sockets","Mixed Reality","HoloLens"],
+      "_categories": "code",
+      "author": {
+        "name": "David Douglas"
+      }
     },
     
     {
@@ -65,9 +73,11 @@
       "summary": 
       "Ibex dashboard is an open source web app for displaying telemetry data from Application Insights. It comes with a number of sample templates including analytics dashboards for Bots. If you’re developing a bot and you want to see how your bot is performing over time then you can select the...",
       "date_published": "2017-08-30T14:48:00+01:00",
-      "tags": "Application Insights, Ibex Dashboard, Data Visualisation, Bots, Log Analytics",
-      "categories": "code",
-      "author": "David Douglas"
+      "tags": ["Application Insights","Ibex Dashboard","Data Visualisation","Bots","Log Analytics"],
+      "_categories": "code",
+      "author": {
+        "name": "David Douglas"
+      }
     },
     
     {
@@ -78,9 +88,11 @@
       "summary": 
       "Previously I’ve looked at using Azure App Services for Unity, which provided a backend for Unity applications or games using Easy Tables and Easy APIs. But what if I wanted to lift and shift heavier data such as audio files, image files, or Unity Asset Bundles binaries? For storing these...",
       "date_published": "2017-03-10T12:14:11+01:00",
-      "tags": "Azure, Blob Storage, Unity3d",
-      "categories": "tutorial",
-      "author": "David Douglas"
+      "tags": ["Azure","Blob Storage","Unity3d"],
+      "_categories": "tutorial",
+      "author": {
+        "name": "David Douglas"
+      }
     },
     
     {
@@ -91,9 +103,11 @@
       "summary": 
       "When it comes to working as a team on the same project we are all thankful for source control. But even if you’re cool with git there are some things to be aware of when starting new source controlled Unity projects that should help to reduce the chance of nasty...",
       "date_published": "2016-09-19T10:30:38+01:00",
-      "tags": "Git, Unity3d, Visual Studio",
-      "categories": "code",
-      "author": "David Douglas"
+      "tags": ["Git","Unity3d","Visual Studio"],
+      "_categories": "code",
+      "author": {
+        "name": "David Douglas"
+      }
     },
     
     {
@@ -104,9 +118,11 @@
       "summary": 
       "Recently I started a new iOS Swift project and spent way more time than I would like trying to find a JSON parser that could handle the various JSON data models I was working with. In this post I will document some real code samples that should prove useful for...",
       "date_published": "2016-08-23T09:37:01+01:00",
-      "tags": "Alamofire, Argo, JSON, Swift",
-      "categories": "code",
-      "author": "David Douglas"
+      "tags": ["Alamofire","Argo","JSON","Swift"],
+      "_categories": "code",
+      "author": {
+        "name": "David Douglas"
+      }
     },
     
     {
@@ -117,9 +133,11 @@
       "summary": 
       "Many web projects rely on a CMS of some description. The system itself is not important, but rather the content it helps to create. The primary function of a CMS is to enable the creation of content - it should empower content creation. If a new project requires a CMS...",
       "date_published": "2016-08-22T17:19:59+01:00",
-      "tags": "Javascript, Polymer, Web Components",
-      "categories": "code",
-      "author": "David Douglas"
+      "tags": ["Javascript","Polymer","Web Components"],
+      "_categories": "code",
+      "author": {
+        "name": "David Douglas"
+      }
     },
     
     {
@@ -130,9 +148,11 @@
       "summary": 
       "Azure Mobile Services will be migrated to App Services on Sept 1st 2016. To prepare for this migration I’ve renamed and updated the open source Mobile Service Unity3d projects to support Azure App Service going forward.Using Azure App Services to create highscores leaderboard for UnityTo demonstrate the Azure App Service...",
       "date_published": "2016-05-16T15:42:13+01:00",
-      "tags": "Azure, App Services, Unity3d",
-      "categories": "tutorial",
-      "author": "David Douglas"
+      "tags": ["Azure","App Services","Unity3d"],
+      "_categories": "tutorial",
+      "author": {
+        "name": "David Douglas"
+      }
     },
     
     {
@@ -143,9 +163,11 @@
       "summary": 
       "Responsive Design is often seen in terms of technical execution or production. In this article I will describe what it means to design responsively as a design process from problem to production.Contents: Responsive Design for designers Responsive Design for developers Responsive Design in productionBackgroundThe need for responsive designThe idea of...",
       "date_published": "2016-05-06T12:06:45+01:00",
-      "tags": "Cordova, Design, Responsive Design",
-      "categories": "code",
-      "author": "David Douglas"
+      "tags": ["Cordova","Design","Responsive Design","RWD"],
+      "_categories": "code",
+      "author": {
+        "name": "David Douglas"
+      }
     },
     
     {
@@ -156,9 +178,11 @@
       "summary": 
       "If you’ve ever needed to debug Cordova web apps on iOS and Android it can be quite an awful experience for a web developer. Since working on Postcard web app I’ve found a couple of neat tips to help make sense of those noisy debug logs.From localhost to native landDesigning...",
       "date_published": "2015-11-13T17:39:00+01:00",
-      "tags": "Android, Cordova, iOS",
-      "categories": "code",
-      "author": "David Douglas"
+      "tags": ["Android","Cordova","iOS"],
+      "_categories": "code",
+      "author": {
+        "name": "David Douglas"
+      }
     },
     
     {
@@ -169,9 +193,11 @@
       "summary": 
       "Building for iOS can be very time consuming. Every time you make changes to a Cordova web app you need to do a cordova build to update the app project. Then you have to go into Xcode to debug on device. But if you don’t need to make changes to...",
       "date_published": "2015-10-16T14:00:03+01:00",
-      "tags": "Cordova, iOS",
-      "categories": "code",
-      "author": "David Douglas"
+      "tags": ["Cordova","iOS"],
+      "_categories": "code",
+      "author": {
+        "name": "David Douglas"
+      }
     },
     
     {
@@ -182,9 +208,11 @@
       "summary": 
       "State of playIf you’ve followed my previous Unity3d Azure tutorials I’ve covered two well known Unity Azure plugins - Prime31 and Bitrave. Bitrave had better multi-platform support, however it required the ‘JSON.NET’ paid asset to support iOS and Android. But then there was issues with iOS AOT compiler. Because of...",
       "date_published": "2015-09-25T11:30:26+01:00",
-      "tags": "Mobile Services, Unity3d",
-      "categories": "tutorial",
-      "author": "David Douglas"
+      "tags": ["Mobile Services","Unity3d"],
+      "_categories": "tutorial",
+      "author": {
+        "name": "David Douglas"
+      }
     },
     
     {
@@ -195,9 +223,11 @@
       "summary": 
       "Like many developers out there I started out coding for the web. So you might think it would be easier to develop a web app than a native app, right? The short answer is no… but web app development is getting better and the performance gap is closing.Thoughts on web...",
       "date_published": "2015-09-11T10:09:52+01:00",
-      "tags": "Android, Cordova, iOS, WebApp",
-      "categories": "code",
-      "author": "David Douglas"
+      "tags": ["Android","Cordova","iOS","WebApp"],
+      "_categories": "code",
+      "author": {
+        "name": "David Douglas"
+      }
     },
     
     {
@@ -208,9 +238,11 @@
       "summary": 
       "To establish peer to peer (p2p) communication on iOS devices there is an API for that known as the Multipeer Connectivity framework. There are a couple of things to bear in mind about this framework: Discovers and connects with iOS devices but will not discover devices on other platforms like...",
       "date_published": "2015-07-30T12:00:26+01:00",
-      "tags": "iOS",
-      "categories": "code",
-      "author": "David Douglas"
+      "tags": ["iOS"],
+      "_categories": "code",
+      "author": {
+        "name": "David Douglas"
+      }
     },
     
     {
@@ -221,9 +253,11 @@
       "summary": 
       "One of our startups at MS Ventures was looking to use the command line to manage their Azure account on Mac. If you prefer using Mac OS X Terminal or iTerm and have an Azure account then you should check out the Azure CLI tools for Mac.Install Azure CLI for MacYou...",
       "date_published": "2015-04-10T15:20:34+01:00",
-      "tags": "Azure, Mobile Services, Azure-CLI",
-      "categories": "tutorial",
-      "author": "David Douglas"
+      "tags": ["Azure","Mobile Services","Azure-CLI"],
+      "_categories": "tutorial",
+      "author": {
+        "name": "David Douglas"
+      }
     },
     
     {
@@ -234,9 +268,11 @@
       "summary": 
       "BackgroundWhen you create an Azure Mobile Service you can download a ToDo sample app to help you get started on a number of platforms including Windows, iOS and Android. There are also cross platform options available with Xamarin or web app development using PhoneGap or HTML/Javascript. Recently I came across...",
       "date_published": "2015-02-28T18:52:59+01:00",
-      "tags": "Ember-CLI, Azure, Mobile Services",
-      "categories": "tutorial",
-      "author": "David Douglas"
+      "tags": ["Ember-CLI","Azure","Mobile Services"],
+      "_categories": "tutorial",
+      "author": {
+        "name": "David Douglas"
+      }
     },
     
     {
@@ -247,9 +283,11 @@
       "summary": 
       "Azure Mobile Service is now App Service, please follow the updated tutorial for App Services for Unity3d instead.This is a quick Unity3d game developer tutorial showing how to save, update and query high scores stored in the Cloud using a Mobile Service and the BitRave Azure plugin.Watch how to create...",
       "date_published": "2014-11-26T11:37:14+01:00",
-      "tags": "Android, GameDev, iOS, Azure, Mobile Services, Unity3d",
-      "categories": "tutorial",
-      "author": "David Douglas"
+      "tags": ["Android","GameDev","iOS","Azure","Mobile Services","Unity3d"],
+      "_categories": "tutorial",
+      "author": {
+        "name": "David Douglas"
+      }
     },
     
     {
@@ -260,9 +298,11 @@
       "summary": 
       "Azure Mobile Service is now App Service, please follow the updated tutorial for App Services for Unity3d instead.This quick-start tutorial is for Unity3d game developers who would like to get a cloud backend that runs across multiple platforms (including the Unity Editor for quick testing). One of the big advantages...",
       "date_published": "2014-11-21T16:02:28+01:00",
-      "tags": "Android, iOS, Azure, Mobile Services, Unity3d",
-      "categories": "tutorial",
-      "author": "David Douglas"
+      "tags": ["Android","iOS","Azure","Mobile Services","Unity3d"],
+      "_categories": "tutorial",
+      "author": {
+        "name": "David Douglas"
+      }
     },
     
     {
@@ -273,9 +313,11 @@
       "summary": 
       "Azure Mobile Service is now App Service, please follow the updated tutorial for App Services for Unity3d instead.Unity game developers looking to publish their games on Windows Store might want to add global/local high-score leaderboards, record user achievements and level progress. For example the ability to save level progress is...",
       "date_published": "2014-10-22T09:46:56+01:00",
-      "tags": "GameDev, Azure, Mobile Services, Unity3d, Visual Studio, Windows",
-      "categories": "tutorial",
-      "author": "David Douglas"
+      "tags": ["GameDev","Azure","Mobile Services","Unity3d","Visual Studio","Windows"],
+      "_categories": "tutorial",
+      "author": {
+        "name": "David Douglas"
+      }
     },
     
     {
@@ -286,9 +328,11 @@
       "summary": 
       "If you’ve developed an app you might want to make a promo video showing your app working across devices or multiple screens.Of course you can record an iOS Simulator, Android Virtual Device, or WindowsPhone emulator easy enough using a screen recording tool like Camtasia but it’s often a bit tricker...",
       "date_published": "2014-08-12T08:27:24+01:00",
-      "tags": "Android, iPad, iPhone, Windows Phone",
-      "categories": "tutorial",
-      "author": "David Douglas"
+      "tags": ["Android","iPad","iPhone","Windows Phone"],
+      "_categories": "tutorial",
+      "author": {
+        "name": "David Douglas"
+      }
     },
     
     {
@@ -299,9 +343,11 @@
       "summary": 
       "When you need a breakout from work here are 10 fun mini games to play on your Windows device. Touch Surface recommended! ;) Reckless Racing Ultimate Top down mini car racing game featuring offroad and race track competitions. A must have game!Get it! Zombie HQ Top down shooter with zombies,...",
       "date_published": "2014-06-19T23:28:00+01:00",
-      "tags": "App Store, Apps, Gaming, Windows",
-      "categories": "info",
-      "author": "David Douglas"
+      "tags": ["App Store","Apps","Gaming","Windows"],
+      "_categories": "info",
+      "author": {
+        "name": "David Douglas"
+      }
     },
     
     {
@@ -312,9 +358,11 @@
       "summary": 
       "Azure Mobile Services is deprecated, please migrate to Azure App Service.Tutorial requirements: Android Studio Microsoft Azure account — start a free Azure trial Google developer account First install Google Play Services package in the Android SDK Manager. NB: If using an Android Virtual Device then ensure your Target is set...",
       "date_published": "2014-05-30T11:16:52+01:00",
-      "tags": "Android, Azure, Mobile Services",
-      "categories": "tutorial",
-      "author": "David Douglas"
+      "tags": ["Android","Azure","Mobile Services"],
+      "_categories": "tutorial",
+      "author": {
+        "name": "David Douglas"
+      }
     },
     
     {
@@ -325,9 +373,11 @@
       "summary": 
       "Azure Mobile Services is deprecated, please migrate to Azure App Service.Tutorial requirements: Android Studio Microsoft Azure account — start a free Azure trial Twitter accountThis article builds on top of the previous tutorial where an Android Todo app was created with Azure Mobile Services. However most steps can be adapted...",
       "date_published": "2014-05-29T11:16:17+01:00",
-      "tags": "Android, Azure, Mobile Services",
-      "categories": "tutorial",
-      "author": "David Douglas"
+      "tags": ["Android","Azure","Mobile Services"],
+      "_categories": "tutorial",
+      "author": {
+        "name": "David Douglas"
+      }
     },
     
     {
@@ -338,9 +388,11 @@
       "summary": 
       "Azure Mobile Services is deprecated, please migrate to Azure App Service.Tutorial requirements: Android Studio Microsoft Azure account — start a free Azure trial Create a new Mobile Service in Azure._The wizard will take you through this process in a couple of steps. Once the mobile service is created it will...",
       "date_published": "2014-05-28T11:11:43+01:00",
-      "tags": "Android, Azure, Mobile Services",
-      "categories": "tutorial",
-      "author": "David Douglas"
+      "tags": ["Android","Azure","Mobile Services"],
+      "_categories": "tutorial",
+      "author": {
+        "name": "David Douglas"
+      }
     },
     
     {
@@ -351,9 +403,11 @@
       "summary": 
       "Azure Mobile Services is deprecated, please migrate to Azure App Service.These days it’s probably a good idea to have cloud backend for your apps. There are a greater number of connected devices in comparison to individuals, which means your apps may be expected to work as well as sync across...",
       "date_published": "2014-05-27T08:39:50+01:00",
-      "tags": "Android, Azure, Mobile Services",
-      "categories": "tutorial",
-      "author": "David Douglas"
+      "tags": ["Android","Azure","Mobile Services"],
+      "_categories": "tutorial",
+      "author": {
+        "name": "David Douglas"
+      }
     },
     
     {
@@ -364,9 +418,11 @@
       "summary": 
       "This tutorial has been deprecated. Please check the wiki for setting up Wordpress with the new Azure App Service.It’s super simple to create your first Wordpress blog using Microsoft Azure Websites Gallery. Getting this all up and running is extremely fast. I’ve uploaded a short video and blog post showing...",
       "date_published": "2014-04-25T11:55:04+01:00",
-      "tags": "Blog, Azure, Website, Wordpress",
-      "categories": "tutorial",
-      "author": "David Douglas"
+      "tags": ["Blog","Azure","Website","Wordpress"],
+      "_categories": "tutorial",
+      "author": {
+        "name": "David Douglas"
+      }
     },
     
     {
@@ -377,9 +433,11 @@
       "summary": 
       "This tutorial has been deprecated. Please check the wiki for setting up Wordpress with the new Azure App Service. Start an Azure trial or sign-in into your Microsoft Azure management portal. Select WEB SITES and choose NEW &gt; WEB SITE &gt; FROM GALLERY Select BLOGS &gt; WordPress Enter unique site URL at *.azurewebsites.net (you...",
       "date_published": "2014-04-02T11:50:05+01:00",
-      "tags": "Azure, Blog, Wordpress, Website",
-      "categories": "tutorial",
-      "author": "David Douglas"
+      "tags": ["Azure","Blog","Wordpress","Website"],
+      "_categories": "tutorial",
+      "author": {
+        "name": "David Douglas"
+      }
     }
     
   ]
