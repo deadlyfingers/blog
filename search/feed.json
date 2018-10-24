@@ -14,9 +14,12 @@
       "summary": "How to export your Wordpress blog and setup GitHub Pages with https and custom domain.",
       "date_published": "2018-10-16T00:00:00+01:00",
       "tags": ["GitHub Pages","Jekyll","Ruby","Wordpress","Blog","Markdown","Website"],
-      "_categories": "code",
       "author": {
         "name": "David Douglas"
+      },
+      "_data": {
+        "categories": "code",
+        "year": 2018
       }
     },
     
@@ -29,9 +32,12 @@
       "Some of the most popular experiences of Augmented or Mixed Reality are currently in a gaming or an immersive 3D form. But what makes headsets like the HoloLens so different and special is the ability to still see into the physical world. It is this link that opens up so...",
       "date_published": "2018-09-24T15:47:27+01:00",
       "tags": ["IoT","HoloLens","Mixed Reality","VuForia","VuMark","Data Visualisation"],
-      "_categories": "code",
       "author": {
         "name": "David Douglas"
+      },
+      "_data": {
+        "categories": "code",
+        "year": 2018
       }
     },
     
@@ -44,9 +50,12 @@
       "Behind every good user experience is great analyticsIf you ever designed or developed client side applications or websites you’ve probably integrated with an analytics service to provide telemetry data to help make informed design choices and development decisions to improve user experience and business outcomes.One of the key performance indicators...",
       "date_published": "2018-09-17T16:36:26+01:00",
       "tags": ["Application Insights","Ibex Dashboard","Data Visualisation","Azure","Unity3d","Mixed Reality","HoloLens"],
-      "_categories": "code",
       "author": {
         "name": "David Douglas"
+      },
+      "_data": {
+        "categories": "code",
+        "year": 2018
       }
     },
     
@@ -59,9 +68,12 @@
       "Certain cloud services may offer a Web Socket streaming connection as an alternative to firing repeated REST requests or polling. To make working with REST APIs in Unity more convenient I built a REST client for Unity based on UnityWebRequest which supports abstract types for JSON / XML serialisation. But...",
       "date_published": "2018-09-16T13:17:16+01:00",
       "tags": ["Unity3d","UWP","Web Sockets","Mixed Reality","HoloLens"],
-      "_categories": "code",
       "author": {
         "name": "David Douglas"
+      },
+      "_data": {
+        "categories": "code",
+        "year": 2018
       }
     },
     
@@ -74,9 +86,12 @@
       "Ibex dashboard is an open source web app for displaying telemetry data from Application Insights. It comes with a number of sample templates including analytics dashboards for Bots. If you’re developing a bot and you want to see how your bot is performing over time then you can select the...",
       "date_published": "2017-08-30T14:48:00+01:00",
       "tags": ["Application Insights","Ibex Dashboard","Data Visualisation","Bots","Log Analytics"],
-      "_categories": "code",
       "author": {
         "name": "David Douglas"
+      },
+      "_data": {
+        "categories": "code",
+        "year": 2017
       }
     },
     
@@ -87,11 +102,14 @@
       "content_text": "Previously I’ve looked at using Azure App Services for Unity, which provided a backend for Unity applications or games using Easy Tables and Easy APIs. But what if I wanted to lift and shift heavier data such as audio files, image files, or Unity Asset Bundles binaries? For storing these types of files, I would be better using Azure Blob storage. Recently I created an Azure Blob storage demo project in Unity to show how to save and load these various asset types in Unity. One of the exciting new applications for Unity is developing VR, AR or MR experiences for HoloLens where a backend could serve media content dynamically whether it’s images, audio, or prefabs with models, materials and referenced scripts. When thinking of cloud gaming the tendency is to consider it in terms of end user scenarios like massive multiplayer online games. While Azure is designed to scale, it is also helpful to use during early stage development and testing. There is an opportunity to create productive cloud tools for artists, designers and developers especially when extensive hardware testing is required in Virtual Reality, Augmented Reality or Mixed Reality development. For example, imagine being able to see and test updates on the hardware without having to rebuild the binaries in Unity or Visual Studio each time. There are many more use cases than IΓÇÖve mentioned here like offering user generated downloadable content for extending your game or app.I’ll be covering the load and save code snippets from the Unity and Azure Blob storage demo commentary which you can watch to see how you can save and load image textures, audio clips as .wav files, and Asset Bundles. The Unity Asset Bundle demo will also include loading Prefabs and dynamically adding them into a Unity Scene using XML or JSON data which should give you some ideas of how you might like to use Blob storage in your Unity development or end user scenario.Setup Azure Blob StorageSetting up Blob Storage for the Unity demo can be done quickly in just a couple of steps:  Sign in to your Azure portal and create a new Storage Account.  Once the Storage account is provisioned then select the add new container button which will be used for storing the blobs.  Create the ‘Blob' type container which permits public read access for the purposes of this demo.Audio filesSaving Unity Audio Clips into Blob StorageFor the Unity audio blob demo I created a helper script to convert Unity Audio Clip recording to .wav files for the purpose of saving to Azure Blob Storage.Once the audio has been recorded in Unity I can upload the file using the PutAudioAudio method which takes a callback function, the wav bytes, the container resource path, the filename and the file’s mime type. By the way this method must be wrapped using StartCoroutine which is the way Unity 5 handles asynchronous requests. Once the request is completed it will trigger the PutAudioCompleted callback function I have provided my script with a response object. If the response is successful you will see the wav file blob added in your Blob Container.☞ Tip: Grab the Storage Explorer app for viewing all the blobs!private void PutAudio (){\tbyte[] wavBytes = File.ReadAllBytes (localPath);\tstring filename = Path.GetFileName (localPath);\tDebug.Log (\"Put audio file: \" + filename);\tStartCoroutine (blobService.PutAudioBlob (PutAudioCompleted, wavBytes, container, filename, \"audio/wav\"));}public void PutAudioCompleted (RestResponse response){\tif (response.IsError) {\t\tDebug.LogError( \"Put audio file error: \" + response.ErrorMessage );\t\treturn;\t}\tDebug.Log (\"Put audio blob success: \" + response.Url);}Loading .wav files from Blob StorageAs we used the Blob type container with public read access you can use the UnityWebRequest.GetAudioClip method to directly load the .wav file from Azure Blob Storage and handle it as a native Unity AudioClip type for playback.public void TappedLoad (){\tstring filename = Path.GetFileName (localPath);\tstring url = Path.Combine (client.PrimaryEndpoint () + container, filename);\tDebug.Log (\"Load audio blob: \" + url);\tStartCoroutine (LoadAudioURL (url));}private IEnumerator LoadAudioURL (string url){\tUnityWebRequest www = UnityWebRequest.GetAudioClip (url, AudioType.WAV);\tyield return www.Send ();\tif (www.isError) {\t\tDebug.LogError( \"Load audio url error: \" + www.error );\t} else {\t\tAudioClip audioClip = ((DownloadHandlerAudioClip)www.downloadHandler).audioClip;\t\taudioSource.clip = audioClip;\t\taudioSource.Play ();\t}}Image filesFor the Unity image blob demo I used Unity’s Application.CaptureScreenshot method to generate a png image representation of the current state of the game screen.Saving Images into Blob StorageThe image is saved using the PutImageBlob method which is similar to the audio blob except we pass the image bytes and mime type.private void PutImage (byte[] imageBytes){\tstring filename = Path.GetFileName (localPath);\tStartCoroutine (blobService.PutImageBlob (PutImageCompleted, imageBytes, container, filename, \"image/png\"));}private void PutImageCompleted (RestResponse response){\tif (response.IsError) {\t\tDebug.LogError( \"Put image file error: \" + response.ErrorMessage );\t\treturn;\t}\tDebug.Log (\"Put image blob:\" + response.Url);}Loading Image Textures from Blob StorageAs we used the Blob type container with public read access you can use the UnityWebRequest.GetTexture method to directly load the .png file from Azure Blob Storage and handle it as a native Unity Texture type for use. As I want to use the Texture in Unity UI to display as an Image I need to convert it to a sprite using my ChangeImage function.public void TappedLoad (){\tChangeImage (new Texture2D (1, 1));\tstring filename = Path.GetFileName (localPath);\tstring url = Path.Combine (client.PrimaryEndpoint () + container, filename);\tDebug.Log (\"Load image: \" + url);\tStartCoroutine (LoadImageURL (url));}public IEnumerator LoadImageURL (string url){\tUnityWebRequest www = UnityWebRequest.GetTexture (url);\tyield return www.Send ();\tif (www.isError) {\t\tDebug.LogError( \"Load image url error: \" + www.error );\t} else {\t\tTexture texture = ((DownloadHandlerTexture)www.downloadHandler).texture;\t\tChangeImage (texture);\t}}private void ChangeImage (Texture2D texture){\tSprite sprite = Sprite.Create (texture, new Rect (0, 0, texture.width, texture.height), Vector2.zero);\timage.GetComponent&lt;Image&gt; ().sprite = sprite;}private void ChangeImage (Texture texture){\tChangeImage (texture as Texture2D);}Unity Asset BundlesUnity Asset Bundles provide a way to dynamically load in assets in your project. This Asset Bundle demo for Blob Storage is a little more complicated than the other examples. An important note to remember is that Asset Bundle binaries need to be build for each target platform. Refer to Unity documentation on building Asset Bundles for more info on building Asset Bundles. Also make sure to review the code stripping section if you want to be able to use referenced scripts in your Prefabs when you do a build.Building and uploading the Asset Bundles for each platform to Blob StorageI have included the Editor scripts with the demo to build the Asset Bundle for each platform. NB: Windows 10 Store App (or HoloLens) bundles can only be built on the Windows Unity Editor at time of writing this. Building the Asset Bundles and uploading them is performed inside Unity Editor:  Select Assets &gt; Build Asset Bundles  Select Window &gt; Upload Asset Bundles…Loading Asset Bundles from Blob Storagepublic void TappedLoadAssetBundle (){\tstring filename = assetBundleName + \"-\" + GetAssetBundlePlatformName () + \".unity3d\";\tstring url = Path.Combine (client.SecondaryEndpoint () + container, filename);\tDebug.Log (\"Load asset bundle: \" + url);\tStartCoroutine (LoadAssetBundleURL (url));}public IEnumerator LoadAssetBundleURL (string url){\tUnityWebRequest www = UnityWebRequest.GetAssetBundle (url);\tyield return www.Send ();\tif (www.isError) {\t\tDebug.LogError( \"Load Asset Bundle url error: \" + www.error );\t\tyield break;\t} else {\t\tassetBundle = ((DownloadHandlerAssetBundle)www.downloadHandler).assetBundle;\t\tDebug.Log(\"Load url: \" + url);\t\tStartCoroutine (LoadAssets (assetBundle, \"CloudCube\"));\t}}private string GetAssetBundlePlatformName (){\tswitch (Application.platform) {\tcase RuntimePlatform.WindowsEditor:\tcase RuntimePlatform.WindowsPlayer:\t\treturn SystemInfo.operatingSystem.Contains (\"64 bit\") ? \"x64\" : \"x86\";\tcase RuntimePlatform.WSAPlayerX86:\tcase RuntimePlatform.WSAPlayerX64:\tcase RuntimePlatform.WSAPlayerARM:\t\treturn \"WSA\";\tcase RuntimePlatform.Android:\t\treturn \"Android\";\tcase RuntimePlatform.IPhonePlayer:\t\treturn \"iOS\";\tcase RuntimePlatform.OSXEditor:\tcase RuntimePlatform.OSXPlayer:\t\treturn \"OSX\";\tdefault:\t\tthrow new Exception (\"Platform not listed\");\t}}If you like the Azure Storage Services library for Unity let me know about it on Twitter. Any issues, features or blob storage demo requests please create it as an issue on github for others to learn from and collaborate.",
       "summary": 
       "Previously I’ve looked at using Azure App Services for Unity, which provided a backend for Unity applications or games using Easy Tables and Easy APIs. But what if I wanted to lift and shift heavier data such as audio files, image files, or Unity Asset Bundles binaries? For storing these...",
-      "date_published": "2017-03-10T12:14:11+01:00",
+      "date_published": "2017-03-10T11:14:11+00:00",
       "tags": ["Azure","Blob Storage","Unity3d"],
-      "_categories": "tutorial",
       "author": {
         "name": "David Douglas"
+      },
+      "_data": {
+        "categories": "tutorial",
+        "year": 2017
       }
     },
     
@@ -104,9 +122,12 @@
       "When it comes to working as a team on the same project we are all thankful for source control. But even if you’re cool with git there are some things to be aware of when starting new source controlled Unity projects that should help to reduce the chance of nasty...",
       "date_published": "2016-09-19T10:30:38+01:00",
       "tags": ["Git","Unity3d","Visual Studio"],
-      "_categories": "code",
       "author": {
         "name": "David Douglas"
+      },
+      "_data": {
+        "categories": "code",
+        "year": 2016
       }
     },
     
@@ -119,9 +140,12 @@
       "Recently I started a new iOS Swift project and spent way more time than I would like trying to find a JSON parser that could handle the various JSON data models I was working with. In this post I will document some real code samples that should prove useful for...",
       "date_published": "2016-08-23T09:37:01+01:00",
       "tags": ["Alamofire","Argo","JSON","Swift"],
-      "_categories": "code",
       "author": {
         "name": "David Douglas"
+      },
+      "_data": {
+        "categories": "code",
+        "year": 2016
       }
     },
     
@@ -134,9 +158,12 @@
       "Many web projects rely on a CMS of some description. The system itself is not important, but rather the content it helps to create. The primary function of a CMS is to enable the creation of content - it should empower content creation. If a new project requires a CMS...",
       "date_published": "2016-08-22T17:19:59+01:00",
       "tags": ["Javascript","Polymer","Web Components"],
-      "_categories": "code",
       "author": {
         "name": "David Douglas"
+      },
+      "_data": {
+        "categories": "code",
+        "year": 2016
       }
     },
     
@@ -149,9 +176,12 @@
       "Azure Mobile Services will be migrated to App Services on Sept 1st 2016. To prepare for this migration I’ve renamed and updated the open source Mobile Service Unity3d projects to support Azure App Service going forward.Using Azure App Services to create highscores leaderboard for UnityTo demonstrate the Azure App Service...",
       "date_published": "2016-05-16T15:42:13+01:00",
       "tags": ["Azure","App Services","Unity3d"],
-      "_categories": "tutorial",
       "author": {
         "name": "David Douglas"
+      },
+      "_data": {
+        "categories": "tutorial",
+        "year": 2016
       }
     },
     
@@ -164,9 +194,12 @@
       "Responsive Design is often seen in terms of technical execution or production. In this article I will describe what it means to design responsively as a design process from problem to production.Contents: Responsive Design for designers Responsive Design for developers Responsive Design in productionBackgroundThe need for responsive designThe idea of...",
       "date_published": "2016-05-06T12:06:45+01:00",
       "tags": ["Cordova","Design","Responsive Design","RWD"],
-      "_categories": "code",
       "author": {
         "name": "David Douglas"
+      },
+      "_data": {
+        "categories": "code",
+        "year": 2016
       }
     },
     
@@ -177,11 +210,14 @@
       "content_text": "If you’ve ever needed to debug Cordova web apps on iOS and Android it can be quite an awful experience for a web developer. Since working on Postcard web app I’ve found a couple of neat tips to help make sense of those noisy debug logs.From localhost to native landDesigning and developing in localhost is familiar territory to web developers and so it makes sense to try and get as much work done there as possible. But when you need to use the physical hardware features of a mobile platform the only way to see if things really work is to go native.For Cordova app development on Android there are a few ways to debug web apps but usually it’s a case of cordova build android then cordova run android --device --debug. Then if you have setup Android SDK’s PATH environment var you can run monitor in command line to open up the Android Device Monitor app to see all the logs.For Cordova app development on iOS it’s usually cordova build ios in Terminal and then you just open the project in Xcode to debug the app.Both these options allow you to run and debug multiple devices although you have to tab or switch views to see the other devices logs. Also Android logs are so noisy it’s almost impossible to spot the stuff you want to look at. Ideally I would like to look at all logs at the same time and dial in on the stuff I’m really interested in.While developing the Postcard app I mocked up the UX flow to perform an Identity Exchange with two devices using our peer to peer Thali Cordova plugin for iOS and Android. Needless to say the Android logs got very busy and I also wanted to be able to get the logs of iOS devices outside of Xcode sessions. Thankfully there are a couple of better ways to debug multiple Android and iOS devices from one Mac —Debugging Cordova web apps on multiple Android devices using adb and logcat filteringList android devices attached:adb devicesBecause I have two android devices attached I want to be able to target both from command line.cordova run android --debug --target=ZX1C224H9F cordova run android --debug --target=YT91138019Once Cordova has installed the app on device you can use logcat to see the logs in Terminal. However with multiple devices you want to use adb -s to target a device and then use logcat -s to filter out all the noise! With the Postcard app we are using jxcore to run Node.js on mobile so I used ‘jxcore-log:*’ as my filter.adb -s YT91138019 logcat -s jxcore-log:\\*In another Terminal tab or split window in iTerm.adb -s ZX1C224H9F logcat -s jxcore-log:\\*Now that’s much cleaner and stuff doesn’t scroll faster than you can actually read! ;)Assuming the Android device is already developer enabled you can also inspect the web view and javascript console logs in Chrome: chrome://inspect/#devicesDebugging Cordova web apps on multiple iOS devices using iOS ConsoleWith iOS all you need to do is attach your devices and download iOS Console which is a handy freeware app to view iOS logs on a Mac with filtering. With our iOS Postcard app I have set the filter to ‘jxcore’.iOS Console doesn’t need Xcode running and the logs are a lot cleaner than the default Console app.Also you can inspect the web view and javascript console in Safari once the app is running. In Safari browser go to:Safari &gt; Preferences &gt; Advanced and turn on “Show Develop menu in menu bar” then select:Safari &gt; Developer &gt; Device NameNote: If you are using mobile Safari to test your web app instead of Cordova then you will have to enable “Web Inspector” on the iOS device under Settings &gt; Safari &gt; Advanced",
       "summary": 
       "If you’ve ever needed to debug Cordova web apps on iOS and Android it can be quite an awful experience for a web developer. Since working on Postcard web app I’ve found a couple of neat tips to help make sense of those noisy debug logs.From localhost to native landDesigning...",
-      "date_published": "2015-11-13T17:39:00+01:00",
+      "date_published": "2015-11-13T16:39:00+00:00",
       "tags": ["Android","Cordova","iOS"],
-      "_categories": "code",
       "author": {
         "name": "David Douglas"
+      },
+      "_data": {
+        "categories": "code",
+        "year": 2015
       }
     },
     
@@ -194,9 +230,12 @@
       "Building for iOS can be very time consuming. Every time you make changes to a Cordova web app you need to do a cordova build to update the app project. Then you have to go into Xcode to debug on device. But if you don’t need to make changes to...",
       "date_published": "2015-10-16T14:00:03+01:00",
       "tags": ["Cordova","iOS"],
-      "_categories": "code",
       "author": {
         "name": "David Douglas"
+      },
+      "_data": {
+        "categories": "code",
+        "year": 2015
       }
     },
     
@@ -209,9 +248,12 @@
       "State of playIf you’ve followed my previous Unity3d Azure tutorials I’ve covered two well known Unity Azure plugins - Prime31 and Bitrave. Bitrave had better multi-platform support, however it required the ‘JSON.NET’ paid asset to support iOS and Android. But then there was issues with iOS AOT compiler. Because of...",
       "date_published": "2015-09-25T11:30:26+01:00",
       "tags": ["Mobile Services","Unity3d"],
-      "_categories": "tutorial",
       "author": {
         "name": "David Douglas"
+      },
+      "_data": {
+        "categories": "tutorial",
+        "year": 2015
       }
     },
     
@@ -224,9 +266,12 @@
       "Like many developers out there I started out coding for the web. So you might think it would be easier to develop a web app than a native app, right? The short answer is no… but web app development is getting better and the performance gap is closing.Thoughts on web...",
       "date_published": "2015-09-11T10:09:52+01:00",
       "tags": ["Android","Cordova","iOS","WebApp"],
-      "_categories": "code",
       "author": {
         "name": "David Douglas"
+      },
+      "_data": {
+        "categories": "code",
+        "year": 2015
       }
     },
     
@@ -239,9 +284,12 @@
       "To establish peer to peer (p2p) communication on iOS devices there is an API for that known as the Multipeer Connectivity framework. There are a couple of things to bear in mind about this framework: Discovers and connects with iOS devices but will not discover devices on other platforms like...",
       "date_published": "2015-07-30T12:00:26+01:00",
       "tags": ["iOS"],
-      "_categories": "code",
       "author": {
         "name": "David Douglas"
+      },
+      "_data": {
+        "categories": "code",
+        "year": 2015
       }
     },
     
@@ -254,9 +302,12 @@
       "One of our startups at MS Ventures was looking to use the command line to manage their Azure account on Mac. If you prefer using Mac OS X Terminal or iTerm and have an Azure account then you should check out the Azure CLI tools for Mac.Install Azure CLI for MacYou...",
       "date_published": "2015-04-10T15:20:34+01:00",
       "tags": ["Azure","Mobile Services","Azure-CLI"],
-      "_categories": "tutorial",
       "author": {
         "name": "David Douglas"
+      },
+      "_data": {
+        "categories": "tutorial",
+        "year": 2015
       }
     },
     
@@ -267,11 +318,14 @@
       "content_text": "BackgroundWhen you create an Azure Mobile Service you can download a ToDo sample app to help you get started on a number of platforms including Windows, iOS and Android. There are also cross platform options available with Xamarin or web app development using PhoneGap or HTML/Javascript. Recently I came across a pretty neat Javascript framework called Ember for creating web apps. While you can go ahead and quickly download the Ember Starter Kit to try out some of the introductory snippets listed on the Emberjs homepage, the better option for serious development of Ember apps is to use Ember-CLI. The Ember Command Line Interface gets you up and running with a full MVC framework and helps install project dependencies using NPM (Node Package Manager) and Bower. Having just started learning Ember-CLI myself I thought it might be useful to do a getting started tutorial showing how to hook it up with Azure Mobile Services to create a ToDo app with same functionality as the other offerings already available on the Mobile Services quick-start page.PrerequisitesBefore you can start using Ember-CLI you will need Node.js installed.How to install Node.js on Windows  node (64-bit)  node (32-bit)Alternatively you can manage multiple node versions using the latest nvm-setup Windows installer.nvm install 0.12.0 nvm use 0.12.0See nvm-windows for more commands.How to install Node.js on MacIf you’re using a Mac its better to install Node.js using NVM (Node Version Manager) rather than install as admin/sudo user. Run the following commands in Terminal:git clone https://github.com/creationix/nvm.git ~/.nvm &amp;&amp; cd ~/.nvm &amp;&amp; git checkout `git describe --abbrev=0 --tags`# Edit bash profile nano ~/.bash_profileexport NVM_DIR=\"/Users/YOUR_USERNAME/.nvm\" [-s \"$NVM_DIR/nvm.sh\"] &amp;&amp; . \"$NVM_DIR/nvm.sh\"# Loads nvm source ~/.bash_profilenvm install 0.12.0 nvm alias default v0.12.0NB: In new Terminal sessions you may need to run nvm use default. If you want to you can add this to your bash profile to setup automatically.nvm use defaultOr for a specific node version:nvm use v0.12.0Once you have node installed you can check its working by getting the version:node -v npm -vInstalling Ember-CLI and bowerInstall ember-cli, bower and phantomjs globally using the -g switch.npm install -g ember-cli npm install -g bower npm install -g phantomjsCreating the Todo example app using Ember-CLI and Azure Mobile Services  Create an Azure Mobile Service  Create example TodoItem table.   Create a new Ember-CLI app    mkdir ~/TodoApp cd ~/TodoApp ember new client cd client        Run in ember client in Browser.    ember serve            Open http://localhost:4200/ in new Browser window to see web app.      Save Azure Mobile Services javascript files into /vendor folder.          MobileServices.Web-1.2.5.js      MobileServices.Web-1.2.5.min.js            Update the Broccoli file Brocfile.js to import /vendor javascripts     var EmberApp = require('ember-cli/lib/broccoli/ember-app'); var app = new EmberApp(); app.import({   development: 'vendor/MobileServices.Web-1.2.5.js',   production:  'vendor/MobileServices.Web-1.2.5.min.js' }); module.exports = app.toTree();            Update the js hint file .jshintrc to recognise the WindowsAzure global namespace.     {   \"predef\": [     \"document\",     \"window\",     \"-Promise\",     \"WindowsAzure\"   ],   \"browser\": true,        Generate TodoItem model, index controller and route. (Generating a route will also generate a Handlebars index.hbs template by default).     ember generate model TodoItem  ember generate controller index  ember generate route index        Create azure service. (Generating a service will also generate an azure-service.js initalizer)    ember generate service azure            Update the services/azure.js script with your own Mobile Service connection strings (on lines 61-62):    import Ember from 'ember';var azureService = Ember.Object.extend({  read : function(table){    console.log(table + \" read\");    return azureService.client().getTable(table).read().then(onComplete, onError);    function onComplete(fulfilled){      console.log(\"read items:\" + fulfilled.length);      return fulfilled;    }    function onError(error){      console.log(\"Error reading item: \" + error);    }  },  insert : function(table, item, model){    console.log(table + \" insert:\" + item.id + \" model:\" + model.length);    return azureService.client().getTable(table).insert(item).then(onComplete, onError);    function onComplete(fulfilledItem){      // NB: use Ember's pushObject / unshiftObject to respect KVO!      model.unshiftObject(fulfilledItem);      console.log(\"inserted item:\" + JSON.stringify(fulfilledItem) + \" model:\" + model.length);      return fulfilledItem;    }    function onError(error){      console.log(\"Error inserting item: \"+error);    }  },  del : function(table, item, model){    console.log(table + \" del:\" + item.id + \" model:\" + model.length);    return azureService.client().getTable(table).del(item).then(onComplete, onError);    function onComplete(fulfilled){      // NB: use Ember's removeObject to respect KVO!      model.removeObject(item);      console.log(\"deleted item:\" + \" model:\" + model.length);      return fulfilled;    }    function onError(error){      console.log(\"Error deleting item: \" + error);    }  },  update : function(table, item){    console.log(table + \" update:\" + item.id);    return azureService.client().getTable(table).update(item).then(onComplete, onError);    function onComplete(fulfilledItem){      console.log(\"updated item:\" + JSON.stringify(fulfilledItem));      return fulfilledItem;    }    function onError(error){      console.log(\"Error updating item: \" + error);    }  }});//  creates static properties and methods for the classazureService.reopenClass({  APPLICATION_URL : \"https://MOBILE_SERVICE_URL.azure-mobile.net/\",  APPLICATION_KEY : \"\",  mobileServiceClient : null,  client : function(){    if(this.APPLICATION_URL === \"\" || this.APPLICATION_KEY === \"\") {      var error = \"Please configure your Azure Mobile Service URL &amp; Application KEY (app/services/azure.js 61-62)\";      alert (error);      throw (\"\\n\" + error);    } else {      if (this.mobileServiceClient == null) {        console.log(\"Creating Mobile Service Client...\");        this.mobileServiceClient = new WindowsAzure.MobileServiceClient(this.APPLICATION_URL, this.APPLICATION_KEY);      }      return this.mobileServiceClient;    }  }});export default azureService;        When the app first loads we will need to read a table. In this case we will read the TodoItem table to get a list of TodoItems. When a user needs to add a Todo item we will call the insert method to add an item into a table and update our Ember model for display. The del method will work the same way except the item will be deleted. Finally the update method will be used to save changes to an item, which in this case will be when the TodoItem is completed (stroked out).        Edit models/todo-item.js to handle todo text string and a completed boolean so tasks can be marked off:    import DS from 'ember-data';export default DS.Model.extend({  // NB: You may not set 'id' as an attribute on your model  text: DS.attr('string'),  completed: DS.attr('boolean')});        The TodoItem model consists of a string property for the Todo text and a boolean property to say if the Todo item has been completed.        Edit routes/index.js and set model to read TodoItems table:    import Ember from 'ember';export default Ember.Route.extend({  model: function(){    var service = this.get('azureService');    var table = 'TodoItem';    console.log(\"service:\" + service);    return service.read(table);  }});        As ember serve auto updates as you save changes you should see some activity in your Browser’s console log.        In the Browser’s console log you might get a refused to connect error “because it violates the following Content Security Policy directive: connect-src ‘self’” that means we need to update our environment config. To fix this add the following contentSecurityPolicy settings to the ENV var in config/environment.js to allow connections to *.azure-mobile.net:    /* jshint node: true */module.exports = function(environment) {  var ENV = {    modulePrefix: 'client',    environment: environment,    baseURL: '/',    locationType: 'auto',    EmberENV: {      FEATURES: {        // Here you can enable experimental features on an ember canary build        // e.g. 'with-controller': true      }    },    contentSecurityPolicy: {      'default-src': \"'none'\",      'script-src': \"'self' 'unsafe-inline' 'unsafe-eval' *.azure-mobile.net\",      'font-src': \"'self'\",      'connect-src': \"'self' *.azure-mobile.net\",      'img-src': \"'self'\",      'style-src': \"'self' 'unsafe-inline'\",      'media-src': \"'self'\"    },    APP: {      // Here you can pass flags/options to your application instance      // when it is created    }  };            Update the templates/index.hbs which will be used to display the user interface.    &lt;h3&gt; Todo: {{text}}&lt;/h3&gt;&lt;header&gt;&lt;form&gt;{{input value=text type=\"text\" name=\"text\" placeholder=\"Todo\" autofocus=\"autofocus\"}}&lt;input type=\"submit\" value=\"Add\" disabled&gt;&lt;/form&gt;&lt;/header&gt;&lt;main&gt;&lt;ol&gt;{{#each item in model}}  &lt;/ol&gt;&lt;li&gt;    &lt;label item&gt;      &lt;input type=\"checkbox\" disabled checked&gt;      &lt;span class=\"item.completed\"&gt;{{item.text}}            &lt;button item&gt;Delete  &lt;/button&gt;&lt;/span&gt;&lt;/label&gt;&lt;/li&gt;{{/each}}&lt;/main&gt;              NB: You will get an uncaught error if you try to add, update or delete items as we still need to handle user actions with a controller.            Update the controllers/index.js to handle actions from user interface and delegate them to our Azure service.    /* jshint node: true */module.exports = function(environment) {  var ENV = {    modulePrefix: 'client',    environment: environment,    baseURL: '/',    locationType: 'auto',    EmberENV: {      FEATURES: {        // Here you can enable experimental features on an ember canary build        // e.g. 'with-controller': true      }    },    contentSecurityPolicy: {      'default-src': \"'none'\",      'script-src': \"'self' 'unsafe-inline' 'unsafe-eval' *.azure-mobile.net\",      'font-src': \"'self'\",      'connect-src': \"'self' *.azure-mobile.net\",      'img-src': \"'self'\",      'style-src': \"'self' 'unsafe-inline'\",      'media-src': \"'self'\"    },    APP: {      // Here you can pass flags/options to your application instance      // when it is created    }  };        To allow access to the service from the controller we need to inject the azureService in the initializers/azure-service.js service initializer.    export function initialize(container, application) {  application.inject('route', 'azureService', 'service:azure');  application.inject('controller', 'azureService', 'service:azure');}export default {  name: 'azure-service',  initialize: initialize};                Finally add some styles to grey out and strike through completed items styles/app.css :    body {  font-family: sans-serif;  cursor: default;  margin: 0;  padding: 0;  -webkit-user-select: none;}    header {  margin: 10px;}    span {  color: #000; /* default (incompleted todos) */}    .completed, .true {  color: #999; /* completed tasks are greyed and striked out */  text-decoration: line-through;}button {  float: right;}    ol {  list-style-position: inside;  margin: 0;  padding: 0;  color: #999;}    li {  padding: 10px;}    li:nth-child(odd) {  background:#fcfcfc;}    li:nth-child(even) {  background:#f9f9f9;}    label {  cursor: pointer;}      Download finished Todo ember-cli project on GitHubgit clone https://github.com/deadlyfingers/ember-cli-todo-app-azure.git cd ember-cli-todo-app-azure npm install bower install ember serve",
       "summary": 
       "BackgroundWhen you create an Azure Mobile Service you can download a ToDo sample app to help you get started on a number of platforms including Windows, iOS and Android. There are also cross platform options available with Xamarin or web app development using PhoneGap or HTML/Javascript. Recently I came across...",
-      "date_published": "2015-02-28T18:52:59+01:00",
+      "date_published": "2015-02-28T17:52:59+00:00",
       "tags": ["Ember-CLI","Azure","Mobile Services"],
-      "_categories": "tutorial",
       "author": {
         "name": "David Douglas"
+      },
+      "_data": {
+        "categories": "tutorial",
+        "year": 2015
       }
     },
     
@@ -282,11 +336,14 @@
       "content_text": "  Azure Mobile Service is now App Service, please follow the updated tutorial for App Services for Unity3d instead.This is a quick Unity3d game developer tutorial showing how to save, update and query high scores stored in the Cloud using a Mobile Service and the BitRave Azure plugin.Watch how to create a Leaderboard in the cloud using the Unity3d BitRave plugin.      To save scores in the Leaderboard table you will need to create a Mobile Service.        Get the BitRave plugin with Leaderboard scripts on my GitHub fork.        Create new Unity project.        Copy contents of the BitRave Universal Plugin Assets folder into your Unity3d project’s Assets folder.        Import JSON.NET dependancy from Unity Asset Store.        Open the TestAzure scene.Select _Main Camera* and remove Script in the Inspector panel. (This will be replaced later.)        Create ‘ Leaderboard ’ table in Azure Mobile Services.        Open AzureUILeaderboard.cs script and replace Azure Mobile Service connection strings.        Drag &amp; drop AzureUILeaderboard.cs script to attach it to the Main Camera.        Now you’re ready to play in Unity Editor add post some high scores!  In this demo project you can submit new scores, return list of all scores and update them. You can also query to show only high scores or get list of a user’s scores.Check it out!Karma Labs on Azure Mobile Services and BitRave plugin in their Unity3d game development.If you are also looking to handle user identity with Mobile Services and configure build settings for iOS and Android development I touch on this in my first getting started with BitRave Azure plugin tutorial.Share your Unity3d #GameDev with @deadlyfingers",
       "summary": 
       "Azure Mobile Service is now App Service, please follow the updated tutorial for App Services for Unity3d instead.This is a quick Unity3d game developer tutorial showing how to save, update and query high scores stored in the Cloud using a Mobile Service and the BitRave Azure plugin.Watch how to create...",
-      "date_published": "2014-11-26T11:37:14+01:00",
+      "date_published": "2014-11-26T10:37:14+00:00",
       "tags": ["Android","GameDev","iOS","Azure","Mobile Services","Unity3d"],
-      "_categories": "tutorial",
       "author": {
         "name": "David Douglas"
+      },
+      "_data": {
+        "categories": "tutorial",
+        "year": 2014
       }
     },
     
@@ -297,11 +354,14 @@
       "content_text": "  Azure Mobile Service is now App Service, please follow the updated tutorial for App Services for Unity3d instead.This quick-start tutorial is for Unity3d game developers who would like to get a cloud backend that runs across multiple platforms (including the Unity Editor for quick testing). One of the big advantages for game devs using Unity3d is that it supports so many platforms. It’s fair to say more people own more than one device that connects to the internet and a lot of them can run apps and games. While the platforms and ecosystems may differ as a gamer I would like to play the same game across any device (and on any platform) and expect things to sync. Azure Mobile Services is a ‘Backend as a Service’ which supports multi-platform app development. In Unity the BitRave plugin for Azure Mobile Services is designed to just work on any platform that Unity supports.Watch getting started with Unity BitRave Azure plugin running on iOS and Android      To kick off with create a Mobile Service in Azure management portal. If you don’t have an Azure account yet game developers can register for the Cloud GameDev Offer.          NB: A Mobile Service will only take a minute to setup and just a couple of minutes more to become active and ready to use.            Download BitRave plugin.        Create new Unity3d project.        Copy BitRave’s AzureMobileServicesUniversalPlugin/Assets into Unity3d project’s ‘Assets’ folder.        Get JSON.NET Unity asset to enable cross platform support.        Open TestAzure Scene.        Open AzureUI.cs script and replace the connection strings with your own Mobile Service URL &amp; API Key.        The BitRave demo uses Authentication with Facebook. You will need to create a Facebook app for your Mobile Service and copy &amp; paste the App Id and App Secret into your Mobile Service’s IDENTITY Facebook section. Then generate the Facebook Access Token under Facebook’s Tools &gt; Access Tokens.Copy the Access Token and paste into _AzureUI.cs* script’s Access Token value.          NB: Remember to save changes!            In Unity select the Main Camera and remove the Script in the Inspector panel.Reattach the _AzureUI.cs* script. (Drag &amp; drop the script onto the Camera.)        Add the demo TodoItem table (in Azure Mobile Service’s get started section).        Run in Unity Editor and connect to Mobile Service.Once logged in you can add a _TodoItem*.You can query or list all items.Items can be selected to updated.        In Unity Build Settings switch platform to build for iOS. I’ve selected Development Build and Symlink Unity Libraries for smaller/faster builds.To run on the iOS Simulator edit Player Settings and under Target iOS Version menu select Simulator SDK        Open Xcode project to build &amp; run. Rotate iOS simulator to landscape to display UI.Connect to Mobile Services by logging in to add some items.        In Unity Build Settings switch platform to build for Android. I’ve selected Development Build and Google Android Project.Edit Player Settings to change the Bundle Identifier. (This is in reverse domain name notation - for example _net.deadlyfingers.DemoApp*)        Import Android project into Android Studio.Edit the _AndroidManifest.xml* and change the installLocation attribute to auto.Build &amp; run app. (I find the Nexus 7 tablet API 21 ARM emulator works best with Unity builds.)Rotate Android emulator to landscape to display UI.Connect to Mobile Services by logging in to add some items.  One more thing to todo!You can also record the userId by adding one line of code on the server-side.Edit TodoItem table Script &gt; Insertfunction insert(item, user, request) {  item.userId = user.userId; // adds userId property to insert item from user object.  request.execute();}Score bonus points!Check out my Leaderboard BitRave tutorial showing how to save, update and query high scores stored in the Cloud using a Mobile Service.Share your Unity3d #GameDev with @deadlyfingers",
       "summary": 
       "Azure Mobile Service is now App Service, please follow the updated tutorial for App Services for Unity3d instead.This quick-start tutorial is for Unity3d game developers who would like to get a cloud backend that runs across multiple platforms (including the Unity Editor for quick testing). One of the big advantages...",
-      "date_published": "2014-11-21T16:02:28+01:00",
+      "date_published": "2014-11-21T15:02:28+00:00",
       "tags": ["Android","iOS","Azure","Mobile Services","Unity3d"],
-      "_categories": "tutorial",
       "author": {
         "name": "David Douglas"
+      },
+      "_data": {
+        "categories": "tutorial",
+        "year": 2014
       }
     },
     
@@ -314,9 +374,12 @@
       "Azure Mobile Service is now App Service, please follow the updated tutorial for App Services for Unity3d instead.Unity game developers looking to publish their games on Windows Store might want to add global/local high-score leaderboards, record user achievements and level progress. For example the ability to save level progress is...",
       "date_published": "2014-10-22T09:46:56+01:00",
       "tags": ["GameDev","Azure","Mobile Services","Unity3d","Visual Studio","Windows"],
-      "_categories": "tutorial",
       "author": {
         "name": "David Douglas"
+      },
+      "_data": {
+        "categories": "tutorial",
+        "year": 2014
       }
     },
     
@@ -329,9 +392,12 @@
       "If you’ve developed an app you might want to make a promo video showing your app working across devices or multiple screens.Of course you can record an iOS Simulator, Android Virtual Device, or WindowsPhone emulator easy enough using a screen recording tool like Camtasia but it’s often a bit tricker...",
       "date_published": "2014-08-12T08:27:24+01:00",
       "tags": ["Android","iPad","iPhone","Windows Phone"],
-      "_categories": "tutorial",
       "author": {
         "name": "David Douglas"
+      },
+      "_data": {
+        "categories": "tutorial",
+        "year": 2014
       }
     },
     
@@ -344,9 +410,12 @@
       "When you need a breakout from work here are 10 fun mini games to play on your Windows device. Touch Surface recommended! ;) Reckless Racing Ultimate Top down mini car racing game featuring offroad and race track competitions. A must have game!Get it! Zombie HQ Top down shooter with zombies,...",
       "date_published": "2014-06-19T23:28:00+01:00",
       "tags": ["App Store","Apps","Gaming","Windows"],
-      "_categories": "info",
       "author": {
         "name": "David Douglas"
+      },
+      "_data": {
+        "categories": "info",
+        "year": 2014
       }
     },
     
@@ -359,9 +428,12 @@
       "Azure Mobile Services is deprecated, please migrate to Azure App Service.Tutorial requirements: Android Studio Microsoft Azure account — start a free Azure trial Google developer account First install Google Play Services package in the Android SDK Manager. NB: If using an Android Virtual Device then ensure your Target is set...",
       "date_published": "2014-05-30T11:16:52+01:00",
       "tags": ["Android","Azure","Mobile Services"],
-      "_categories": "tutorial",
       "author": {
         "name": "David Douglas"
+      },
+      "_data": {
+        "categories": "tutorial",
+        "year": 2014
       }
     },
     
@@ -374,9 +446,12 @@
       "Azure Mobile Services is deprecated, please migrate to Azure App Service.Tutorial requirements: Android Studio Microsoft Azure account — start a free Azure trial Twitter accountThis article builds on top of the previous tutorial where an Android Todo app was created with Azure Mobile Services. However most steps can be adapted...",
       "date_published": "2014-05-29T11:16:17+01:00",
       "tags": ["Android","Azure","Mobile Services"],
-      "_categories": "tutorial",
       "author": {
         "name": "David Douglas"
+      },
+      "_data": {
+        "categories": "tutorial",
+        "year": 2014
       }
     },
     
@@ -389,9 +464,12 @@
       "Azure Mobile Services is deprecated, please migrate to Azure App Service.Tutorial requirements: Android Studio Microsoft Azure account — start a free Azure trial Create a new Mobile Service in Azure._The wizard will take you through this process in a couple of steps. Once the mobile service is created it will...",
       "date_published": "2014-05-28T11:11:43+01:00",
       "tags": ["Android","Azure","Mobile Services"],
-      "_categories": "tutorial",
       "author": {
         "name": "David Douglas"
+      },
+      "_data": {
+        "categories": "tutorial",
+        "year": 2014
       }
     },
     
@@ -404,9 +482,12 @@
       "Azure Mobile Services is deprecated, please migrate to Azure App Service.These days it’s probably a good idea to have cloud backend for your apps. There are a greater number of connected devices in comparison to individuals, which means your apps may be expected to work as well as sync across...",
       "date_published": "2014-05-27T08:39:50+01:00",
       "tags": ["Android","Azure","Mobile Services"],
-      "_categories": "tutorial",
       "author": {
         "name": "David Douglas"
+      },
+      "_data": {
+        "categories": "tutorial",
+        "year": 2014
       }
     },
     
@@ -419,9 +500,12 @@
       "This tutorial has been deprecated. Please check the wiki for setting up Wordpress with the new Azure App Service.It’s super simple to create your first Wordpress blog using Microsoft Azure Websites Gallery. Getting this all up and running is extremely fast. I’ve uploaded a short video and blog post showing...",
       "date_published": "2014-04-25T11:55:04+01:00",
       "tags": ["Blog","Azure","Website","Wordpress"],
-      "_categories": "tutorial",
       "author": {
         "name": "David Douglas"
+      },
+      "_data": {
+        "categories": "tutorial",
+        "year": 2014
       }
     },
     
@@ -434,9 +518,12 @@
       "This tutorial has been deprecated. Please check the wiki for setting up Wordpress with the new Azure App Service. Start an Azure trial or sign-in into your Microsoft Azure management portal. Select WEB SITES and choose NEW &gt; WEB SITE &gt; FROM GALLERY Select BLOGS &gt; WordPress Enter unique site URL at *.azurewebsites.net (you...",
       "date_published": "2014-04-02T11:50:05+01:00",
       "tags": ["Azure","Blog","Wordpress","Website"],
-      "_categories": "tutorial",
       "author": {
         "name": "David Douglas"
+      },
+      "_data": {
+        "categories": "tutorial",
+        "year": 2014
       }
     }
     
