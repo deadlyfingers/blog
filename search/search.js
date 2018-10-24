@@ -1,58 +1,80 @@
 (function () {
-  fetch("./search.json")
+  fetch("./feed.json")
     .then(res => res.json())
-    .then((data) => {
-      // Search index json dictionary loaded
+    .then(data => {
+      // Search index json feed loaded
       const idx = lunr(function () {
         this.ref('id');
         this.field('title');
-        this.field('content', {
+        this.field('content_text', {
           boost: 10
         });
-        this.field('author');
+        this.field('tags');
         this.field('categories');
+        this.field('author');
 
-        Object.keys(data).forEach((key, index) => {
-          var value = data[key];
-          value['id'] = key;
-          this.add(value);
-        });
+        if (data && data.items && data.items.length > 0) {
+          data.items.forEach(item => {
+            this.add(item);
+          });
+        } else {
+          console.error("No search feed data items available.");
+        }
       });
 
       // DOM element ids
-      const form = document.getElementById("form");
+      const form = document.getElementById("search_form");
       const search = document.getElementById("search");
-      const list = document.getElementById("results");
+      const container = document.getElementById("search_results");
+      const title = document.getElementById("search_title");
 
-      // Submit form handler
-      if (form && search && list) {
-        form.addEventListener("submit", function (e) {
-          e.preventDefault();
-          var query = search.value;
-          var results = idx.search(query);
-          updateResults(results);
-        });
-      } else {
-        console.error("Unable to get search elements");
-      }
+      // Update DOM with search title
+      const updateTitle = function (query) {
+        title.textContent = query.length > 0 ? 'Search results for "' + query + '"' : "";
+      };
 
-      // Update DOM
+      // Update DOM with dynamic search results
       const updateResults = function (results) {
-        var items = [];
+        var elements = [];
         var item;
         results.forEach(result => {
-          item = data[result.ref];
+          item = data.items.find(x => x.id === result.ref);
           if (item) {
             var li = '<li><a href="' + item.url + '">' + item.title + '</a></li>';
-            items.push(li);
+            elements.push(li);
           }
         });
-        var html = "<li>No results found</li>";
-        if (items.length > 0) {
-          html = items.join("\n");
+        var html = "<p>No results found</p>";
+        if (elements.length > 0) {
+          html = '<ul>' + elements.join("\n") + '</ul>';
         }
-        list.innerHTML = html;
+        container.innerHTML = html;
       };
+
+      // Search index
+      const searchIndex = function (query) {
+        var fuzzyQuery = query.length > 0 ? query + "~1" : query;
+        var results = idx.search(fuzzyQuery);
+        updateTitle(query);
+        updateResults(results);
+      };
+
+      // View controller
+      if (form && search && container && title) {
+        // URL search param handler
+        var params = new URLSearchParams(window.location.search);
+        var q = params.get('q');
+        if (q && q.length > 0) {
+          searchIndex(q);
+        }
+        // Live search input handler
+        search.addEventListener("keyup", function (e) {
+          var input = search.value;
+          searchIndex(input);
+        });
+      } else {
+        console.error("Failed to get required search elements on page.");
+      }
     })
     .catch(err => {
       console.error("Failed to fetch search index!", err);

@@ -1,17 +1,19 @@
 ---
 layout: page
 title: Search
+id: search
 ---
 
-<div class="small-12 cell">
-  <form id="form">
-    <input id="search" type="search" placeholder="search" />
-    <input type="submit" value="Find">
-  </form>
+<div class="small-12 cell right">
+  {% include search.html %}
 </div>
 
 <div class="small-12 cell">
-  <ul id="results"></ul>
+  <h1><span id="search_title"></span></h1>
+</div>
+
+<div id="search_results" class="small-12 cell">
+  <!-- search results -->
 </div>
 
 <!-- lunr search -->

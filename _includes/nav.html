@@ -3,8 +3,15 @@
     <h1><a href="/">{{ site.title }}</a></h1>
   </div>
   <div class="small-6 cell right">
-    <a class="icon twitter" href="https://twitter.com/{{ site.author.twitter }}"></a>
-    <a class="icon github" href="https://github.com/{{ site.author.github }}"></a>
-    <a class="icon youtube" href="https://youtube.com/{{ site.author.youtube }}"></a>
+    <div class="icons">
+      <a class="icon twitter" href="https://twitter.com/{{ site.author.twitter }}"></a>
+      <a class="icon github" href="https://github.com/{{ site.author.github }}"></a>
+      <a class="icon youtube" href="https://youtube.com/{{ site.author.youtube }}"></a>
+    </div>
+  </div>
+  <div class="small-12 cell right">
+    {% if page.id != "search" %}
+    {% include search.html %}
+    {% endif %}
   </div>
 </div>

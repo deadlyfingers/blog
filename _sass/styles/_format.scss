@@ -189,8 +189,25 @@ pre {
   padding: 10px 5px;
 }
 
+.icons {
+  padding-top: 16px;
+}
+
 /* spacing */
 
 .spacer {
   height: 10px;
+}
+
+/* form */
+
+form {
+  input {
+    /* prevents iPhone input tap zoom-in feature */
+    font-size: 16px;
+  }
+}
+
+div.search {
+  padding-bottom: 10px;
 }

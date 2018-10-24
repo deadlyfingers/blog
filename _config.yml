@@ -24,6 +24,7 @@ links:
   categories: "/categories"
   tags: "/tags"
   tag: "/tag/"
+  feed: "/search/feed.json"
 
 # Collections
 collections:

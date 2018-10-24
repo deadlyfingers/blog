@@ -119,7 +119,7 @@ You can find the source code of this website on my [GitHub Page's blog repo](htt
 - [GitHub Pages](https://pages.github.com/)
 - [GitHub Project Pages](https://help.github.com/articles/user-organization-and-project-pages/#project-pages-sites)
 - [Using Jekyll](https://help.github.com/articles/using-jekyll-as-a-static-site-generator-with-github-pages/)
-- [Themes](https://pages.github.com/themes/)
+- [Built-in Themes](https://pages.github.com/themes/)
 - [Default Plugins](https://help.github.com/articles/configuring-jekyll-plugins/#default-plugins)
 - [markdown: kramdown](https://help.github.com/articles/updating-your-markdown-processor-to-kramdown/)
 - [highlighter: rouge](https://help.github.com/articles/using-syntax-highlighting-on-github-pages/)
@@ -143,17 +143,29 @@ You can find the source code of this website on my [GitHub Page's blog repo](htt
 - [GitHub Pages setup](https://jekyllrb.com/docs/github-pages/)
 - [GitHub Pages dependencies](https://pages.github.com/versions/)
 - [List of TimeZones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+- [Jekyll Collections](https://jekyllrb.com/docs/collections/)
 
 ### Disqus
+[Disqus](https://disqus.com) can be added to a Jekyll site to enable comments on blog posts.
 
 - [Adding Disqus to Jekyll blog](http://sgeos.github.io/jekyll/disqus/2016/02/15/adding-disqus-to-a-jekyll-blog.html)
 - [Disqus config](https://help.disqus.com/developer/javascript-configuration-variables)
 
 ### Foundation
+I added the [XY-Grid SASS classes](https://foundation.zurb.com/sites/docs/xy-grid.html#importing) for responsive design layouts.
 
 - [XY-Grid](https://foundation.zurb.com/sites/docs/xy-grid.html)
 
+### Search
+A Jekyll generated [JSON feed](https://jsonfeed.org) can be used as the search index for [lunr.js](https://lunrjs.com/).
+
+- [Jekyll and lunr search](https://rayhightower.com/blog/2016/01/04/how-to-make-lunrjs-jekyll-work-together/)
+- [Submit search query](https://learn.cloudcannon.com/jekyll/jekyll-search-using-lunr-js/)
+- [JSON feed format](https://jsonfeed.org/version/1)
+- [Jekyll JSON feed](https://stevenwestmoreland.com/2017/05/adding-json-feed-to-your-jekyll-site.html)
+
 ### Gulp
+One [gulp](https://gulpjs.com/) command deploys the production build to my `gh-pages` branch!
 
 - [Publish build to GitHub Pages](https://www.npmjs.com/package/gulp-gh-pages)
 - [gulp 3 to gulp 4 task guide](https://www.joezimjs.com/javascript/complete-guide-upgrading-gulp-4/)
