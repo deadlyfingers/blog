@@ -9,21 +9,35 @@
           boost: 10
         });
         this.field('content_text');
+        this.field('summary');
         this.field('tags', {
           boost: 5
         });
-        this.field('_categories');
-
+        this.field('author');
+        this.field('categories');
+        this.field('year', {
+          boost: 7
+        });
+        // convert JSON feed item properties to lunr search fields
         if (data && data.items && data.items.length > 0) {
           data.items.forEach(item => {
-            this.add(item);
+            this.add({
+              id: item.id,
+              title: item.title,
+              content_text: item.content_text,
+              summary: item.summary,
+              tags: item.tags,
+              author: item.author.name,
+              categories: item._data.categories,
+              year: item._data.year
+            });
           });
         } else {
           console.error("No search feed data items available.");
         }
       });
 
-      // DOM element ids
+      // Required HTML element ids
       const form = document.getElementById("search_form");
       const search = document.getElementById("search");
       const container = document.getElementById("search_results");
@@ -53,11 +67,22 @@
       };
 
       // Search index
+      var lastQuery = "";
       const searchIndex = function (query) {
-        //var fuzzyQuery = query.length > 0 ? query + "~1" : query;
-        var results = idx.search(query);
-        updateTitle(query);
+        var q = query.trim();
+        if (q.length === 0 || q === lastQuery) {
+          return;
+        }
+        var results = idx.search(q);
+        updateTitle(q);
         updateResults(results);
+        lastQuery = q;
+      };
+
+      // Trigger search
+      const triggerSearch = function () {
+        var input = search.value;
+        searchIndex(input);
       };
 
       // View controller
@@ -70,8 +95,11 @@
         }
         // Live search input handler
         search.addEventListener("keyup", function (e) {
-          var input = search.value;
-          searchIndex(input);
+          triggerSearch();
+        });
+        // Detect autocomplete input event on iOS
+        search.addEventListener("input", function (e) {
+          triggerSearch();
         });
       } else {
         console.error("Failed to get required search elements on page.");

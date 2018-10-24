@@ -102,7 +102,7 @@ gulp.task('generate:tags', function () {
 });
 
 // build everything but don't do live deploy
-gulp.task('deploy:soft', gulp.series('build', 'copy', 'generate:tags'));
+gulp.task('soft_deploy', gulp.series('build', 'copy', 'generate:tags'));
 
 // first build and copy any required files, generate tags and then deploy site
 gulp.task('deploy', gulp.series('build', 'copy', 'generate:tags', '_deploy_site'));

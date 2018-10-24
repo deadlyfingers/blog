@@ -223,6 +223,11 @@ form {
     background: white;
     border-radius: 4px 0 0 4px;
     width: calc(100% - 44px);
+
+    /* hides datalist arrow */
+    &::-webkit-calendar-picker-indicator {
+      display: none;
+    }
   }
 
   button[type=submit] {
