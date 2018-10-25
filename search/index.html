@@ -5,7 +5,7 @@ id: search
 ---
 
 <div class="small-12 cell right">
-  {% include search.html %}
+  {%- include search.html -%}
 </div>
 
 <div class="small-12 cell">
@@ -17,9 +17,9 @@ id: search
 </div>
 
 <!-- lunr search -->
-{% if jekyll.environment == 'development' %}
+{%- if jekyll.environment == 'development' -%}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.3/lunr.js"></script>
-{% else %}
+{%- else -%}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.3/lunr.min.js"></script>
-{% endif %}
+{%- endif -%}
 <script src="./search.js"></script>

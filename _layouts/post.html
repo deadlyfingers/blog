@@ -3,48 +3,48 @@ layout: default
 ---
 
 <div id="post" class="large-8 cell post">
-  {% if page.date %}
-  <time datetime="{{ page.date | date_to_xmlschema }}" class="date">{{ page.date | date: "%d %b %Y" }}</time>
-  {% endif %}
-  <h1 class="post-title">{{ page.title }}</h1>
+  {%- if page.date -%}
+  <time datetime="{{- page.date | date_to_xmlschema -}}" class="date">{{- page.date | date: "%d %b %Y" -}}</time>
+  {%- endif -%}
+  <h1 class="post-title">{{- page.title -}}</h1>
   <div class="post-line"></div>
-  {{ content }}
+  {{- content -}}
 </div>
 
 <div class="large-4 cell">
-  {% include disqus_comments.html %}
+  {%- include disqus_comments.html -%}
 </div>
 
 <div id="pagination" class="large-12 cell">
   <div>
-    <a href="{{ page.url | absolute_url }}">{{ page.title }}</a>
+    <a href="{{- page.url | absolute_url -}}">{{- page.title -}}</a>
     <span>
-      {% if page.author and page.author.display_name %}
-      <span>by {{ page.author.display_name }}</span>
-      {% else %}
-      <span>by {{ site.author.name }}</span>
-      {% endif %}
+      {%- if page.author and page.author.display_name -%}
+      <span>by {{- page.author.display_name -}}</span>
+      {%- else -%}
+      <span>by {{- site.author.name -}}</span>
+      {%- endif -%}
     </span>
   </div>
   <ul class="tags">
-    {% assign tagUrl = site.links.tag | prepend: site.baseurl %}
-    {% for tag in page.tags %}
-    <li><a href="{{ tag | slugify | prepend: tagUrl }}">{{ tag }}</a></li>
-    {% endfor %}
+    {%- assign tagUrl = site.links.tag | prepend: site.baseurl -%}
+    {%- for tag in page.tags -%}
+    <li><a href="{{- tag | slugify | prepend: tagUrl -}}">{{- tag -}}</a></li>
+    {%- endfor -%}
   </ul>
 
   <div class="grid-x grid-margin-x grid-padding-y">
     <div class="large-6 cell">
-      {% if page.next.url %}
+      {%- if page.next.url -%}
       <span class="next">Next</span>
-      <a href="{{ page.next.url | prepend: site.baseurl }}">{{ page.next.title }}</a>
-      {% endif %}
+      <a href="{{- page.next.url | prepend: site.baseurl -}}">{{- page.next.title -}}</a>
+      {%- endif -%}
     </div>
     <div class="large-6 cell">
-      {% if page.previous.url %}
+      {%- if page.previous.url -%}
       <span class="prev">Previous</span>
-      <a href="{{ page.previous.url | prepend: site.baseurl }}">{{ page.previous.title }}</a>
-      {% endif %}
+      <a href="{{- page.previous.url | prepend: site.baseurl -}}">{{- page.previous.title -}}</a>
+      {%- endif -%}
     </div>
   </div>
   <div class="top"><a href="#" class="top">Top</a></div>

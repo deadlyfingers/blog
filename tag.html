@@ -4,17 +4,17 @@ title: "Tags"
 permalink: /tag/
 ---
 
-{% assign tags = "" | split: "" %}
-{% for tag in site.tags %}
-{% assign tags = tags | push: tag[0] %}
-{% endfor %}
+{%- assign tags = "" | split: "" -%}
+{%- for tag in site.tags -%}
+{%- assign tags = tags | push: tag[0] -%}
+{%- endfor -%}
 
-{% assign sortedTags = tags | sort_natural %}
-{% assign tagUrl = site.links.tag | prepend: site.baseurl %}
+{%- assign sortedTags = tags | sort_natural -%}
+{%- assign tagUrl = site.links.tag | prepend: site.baseurl -%}
 <div class="small-12 cell">
   <ul>
-    {% for tag in sortedTags %}
-    <li><a href="{{ tag | slugify | prepend: tagUrl }}">{{ tag }}</a></li>
-    {% endfor %}
+    {%- for tag in sortedTags -%}
+    <li><a href="{{- tag | slugify | prepend: tagUrl -}}">{{- tag -}}</a></li>
+    {%- endfor -%}
   </ul>
 </div>

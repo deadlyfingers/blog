@@ -20,7 +20,7 @@ npm install --only=dev
 #### Install dependencies
 `npm install --only=prod`
 
-Copy required dependencies from *node_modules* into *_dev* build dir
+> **Copy required dependencies from *node_modules* into *_dev* build dir**
 
 `gulp copy:dev`
 
@@ -52,9 +52,11 @@ or
 
 `npm run serve:dev`
 or
-`bundle exec jekyll serve -d ./_dev --config _config.yml,_config_dev.yml`
+`bundle exec jekyll serve -d ./_dev --config _config.yml,_config_dev.yml --livereload`
 
-#### Or serve with **auto-reload** to external devices using [BrowserSync](https://browsersync.io/docs/command-line):
+> If you get an error on Windows: _"Unable to load the EventMachine C extension"_ then try `gem uninstall eventmachine` followed by `gem install eventmachine --platform ruby`
+
+#### Or serve using [BrowserSync](https://browsersync.io/docs/command-line) to test on external devices:
 
 `browser-sync start --server '_dev' --files '_dev/**/*' --extensions 'html' --port 3000 --reload-debounce 200 --no-ui --no-open`
 

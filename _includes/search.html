@@ -3,9 +3,9 @@
     <input id="search" name="q" type="search" placeholder="search site" list="search_tags" />
     <button type="submit" value="Search"><i class="icon search"></i></button>
     <datalist id="search_tags">
-      {% for tag in site.tags %}
-      <option value="{{ tag[0] }}" />
-      {% endfor %}
+      {%- for tag in site.tags -%}
+      <option value="{{- tag[0] -}}">
+        {%- endfor -%}
     </datalist>
   </form>
 </div>

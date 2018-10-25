@@ -5,6 +5,13 @@
         "_dev": true,
         ".publish": true
     },
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/.sass-cache": true,
+        "**/_site": true,
+        "**/_dev": true,
+        "**/.publish": true
+    },
     "editor.insertSpaces": true,
     "editor.tabSize": 2,
     "files.eol": "\n",

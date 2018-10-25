@@ -1,10 +1,10 @@
 <head>
   <meta charset="UTF-8">
-  <meta name="description" content="{% if page.description %}{{ page.description }}{% elsif page.excerpt %}{{ page.excerpt | strip_html | truncatewords: 50 }}{% else %}{{ site.description }}{% endif %}">
-  <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <meta name="description" content="{%- if page.description -%}{{- page.description -}}{%- elsif page.excerpt -%}{{- page.excerpt | strip_html | truncatewords: 50 -}}{%- else -%}{{- site.description -}}{%- endif -%}">
+  <title>{%- if page.title -%}{{- page.title -}}{%- else -%}{{- site.title -}}{%- endif -%}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="{{ '/assets/main.css' | relative_url }}" rel="stylesheet">
+  <link href="{{- '/assets/main.css' | relative_url -}}" rel="stylesheet">
   <!-- feed -->
-  <link rel="alternate" title="{{ site.title }}" type="application/json" href="{{ site.links.feed | prepend: site.url }}" />
-  {% feed_meta %}
+  <link rel="alternate" title="{{- site.title -}}" type="application/json" href="{{- site.links.feed | prepend: site.url -}}" />
+  {%- feed_meta -%}
 </head>

@@ -135,6 +135,7 @@ You can find the source code of this website on my [GitHub Page's blog repo](htt
 - [Sass/SCSS](https://jekyllrb.com/docs/assets/#sassscss)
 - [Generate GitHub Rouge SASS](http://ben.balter.com/jekyll-style-guide/themes/)
 - [Linking to pages](https://jekyllrb.com/docs/liquid/tags/#link)
+- [Liquid template language](https://shopify.github.io/liquid/basics/introduction/)
 
 ### YML Config reference docs
 
