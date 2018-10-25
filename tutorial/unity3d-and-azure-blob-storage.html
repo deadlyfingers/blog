@@ -1,20 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
   <meta charset="UTF-8">
   <meta name="description" content="Previously I’ve looked at using Azure App Services for Unity, which provided a backend for Unity applications or games using Easy Tables and Easy APIs. But what if I wanted to lift and shift heavier data such as audio files, image files, or Unity Asset Bundles binaries? For storing these...">
   <title>Unity3d and Azure Blob Storage</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="/assets/main.css" rel="stylesheet">
   <!-- feed -->
-  <link rel="alternate" title="Deadlyfingers.net" type="application/json" href="https://www.deadlyfingers.net/search/feed.json" />
-  <link type="application/atom+xml" rel="alternate" href="https://www.deadlyfingers.net/feed.xml" title="Deadlyfingers.net" />
-</head>
-
-<body>
+  <link rel="alternate" title="Deadlyfingers.net" type="application/json" href="https://www.deadlyfingers.net/search/feed.json" /><link type="application/atom+xml" rel="alternate" href="https://www.deadlyfingers.net/feed.xml" title="Deadlyfingers.net" /></head><body>
   <div class="grid-container">
-    <!-- nav -->
-    <div class="grid-x">
+    <!-- nav --><div class="grid-x">
   <div class="small-6 cell">
     <h1><a href="/">Deadlyfingers.net</a></h1>
   </div>
@@ -25,129 +19,16 @@
       <a class="icon youtube" href="https://youtube.com/deadlyfingerstv"></a>
     </div>
   </div>
-  <div class="small-12 medium-6 large-3 cell">
-    
-    <div class="searchbar">
+  <div class="small-12 medium-6 large-3 cell"><div class="searchbar">
   <form id="search_form" method="GET" action="/search/">
     <input id="search" name="q" type="search" placeholder="search site" list="search_tags" />
     <button type="submit" value="Search"><i class="icon search"></i></button>
-    <datalist id="search_tags">
-      
-      <option value="Azure" />
-      
-      <option value="Blog" />
-      
-      <option value="Wordpress" />
-      
-      <option value="Website" />
-      
-      <option value="Android" />
-      
-      <option value="Mobile Services" />
-      
-      <option value="App Store" />
-      
-      <option value="Apps" />
-      
-      <option value="Gaming" />
-      
-      <option value="Windows" />
-      
-      <option value="iPad" />
-      
-      <option value="iPhone" />
-      
-      <option value="Windows Phone" />
-      
-      <option value="GameDev" />
-      
-      <option value="Unity3d" />
-      
-      <option value="Visual Studio" />
-      
-      <option value="iOS" />
-      
-      <option value="Ember-CLI" />
-      
-      <option value="Azure-CLI" />
-      
-      <option value="Cordova" />
-      
-      <option value="WebApp" />
-      
-      <option value="Design" />
-      
-      <option value="Responsive Design" />
-      
-      <option value="RWD" />
-      
-      <option value="App Services" />
-      
-      <option value="Javascript" />
-      
-      <option value="Polymer" />
-      
-      <option value="Web Components" />
-      
-      <option value="Alamofire" />
-      
-      <option value="Argo" />
-      
-      <option value="JSON" />
-      
-      <option value="Swift" />
-      
-      <option value="Git" />
-      
-      <option value="Blob Storage" />
-      
-      <option value="Application Insights" />
-      
-      <option value="Ibex Dashboard" />
-      
-      <option value="Data Visualisation" />
-      
-      <option value="Bots" />
-      
-      <option value="Log Analytics" />
-      
-      <option value="UWP" />
-      
-      <option value="Web Sockets" />
-      
-      <option value="Mixed Reality" />
-      
-      <option value="HoloLens" />
-      
-      <option value="IoT" />
-      
-      <option value="VuForia" />
-      
-      <option value="VuMark" />
-      
-      <option value="GitHub Pages" />
-      
-      <option value="Jekyll" />
-      
-      <option value="Ruby" />
-      
-      <option value="Markdown" />
-      
-    </datalist>
+    <datalist id="search_tags"><option value="Azure"><option value="Blog"><option value="Wordpress"><option value="Website"><option value="Android"><option value="Mobile Services"><option value="App Store"><option value="Apps"><option value="Gaming"><option value="Windows"><option value="iPad"><option value="iPhone"><option value="Windows Phone"><option value="GameDev"><option value="Unity3d"><option value="Visual Studio"><option value="iOS"><option value="Ember-CLI"><option value="Azure-CLI"><option value="Cordova"><option value="WebApp"><option value="Design"><option value="Responsive Design"><option value="RWD"><option value="App Services"><option value="Javascript"><option value="Polymer"><option value="Web Components"><option value="Alamofire"><option value="Argo"><option value="JSON"><option value="Swift"><option value="Git"><option value="Blob Storage"><option value="Application Insights"><option value="Ibex Dashboard"><option value="Data Visualisation"><option value="Bots"><option value="Log Analytics"><option value="UWP"><option value="Web Sockets"><option value="Mixed Reality"><option value="HoloLens"><option value="IoT"><option value="VuForia"><option value="VuMark"><option value="GitHub Pages"><option value="Jekyll"><option value="Ruby"><option value="Markdown"></datalist>
   </form>
-</div>
-    
-  </div>
-</div>
-    <!-- body content -->
-    <div class="grid-x grid-margin-x">
-      <div id="post" class="large-8 cell post">
-  
-  <time datetime="2017-03-10T11:14:11+00:00" class="date">10 Mar 2017</time>
-  
-  <h1 class="post-title">Unity3d and Azure Blob Storage</h1>
-  <div class="post-line"></div>
-  <p>Previously I’ve looked at using <a href="http://www.deadlyfingers.net/azure/azure-app-services-for-unity3d/">Azure App Services for Unity</a>, which provided a backend for Unity applications or games using Easy Tables and Easy APIs. But what if I wanted to lift and shift heavier data such as audio files, image files, or Unity Asset Bundles binaries? For storing these types of files, I would be better using <a href="https://azure.microsoft.com/en-gb/services/storage/blobs/">Azure Blob storage</a>. Recently I created an <a href="https://github.com/Unity3dAzure/StorageServicesDemo">Azure Blob storage demo project in Unity</a> to show how to save and load these various asset types in Unity. One of the exciting new applications for Unity is developing <acronym title="Virtual Reality">VR</acronym>, <acronym title="Augmented Reality">AR</acronym> or <acronym title="Mixed Reality">MR</acronym> experiences for HoloLens where a backend could serve media content dynamically whether it’s images, audio, or prefabs with models, materials and referenced scripts. When thinking of cloud gaming the tendency is to consider it in terms of end user scenarios like massive multiplayer online games. While Azure is designed to scale, it is also helpful to use during early stage development and testing. There is an opportunity to create productive cloud tools for artists, designers and developers especially when extensive hardware testing is required in Virtual Reality, Augmented Reality or Mixed Reality development. For example, imagine being able to see and test updates on the hardware without having to rebuild the binaries in Unity or Visual Studio each time. There are many more use cases than IΓÇÖve mentioned here like offering user generated downloadable content for extending your game or app.</p>
+</div></div>
+</div><!-- body content -->
+    <div class="grid-x grid-margin-x"><div id="post" class="large-8 cell post"><time datetime="2017-03-10T12:14:11+01:00" class="date">10 Mar 2017</time><h1 class="post-title">Unity3d and Azure Blob Storage</h1>
+  <div class="post-line"></div><p>Previously I’ve looked at using <a href="http://www.deadlyfingers.net/azure/azure-app-services-for-unity3d/">Azure App Services for Unity</a>, which provided a backend for Unity applications or games using Easy Tables and Easy APIs. But what if I wanted to lift and shift heavier data such as audio files, image files, or Unity Asset Bundles binaries? For storing these types of files, I would be better using <a href="https://azure.microsoft.com/en-gb/services/storage/blobs/">Azure Blob storage</a>. Recently I created an <a href="https://github.com/Unity3dAzure/StorageServicesDemo">Azure Blob storage demo project in Unity</a> to show how to save and load these various asset types in Unity. One of the exciting new applications for Unity is developing <acronym title="Virtual Reality">VR</acronym>, <acronym title="Augmented Reality">AR</acronym> or <acronym title="Mixed Reality">MR</acronym> experiences for HoloLens where a backend could serve media content dynamically whether it’s images, audio, or prefabs with models, materials and referenced scripts. When thinking of cloud gaming the tendency is to consider it in terms of end user scenarios like massive multiplayer online games. While Azure is designed to scale, it is also helpful to use during early stage development and testing. There is an opportunity to create productive cloud tools for artists, designers and developers especially when extensive hardware testing is required in Virtual Reality, Augmented Reality or Mixed Reality development. For example, imagine being able to see and test updates on the hardware without having to rebuild the binaries in Unity or Visual Studio each time. There are many more use cases than IΓÇÖve mentioned here like offering user generated downloadable content for extending your game or app.</p>
 
 <p>I’ll be covering the load and save code snippets from the <a href="https://youtu.be/0gpg2xwusjM">Unity and Azure Blob storage demo commentary</a> which you can watch to see how you can save and load image textures, audio clips as <em>.wav</em> files, and Asset Bundles. The Unity Asset Bundle demo will also include loading Prefabs and dynamically adding them into a Unity Scene using XML or JSON data which should give you some ideas of how you might like to use Blob storage in your Unity development or end user scenario.</p>
 
@@ -346,15 +227,9 @@ Once the audio has been recorded in Unity I can upload the file using the <code 
 </code></pre></div></div>
 
 <p>If you like the <a href="https://github.com/Unity3dAzure/StorageServices">Azure Storage Services library for Unity</a> let me know about it on <a href="https://twitter.com/deadlyfingers">Twitter</a>. Any issues, features or blob storage demo requests please create it as an issue on github for others to learn from and collaborate.</p>
-
 </div>
 
-<div class="large-4 cell">
-  <!-- disqus comments -->
-
-
-
-<h6>Comments</h6>
+<div class="large-4 cell"><!-- disqus comments --><h6>Comments</h6>
 <div id="disqus_thread"></div>
 <script>
   //*
@@ -373,53 +248,26 @@ Once the audio has been recorded in Unity I can upload the file using the <code 
     (d.head || d.body).appendChild(s);
   })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-</div>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
 
 <div id="pagination" class="large-12 cell">
   <div>
     <a href="https://www.deadlyfingers.net/tutorial/unity3d-and-azure-blob-storage">Unity3d and Azure Blob Storage</a>
-    <span>
-      
-      <span>by David Douglas</span>
-      
-    </span>
+    <span><span>byDavid Douglas</span></span>
   </div>
-  <ul class="tags">
-    
-    
-    <li><a href="/tag/azure">Azure</a></li>
-    
-    <li><a href="/tag/blob-storage">Blob Storage</a></li>
-    
-    <li><a href="/tag/unity3d">Unity3d</a></li>
-    
-  </ul>
+  <ul class="tags"><li><a href="/tag/azure">Azure</a></li><li><a href="/tag/blob-storage">Blob Storage</a></li><li><a href="/tag/unity3d">Unity3d</a></li></ul>
 
   <div class="grid-x grid-margin-x grid-padding-y">
-    <div class="large-6 cell">
-      
-      <span class="next">Next</span>
-      <a href="/code/querying-application-insights-for-data-visualisation">Querying Application Insights for data visualisation</a>
-      
-    </div>
-    <div class="large-6 cell">
-      
-      <span class="prev">Previous</span>
-      <a href="/code/unity-git">Merging Unity scenes, prefabs and assets with git</a>
-      
-    </div>
+    <div class="large-6 cell"><span class="next">Next</span>
+      <a href="/code/querying-application-insights-for-data-visualisation">Querying Application Insights for data visualisation</a></div>
+    <div class="large-6 cell"><span class="prev">Previous</span>
+      <a href="/code/unity-git">Merging Unity scenes, prefabs and assets with git</a></div>
   </div>
   <div class="top"><a href="#" class="top">Top</a></div>
-</div>
-    </div>
+</div></div>
   </div>
 
-  <!-- scripts -->
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-140437-35"></script>
+  <!-- scripts --><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-140437-35"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
 
@@ -428,8 +276,6 @@ Once the audio has been recorded in Unity I can upload the file using the <code 
   }
   gtag('js', new Date());
   gtag('config', 'UA-140437-35');
-</script>
-
-</body>
+</script></body>
 
 </html>
