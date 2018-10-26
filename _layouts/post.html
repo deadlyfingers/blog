@@ -12,19 +12,16 @@ layout: default
 </div>
 
 <div class="large-4 cell">
-  {%- include disqus_comments.html -%}
 </div>
 
-<div id="pagination" class="large-12 cell">
+<div id="pagination" class="large-8 cell">
   <div>
     <a href="{{- page.url | absolute_url -}}">{{- page.title -}}</a>
-    <span>
-      {%- if page.author and page.author.display_name -%}
-      <span>by {{- page.author.display_name -}}</span>
-      {%- else -%}
-      <span>by {{- site.author.name -}}</span>
-      {%- endif -%}
-    </span>
+    {%- if page.author and page.author.display_name -%}
+    <span> by </span><span class="author">{{- page.author.display_name -}}</span>
+    {%- else -%}
+    <span> by </span><span class="author">{{- site.author.name -}}</span>
+    {%- endif -%}
   </div>
   <ul class="tags">
     {%- assign tagUrl = site.links.tag | prepend: site.baseurl -%}
@@ -32,7 +29,13 @@ layout: default
     <li><a href="{{- tag | slugify | prepend: tagUrl -}}">{{- tag -}}</a></li>
     {%- endfor -%}
   </ul>
+</div>
 
+<div class="large-8 cell">
+  {%- include disqus_comments.html -%}
+</div>
+
+<div class="large-12 cell">
   <div class="grid-x grid-margin-x grid-padding-y">
     <div class="large-6 cell">
       {%- if page.next.url -%}
@@ -47,5 +50,8 @@ layout: default
       {%- endif -%}
     </div>
   </div>
+</div>
+
+<div class="large-12 cell">
   <div class="top"><a href="#" class="top">Top</a></div>
 </div>
