@@ -1,5 +1,8 @@
+---
+layout: null
+---
 (function () {
-  fetch("./feed.json")
+  fetch('{{- "/search/feed.json" | absolute_url -}}')
     .then(res => res.json())
     .then(data => {
       // Search index json feed loaded
@@ -89,7 +92,15 @@
       if (form && search && container && title) {
         // URL search param handler
         var params = new URLSearchParams(window.location.search);
-        var q = params.get('q');
+        var q;
+        if (params && params.has('q')) {
+          q = params.get('q');
+        } else {
+          var path = window.location.pathname;
+          if (path && path.length > 1 && !path.startsWith('/404') && !path.startsWith('/search')) {
+            q = path.split("/").join(" ").trim();
+          }
+        }
         if (q && q.length > 0) {
           searchIndex(q);
         }
