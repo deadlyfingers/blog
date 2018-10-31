@@ -49,10 +49,10 @@
 <img src="/assets/images/MS201_TablePermissions-OnlyAuthenticationUsers.png" alt="" /></li>
   <li>
     <p><a href="http://apps.twitter.com">Create twitter app</a>.<br />
-<img src="/assets/images/MS202\*TwitterApps-CreateNewApp.png" alt="" /></p>
+<img src="/assets/images/MS202_TwitterApps-CreateNewApp.png" alt="" /></p>
 
     <p>Copy _Mobile Service URL* from Azure Mobile Service Dashboard<br />
-<img src="/assets/images/MS203*CopyMobileServiceURL.png" alt="" /></p>
+<img src="/assets/images/MS203_CopyMobileServiceURL.png" alt="" /></p>
 
     <p>Paste the Azure _Mobile Service URL* into Twitter app’s <em>Website</em> and <em>Callback URL</em> fields and save. Then in <em>Settings</em> tab tick the <em>‘Allow this application to be used Sign in with Twitter’</em> checkbox.<br />
 <img src="/assets/images/MS204_AllowThisAppToSignInWithTwitter.png" alt="" /></p>
@@ -66,7 +66,7 @@
   </li>
   <li>
     <p>In <strong>Android Studio</strong> <em>ToDoActivity</em> cut the code block under the new Mobile Service client.<br />
-<img src="/assets/images/MS207\*CreateTableMethod.png" alt="" /></p>
+<img src="/assets/images/MS207_CreateTableMethod.png" alt="" /></p>
 
     <p>And paste into a new method _createTable()*.<br />
 <img src="/assets/images/MS208_CreateTableMethod.png" alt="" /></p>
@@ -102,20 +102,19 @@
     <p><img src="/assets/images/MS211_TodoItem-Script-Insert-UserId.png" alt="" /></p>
   </li>
   <li>Add another Todo item in the app.<br />
-<img src="/assets/images/MS212*Add-TodoItem-UserId.png" alt="" />
-Refresh the _ToDoItem* table to see the new item with <em>userId</em>.<br />
+<img src="/assets/images/MS212_Add-TodoItem-UserId.png" alt="" />
+Refresh the <em>ToDoItem</em> table to see the new item with <em>userId</em>.<br />
 <img src="/assets/images/MS213_Browse-TodoItem-userId-Refresh.png" alt="" /></li>
-  <li>Now change <strong>Script &gt; Read</strong> so app shows only the authenticated user’s items.<br />
-<img src="/assets/images/MS214_TodoItem-Table-Script-Read-where-userId.png" alt="" /></li>
-</ol>
+  <li>
+    <p>Now change <strong>Script &gt; Read</strong> so app shows only the authenticated user’s items.<br />
+<img src="/assets/images/MS214_TodoItem-Table-Script-Read-where-userId.png" alt="" /></p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">read</span><span class="p">(</span><span class="nx">query</span><span class="p">,</span> <span class="nx">user</span><span class="p">,</span> <span class="nx">request</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">query</span><span class="p">.</span><span class="nx">where</span><span class="p">({</span> <span class="na">userId</span><span class="p">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">userId</span> <span class="p">});</span>
-  <span class="nx">request</span><span class="p">.</span><span class="nx">execute</span><span class="p">();</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<ol>
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">function</span> <span class="nx">read</span><span class="p">(</span><span class="nx">query</span><span class="p">,</span> <span class="nx">user</span><span class="p">,</span> <span class="nx">request</span><span class="p">)</span> <span class="p">{</span>
+   <span class="nx">query</span><span class="p">.</span><span class="nx">where</span><span class="p">({</span> <span class="na">userId</span><span class="p">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">userId</span> <span class="p">});</span>
+   <span class="nx">request</span><span class="p">.</span><span class="nx">execute</span><span class="p">();</span>
+ <span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
   <li>Refresh app to see changes.<br />
 <img src="/assets/images/MS215_Refresh-Todo-Items.png" alt="" />
 The list should only show ToDo items that belong to that user now.

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="https://www.deadlyfingers.net/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.deadlyfingers.net/" rel="alternate" type="text/html" /><updated>2018-10-30T17:48:53+00:00</updated><id>https://www.deadlyfingers.net/</id><title type="html">Deadlyfingers.net</title><subtitle>Blog for technical designers and developers featuring code stories, experimental tech and tutorials by David Douglas</subtitle><author><name>David Douglas</name></author><entry><title type="html">Migrating from Wordpress blog to GitHub Pages</title><link href="https://www.deadlyfingers.net/code/migrating-from-wordpress-to-github-pages" rel="alternate" type="text/html" title="Migrating from Wordpress blog to GitHub Pages" /><published>2018-10-16T00:00:00+00:00</published><updated>2018-10-16T00:00:00+00:00</updated><id>https://www.deadlyfingers.net/code/migrating-from-wordpress-to-github-pages</id><content type="html" xml:base="https://www.deadlyfingers.net/code/migrating-from-wordpress-to-github-pages">&lt;p&gt;Wordpress has done a decent job of running my blog.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="https://www.deadlyfingers.net/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.deadlyfingers.net/" rel="alternate" type="text/html" /><updated>2018-10-31T17:38:01+00:00</updated><id>https://www.deadlyfingers.net/</id><title type="html">Deadlyfingers.net</title><subtitle>Blog for technical designers and developers featuring code stories, experimental tech and tutorials by David Douglas</subtitle><author><name>David Douglas</name></author><entry><title type="html">Migrating from Wordpress blog to GitHub Pages</title><link href="https://www.deadlyfingers.net/code/migrating-from-wordpress-to-github-pages" rel="alternate" type="text/html" title="Migrating from Wordpress blog to GitHub Pages" /><published>2018-10-16T00:00:00+00:00</published><updated>2018-10-16T00:00:00+00:00</updated><id>https://www.deadlyfingers.net/code/migrating-from-wordpress-to-github-pages</id><content type="html" xml:base="https://www.deadlyfingers.net/code/migrating-from-wordpress-to-github-pages">&lt;p&gt;Wordpress has done a decent job of running my blog.
 But I’ve longed for something leaner for writing developer code stories as the rich &lt;strong&gt;HTML&lt;/strong&gt; text editor tends to introduce too much complexity.&lt;/p&gt;
 
 &lt;!--more--&gt;
@@ -797,18 +797,21 @@ You can also create your own custom dashboard templates using &lt;a href=&quot;h
 &lt;p&gt;Setting up Blob Storage for the Unity demo can be done quickly in just a couple of steps:&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;Sign in to your &lt;a href=&quot;https://portal.azure.com&quot;&gt;Azure portal&lt;/a&gt; and create a new Storage Account.
-&lt;img src=&quot;/assets/images/01-StorageAccount.png&quot; alt=&quot;01-StorageAccount&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;Once the Storage account is provisioned then select the add new container button which will be used for storing the blobs.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Sign in to your &lt;a href=&quot;https://portal.azure.com&quot;&gt;Azure portal&lt;/a&gt; and create a new Storage Account.
+ &lt;img src=&quot;/assets/images/01-StorageAccount.png&quot; alt=&quot;01-StorageAccount&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Once the Storage account is provisioned then select the add new container button which will be used for storing the blobs.&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/images/02-CreateContainer.png&quot; alt=&quot;02-CreateContainer&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create the ‘&lt;string&gt;Blob' type container which permits public read access for the purposes of this demo.&lt;/string&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/images/03-NewContainer-BlobAccess.png&quot; alt=&quot;03-NewContainer-BlobAccess&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/02-CreateContainer.png&quot; alt=&quot;02-CreateContainer&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Create the ‘&lt;string&gt;Blob' type container which permits public read access for the purposes of this demo.&lt;/string&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/03-NewContainer-BlobAccess.png&quot; alt=&quot;03-NewContainer-BlobAccess&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;audio-files&quot;&gt;Audio files&lt;/h2&gt;
 
@@ -1692,29 +1695,30 @@ Then configure the Facebook App Basic and Advanced settings with your Azure App 
 &lt;img src=&quot;/assets/images/FacebookAppSecureCanvasURL.png&quot; alt=&quot;FacebookAppSecureCanvasURL&quot; /&gt;
 &lt;img src=&quot;/assets/images/FacebookAppAdvancedSettings.png&quot; alt=&quot;FacebookAppAdvancedSettings&quot; /&gt;
 If in doubt how to configure these settings check out the &lt;a href=&quot;https://azure.microsoft.com/en-gb/documentation/articles/app-service-mobile-how-to-configure-facebook-authentication/&quot;&gt;Azure App Service documentation&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Once authentication is setup the &lt;strong&gt;‘Highscores’&lt;/strong&gt; table script can be edited to save &lt;strong&gt;‘userId’&lt;/strong&gt;information.
-&lt;img src=&quot;/assets/images/AppService_4-TableInsertScript.png&quot; alt=&quot;AppService_4-TableInsertScript&quot; /&gt;&lt;/li&gt;
-&lt;/ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Once authentication is setup the &lt;strong&gt;‘Highscores’&lt;/strong&gt; table script can be edited to save &lt;strong&gt;‘userId’&lt;/strong&gt;information.
+&lt;img src=&quot;/assets/images/AppService_4-TableInsertScript.png&quot; alt=&quot;AppService_4-TableInsertScript&quot; /&gt;&lt;/p&gt;
 
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;table&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;insert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;userId&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;execute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;In addition to table scripts you can also create custom APIs. In &lt;em&gt;Settings&lt;/em&gt;, search for &lt;strong&gt;Easy APIs&lt;/strong&gt; and add an example &lt;strong&gt;‘hello’&lt;/strong&gt; API.
+    &lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nx&quot;&gt;table&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;insert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+     &lt;span class=&quot;nx&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;userId&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;execute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;In addition to table scripts you can also create custom APIs. In &lt;em&gt;Settings&lt;/em&gt;, search for &lt;strong&gt;Easy APIs&lt;/strong&gt; and add an example &lt;strong&gt;‘hello’&lt;/strong&gt; API.
 &lt;img src=&quot;/assets/images/AppService_EasyAPIs.png&quot; alt=&quot;AppService_EasyAPIs&quot; /&gt;
-&lt;img src=&quot;/assets/images/AppService_EasyAPIs-hello.js.png&quot; alt=&quot;AppService_EasyAPIs-hello.js&quot; /&gt;&lt;/li&gt;
-&lt;/ol&gt;
+&lt;img src=&quot;/assets/images/AppService_EasyAPIs-hello.js.png&quot; alt=&quot;AppService_EasyAPIs-hello.js&quot; /&gt;&lt;/p&gt;
 
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hello Unity!&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+     &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hello Unity!&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;p&gt;Once you have setup Azure App Service you can update the Unity scene with your App Service &lt;strong&gt;‘https’&lt;/strong&gt; url and hit run!&lt;/p&gt;</content><author><name>David Douglas</name></author><category term="Azure" /><category term="App Services" /><category term="Unity3d" /><summary type="html">Azure Mobile Services will be migrated to App Services on Sept 1st 2016. To prepare for this migration I’ve renamed and updated the open source Mobile Service Unity3d projects to support Azure App Service going forward. Using Azure App Services to create highscores leaderboard for Unity To demonstrate the Azure App Service I have created a sample Highscores demo for Unity to insert, update and query a user’s highscores. But to run the project in Unity Editor you will need to hook it up to an Azure App Service. Using an Azure account simply create a new App Service in the Azure portal, (for this demo I am using an App Service with Javascript backend). In a couple of minutes the Azure App Service should be up and running and ready to configure. Open Settings, search for Easy Tables and add a ‘Highscores’ table. Set all table permissions to allow anonymous access to start with. Manage schema to add Number column for ‘score’ and String column for ‘userId’ Additionally, if you want to store user data or game scores you can enable authentication using Facebook, Twitter, Microsoft account or Google account. If you want to use the Facebook login in this demo you will need to create a Facebook app. Once you’ve created the Facebook app add the Facebook App ID and Secret to your Azure App Service Facebook Authentication settings. Then configure the Facebook App Basic and Advanced settings with your Azure App Service URL: If in doubt how to configure these settings check out the Azure App Service documentation. Once authentication is setup the ‘Highscores’ table script can be edited to save ‘userId’information. table.insert(function(context) { if (context.user) { context.item.userId = context.user.id; } return context.execute(); }); In addition to table scripts you can also create custom APIs. In Settings, search for Easy APIs and add an example ‘hello’ API. module.exports = { get: function(req, res, next) { res.send(200, { message: &quot;Hello Unity!&quot; }); } }; Once you have setup Azure App Service you can update the Unity scene with your App Service ‘https’ url and hit run!</summary></entry></feed>

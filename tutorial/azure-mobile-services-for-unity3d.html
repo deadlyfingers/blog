@@ -39,48 +39,46 @@
 <h2 id="getting-started">Getting started</h2>
 
 <ol>
-  <li><a href="https://github.com/Unity3dAzure/MobileServicesDemo/archive/master.zip">Download the Unity3d Azure demo project</a> or use git to clone the project:</li>
-</ol>
+  <li>
+    <p><a href="https://github.com/Unity3dAzure/MobileServicesDemo/archive/master.zip">Download the Unity3d Azure demo project</a> or use git to clone the project:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/Unity3dAzure/MobileServicesDemo.git
-</code></pre></div></div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> git clone https://github.com/Unity3dAzure/MobileServicesDemo.git
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><a href="https://manage.windowsazure.com/">Create a Mobile Service</a></p>
 
-<ol>
-  <li><a href="https://manage.windowsazure.com/">Create a Mobile Service</a></li>
-</ol>
+    <ul>
+      <li>Create ‘Highscores’ table for app data</li>
+      <li>Modify ‘Highscores’ table Insert node script to save userId</li>
+      <li>Create a custom API called ‘hello’</li>
+    </ul>
+  </li>
+  <li>
+    <p>In Unity3d <strong>open scene</strong> <code class="highlighter-rouge">Scenes/HighscoresDemo.unity</code></p>
 
-<ul>
-  <li>Create ‘Highscores’ table for app data</li>
-  <li>Modify ‘Highscores’ table Insert node script to save userId</li>
-  <li>Create a custom API called ‘hello’</li>
-</ul>
+    <ul>
+      <li>Check the Demo UI script is attached to the Camera. (The script can be attached by dragging &amp; dropping the <code class="highlighter-rouge">Scripts/HighscoresDemoUI.cs</code> script unto the Scene’s ‘Main Camera’ in the Hierarchy panel.)</li>
+    </ul>
+  </li>
+  <li>
+    <p>Paste Azure Mobile Service app’s connection strings into Unity Editor Inspector fields (or else directly into script <code class="highlighter-rouge">Scripts/HighscoresDemoUI.cs</code>)</p>
 
-<ol>
-  <li>In Unity3d <strong>open scene</strong> <code class="highlighter-rouge">Scenes/HighscoresDemo.unity</code></li>
-</ol>
+    <ul>
+      <li>Mobile Service URL</li>
+      <li>Mobile Service Application Key</li>
+    </ul>
+  </li>
+  <li>
+    <p>If you want to save score with userId then <a href="https://developers.facebook.com/apps/async/create/platform-setup/dialog/">create Facebook app</a></p>
 
-<ul>
-  <li>Check the Demo UI script is attached to the Camera. (The script can be attached by dragging &amp; dropping the <code class="highlighter-rouge">Scripts/HighscoresDemoUI.cs</code> script unto the Scene’s ‘Main Camera’ in the Hierarchy panel.)</li>
-</ul>
-
-<ol>
-  <li>Paste Azure Mobile Service app’s connection strings into Unity Editor Inspector fields (or else directly into script <code class="highlighter-rouge">Scripts/HighscoresDemoUI.cs</code>)</li>
-</ol>
-
-<ul>
-  <li>Mobile Service URL</li>
-  <li>Mobile Service Application Key</li>
-</ul>
-
-<ol>
-  <li>If you want to save score with userId then <a href="https://developers.facebook.com/apps/async/create/platform-setup/dialog/">create Facebook app</a></li>
-</ol>
-
-<ul>
-  <li>Fill in Azure Mobile Service’s Identity &gt; Facebook settings (App Id &amp; App Secret)</li>
-  <li>Paste <a href="https://developers.facebook.com/tools/accesstoken/">Facebook access user token</a> into Unity Editor Inspector field (or else directly into <code class="highlighter-rouge">Scripts/HighscoresDemoUI.cs</code>)<br />
+    <ul>
+      <li>Fill in Azure Mobile Service’s Identity &gt; Facebook settings (App Id &amp; App Secret)</li>
+      <li>Paste <a href="https://developers.facebook.com/tools/accesstoken/">Facebook access user token</a> into Unity Editor Inspector field (or else directly into <code class="highlighter-rouge">Scripts/HighscoresDemoUI.cs</code>)<br />
 Play in UnityEditor</li>
-</ul>
+    </ul>
+  </li>
+</ol>
 
 <h2 id="credits">Credits</h2>
 

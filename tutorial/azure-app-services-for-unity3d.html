@@ -50,30 +50,31 @@ Then configure the Facebook App Basic and Advanced settings with your Azure App 
 <img src="/assets/images/FacebookAppSecureCanvasURL.png" alt="FacebookAppSecureCanvasURL" />
 <img src="/assets/images/FacebookAppAdvancedSettings.png" alt="FacebookAppAdvancedSettings" />
 If in doubt how to configure these settings check out the <a href="https://azure.microsoft.com/en-gb/documentation/articles/app-service-mobile-how-to-configure-facebook-authentication/">Azure App Service documentation</a>.</li>
-  <li>Once authentication is setup the <strong>‘Highscores’</strong> table script can be edited to save <strong>‘userId’</strong>information.
-<img src="/assets/images/AppService_4-TableInsertScript.png" alt="AppService_4-TableInsertScript" /></li>
-</ol>
+  <li>
+    <p>Once authentication is setup the <strong>‘Highscores’</strong> table script can be edited to save <strong>‘userId’</strong>information.
+<img src="/assets/images/AppService_4-TableInsertScript.png" alt="AppService_4-TableInsertScript" /></p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">table</span><span class="p">.</span><span class="nx">insert</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">context</span><span class="p">.</span><span class="nx">item</span><span class="p">.</span><span class="nx">userId</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
-  <span class="p">}</span>
-  <span class="k">return</span> <span class="nx">context</span><span class="p">.</span><span class="nx">execute</span><span class="p">();</span>
-<span class="p">});</span>
-</code></pre></div></div>
-
-<ol>
-  <li>In addition to table scripts you can also create custom APIs. In <em>Settings</em>, search for <strong>Easy APIs</strong> and add an example <strong>‘hello’</strong> API.
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nx">table</span><span class="p">.</span><span class="nx">insert</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+   <span class="k">if</span> <span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+     <span class="nx">context</span><span class="p">.</span><span class="nx">item</span><span class="p">.</span><span class="nx">userId</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+   <span class="p">}</span>
+   <span class="k">return</span> <span class="nx">context</span><span class="p">.</span><span class="nx">execute</span><span class="p">();</span>
+ <span class="p">});</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>In addition to table scripts you can also create custom APIs. In <em>Settings</em>, search for <strong>Easy APIs</strong> and add an example <strong>‘hello’</strong> API.
 <img src="/assets/images/AppService_EasyAPIs.png" alt="AppService_EasyAPIs" />
-<img src="/assets/images/AppService_EasyAPIs-hello.js.png" alt="AppService_EasyAPIs-hello.js" /></li>
-</ol>
+<img src="/assets/images/AppService_EasyAPIs-hello.js.png" alt="AppService_EasyAPIs-hello.js" /></p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">get</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span> <span class="na">message</span><span class="p">:</span> <span class="s2">"Hello Unity!"</span> <span class="p">});</span>
-  <span class="p">}</span>
-<span class="p">};</span>
-</code></pre></div></div>
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="na">get</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+     <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span> <span class="na">message</span><span class="p">:</span> <span class="s2">"Hello Unity!"</span> <span class="p">});</span>
+   <span class="p">}</span>
+ <span class="p">};</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
 
 <p>Once you have setup Azure App Service you can update the Unity scene with your App Service <strong>‘https’</strong> url and hit run!</p>
 </div>

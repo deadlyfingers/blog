@@ -73,8 +73,8 @@
   </li>
   <li>
     <p>The BitRave demo uses Authentication with Facebook. You will need to <a href="http://azure.microsoft.com/en-us/documentation/articles/mobile-services-how-to-register-facebook-authentication/">create a Facebook app for your Mobile Service</a> and copy &amp; paste the App Id and App Secret into your Mobile Service’s <strong>IDENTITY</strong> Facebook section. Then <a href="https://developers.facebook.com/tools/accesstoken/">generate the Facebook Access Token</a> under Facebook’s <strong>Tools &gt; Access Tokens.</strong>
-<img src="/assets/images/Unity3d-BitRave-AzureMobileServices*06a.png" alt="" />
-Copy the Access Token and paste into _AzureUI.cs* script’s Access Token value.
+<img src="/assets/images/Unity3d-BitRave-AzureMobileServices_06a.png" alt="" />
+Copy the Access Token and paste into <em>AzureUI.cs</em> script’s Access Token value.
 <img src="/assets/images/Unity3d-BitRave-AzureMobileServices_06b.png" alt="" /></p>
 
     <blockquote>
@@ -83,8 +83,8 @@ Copy the Access Token and paste into _AzureUI.cs* script’s Access Token value.
   </li>
   <li>
     <p>In Unity select the <strong>Main Camera</strong> and remove the Script in the Inspector panel.
-<img src="/assets/images/Unity3d-BitRave-AzureMobileServices*07a.png" alt="" />
-Reattach the _AzureUI.cs* script. (Drag &amp; drop the script onto the Camera.)
+<img src="/assets/images/Unity3d-BitRave-AzureMobileServices_07a.png" alt="" />
+Reattach the <em>AzureUI.cs</em> script. (Drag &amp; drop the script onto the Camera.)
 <img src="/assets/images/Unity3d-BitRave-AzureMobileServices_07b.png" alt="" />
 <img src="/assets/images/Unity3d-BitRave-AzureMobileServices_07c.png" alt="" /></p>
   </li>
@@ -94,8 +94,8 @@ Reattach the _AzureUI.cs* script. (Drag &amp; drop the script onto the Camera.)
   </li>
   <li>
     <p>Run in Unity Editor and connect to Mobile Service.
-<img src="/assets/images/Unity3d-BitRave-AzureMobileServices*09a.png" alt="" />
-Once logged in you can add a _TodoItem*.
+<img src="/assets/images/Unity3d-BitRave-AzureMobileServices_09a.png" alt="" />
+Once logged in you can add a <em>TodoItem</em>.
 <img src="/assets/images/Unity3d-BitRave-AzureMobileServices_09b.png" alt="" />
 You can query or list all items.
 <img src="/assets/images/Unity3d-BitRave-AzureMobileServices_09c.png" alt="" />
@@ -117,13 +117,13 @@ Connect to Mobile Services by logging in to add some items.
   </li>
   <li>
     <p>In Unity <strong>Build Settings</strong> switch platform to build for Android. I’ve selected <em>Development Build</em> and <em>Google Android Project</em>.
-<img src="/assets/images/Unity3d-BitRave-AzureMobileServices*12a.png" alt="" />
-Edit <strong>Player Settings</strong> to change the <strong>Bundle Identifier</strong>. (This is in reverse domain name notation - for example _net.deadlyfingers.DemoApp*)
+<img src="/assets/images/Unity3d-BitRave-AzureMobileServices_12a.png" alt="" />
+Edit <strong>Player Settings</strong> to change the <strong>Bundle Identifier</strong>. (This is in reverse domain name notation - for example <em>net.deadlyfingers.DemoApp</em>)
 <img src="/assets/images/Unity3d-BitRave-AzureMobileServices_12b.png" alt="" /></p>
   </li>
   <li>
     <p>Import Android project into Android Studio.
-<img src="/assets/images/Unity3d-BitRave-AzureMobileServices*13a.png" alt="" />
+<img src="/assets/images/Unity3d-BitRave-AzureMobileServices_13a.png" alt="" />
 Edit the _AndroidManifest.xml* and change the <em>installLocation</em> attribute to <strong>auto</strong>.
 <img src="/assets/images/Unity3d-BitRave-AzureMobileServices_13c.png" alt="" />
 Build &amp; run app. (I find the Nexus 7 tablet API 21 ARM emulator works best with Unity builds.)
