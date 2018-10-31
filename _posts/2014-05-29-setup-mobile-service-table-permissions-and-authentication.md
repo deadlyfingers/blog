@@ -29,10 +29,10 @@ This article builds on top of the [previous tutorial](http://www.deadlyfingers.n
 1. Edit _TodoItem_ table **insert** permissions to _Only Authenticated Users_.  
    ![]({{ site.baseurl }}/assets/images/MS201_TablePermissions-OnlyAuthenticationUsers.png)
 2. [Create twitter app](http://apps.twitter.com).  
-   ![]({{ site.baseurl }}/assets/images/MS202\*TwitterApps-CreateNewApp.png)
+   ![]({{ site.baseurl }}/assets/images/MS202_TwitterApps-CreateNewApp.png)
 
    Copy \_Mobile Service URL* from Azure Mobile Service Dashboard  
-   ![]({{ site.baseurl }}/assets/images/MS203*CopyMobileServiceURL.png)
+   ![]({{ site.baseurl }}/assets/images/MS203_CopyMobileServiceURL.png)
 
    Paste the Azure \_Mobile Service URL\* into Twitter app's _Website_ and _Callback URL_ fields and save. Then in _Settings_ tab tick the _‘Allow this application to be used Sign in with Twitter’_ checkbox.  
    ![]({{ site.baseurl }}/assets/images/MS204_AllowThisAppToSignInWithTwitter.png)
@@ -44,7 +44,7 @@ This article builds on top of the [previous tutorial](http://www.deadlyfingers.n
    ![]({{ site.baseurl }}/assets/images/MS206_PasteTwitterAPIKeyAndSecret-AzureIdentity.png)
 
 4. In **Android Studio** _ToDoActivity_ cut the code block under the new Mobile Service client.  
-   ![]({{ site.baseurl }}/assets/images/MS207\*CreateTableMethod.png)
+   ![]({{ site.baseurl }}/assets/images/MS207_CreateTableMethod.png)
 
    And paste into a new method \_createTable()\*.  
    ![]({{ site.baseurl }}/assets/images/MS208_CreateTableMethod.png)
@@ -80,18 +80,18 @@ This article builds on top of the [previous tutorial](http://www.deadlyfingers.n
    ```
    ![]({{ site.baseurl }}/assets/images/MS211_TodoItem-Script-Insert-UserId.png)
 8. Add another Todo item in the app.  
-   ![]({{ site.baseurl }}/assets/images/MS212*Add-TodoItem-UserId.png)
-   Refresh the \_ToDoItem* table to see the new item with _userId_.  
+   ![]({{ site.baseurl }}/assets/images/MS212_Add-TodoItem-UserId.png)
+   Refresh the *ToDoItem* table to see the new item with _userId_.  
    ![]({{ site.baseurl }}/assets/images/MS213_Browse-TodoItem-userId-Refresh.png)
 9. Now change **Script \> Read** so app shows only the authenticated user's items.  
    ![]({{ site.baseurl }}/assets/images/MS214_TodoItem-Table-Script-Read-where-userId.png)
 
-```js
-function read(query, user, request) {
-  query.where({ userId: user.userId });
-  request.execute();
-}
-```
+    ```js
+    function read(query, user, request) {
+      query.where({ userId: user.userId });
+      request.execute();
+    }
+    ```
 
 10. Refresh app to see changes.  
     ![]({{ site.baseurl }}/assets/images/MS215_Refresh-Todo-Items.png)

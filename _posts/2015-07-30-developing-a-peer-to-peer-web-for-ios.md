@@ -62,15 +62,15 @@ There are three main parts or layers in the Thali iOS project:
 
 1. ### Cordova
 
-- All demo UI code is handled by "thali_main.js" script.
+    - All demo UI code is handled by "thali_main.js" script.
 
 2. ### JXCore
 
-- UI actions will trigger a call to functions in "app.js" script which is responsible for running all our Node.js code and calling the native methods as documented in the [Thali common API.](https://github.com/thaliproject/Thali_CordovaPlugin/blob/story_0_matthewp/doc/api/connectivity.md)
+    - UI actions will trigger a call to functions in "app.js" script which is responsible for running all our Node.js code and calling the native methods as documented in the [Thali common API.](https://github.com/thaliproject/Thali_CordovaPlugin/blob/story_0_matthewp/doc/api/connectivity.md)
 
 3. ### Native Plugins
 
-- All native methods called from JXCore are registered in "THEAppContext.m" `defineJavaScriptExtensions` method
+    - All native methods called from JXCore are registered in "THEAppContext.m" `defineJavaScriptExtensions` method
 
 ## What about Android p2p?
 

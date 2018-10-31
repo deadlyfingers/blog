@@ -38,25 +38,25 @@ To demonstrate the Azure App Service I have created a sample [Highscores demo fo
 5. Once authentication is setup the **'Highscores'** table script can be edited to save **'userId'**information.
    ![AppService_4-TableInsertScript]({{ site.baseurl }}/assets/images/AppService_4-TableInsertScript.png)
 
-```js
-table.insert(function(context) {
-  if (context.user) {
-    context.item.userId = context.user.id;
-  }
-  return context.execute();
-});
-```
+    ```js
+    table.insert(function(context) {
+      if (context.user) {
+        context.item.userId = context.user.id;
+      }
+      return context.execute();
+    });
+    ```
 
 6. In addition to table scripts you can also create custom APIs. In _Settings_, search for **Easy APIs** and add an example **'hello'** API.
    ![AppService_EasyAPIs]({{ site.baseurl }}/assets/images/AppService_EasyAPIs.png)
    ![AppService_EasyAPIs-hello.js]({{ site.baseurl }}/assets/images/AppService_EasyAPIs-hello.js.png)
 
-```js
-module.exports = {
-  get: function(req, res, next) {
-    res.send(200, { message: "Hello Unity!" });
-  }
-};
-```
+    ```js
+    module.exports = {
+      get: function(req, res, next) {
+        res.send(200, { message: "Hello Unity!" });
+      }
+    };
+    ```
 
 Once you have setup Azure App Service you can update the Unity scene with your App Service **'https'** url and hit run!

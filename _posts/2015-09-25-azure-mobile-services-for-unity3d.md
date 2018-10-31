@@ -25,30 +25,30 @@ You can drop the [Unity3dAzure library](https://github.com/Unity3dAzure/MobileSe
 
 1. [Download the Unity3d Azure demo project](https://github.com/Unity3dAzure/MobileServicesDemo/archive/master.zip) or use git to clone the project:
 
-```
-git clone https://github.com/Unity3dAzure/MobileServicesDemo.git
-```
+    ```
+    git clone https://github.com/Unity3dAzure/MobileServicesDemo.git
+    ```
 
 2. [Create a Mobile Service](https://manage.windowsazure.com/)
 
-- Create 'Highscores' table for app data
-- Modify 'Highscores' table Insert node script to save userId
-- Create a custom API called 'hello'
+    - Create 'Highscores' table for app data
+    - Modify 'Highscores' table Insert node script to save userId
+    - Create a custom API called 'hello'
 
 3. In Unity3d **open scene** `Scenes/HighscoresDemo.unity`
 
-- Check the Demo UI script is attached to the Camera. (The script can be attached by dragging & dropping the `Scripts/HighscoresDemoUI.cs` script unto the Scene's 'Main Camera' in the Hierarchy panel.)
+    - Check the Demo UI script is attached to the Camera. (The script can be attached by dragging & dropping the `Scripts/HighscoresDemoUI.cs` script unto the Scene's 'Main Camera' in the Hierarchy panel.)
 
 4. Paste Azure Mobile Service app's connection strings into Unity Editor Inspector fields (or else directly into script `Scripts/HighscoresDemoUI.cs`)
 
-- Mobile Service URL
-- Mobile Service Application Key
+    - Mobile Service URL
+    - Mobile Service Application Key
 
 5. If you want to save score with userId then [create Facebook app](https://developers.facebook.com/apps/async/create/platform-setup/dialog/)
 
-- Fill in Azure Mobile Service's Identity \> Facebook settings (App Id & App Secret)
-- Paste [Facebook access user token](https://developers.facebook.com/tools/accesstoken/) into Unity Editor Inspector field (or else directly into `Scripts/HighscoresDemoUI.cs`)  
-  Play in UnityEditor
+    - Fill in Azure Mobile Service's Identity \> Facebook settings (App Id & App Secret)
+    - Paste [Facebook access user token](https://developers.facebook.com/tools/accesstoken/) into Unity Editor Inspector field (or else directly into `Scripts/HighscoresDemoUI.cs`)  
+      Play in UnityEditor
 
 ## Credits
 

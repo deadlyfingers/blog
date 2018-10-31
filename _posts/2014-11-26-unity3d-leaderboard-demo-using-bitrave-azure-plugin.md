@@ -42,8 +42,8 @@ This is a quick Unity3d game developer tutorial showing how to save, update and 
    ![Unity3d BitRave Fork with Leaderboard script demo]({{ site.baseurl }}/assets/images/Unity3d-BitRave-Azure-Leaderboard_03a.png)
 
 6. Open the _TestAzure_ scene.
-   ![Unity3d BitRave Fork with Leaderboard script demo]({{ site.baseurl }}/assets/images/Unity3d-BitRave-Azure-Leaderboard*04.png)
-   Select \_Main Camera* and remove Script in the Inspector panel. (This will be replaced later.)
+   ![Unity3d BitRave Fork with Leaderboard script demo]({{ site.baseurl }}/assets/images/Unity3d-BitRave-Azure-Leaderboard_04.png)
+   Select *Main Camera* and remove Script in the Inspector panel. (This will be replaced later.)
    ![Unity3d BitRave Fork with Leaderboard script demo]({{ site.baseurl }}/assets/images/Unity3d-BitRave-Azure-Leaderboard_05.png)
 
 7. Create ‘ **Leaderboard** ’ table in Azure Mobile Services.

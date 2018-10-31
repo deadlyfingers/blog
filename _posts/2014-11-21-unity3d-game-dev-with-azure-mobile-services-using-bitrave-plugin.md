@@ -48,15 +48,15 @@ This quick-start tutorial is for Unity3d game developers who would like to get a
    ![]({{ site.baseurl }}/assets/images/Unity3d-BitRave-AzureMobileServices_05.png)
 
 8. The BitRave demo uses Authentication with Facebook. You will need to [create a Facebook app for your Mobile Service](http://azure.microsoft.com/en-us/documentation/articles/mobile-services-how-to-register-facebook-authentication/) and copy & paste the App Id and App Secret into your Mobile Service’s **IDENTITY** Facebook section. Then [generate the Facebook Access Token](https://developers.facebook.com/tools/accesstoken/) under Facebook’s **Tools \> Access Tokens.**
-   ![]({{ site.baseurl }}/assets/images/Unity3d-BitRave-AzureMobileServices*06a.png)
-   Copy the Access Token and paste into \_AzureUI.cs* script's Access Token value.
+   ![]({{ site.baseurl }}/assets/images/Unity3d-BitRave-AzureMobileServices_06a.png)
+   Copy the Access Token and paste into *AzureUI.cs* script's Access Token value.
    ![]({{ site.baseurl }}/assets/images/Unity3d-BitRave-AzureMobileServices_06b.png)
 
    > NB: Remember to save changes!
 
 9. In Unity select the **Main Camera** and remove the Script in the Inspector panel.
-   ![]({{ site.baseurl }}/assets/images/Unity3d-BitRave-AzureMobileServices*07a.png)
-   Reattach the \_AzureUI.cs* script. (Drag & drop the script onto the Camera.)
+   ![]({{ site.baseurl }}/assets/images/Unity3d-BitRave-AzureMobileServices_07a.png)
+   Reattach the *AzureUI.cs* script. (Drag & drop the script onto the Camera.)
    ![]({{ site.baseurl }}/assets/images/Unity3d-BitRave-AzureMobileServices_07b.png)
    ![]({{ site.baseurl }}/assets/images/Unity3d-BitRave-AzureMobileServices_07c.png)
 
@@ -64,8 +64,8 @@ This quick-start tutorial is for Unity3d game developers who would like to get a
     ![]({{ site.baseurl }}/assets/images/Unity3d-BitRave-AzureMobileServices_08.png)
 
 11. Run in Unity Editor and connect to Mobile Service.
-    ![]({{ site.baseurl }}/assets/images/Unity3d-BitRave-AzureMobileServices*09a.png)
-    Once logged in you can add a \_TodoItem*.
+    ![]({{ site.baseurl }}/assets/images/Unity3d-BitRave-AzureMobileServices_09a.png)
+    Once logged in you can add a *TodoItem*.
     ![]({{ site.baseurl }}/assets/images/Unity3d-BitRave-AzureMobileServices_09b.png)
     You can query or list all items.
     ![]({{ site.baseurl }}/assets/images/Unity3d-BitRave-AzureMobileServices_09c.png)
@@ -84,12 +84,12 @@ This quick-start tutorial is for Unity3d game developers who would like to get a
     ![]({{ site.baseurl }}/assets/images/Unity3d-BitRave-AzureMobileServices_11c.png)
 
 14. In Unity **Build Settings** switch platform to build for Android. I've selected _Development Build_ and _Google Android Project_.
-    ![]({{ site.baseurl }}/assets/images/Unity3d-BitRave-AzureMobileServices*12a.png)
-    Edit **Player Settings** to change the **Bundle Identifier**. (This is in reverse domain name notation - for example \_net.deadlyfingers.DemoApp*)
+    ![]({{ site.baseurl }}/assets/images/Unity3d-BitRave-AzureMobileServices_12a.png)
+    Edit **Player Settings** to change the **Bundle Identifier**. (This is in reverse domain name notation - for example *net.deadlyfingers.DemoApp*)
     ![]({{ site.baseurl }}/assets/images/Unity3d-BitRave-AzureMobileServices_12b.png)
 
 15. Import Android project into Android Studio.
-    ![]({{ site.baseurl }}/assets/images/Unity3d-BitRave-AzureMobileServices*13a.png)
+    ![]({{ site.baseurl }}/assets/images/Unity3d-BitRave-AzureMobileServices_13a.png)
     Edit the \_AndroidManifest.xml* and change the _installLocation_ attribute to **auto**.
     ![]({{ site.baseurl }}/assets/images/Unity3d-BitRave-AzureMobileServices_13c.png)
     Build & run app. (I find the Nexus 7 tablet API 21 ARM emulator works best with Unity builds.)

@@ -25,14 +25,15 @@ I'll be covering the load and save code snippets from the [Unity and Azure Blob 
 Setting up Blob Storage for the Unity demo can be done quickly in just a couple of steps:
 
 1. Sign in to your [Azure portal](https://portal.azure.com) and create a new Storage Account.
-   ![01-StorageAccount]({{ site.baseurl }}/assets/images/01-StorageAccount.png)
+	![01-StorageAccount]({{ site.baseurl }}/assets/images/01-StorageAccount.png)
+	
 2. Once the Storage account is provisioned then select the add new container button which will be used for storing the blobs.
 
-![02-CreateContainer]({{ site.baseurl }}/assets/images/02-CreateContainer.png)
+	![02-CreateContainer]({{ site.baseurl }}/assets/images/02-CreateContainer.png)
 
 3. Create the '<string>Blob' type container which permits public read access for the purposes of this demo.</string>
 
-![03-NewContainer-BlobAccess]({{ site.baseurl }}/assets/images/03-NewContainer-BlobAccess.png)
+	![03-NewContainer-BlobAccess]({{ site.baseurl }}/assets/images/03-NewContainer-BlobAccess.png)
 
 ## Audio files
 
