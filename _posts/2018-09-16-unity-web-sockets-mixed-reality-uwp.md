@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Unity Web Sockets for Mixed Reality
+description: Unity project showing how to stream voice recordings in real-time to Bing Speech and LUIS model for natural language understanding to control properties of 3D objects in HoloLens or Virtual Reality.
 date: 2018-09-16 13:17:16.000000000 +01:00
 published: true
 categories: code

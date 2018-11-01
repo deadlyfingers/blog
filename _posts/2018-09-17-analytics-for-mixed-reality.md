@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Analytics for Mixed Reality
+description: Unity project showing how to log telemetry using Application Insights. Capture events for Unity UI buttons and spatial events including air tap and proximity interactions for HoloLens and Mixed Reality. With Application Insights you can follow user flow across scenes, create funnels and review user retention for your Unity project.
 date: 2018-09-17 16:36:26.000000000 +01:00
 published: true
 categories: code
