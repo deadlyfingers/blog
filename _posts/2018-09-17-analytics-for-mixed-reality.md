@@ -9,6 +9,7 @@ tags:
   - Application Insights
   - Ibex Dashboard
   - Data Visualisation
+  - Kusto
   - Azure
   - Unity3d
   - Mixed Reality

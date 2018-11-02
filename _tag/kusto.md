@@ -1,0 +1,4 @@
+---
+tag: Kusto
+layout: tag
+---

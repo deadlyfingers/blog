@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Custom Vuforia VuMarks to identify and monitor IoT Devices with HoloLens
-description: How to use a VuMark to encode a 32 character GUID string to identify a IoT Device Id using a HoloLens using Azure Functions and IoT Hub.
+description: How to use a VuMark to encode a 32 character GUID string to identify a IoT Device Id with HoloLens using Azure Functions and IoT Hub.
 date: 2018-09-24 15:47:27.000000000 +01:00
 published: true
 categories: code

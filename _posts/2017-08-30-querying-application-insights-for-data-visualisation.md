@@ -8,8 +8,9 @@ tags:
   - Application Insights
   - Ibex Dashboard
   - Data Visualisation
-  - Bots
+  - Kusto
   - Log Analytics
+  - Bots
 meta:
   dsq_thread_id: "6107339333"
   _wp_old_slug: writing-application-insights-queries-for-data-visualisation
