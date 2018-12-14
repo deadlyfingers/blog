@@ -37,7 +37,10 @@ li {
 hr {
   border: 0;
   height: 1px;
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0));
+  background-image: linear-gradient(to right,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0));
   margin: 20px 0;
 }
 
@@ -209,8 +212,8 @@ form {
     -webkit-appearance: none;
   }
 
-  input[type=search],
-  button[type=submit] {
+  input[type="search"],
+  button[type="submit"] {
     display: block;
     float: left;
     box-sizing: border-box;
@@ -219,7 +222,7 @@ form {
     padding: 0 10px;
   }
 
-  input[type=search] {
+  input[type="search"] {
     background: white;
     border-radius: 4px 0 0 4px;
     width: calc(100% - 44px);
@@ -230,7 +233,7 @@ form {
     }
   }
 
-  button[type=submit] {
+  button[type="submit"] {
     background: $color-accent;
     border-radius: 0 4px 4px 0;
     border-left: none;
@@ -252,4 +255,44 @@ form {
 
 div.searchbar {
   padding-bottom: 10px;
+}
+
+/* image */
+
+.banner {
+  width: 100%;
+  min-height: 140px;
+  display: table;
+  overflow: hidden;
+  margin: 10px 0;
+  background-color: $color-accent;
+  text-decoration: none;
+}
+
+.banner>*,
+.banner>.fas,
+.banner>.fab {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 100px;
+  color: white;
+  text-decoration: none;
+}
+
+/* Medium and up */
+@media screen and (min-width: 40em) {
+  .banner {
+    border-radius: 8px;
+  }
+}
+
+/* fullbleed extends the page content header background to the full width */
+
+@media screen and (max-width: 39.9375em) {
+  .fullbleed {
+    padding-right: $fs-grid-margin-small;
+    padding-left: $fs-grid-margin-small;
+    margin-left: -$fs-grid-margin-small;
+  }
 }

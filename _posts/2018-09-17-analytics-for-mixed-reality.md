@@ -18,6 +18,8 @@ meta:
   dsq_thread_id: "6917106927"
 comments: true
 author: David Douglas
+icon: "chart-line"
+prefix: "fas"
 ---
 
 ## Behind every good user experience is great analytics

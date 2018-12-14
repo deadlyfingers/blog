@@ -1,0 +1,20 @@
+{%- assign p = post | default: page -%}
+
+{%- assign icon = p.icon | default: "code" -%}
+
+{%- if icon == 'code' and p.background -%}
+<a href="{{- p.url | absolute_url -}}" class="banner fullbleed">
+  <i class="fas fa-file-code"></i>
+</a>
+{%- else -%}
+{%- assign iconPrefix = p.prefix | default: "fas" -%}
+{%- assign iconColor = p.color | default: "#ffffff" -%}
+{%- assign backgroundColor = p.background | default: "#0d6fbe" -%}
+
+{%- assign backgroundStyle = "background-color:" | append: backgroundColor -%}
+{% assign iconClass = " fa-" | prepend: iconPrefix | append: icon %}
+{% assign iconStyle = "color:" | append: iconColor %}
+<a href="{{- p.url | absolute_url -}}" class="banner fullbleed" style="{{backgroundStyle}}">
+  <i class="{{iconClass}}" style="{{iconStyle}}"></i>
+</a>
+{%- endif -%}

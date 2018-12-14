@@ -7,6 +7,8 @@ categories: code
 tags: [GitHub Pages, Jekyll, Ruby, Wordpress, Blog, Markdown, Website]
 published: true
 comments: true
+icon: "github"
+prefix: "fab"
 ---
 
 Wordpress has done a decent job of running my blog.
@@ -147,17 +149,20 @@ You can find the source code of this website on my [GitHub Page's blog repo](htt
 - [Jekyll Collections](https://jekyllrb.com/docs/collections/)
 
 ### Disqus
+
 [Disqus](https://disqus.com) can be added to a Jekyll site to enable comments on blog posts.
 
 - [Adding Disqus to Jekyll blog](http://sgeos.github.io/jekyll/disqus/2016/02/15/adding-disqus-to-a-jekyll-blog.html)
 - [Disqus config](https://help.disqus.com/developer/javascript-configuration-variables)
 
 ### Foundation
+
 I added the [XY-Grid SASS classes](https://foundation.zurb.com/sites/docs/xy-grid.html#importing) for responsive design layouts.
 
 - [XY-Grid](https://foundation.zurb.com/sites/docs/xy-grid.html)
 
 ### Search
+
 A Jekyll generated [JSON feed](https://jsonfeed.org) can be used as the search index for [lunr.js](https://lunrjs.com/).
 
 - [Jekyll and lunr search](https://rayhightower.com/blog/2016/01/04/how-to-make-lunrjs-jekyll-work-together/)
@@ -166,6 +171,7 @@ A Jekyll generated [JSON feed](https://jsonfeed.org) can be used as the search i
 - [Jekyll JSON feed](https://stevenwestmoreland.com/2017/05/adding-json-feed-to-your-jekyll-site.html)
 
 ### Gulp
+
 One [gulp](https://gulpjs.com/) command deploys the production build to my `gh-pages` branch!
 
 - [Publish build to GitHub Pages](https://www.npmjs.com/package/gulp-gh-pages)

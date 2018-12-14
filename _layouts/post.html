@@ -3,6 +3,7 @@ layout: default
 ---
 
 <div id="post" class="large-8 cell post">
+  {%- include banner.html -%}
   {%- if page.date -%}
   <time datetime="{{- page.date | date_to_xmlschema -}}" class="date">{{- page.date | date: "%d %b %Y" -}}</time>
   {%- endif -%}
