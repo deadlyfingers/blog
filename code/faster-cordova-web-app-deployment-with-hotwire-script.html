@@ -27,7 +27,11 @@
   </form>
 </div></div>
 </div><!-- body content -->
-    <div class="grid-x grid-margin-x"><div id="post" class="large-8 cell post"><time datetime="2015-10-16T13:00:03+00:00" class="date">16 Oct 2015</time><h1 class="post-title">Faster Cordova web app deployment with hotwire script</h1>
+    <div class="grid-x grid-margin-x"><div id="post" class="large-8 cell post">
+
+<a href="https://www.deadlyfingers.net/code/faster-cordova-web-app-deployment-with-hotwire-script" class="banner fullbleed" style="background-color:#0d6fbe">
+  <i class="fas fa-code" style="color:#ffffff"></i>
+</a><time datetime="2015-10-16T14:00:03+01:00" class="date">16 Oct 2015</time><h1 class="post-title">Faster Cordova web app deployment with hotwire script</h1>
   <div class="post-line"></div><p>Building for iOS can be very time consuming. Every time you make changes to a Cordova web app you need to do a <code class="highlighter-rouge">cordova build</code> to update the app project. Then you have to go into Xcode to debug on device. But if you don’t need to make changes to native code and you only need to update web elements like HTML, Javascript, image and media files then you can save time by just updating those bits.</p>
 
 <p>I’ve made a <a href="https://github.com/deadlyfingers/hotwire-ipa">Hotwire IPA</a> bash script to replace the ‘www’ web app folder with the updated directory. All you need to do is create an ‘*.ipa’ archive and the hotwire script can quickly update it with all web app changes and deploy to device (without need to jailbreak).</p>
