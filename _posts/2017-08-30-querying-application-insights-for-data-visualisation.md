@@ -16,6 +16,9 @@ meta:
   _wp_old_slug: writing-application-insights-queries-for-data-visualisation
 comments: true
 author: David Douglas
+icon: "chart-line"
+prefix: "fas"
+repo: https://github.com/Azure/ibex-dashboard
 ---
 
 [Ibex dashboard](https://github.com/CatalystCode/ibex-dashboard) is an open source [web app](https://azure.microsoft.com/en-gb/services/app-service/web/) for displaying telemetry data from [Application Insights](https://azure.microsoft.com/en-gb/services/application-insights/). It comes with a number of [sample templates](https://github.com/CatalystCode/ibex-dashboard/tree/master/server/dashboards/preconfigured) including analytics dashboards for [Bots](https://dev.botframework.com/). If you're developing a bot and you want to see how your bot is performing over time then you can select the [Bot Instrumentation template](https://github.com/CatalystCode/ibex-dashboard/blob/master/server/dashboards/preconfigured/bot-framework-inst.ts) which requires you to enter your Application Insights App Id and App Key. Also depending on your bot you will need to add [Node.js instrumentation](https://github.com/CatalystCode/botbuilder-instrumentation) or [C# instrumentation](https://github.com/CatalystCode/botbuilder-instrumentation-cs) in order to enable logging to Application Insights. Then after a couple of minutes you will start to see the data come through! The dashboard can be completely customised using [generic components](https://github.com/CatalystCode/ibex-dashboard/tree/master/client/src/components/generic) including charts, tables, score cards and drill-down dialogs. These elements can be used to review how your bot performs over time, monitor usage stats, message sentiment, user retention and inspect user intents.
@@ -154,7 +157,7 @@ calculated: results => {
 
 The only thing we do is a 'reduce' function to convert the time format 'hh:mm:ss' returned from the Application Insights query into a number of seconds for the various calculations for displaying in a score card element.
 
-The final Application Insights query is available in the [hand-off to human dashboard template](https://github.com/CatalystCode/ibex-dashboard/blob/master/server/dashboards/preconfigured/human-handoff.ts) and is included with [Ibex dashboard](https://github.com/CatalystCode/ibex-dashboard).
+The final Application Insights query is available in the [hand-off to human dashboard template](https://github.com/Azure/ibex-dashboard/blob/master/server/dashboards/preconfigured/human-handoff.ts) and is included with [Ibex dashboard](https://github.com/Azure/ibex-dashboard).
 
 #### Further reading and resources:
 

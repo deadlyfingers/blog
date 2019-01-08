@@ -5,13 +5,15 @@ date: 2015-10-16 14:00:03.000000000 +01:00
 published: true
 categories: code
 tags:
-- Cordova
-- iOS
+  - Cordova
+  - iOS
 meta:
-  dsq_thread_id: '5687323726'
+  dsq_thread_id: "5687323726"
 comments: true
 author: David Douglas
+repo: https://github.com/deadlyfingers/hotwire-ipa
 ---
+
 Building for iOS can be very time consuming. Every time you make changes to a Cordova web app you need to do a `cordova build` to update the app project. Then you have to go into Xcode to debug on device. But if you don't need to make changes to native code and you only need to update web elements like HTML, Javascript, image and media files then you can save time by just updating those bits.
 
 I've made a [Hotwire IPA](https://github.com/deadlyfingers/hotwire-ipa) bash script to replace the 'www' web app folder with the updated directory. All you need to do is create an '\*.ipa' archive and the hotwire script can quickly update it with all web app changes and deploy to device (without need to jailbreak).
@@ -45,5 +47,4 @@ To run the script we need to first create an Archive and export it as an \*.ipa 
 
 That's 3 minutes 12 seconds saved the first time if you have already done `cordova build ios` just to compile the native code, then **7 minutes 18 seconds saved** to deploy repeated web app updates.
 
-All times recorded using [Postcard web app](https://github.com/thaliproject/postcardapp) (using 'Story\_0' branch) on MacBook 1.2 GHz Intel Core M
-
+All times recorded using [Postcard web app](https://github.com/thaliproject/postcardapp) (using 'Story_0' branch) on MacBook 1.2 GHz Intel Core M

@@ -24,6 +24,9 @@ layout: default
     <li><a href="{{- tag | slugify | prepend: tagUrl -}}">{{- tag -}}</a></li>
     {%- endfor -%}
   </ul>
+  {%- if post.repo -%}
+  <a class="repo" href="{{- post.repo  -}}"><i class="fas fa-code-branch"></i></a>
+  {%- endif -%}
   <hr class="show-for-small-only" />
 </div>
 {%- endfor -%}

@@ -12,6 +12,7 @@ meta:
   dsq_thread_id: "5662800490"
 comments: true
 author: David Douglas
+repo: https://github.com/Unity3dAzure/AppServicesDemo
 ---
 
 [Azure Mobile Services will be migrated to App Services](https://azure.microsoft.com/en-us/blog/transition-of-azure-mobile-services/) on Sept 1st 2016. To prepare for this migration I've renamed and updated the open source [Mobile Service Unity3d projects to support **Azure App Service**](https://github.com/Unity3dAzure/AppServices) going forward.

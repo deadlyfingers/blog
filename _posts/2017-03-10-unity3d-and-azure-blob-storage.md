@@ -12,6 +12,9 @@ meta:
   dsq_thread_id: "5662807180"
 comments: true
 author: David Douglas
+icon: "database"
+prefix: "fas"
+repo: https://github.com/Unity3dAzure/StorageServicesDemo
 ---
 
 Previously I've looked at using [Azure App Services for Unity](http://www.deadlyfingers.net/azure/azure-app-services-for-unity3d/), which provided a backend for Unity applications or games using Easy Tables and Easy APIs. But what if I wanted to lift and shift heavier data such as audio files, image files, or Unity Asset Bundles binaries? For storing these types of files, I would be better using [Azure Blob storage](https://azure.microsoft.com/en-gb/services/storage/blobs/). Recently I created an [Azure Blob storage demo project in Unity](https://github.com/Unity3dAzure/StorageServicesDemo) to show how to save and load these various asset types in Unity. One of the exciting new applications for Unity is developing <acronym title="Virtual Reality">VR</acronym>, <acronym title="Augmented Reality">AR</acronym> or <acronym title="Mixed Reality">MR</acronym> experiences for HoloLens where a backend could serve media content dynamically whether it's images, audio, or prefabs with models, materials and referenced scripts. When thinking of cloud gaming the tendency is to consider it in terms of end user scenarios like massive multiplayer online games. While Azure is designed to scale, it is also helpful to use during early stage development and testing. There is an opportunity to create productive cloud tools for artists, designers and developers especially when extensive hardware testing is required in Virtual Reality, Augmented Reality or Mixed Reality development. For example, imagine being able to see and test updates on the hardware without having to rebuild the binaries in Unity or Visual Studio each time. There are many more use cases than IΓÇÖve mentioned here like offering user generated downloadable content for extending your game or app.
@@ -25,15 +28,15 @@ I'll be covering the load and save code snippets from the [Unity and Azure Blob 
 Setting up Blob Storage for the Unity demo can be done quickly in just a couple of steps:
 
 1. Sign in to your [Azure portal](https://portal.azure.com) and create a new Storage Account.
-	![01-StorageAccount]({{ site.baseurl }}/assets/images/01-StorageAccount.png)
-	
+   ![01-StorageAccount]({{ site.baseurl }}/assets/images/01-StorageAccount.png)
+
 2. Once the Storage account is provisioned then select the add new container button which will be used for storing the blobs.
 
-	![02-CreateContainer]({{ site.baseurl }}/assets/images/02-CreateContainer.png)
+   ![02-CreateContainer]({{ site.baseurl }}/assets/images/02-CreateContainer.png)
 
 3. Create the '<string>Blob' type container which permits public read access for the purposes of this demo.</string>
 
-	![03-NewContainer-BlobAccess]({{ site.baseurl }}/assets/images/03-NewContainer-BlobAccess.png)
+   ![03-NewContainer-BlobAccess]({{ site.baseurl }}/assets/images/03-NewContainer-BlobAccess.png)
 
 ## Audio files
 

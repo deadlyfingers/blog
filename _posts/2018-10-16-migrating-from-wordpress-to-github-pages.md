@@ -9,6 +9,7 @@ published: true
 comments: true
 icon: "github"
 prefix: "fab"
+repo: https://github.com/deadlyfingers/blog
 ---
 
 Wordpress has done a decent job of running my blog.

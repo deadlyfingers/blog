@@ -20,6 +20,7 @@ comments: true
 author: David Douglas
 icon: "chart-line"
 prefix: "fas"
+repo: https://github.com/Unity3dAzure/UnityApplicationInsights
 ---
 
 ## Behind every good user experience is great analytics

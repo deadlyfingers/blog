@@ -30,6 +30,9 @@ layout: default
     <li><a href="{{- tag | slugify | prepend: tagUrl -}}">{{- tag -}}</a></li>
     {%- endfor -%}
   </ul>
+  {%- if page.repo -%}
+  <a class="repo" href="{{- page.repo  -}}"><i class="fas fa-code-branch"></i></a>
+  {%- endif -%}
 </div>
 
 <div class="large-8 cell">

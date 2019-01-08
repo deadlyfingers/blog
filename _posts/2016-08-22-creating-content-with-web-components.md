@@ -12,6 +12,7 @@ meta:
   dsq_thread_id: '5740806672'
 comments: true
 author: David Douglas
+repo: https://github.com/ideaaward/badge-builder/
 ---
 Many web projects rely on a <abbr title="Content Management System">CMS</abbr> of some description. The system itself is not important, but rather the content it helps to create. The primary function of a CMS is to enable the creation of content - it should empower content creation. If a new project requires a CMS the question that would tend to spring into a developer's mind is - can I use an existing CMS already out there, or do I need to build a CMS from scratch for this project? But before that can be answered, perhaps some simple questions need to be asked first.
 

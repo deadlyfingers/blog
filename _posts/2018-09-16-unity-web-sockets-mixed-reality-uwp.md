@@ -17,6 +17,7 @@ comments: true
 author: David Douglas
 icon: "comment-alt"
 prefix: "fas"
+repo: https://github.com/Unity3dAzure/UnityWebSocketDemo
 ---
 
 Certain cloud services may offer a Web Socket streaming connection as an alternative to firing repeated REST requests or polling. To make working with REST APIs in Unity more convenient I built a [REST client for Unity](https://github.com/Unity3dAzure/RESTClient) based on [UnityWebRequest](https://docs.unity3d.com/ScriptReference/Networking.UnityWebRequest.html) which supports abstract types for JSON / XML serialisation. But given a real-time scenario like "speech to text" using a Web Socket client instead of REST gives an option to stream the audio data and get intermediate results back which provides responsive feedback to users for an improved user experience.

@@ -19,6 +19,7 @@ comments: true
 author: David Douglas
 icon: "qrcode"
 prefix: "fas"
+repo: https://github.com/deadlyfingers/MixedRealityIoTMonitoring
 ---
 
 Some of the most popular experiences of Augmented or Mixed Reality are currently in a gaming or an immersive 3D form. But what makes headsets like the HoloLens so different and special is the ability to still see into the physical world. It is this link that opens up so many new opportunities and future possibilities of spatial computing. An interesting scenario is using HoloLens to interact with IoT devices in the real world. Just by gazing at devices around a room imagine you could identify a specific IoT device to review its real-time telemetry and control it over the air!
