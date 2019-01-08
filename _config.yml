@@ -67,7 +67,7 @@ exclude:
   - "^*"
 
 keep_files:
-  - node_modules/@fortawesome/fontawesome-free/webfonts
+  - assets/modules
 
 # Filtering Content
 show_drafts: false

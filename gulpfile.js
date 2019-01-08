@@ -27,23 +27,22 @@ gulp.task('_deploy_site', function () {
 });
 
 // Helper function to copy dependencies
-const keep_files = function (dest) {
-  // Any 'keep_files' listed in '_config.yml' should be included here
+const copy_files = function (dest) {
   return gulp.src(['node_modules/@fortawesome/fontawesome-free/webfonts/**/*'], {
-      base: 'node_modules'
+      base: 'node_modules/@fortawesome'
     })
-    .pipe(gulp.dest(dest + '/node_modules'));
+    .pipe(gulp.dest(dest + '/assets/modules'));
 };
 
 // 'node_modules' contains both production and development modules.
 // But the exclude/include settings in '_config.yml' don't allow a sub-dir to be retained in an excluded parent dir.
 // Therefore there is the need to copy the files from 'node_modules' that we only require for production.
 gulp.task('copy', function () {
-  return keep_files(BUILD_SITE);
+  return copy_files(BUILD_SITE);
 });
 
 gulp.task('copy:dev', function () {
-  return keep_files(BUILD_DEV);
+  return copy_files(BUILD_DEV);
 });
 
 // list category values from posts front matter
