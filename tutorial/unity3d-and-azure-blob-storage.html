@@ -23,14 +23,14 @@
   <form id="search_form" method="GET" action="/search/">
     <input id="search" name="q" type="search" placeholder="search site" list="search_tags" />
     <button type="submit" value="Search"><i class="icon search"></i></button>
-    <datalist id="search_tags"><option value="Azure"><option value="Blog"><option value="Wordpress"><option value="Website"><option value="Android"><option value="Mobile Services"><option value="App Store"><option value="Apps"><option value="Gaming"><option value="Windows"><option value="iPad"><option value="iPhone"><option value="Windows Phone"><option value="GameDev"><option value="Unity3d"><option value="Visual Studio"><option value="iOS"><option value="Ember-CLI"><option value="Azure-CLI"><option value="Cordova"><option value="WebApp"><option value="Design"><option value="Responsive Design"><option value="RWD"><option value="App Services"><option value="Javascript"><option value="Polymer"><option value="Web Components"><option value="Alamofire"><option value="Argo"><option value="JSON"><option value="Swift"><option value="Git"><option value="Blob Storage"><option value="Application Insights"><option value="Ibex Dashboard"><option value="Data Visualisation"><option value="Kusto"><option value="Log Analytics"><option value="Bots"><option value="UWP"><option value="Web Sockets"><option value="Mixed Reality"><option value="HoloLens"><option value="IoT"><option value="VuForia"><option value="VuMark"><option value="GitHub Pages"><option value="Jekyll"><option value="Ruby"><option value="Markdown"></datalist>
+    <datalist id="search_tags"><option value="Azure"><option value="Blog"><option value="Wordpress"><option value="Website"><option value="Android"><option value="Mobile Services"><option value="App Store"><option value="Apps"><option value="Gaming"><option value="Windows"><option value="iPad"><option value="iPhone"><option value="Windows Phone"><option value="GameDev"><option value="Unity3d"><option value="Visual Studio"><option value="iOS"><option value="Ember-CLI"><option value="Azure-CLI"><option value="Cordova"><option value="WebApp"><option value="Design"><option value="Responsive Design"><option value="RWD"><option value="App Services"><option value="Javascript"><option value="Polymer"><option value="Web Components"><option value="Alamofire"><option value="Argo"><option value="JSON"><option value="Swift"><option value="Git"><option value="Blob Storage"><option value="Application Insights"><option value="Ibex Dashboard"><option value="Data Visualisation"><option value="Kusto"><option value="Log Analytics"><option value="Bots"><option value="UWP"><option value="Web Sockets"><option value="Mixed Reality"><option value="HoloLens"><option value="IoT"><option value="VuForia"><option value="VuMark"><option value="GitHub Pages"><option value="Jekyll"><option value="Ruby"><option value="Markdown"><option value="React"><option value="Adaptive Design"><option value="Web Development"></datalist>
   </form>
 </div></div>
 </div><!-- body content -->
     <div class="grid-x grid-margin-x"><div id="post" class="large-8 cell post">
 
 <a href="https://www.deadlyfingers.net/tutorial/unity3d-and-azure-blob-storage" class="banner fullbleed" style="background-color:#0d6fbe">
-  <i class="fas fa-code" style="color:#ffffff"></i>
+  <i class="fas fa-database" style="color:#ffffff"></i>
 </a><time datetime="2017-03-10T11:14:11+00:00" class="date">10 Mar 2017</time><h1 class="post-title">Unity3d and Azure Blob Storage</h1>
   <div class="post-line"></div><p>Previously I’ve looked at using <a href="http://www.deadlyfingers.net/azure/azure-app-services-for-unity3d/">Azure App Services for Unity</a>, which provided a backend for Unity applications or games using Easy Tables and Easy APIs. But what if I wanted to lift and shift heavier data such as audio files, image files, or Unity Asset Bundles binaries? For storing these types of files, I would be better using <a href="https://azure.microsoft.com/en-gb/services/storage/blobs/">Azure Blob storage</a>. Recently I created an <a href="https://github.com/Unity3dAzure/StorageServicesDemo">Azure Blob storage demo project in Unity</a> to show how to save and load these various asset types in Unity. One of the exciting new applications for Unity is developing <acronym title="Virtual Reality">VR</acronym>, <acronym title="Augmented Reality">AR</acronym> or <acronym title="Mixed Reality">MR</acronym> experiences for HoloLens where a backend could serve media content dynamically whether it’s images, audio, or prefabs with models, materials and referenced scripts. When thinking of cloud gaming the tendency is to consider it in terms of end user scenarios like massive multiplayer online games. While Azure is designed to scale, it is also helpful to use during early stage development and testing. There is an opportunity to create productive cloud tools for artists, designers and developers especially when extensive hardware testing is required in Virtual Reality, Augmented Reality or Mixed Reality development. For example, imagine being able to see and test updates on the hardware without having to rebuild the binaries in Unity or Visual Studio each time. There are many more use cases than IΓÇÖve mentioned here like offering user generated downloadable content for extending your game or app.</p>
 
@@ -45,7 +45,7 @@
 <ol>
   <li>
     <p>Sign in to your <a href="https://portal.azure.com">Azure portal</a> and create a new Storage Account.
- <img src="/assets/images/01-StorageAccount.png" alt="01-StorageAccount" /></p>
+<img src="/assets/images/01-StorageAccount.png" alt="01-StorageAccount" /></p>
   </li>
   <li>
     <p>Once the Storage account is provisioned then select the add new container button which will be used for storing the blobs.</p>
@@ -242,8 +242,7 @@ Once the audio has been recorded in Unity I can upload the file using the <code 
 <div id="pagination" class="large-8 cell">
   <div>
     <a href="https://www.deadlyfingers.net/tutorial/unity3d-and-azure-blob-storage">Unity3d and Azure Blob Storage</a><span> by </span><span class="author">David Douglas</span></div>
-  <ul class="tags"><li><a href="/tag/azure">Azure</a></li><li><a href="/tag/blob-storage">Blob Storage</a></li><li><a href="/tag/unity3d">Unity3d</a></li></ul>
-</div>
+  <ul class="tags"><li><a href="/tag/azure">Azure</a></li><li><a href="/tag/blob-storage">Blob Storage</a></li><li><a href="/tag/unity3d">Unity3d</a></li></ul><a class="repo" href="https://github.com/Unity3dAzure/StorageServicesDemo"><i class="fas fa-code-branch"></i></a></div>
 
 <div class="large-8 cell"><!-- disqus comments --><div id="disqus_thread"></div>
 <script>
