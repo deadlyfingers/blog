@@ -246,7 +246,7 @@ cordova plugin add cordova-plugin-wkwebview-engine --save
 ### A couple of time saving Cordova scripts
 
 - [Cordova app icon asset generator](https://www.npmjs.com/package/cordova-asset-generator). I also created a [ruby script for batch image resizing](https://gist.github.com/deadlyfingers/721b5495ea25a1eebd53) for generating all the app icons and launch images for iOS and Android platforms.
-- [Faster Cordova web app deployment on iOS](http://www.deadlyfingers.net/mobile/faster-cordova-web-app-deployment-with-hotwire-script/) with [Hotwire IPA script](https://github.com/deadlyfingers/hotwire-ipa)
+- [Faster Cordova web app deployment on iOS](https://www.deadlyfingers.net/code/faster-cordova-web-app-deployment-with-hotwire-script) with [Hotwire IPA script](https://github.com/deadlyfingers/hotwire-ipa)
 
 ## Summary
 

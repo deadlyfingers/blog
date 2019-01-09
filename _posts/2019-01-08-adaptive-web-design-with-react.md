@@ -67,7 +67,7 @@ When it comes to selecting a UI kit for React apps [Material UI](https://materia
 yarn add @material-ui/core
 ```
 
-Material UI Select components and custom date pickers can provide a great experience on desktop using a mouse, but I find they can run into a number of UX issues on mobile. I think this could be one of the reasons the [Material UI Picker docs](https://material-ui.com/demos/pickers/) mention there are falling back to native input controls. But whilst the experience of native pickers is optimal on mobile, it's not widely available on desktop yet. Also, web designers have little control over how it looks on desktop at the minute, so if you site uses a dark theme it may look a bit out of place or like lazy design.
+Material UI Select components and custom date pickers can provide a great experience on desktop using a mouse, but I find they can run into a number of UX issues on mobile. I think this could be one of the reasons the [Material UI Picker docs](https://material-ui.com/demos/pickers/) mention there are falling back to native input controls. But whilst the experience of native pickers is optimal on mobile, it's not widely available on desktop yet. Also, web designers have little control over how it looks on desktop at the minute, so if you site uses a dark theme it may look a bit out of place or lazy design.
 
 In the ideal world we would have native pickers that support basic theming using CSS for desktop browsers but until that happens I think the best way to go is to use the Material UI Select and a custom Date Picker on desktop, whilst taking advantage of the native selects and pickers on mobile. Fortunately there's a [React device detect component](https://github.com/duskload/react-device-detect) to help with that!
 
@@ -75,16 +75,71 @@ In the ideal world we would have native pickers that support basic theming using
 yarn add react-device-detect
 ```
 
-Using device detection we are able to provide [Adaptive React components](https://github.com/deadlyfingers/react-adaptive-components) that use the [native select and native date picker components](https://material-ui.com/api/native-select/) for mobile and the [Material UI Select](https://material-ui.com/api/select/) and the [React Date Picker component](react-datepicker) for desktop in order to provide the best user experience for a particular platform.
+Using device detection we are able to provide [Adaptive React components](https://github.com/deadlyfingers/react-adaptive-components) that use the [native select and native date picker components](https://material-ui.com/api/native-select/) for mobile and the [Material UI Select](https://material-ui.com/api/select/) and the [React Date Picker component](react-datepicker) for desktop in order to provide the best user experience for each platform.
 
-### Adaptive Select component for desktop and mobile
+#### Adaptive Select
 
 ![Select Desktop]({{ site.baseurl }}/assets/images/react-select-desktop.png)
 
 ![Select iPhone]({{ site.baseurl }}/assets/images/react-select-iphone.png)
 
-### Adaptive Date Picker component for desktop and mobile
+#### Adaptive Date Picker
 
 ![Date Picker Desktop]({{ site.baseurl }}/assets/images/react-datepicker-desktop.png)
 
 ![Date Picker iPhone]({{ site.baseurl }}/assets/images/react-datepicker-iphone.png)
+
+### Sample usage
+
+The following code snippet shows how to provide an initial state for our [adaptive select](https://github.com/deadlyfingers/react-adaptive-components/blob/master/src/components/AdaptiveSelect.jsx) and [date picker component](https://github.com/deadlyfingers/react-adaptive-components/blob/master/src/components/AdaptiveDatePicker.jsx) and the handler functions for when the user selection changes.
+
+```jsx
+import React, { Component } from "react";
+import AdaptiveSelect from "./components/AdaptiveSelect";
+import AdaptiveDatePicker from "./components/AdaptiveDatePicker";
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedValue: "en",
+      selectedDate: new Date()
+    };
+  }
+
+  handleSelectChange = selected => {
+    if (selected === undefined) return;
+    // update state
+    this.setState({
+      selectedValue: selected
+    });
+  };
+
+  handleDateChange = selected => {
+    if (selected === undefined) return;
+    // update state
+    this.setState({
+      selectedDate: selected
+    });
+  };
+
+  render() {
+    const { selectedValue, selectedDate } = this.state;
+    return (
+      <React.Fragment>
+        <AdaptiveSelect
+          options={{ en: "English", de: "German", fr: "French" }}
+          value={selectedValue}
+          onChange={this.handleSelectChange}
+        />
+        <AdaptiveDatePicker
+          onChange={this.handleDateChange}
+          value={selectedDate}
+        />
+      </React.Fragment>
+    );
+  }
+}
+```
+
+The full code is made available in the [React Adaptive Components repo.](https://github.com/deadlyfingers/react-adaptive-components)
