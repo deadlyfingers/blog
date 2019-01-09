@@ -93,6 +93,8 @@ Using device detection we are able to provide [Adaptive React components](https:
 
 The following code snippet shows how to provide an initial state for our [adaptive select](https://github.com/deadlyfingers/react-adaptive-components/blob/master/src/components/AdaptiveSelect.jsx) and [date picker component](https://github.com/deadlyfingers/react-adaptive-components/blob/master/src/components/AdaptiveDatePicker.jsx) and the handler functions for when the user selection changes.
 
+{% raw %}
+
 ```jsx
 import React, { Component } from "react";
 import AdaptiveSelect from "./components/AdaptiveSelect";
@@ -141,5 +143,7 @@ class App extends Component {
   }
 }
 ```
+
+{% endraw %}
 
 The full code is made available in the [React Adaptive Components repo.](https://github.com/deadlyfingers/react-adaptive-components)
