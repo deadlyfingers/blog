@@ -61,13 +61,15 @@ After this it's just a case of adding the [XY Grid class names](https://foundati
 yarn add react-resize-detector
 ```
 
+## Adaptive UI
+
 When it comes to selecting a UI kit for React apps [Material UI](https://material-ui.com/) provides a good number of components, which can be [themed](https://material-ui.com/customization/themes/#theme-provider).
 
 ```shell
 yarn add @material-ui/core
 ```
 
-Material UI Select components and custom date pickers can provide a great experience on desktop using a mouse, but I find they can run into a number of UX issues on mobile. I think this could be one of the reasons the [Material UI Picker docs](https://material-ui.com/demos/pickers/) mention there are falling back to native input controls. But whilst the experience of native pickers is optimal on mobile, it's not widely available on desktop yet. Also, web designers have little control over how it looks on desktop at the minute, so if you site uses a dark theme it may look a bit out of place or lazy design.
+Material UI Select components and custom date pickers can provide a great experience on desktop using a mouse, but I find they can run into a number of UX issues on mobile. I think this could be one of the reasons the [Material UI Picker docs](https://material-ui.com/demos/pickers/) mention there are falling back to native input controls. But whilst the experience of native pickers is optimal on mobile, it's not widely available on desktop yet. Also, web designers have little control over how it looks on desktop at the minute, so if you site uses a dark theme it may look inconsistent in terms of design.
 
 In the ideal world we would have native pickers that support basic theming using CSS for desktop browsers but until that happens I think the best way to go is to use the Material UI Select and a custom Date Picker on desktop, whilst taking advantage of the native selects and pickers on mobile. Fortunately there's a [React device detect component](https://github.com/duskload/react-device-detect) to help with that!
 
