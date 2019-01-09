@@ -76,7 +76,8 @@
   </li>
 </ol>
 
-<p>After this it’s just a case of adding the <a href="https://foundation.zurb.com/sites/docs/xy-grid.html#basics">XY Grid class names</a> to your JSX markup.</p>
+<p>After this it’s just a case of adding the <a href="https://foundation.zurb.com/sites/docs/xy-grid.html#basics">XY Grid class names</a> to your JSX markup.
+You can also utilize the <a href="https://foundation.zurb.com/sites/docs/flexbox-utilities.html">flexbox helper classes</a> to change <a href="https://foundation.zurb.com/sites/docs/flexbox-utilities.html#source-ordering">source ordering</a> and the <a href="https://foundation.zurb.com/sites/docs/visibility.html">visibility helper classes</a> to show or hide content for certain screen sizes.</p>
 
 <blockquote>
   <p>As mentioned earlier there are conditions where a grid class on its own won’t solve every responsive design problem specifically in cases when you need to resize a React child component that requires an exact width or height prop in order to render correctly. In this case you may need to wrap that component with a <a href="https://github.com/maslianok/react-resize-detector">React Resize Detector</a> to render to component on resize event.</p>
@@ -92,7 +93,7 @@
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yarn add @material-ui/core
 </code></pre></div></div>
 
-<p>Material UI Select components and custom date pickers can provide a great experience on desktop using a mouse, but I find they can run into a number of UX issues on mobile. I think this could be one of the reasons the <a href="https://material-ui.com/demos/pickers/">Material UI Picker docs</a> mention there are falling back to native input controls. But whilst the experience of native pickers is optimal on mobile, it’s not widely available on desktop yet. Also, web designers have little control over how it looks on desktop at the minute, so if you site uses a dark theme it may look inconsistent in terms of design.</p>
+<p>Material UI Select components and custom date pickers can provide a great experience on desktop using a mouse, but I find they can run into a number of UX issues on mobile. I think this could be one of the reasons the <a href="https://material-ui.com/demos/pickers/">Material UI Picker docs</a> mention there are falling back to native input controls. But whilst the experience of native pickers is optimal on mobile, it’s not widely available on desktop yet. Also, web designers have little control over how it looks on desktop at the minute, so if your site uses a dark theme it may look inconsistent in terms of design.</p>
 
 <p>In the ideal world we would have native pickers that support basic theming using CSS for desktop browsers but until that happens I think the best way to go is to use the Material UI Select and a custom Date Picker on desktop, whilst taking advantage of the native selects and pickers on mobile. Fortunately there’s a <a href="https://github.com/duskload/react-device-detect">React device detect component</a> to help with that!</p>
 
