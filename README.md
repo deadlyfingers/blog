@@ -70,10 +70,18 @@ or
 or 
 `bundle exec jekyll build`
 
+### Soft Deploy
+
+`npm run softdeploy`
+
+### Local server
+
+`npx http-server ./_site`
+
 ### Deploy
 
 Deploys build to 'gh-pages' branch
 
-`gulp deploy`
+`npm run deploy`
 
 > NB: This publishes all changes to the the live site!
