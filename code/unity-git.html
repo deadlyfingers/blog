@@ -47,7 +47,7 @@
 <p>But as this is not the default setting make sure when applying this mode that everyone else on the team is happy to switch.<br />
 If you select “Force Text” to save files in YAML format you should add a <em>.gitattributes</em> file that tells git to treat <em>*.unity</em>, <em>*.prefab</em> and <em>*.asset</em> files as binary to ensure git doesn’t try to merge scenes automatically. Paste the following into the <em>.gitconfig</em> file inside your Unity project:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*.unity binary
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*.unity binary
 *.prefab binary
 *.asset binary
 </code></pre></div></div>
@@ -60,23 +60,23 @@ If you select “Force Text” to save files in YAML format you should add a <em
 
 <h4 id="unityyamlmerge-windows">UnityYAMLMerge (Windows):</h4>
 
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>merge]
-tool <span class="o">=</span> unityyamlmerge
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">merge</span><span class="p">]</span><span class="w">
+</span><span class="n">tool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">unityyamlmerge</span><span class="w">
 
-<span class="o">[</span>mergetool <span class="s2">"unityyamlmerge"</span><span class="o">]</span>
-trustExitCode <span class="o">=</span> <span class="nb">false
-</span>cmd <span class="o">=</span> <span class="s1">'C:\Program Files\Unity\Editor\Data\Tools\UnityYAMLMerge.exe'</span> merge -p <span class="s2">"</span><span class="nv">$BASE</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$REMOTE</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$LOCAL</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$MERGED</span><span class="s2">"</span>
-</code></pre></div></div>
+</span><span class="p">[</span><span class="n">mergetool</span><span class="w"> </span><span class="s2">"unityyamlmerge"</span><span class="p">]</span><span class="w">
+</span><span class="n">trustExitCode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">false</span><span class="w">
+</span><span class="nx">cmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'C:\Program Files\Unity\Editor\Data\Tools\UnityYAMLMerge.exe'</span><span class="w"> </span><span class="n">merge</span><span class="w"> </span><span class="nt">-p</span><span class="w"> </span><span class="s2">"</span><span class="nv">$BASE</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$REMOTE</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$LOCAL</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$MERGED</span><span class="s2">"</span><span class="w">
+</span></code></pre></div></div>
 
 <h4 id="unityyamlmerge-mac">UnityYAMLMerge (Mac):</h4>
 
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>merge]
-tool <span class="o">=</span> unityyamlmerge
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">merge</span><span class="p">]</span><span class="w">
+</span><span class="n">tool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">unityyamlmerge</span><span class="w">
 
-<span class="o">[</span>mergetool <span class="s2">"unityyamlmerge"</span><span class="o">]</span>
-trustExitCode <span class="o">=</span> <span class="nb">false
-</span>cmd <span class="o">=</span> <span class="s1">'/Applications/Unity/Unity.app/Contents/Tools/UnityYAMLMerge'</span> merge -p <span class="s2">"</span><span class="nv">$BASE</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$REMOTE</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$LOCAL</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$MERGED</span><span class="s2">"</span>
-</code></pre></div></div>
+</span><span class="p">[</span><span class="n">mergetool</span><span class="w"> </span><span class="s2">"unityyamlmerge"</span><span class="p">]</span><span class="w">
+</span><span class="n">trustExitCode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">false</span><span class="w">
+</span><span class="nx">cmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'/Applications/Unity/Unity.app/Contents/Tools/UnityYAMLMerge'</span><span class="w"> </span><span class="n">merge</span><span class="w"> </span><span class="nt">-p</span><span class="w"> </span><span class="s2">"</span><span class="nv">$BASE</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$REMOTE</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$LOCAL</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$MERGED</span><span class="s2">"</span><span class="w">
+</span></code></pre></div></div>
 
 <h2 id="gitmerge-for-unity">GitMerge for Unity</h2>
 
@@ -84,19 +84,19 @@ trustExitCode <span class="o">=</span> <span class="nb">false
 
 <h2 id="merging-unity-c-script-conflicts-with-p4merge-app">Merging Unity C# script conflicts with P4Merge app</h2>
 
-<p>For merging conflicts I prefer to use the free <a href="https://www.perforce.com/product/components/perforce-visual-merge-and-diff-tools">P4Merge</a> visual merge tool which is available for <a href="https://www.perforce.com/downloads/register/helix?return_url=http://www.perforce.com/downloads/perforce/r15.2/bin.macosx107x86_64/P4V.dmg&amp;platform_family=MACINTOSH&amp;platform=OS%20X%2010.8%2B%20%28x64%29&amp;version=2015.2/1312139&amp;product_selected=Perforce&amp;edition_selected=helix&amp;product_name=Helix%20P4V:%20:%20Visual%20Client&amp;prod_num=9">Mac</a> and <a href="https://www.perforce.com/downloads/register/helix?return_url=http://www.perforce.com/downloads/perforce/r15.2/bin.ntx64/p4vinst64.exe&amp;platform_family=WINDOWS&amp;platform=Windows%20%28x64%29&amp;version=2015.2/1312139&amp;product_selected=Perforce&amp;edition_selected=helix&amp;product_name=Helix%20P4V:%20:%20Visual%20Client&amp;prod_num=9">Windows</a>. Here’s how to hook up the P4Merge app as the <strong>global</strong> git merge tool when issuing the <code class="highlighter-rouge">git mergetool</code> command:</p>
+<p>For merging conflicts I prefer to use the free <a href="https://www.perforce.com/product/components/perforce-visual-merge-and-diff-tools">P4Merge</a> visual merge tool which is available for <a href="https://www.perforce.com/downloads/register/helix?return_url=http://www.perforce.com/downloads/perforce/r15.2/bin.macosx107x86_64/P4V.dmg&amp;platform_family=MACINTOSH&amp;platform=OS%20X%2010.8%2B%20%28x64%29&amp;version=2015.2/1312139&amp;product_selected=Perforce&amp;edition_selected=helix&amp;product_name=Helix%20P4V:%20:%20Visual%20Client&amp;prod_num=9">Mac</a> and <a href="https://www.perforce.com/downloads/register/helix?return_url=http://www.perforce.com/downloads/perforce/r15.2/bin.ntx64/p4vinst64.exe&amp;platform_family=WINDOWS&amp;platform=Windows%20%28x64%29&amp;version=2015.2/1312139&amp;product_selected=Perforce&amp;edition_selected=helix&amp;product_name=Helix%20P4V:%20:%20Visual%20Client&amp;prod_num=9">Windows</a>. Here’s how to hook up the P4Merge app as the <strong>global</strong> git merge tool when issuing the <code class="language-plaintext highlighter-rouge">git mergetool</code> command:</p>
 
 <h4 id="p4merge-windows">P4Merge (Windows):</h4>
 
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config --global merge.tool p4merge
-git config --global mergetool.p4merge.path <span class="s1">'C:/Program Files/Perforce/p4merge.exe'</span>
-</code></pre></div></div>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">git</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="nt">--global</span><span class="w"> </span><span class="nx">merge.tool</span><span class="w"> </span><span class="nx">p4merge</span><span class="w">
+</span><span class="n">git</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="nt">--global</span><span class="w"> </span><span class="nx">mergetool.p4merge.path</span><span class="w"> </span><span class="s1">'C:/Program Files/Perforce/p4merge.exe'</span><span class="w">
+</span></code></pre></div></div>
 
 <h4 id="p4merge-mac">P4Merge (Mac):</h4>
 
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Setup p4merge as a visual mergetool</span>
-git config --global merge.tool p4mergetool
-git config --global mergetool.p4mergetool.cmd <span class="s2">"/Applications/p4merge.app/Contents/MacOS/p4merge \"</span><span class="nv">$BASE</span>\<span class="s2">" \"</span><span class="nv">$LOCAL</span>\<span class="s2">" \"</span><span class="nv">$REMOTE</span>\<span class="s2">" \"</span><span class="nv">$MERGED</span>\<span class="s2">"
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Setup p4merge as a visual mergetool</span><span class="w">
+</span><span class="n">git</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="nt">--global</span><span class="w"> </span><span class="nx">merge.tool</span><span class="w"> </span><span class="nx">p4mergetool</span><span class="w">
+</span><span class="n">git</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="nt">--global</span><span class="w"> </span><span class="nx">mergetool.p4mergetool.cmd</span><span class="w"> </span><span class="s2">"/Applications/p4merge.app/Contents/MacOS/p4merge \"</span><span class="nv">$BASE</span><span class="nx">\</span><span class="s2">" \"</span><span class="nv">$LOCAL</span><span class="nx">\</span><span class="s2">" \"</span><span class="nv">$REMOTE</span><span class="nx">\</span><span class="s2">" \"</span><span class="nv">$MERGED</span><span class="nx">\</span><span class="s2">"
 
 git config --global mergetool.p4mergetool.keepTemporaries false
 git config --global mergetool.p4mergetool.trustExitCode false
@@ -105,11 +105,11 @@ git config --global mergetool.p4mergetool.prompt false
 
 # Setup p4merge as a visual diff tool
 git config --global diff.tool p4mergetool
-git config --global difftool.p4mergetool.cmd "</span>/Applications/p4merge.app/Contents/Resources/launchp4merge \<span class="s2">"</span><span class="nv">$LOCAL</span><span class="s2">\"</span> \<span class="s2">"</span><span class="nv">$REMOTE</span><span class="s2">\"</span>
+git config --global difftool.p4mergetool.cmd "</span><span class="nx">/Applications/p4merge.app/Contents/Resources/launchp4merge</span><span class="w"> </span><span class="nx">\</span><span class="s2">"</span><span class="nv">$LOCAL</span><span class="s2">\"</span><span class="w"> </span><span class="nx">\</span><span class="s2">"</span><span class="nv">$REMOTE</span><span class="s2">\"</span><span class="w">
 
-<span class="c1"># show updated git config</span>
-git config --global --list
-</code></pre></div></div>
+</span><span class="c"># show updated git config</span><span class="w">
+</span><span class="n">git</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="nt">--global</span><span class="w"> </span><span class="nt">--list</span><span class="w">
+</span></code></pre></div></div>
 
 <h2 id="setup-a-gitignore-file-for-unity-projects">Setup a .gitignore file for Unity projects</h2>
 
@@ -186,15 +186,17 @@ git config --global --list
 </div></div>
   </div>
 
-  <!-- scripts --><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-140437-35"></script>
+  <!-- scripts --><!-- Google tag (gtag.js) GA4 --><script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-GPSLBL05X1"
+></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-
   function gtag() {
     dataLayer.push(arguments);
   }
-  gtag('js', new Date());
-  gtag('config', 'UA-140437-35');
+  gtag("js", new Date());
+  gtag("config", "G-GPSLBL05X1");
 </script></body>
 
 </html>

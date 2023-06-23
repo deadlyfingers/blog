@@ -71,7 +71,7 @@
   <li>
     <p>Finally, remember to update any <strong>css</strong> imports in the ‘App.js’ file from ‘.css’ to ‘.scss’</p>
 
-    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s2">"./App.scss"</span><span class="p">;</span>
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="dl">"</span><span class="s2">./App.scss</span><span class="dl">"</span><span class="p">;</span>
 </code></pre></div>    </div>
   </li>
 </ol>
@@ -118,15 +118,15 @@ You can also utilize the <a href="https://foundation.zurb.com/sites/docs/flexbox
 
 <p>The following code snippet shows how to provide an initial state for our <a href="https://github.com/deadlyfingers/react-adaptive-components/blob/master/src/components/AdaptiveSelect.jsx">adaptive select</a> and <a href="https://github.com/deadlyfingers/react-adaptive-components/blob/master/src/components/AdaptiveDatePicker.jsx">date picker component</a> and the handler functions for when the user selection changes.</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="s2">"react"</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">AdaptiveSelect</span> <span class="k">from</span> <span class="s2">"./components/AdaptiveSelect"</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">AdaptiveDatePicker</span> <span class="k">from</span> <span class="s2">"./components/AdaptiveDatePicker"</span><span class="p">;</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">AdaptiveSelect</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./components/AdaptiveSelect</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">AdaptiveDatePicker</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./components/AdaptiveDatePicker</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">class</span> <span class="nx">App</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span>
   <span class="kd">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">super</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="na">selectedValue</span><span class="p">:</span> <span class="s2">"en"</span><span class="p">,</span>
+      <span class="na">selectedValue</span><span class="p">:</span> <span class="dl">"</span><span class="s2">en</span><span class="dl">"</span><span class="p">,</span>
       <span class="na">selectedDate</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">()</span>
     <span class="p">};</span>
   <span class="p">}</span>
@@ -152,13 +152,13 @@ You can also utilize the <a href="https://foundation.zurb.com/sites/docs/flexbox
     <span class="k">return</span> <span class="p">(</span>
       <span class="p">&lt;</span><span class="nc">React</span><span class="p">.</span><span class="nc">Fragment</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nc">AdaptiveSelect</span>
-          <span class="na">options=</span><span class="si">{</span><span class="p">{</span> <span class="na">en</span><span class="p">:</span> <span class="s2">"English"</span><span class="p">,</span> <span class="na">de</span><span class="p">:</span> <span class="s2">"German"</span><span class="p">,</span> <span class="na">fr</span><span class="p">:</span> <span class="s2">"French"</span> <span class="p">}</span><span class="si">}</span>
-          <span class="na">value=</span><span class="si">{</span><span class="nx">selectedValue</span><span class="si">}</span>
-          <span class="na">onChange=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">handleSelectChange</span><span class="si">}</span>
+          <span class="na">options</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">en</span><span class="p">:</span> <span class="dl">"</span><span class="s2">English</span><span class="dl">"</span><span class="p">,</span> <span class="na">de</span><span class="p">:</span> <span class="dl">"</span><span class="s2">German</span><span class="dl">"</span><span class="p">,</span> <span class="na">fr</span><span class="p">:</span> <span class="dl">"</span><span class="s2">French</span><span class="dl">"</span> <span class="p">}</span><span class="si">}</span>
+          <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">selectedValue</span><span class="si">}</span>
+          <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">handleSelectChange</span><span class="si">}</span>
         <span class="p">/&gt;</span>
         <span class="p">&lt;</span><span class="nc">AdaptiveDatePicker</span>
-          <span class="na">onChange=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">handleDateChange</span><span class="si">}</span>
-          <span class="na">value=</span><span class="si">{</span><span class="nx">selectedDate</span><span class="si">}</span>
+          <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">handleDateChange</span><span class="si">}</span>
+          <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">selectedDate</span><span class="si">}</span>
         <span class="p">/&gt;</span>
       <span class="p">&lt;/</span><span class="nc">React</span><span class="p">.</span><span class="nc">Fragment</span><span class="p">&gt;</span>
     <span class="p">);</span>
@@ -210,15 +210,17 @@ You can also utilize the <a href="https://foundation.zurb.com/sites/docs/flexbox
 </div></div>
   </div>
 
-  <!-- scripts --><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-140437-35"></script>
+  <!-- scripts --><!-- Google tag (gtag.js) GA4 --><script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-GPSLBL05X1"
+></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-
   function gtag() {
     dataLayer.push(arguments);
   }
-  gtag('js', new Date());
-  gtag('config', 'UA-140437-35');
+  gtag("js", new Date());
+  gtag("config", "G-GPSLBL05X1");
 </script></body>
 
 </html>

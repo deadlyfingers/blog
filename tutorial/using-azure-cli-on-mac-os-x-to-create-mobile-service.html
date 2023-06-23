@@ -40,7 +40,7 @@
 
 <p>You can either download the <a href="http://go.microsoft.com/fwlink/?LinkId=252249">Azure Command Line tools installer for Mac</a> or install the Azure command line tools using <strong>nodejs</strong>. I have previously written a post covering <a href="http://www.deadlyfingers.net/webdev/ember-cli-todo-example-app-with-azure-mobile-services/#nodejs-mac">installing nodejs using NVM</a>.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install <span class="nt">-g</span> azure-cli@0.8.17
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span> <span class="nt">-g</span> azure-cli@0.8.17
 </code></pre></div></div>
 
 <p>Test Azure command works with help:</p>
@@ -106,7 +106,7 @@ The Mobile Service should only take a couple of minutes to provision.</p>
 
 <h2 id="crud-examples-with-mobile-service-using-curl">CRUD examples with Mobile Service using <strong>curl</strong></h2>
 
-<p>You can quickly execute Create, Read, Update and Delete operations with Mobile Services using <code class="highlighter-rouge">curl</code> commands. Here’s a quick overview of Mobile Service CRUD operations and methods:</p>
+<p>You can quickly execute Create, Read, Update and Delete operations with Mobile Services using <code class="language-plaintext highlighter-rouge">curl</code> commands. Here’s a quick overview of Mobile Service CRUD operations and methods:</p>
 
 <table>
   <thead>
@@ -140,7 +140,7 @@ The Mobile Service should only take a couple of minutes to provision.</p>
   </tbody>
 </table>
 
-<p>You will need to replace the <code class="highlighter-rouge">X-ZUMO-APPLICATION</code> header value below with your own Mobile Service <em>applicationKey</em>.</p>
+<p>You will need to replace the <code class="language-plaintext highlighter-rouge">X-ZUMO-APPLICATION</code> header value below with your own Mobile Service <em>applicationKey</em>.</p>
 
 <ol>
   <li>Create / Insert
@@ -151,7 +151,7 @@ The Mobile Service should only take a couple of minutes to provision.</p>
  <span class="nt">--location</span> <span class="s1">'https://terminaltest.azure-mobile.net/tables/Items'</span>
 </code></pre></div>    </div>
 
-    <p>Change the data <code class="highlighter-rouge">text</code> to submit a couple of items… Note you will get a JSON response with the <code class="highlighter-rouge">id</code> of the inserted item. This item id value is to be used in the Update and Delete examples below.</p>
+    <p>Change the data <code class="language-plaintext highlighter-rouge">text</code> to submit a couple of items… Note you will get a JSON response with the <code class="language-plaintext highlighter-rouge">id</code> of the inserted item. This item id value is to be used in the Update and Delete examples below.</p>
   </li>
   <li>Read / Query
     <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> curl <span class="nt">--request</span> GET <span class="se">\</span>
@@ -173,7 +173,7 @@ The Mobile Service should only take a couple of minutes to provision.</p>
  </figure>
   </li>
   <li>Delete
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> curl --request DELETE \
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> curl --request DELETE \
  --header 'X-ZUMO-APPLICATION: RLKPKSRTzFUFgXqVLRPkUTOKorqRQV65' \
  --header 'Content-Type: application/json; charset=UTF-8' \
  --location 'https://terminaltest.azure-mobile.net/tables/Items/C9CCC7F7-4F16-4F63-8ACD-BD2DCC32F4CC'
@@ -185,7 +185,7 @@ The Mobile Service should only take a couple of minutes to provision.</p>
 
 <h2 id="how-to-query-and-filter-mobile-service-table-data-with-curl">How to query and filter Mobile Service table data with curl</h2>
 
-<p>Get items marked as <strong><code class="highlighter-rouge">complete</code></strong></p>
+<p>Get items marked as <strong><code class="language-plaintext highlighter-rouge">complete</code></strong></p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">--request</span> GET <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'X-ZUMO-APPLICATION: RLKPKSRTzFUFgXqVLRPkUTOKorqRQV65'</span> <span class="se">\</span>
@@ -209,7 +209,7 @@ The Mobile Service should only take a couple of minutes to provision.</p>
 <span class="nt">--location</span> <span class="s2">"https://terminaltest.azure-mobile.net/tables/Items?</span><span class="se">\$</span><span class="s2">orderby=text%20desc&amp;</span><span class="se">\$</span><span class="s2">skip=1&amp;</span><span class="se">\$</span><span class="s2">top=1"</span>
 </code></pre></div></div>
 
-<p>NB: Just be aware if you use double quotes for <code class="highlighter-rouge">--location</code> then you must escape the dollar signs that prefix the params with a backslash (eg. <strong><code class="highlighter-rouge">\$</code></strong>). Single quotes don’t require dollar escaping but you may have trouble encapsulating filters with quoted strings hence I have opted for double quotes in these query examples.</p>
+<p>NB: Just be aware if you use double quotes for <code class="language-plaintext highlighter-rouge">--location</code> then you must escape the dollar signs that prefix the params with a backslash (eg. <strong><code class="language-plaintext highlighter-rouge">\$</code></strong>). Single quotes don’t require dollar escaping but you may have trouble encapsulating filters with quoted strings hence I have opted for double quotes in these query examples.</p>
 
 </div>
 
@@ -255,15 +255,17 @@ The Mobile Service should only take a couple of minutes to provision.</p>
 </div></div>
   </div>
 
-  <!-- scripts --><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-140437-35"></script>
+  <!-- scripts --><!-- Google tag (gtag.js) GA4 --><script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-GPSLBL05X1"
+></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-
   function gtag() {
     dataLayer.push(arguments);
   }
-  gtag('js', new Date());
-  gtag('config', 'UA-140437-35');
+  gtag("js", new Date());
+  gtag("config", "G-GPSLBL05X1");
 </script></body>
 
 </html>

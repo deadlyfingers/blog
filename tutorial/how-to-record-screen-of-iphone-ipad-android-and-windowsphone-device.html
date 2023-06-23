@@ -85,16 +85,16 @@ The WindowsPhone should have the latest 8.1 update installed.</p>
 
 <ol>
   <li>Check Android device is connected to PC/Mac using USB connection. NB: You will have to enable ‘Developer’ mode on your device by tapping <em>Build number</em> seven times (found under <em>Settings &gt; About device</em>). Then enable <em>USB debugging</em> (found under new <em>Developer options</em> settings).<br />
-<code class="highlighter-rouge">adb devices</code></li>
+<code class="language-plaintext highlighter-rouge">adb devices</code></li>
   <li>Record screen using adb shell. NB: Requires Android 4.4 <em>KitKat</em> (API level 19) or above.<br />
-<code class="highlighter-rouge">adb shell
+<code class="language-plaintext highlighter-rouge">adb shell
 screenrecord /sdcard/recording.mp4</code></li>
   <li>Stop recording (Control+C) and exit shell.<br />
-<code class="highlighter-rouge">exit</code></li>
+<code class="language-plaintext highlighter-rouge">exit</code></li>
   <li>Copy screen recording from device’s /sdcard onto PC/Mac<br />
-<code class="highlighter-rouge">adb pull /sdcard/recording.mp4</code></li>
+<code class="language-plaintext highlighter-rouge">adb pull /sdcard/recording.mp4</code></li>
   <li>Move / rename recording<br />
-<code class="highlighter-rouge">mv recording.mp4 ~/Desktop/</code></li>
+<code class="language-plaintext highlighter-rouge">mv recording.mp4 ~/Desktop/</code></li>
 </ol>
 
 <p><img src="/assets/images/GalaxyNote3.jpg" alt="Recording screen of Galaxy Note 3" /></p>
@@ -145,15 +145,17 @@ screenrecord /sdcard/recording.mp4</code></li>
 </div></div>
   </div>
 
-  <!-- scripts --><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-140437-35"></script>
+  <!-- scripts --><!-- Google tag (gtag.js) GA4 --><script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-GPSLBL05X1"
+></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-
   function gtag() {
     dataLayer.push(arguments);
   }
-  gtag('js', new Date());
-  gtag('config', 'UA-140437-35');
+  gtag("js", new Date());
+  gtag("config", "G-GPSLBL05X1");
 </script></body>
 
 </html>

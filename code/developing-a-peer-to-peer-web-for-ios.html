@@ -54,7 +54,7 @@ The spec will use the TCP internet standard to transport data across peers there
 
 <p>Install the Cordova package:</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install <span class="nt">-g</span> cordova
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span> <span class="nt">-g</span> cordova
 </code></pre></div></div>
 
 <p>Build Thali “Story -1” demo for iOS:</p>
@@ -62,14 +62,14 @@ The spec will use the TCP internet standard to transport data across peers there
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
 <span class="nv">HOME_DIR</span><span class="o">=</span><span class="s2">"Code"</span>
 <span class="nv">PROJECT_DIR</span><span class="o">=</span><span class="s2">"ThaliTest-1-ios"</span>
-mkdir <span class="nt">-p</span> ~/<span class="nv">$HOME_DIR</span>
+<span class="nb">mkdir</span> <span class="nt">-p</span> ~/<span class="nv">$HOME_DIR</span>
 <span class="nb">cd</span> ~/<span class="nv">$HOME_DIR</span>
 cordova create ~/<span class="nv">$HOME_DIR</span>/<span class="nv">$PROJECT_DIR</span> com.test.thalitest ThaliTest
 <span class="nb">cd</span> <span class="nv">$PROJECT_DIR</span>
 cordova platform add ios
 cordova plugin add https://github.com/thaliproject/Thali_CordovaPlugin.git#story-1-dadougla
 <span class="c"># copy sample 'www' dir</span>
-cp <span class="nt">-a</span> <span class="nt">-R</span> <span class="nt">-v</span> plugins/org.thaliproject.p2p/sample/ios/www ./
+<span class="nb">cp</span> <span class="nt">-a</span> <span class="nt">-R</span> <span class="nt">-v</span> plugins/org.thaliproject.p2p/sample/ios/www ./
 <span class="c"># build iOS project</span>
 cordova build
 <span class="c"># open iOS project in Xcode</span>
@@ -99,7 +99,7 @@ open platforms/ios/ThaliTest.xcodeproj
     <h3 id="native-plugins">Native Plugins</h3>
 
     <ul>
-      <li>All native methods called from JXCore are registered in “THEAppContext.m” <code class="highlighter-rouge">defineJavaScriptExtensions</code> method</li>
+      <li>All native methods called from JXCore are registered in “THEAppContext.m” <code class="language-plaintext highlighter-rouge">defineJavaScriptExtensions</code> method</li>
     </ul>
   </li>
 </ol>
@@ -155,15 +155,17 @@ open platforms/ios/ThaliTest.xcodeproj
 </div></div>
   </div>
 
-  <!-- scripts --><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-140437-35"></script>
+  <!-- scripts --><!-- Google tag (gtag.js) GA4 --><script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-GPSLBL05X1"
+></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-
   function gtag() {
     dataLayer.push(arguments);
   }
-  gtag('js', new Date());
-  gtag('config', 'UA-140437-35');
+  gtag("js", new Date());
+  gtag("config", "G-GPSLBL05X1");
 </script></body>
 
 </html>

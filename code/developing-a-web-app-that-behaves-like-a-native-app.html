@@ -60,7 +60,7 @@
 
 <p>Many web apps take advantage of node and there is a great module for designers called <a href="http://www.browsersync.io">BrowserSync</a>.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install <span class="nt">-g</span> browser-sync
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span> <span class="nt">-g</span> browser-sync
 </code></pre></div></div>
 
 <p>BrowserSync allows you live preview all your design or code changes across multiple screens. That means you can test your web app in real-time on any browser on Mac or Windows as well as hook up the web app on iPhone, iPad or Android. Also when you interact on one screen for example following a link or scrolling the page this automatically updates everywhere else. This is a must have for any responsive design or adaptive design work!<br />
@@ -74,23 +74,23 @@
 
 <p>The trickiest thing is actually getting all the Polymer elements you need to use as these all come separately which of course makes sense later for production. But do yourself a favour and just install all the paper, iron and neon elements for no hassle development.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bower install <span class="nt">--save</span> PolymerElements/paper-elements 
-bower install <span class="nt">--save</span> PolymerElements/iron-elements 
-bower install <span class="nt">--save</span> PolymerElements/neon-animation
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bower <span class="nb">install</span> <span class="nt">--save</span> PolymerElements/paper-elements 
+bower <span class="nb">install</span> <span class="nt">--save</span> PolymerElements/iron-elements 
+bower <span class="nb">install</span> <span class="nt">--save</span> PolymerElements/neon-animation
 </code></pre></div></div>
 
 <h3 id="should-i-use-polymers-on-click-or-on-tap-event">Should I use Polymer’s ‘on-click’ or ‘on-tap’ event?</h3>
 
-<p>There is a <a href="http://www.telerik.com/blogs/what-exactly-is.....-the-300ms-click-delay">300ms click delay issue</a> that affects mobile web apps. The good news is that there is a simple fix by using the <a href="https://developer.mozilla.org/en/docs/Mozilla/Mobile/Viewport_meta_tag">viewport meta tag</a> with <code class="highlighter-rouge">width=device-width</code> property. But the bad news is that this trick only works in Chrome 32+ on Android.</p>
+<p>There is a <a href="http://www.telerik.com/blogs/what-exactly-is.....-the-300ms-click-delay">300ms click delay issue</a> that affects mobile web apps. The good news is that there is a simple fix by using the <a href="https://developer.mozilla.org/en/docs/Mozilla/Mobile/Viewport_meta_tag">viewport meta tag</a> with <code class="language-plaintext highlighter-rouge">width=device-width</code> property. But the bad news is that this trick only works in Chrome 32+ on Android.</p>
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1"</span><span class="nt">&gt;</span>
 </code></pre></div></div>
 
-<p>Thankfully Polymer tries to handle this issue for you if you use the <code class="highlighter-rouge">on-tap</code> event however it doesn’t appear to currently trigger a click on Mac Safari (using an iframe web app). So if desktop Safari compatibility is more important then you may have to stick with the standard <code class="highlighter-rouge">on-click</code> event until this is fixed. Or just incase you already use a <a href="https://github.com/ftlabs/fastclick">‘fast click’</a> javascript polyfill it may run into issues due to <a href="http://developer.telerik.com/featured/300-ms-click-delay-ios-8/">click delay complications with the iOS 8 web view</a>.</p>
+<p>Thankfully Polymer tries to handle this issue for you if you use the <code class="language-plaintext highlighter-rouge">on-tap</code> event however it doesn’t appear to currently trigger a click on Mac Safari (using an iframe web app). So if desktop Safari compatibility is more important then you may have to stick with the standard <code class="language-plaintext highlighter-rouge">on-click</code> event until this is fixed. Or just incase you already use a <a href="https://github.com/ftlabs/fastclick">‘fast click’</a> javascript polyfill it may run into issues due to <a href="http://developer.telerik.com/featured/300-ms-click-delay-ios-8/">click delay complications with the iOS 8 web view</a>.</p>
 
 <h3 id="meet-iron-list---the-uitableview-for-web-app">Meet ‘iron-list’ - the UITableView for web app</h3>
 
-<p>Polymer’s <code class="highlighter-rouge">iron-list</code> element is essential for scrolling large amounts of data on mobile devices. It does this by using a virtual list and recycling (20) cells to handle smooth scrolling of 1000s of items. One note of caution is that this runs fine in Safari browser but there is currently a <a href="https://github.com/PolymerElements/iron-list/issues/61">scrolling issue in iOS 8 WebView</a> beyond a certain number of items. If only UIWebView would behave the same as Safari then development would run so much smoother!</p>
+<p>Polymer’s <code class="language-plaintext highlighter-rouge">iron-list</code> element is essential for scrolling large amounts of data on mobile devices. It does this by using a virtual list and recycling (20) cells to handle smooth scrolling of 1000s of items. One note of caution is that this runs fine in Safari browser but there is currently a <a href="https://github.com/PolymerElements/iron-list/issues/61">scrolling issue in iOS 8 WebView</a> beyond a certain number of items. If only UIWebView would behave the same as Safari then development would run so much smoother!</p>
 
 <h2 id="make-it-feel-like-a-native-app---not-a-web-site">Make it feel like a native app - not a web site!</h2>
 
@@ -98,17 +98,17 @@ bower install <span class="nt">--save</span> PolymerElements/neon-animation
 
 <h3 id="disable-the-scrolling-bounce-effect">Disable the scrolling bounce effect</h3>
 
-<p>While adding the <a href="https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html">magical web app meta tags</a> will give you full screen control in the browser it doesn’t get rid of the web page scrolling spring effect common with iOS and Mac. Now while the spring effect provides a wonderful UX in a web browsing context - native app’s don’t spring! To disable this unwanted behaviour the first thing to do is to enable the <code class="highlighter-rouge">DisallowOverscroll</code> preference in <a href="https://cordova.apache.org/docs/en/3.0.0/guide_platforms_ios_config.md.html">Cordova’s config.xml</a>.</p>
+<p>While adding the <a href="https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html">magical web app meta tags</a> will give you full screen control in the browser it doesn’t get rid of the web page scrolling spring effect common with iOS and Mac. Now while the spring effect provides a wonderful UX in a web browsing context - native app’s don’t spring! To disable this unwanted behaviour the first thing to do is to enable the <code class="language-plaintext highlighter-rouge">DisallowOverscroll</code> preference in <a href="https://cordova.apache.org/docs/en/3.0.0/guide_platforms_ios_config.md.html">Cordova’s config.xml</a>.</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;preference</span> <span class="na">name=</span><span class="s">"DisallowOverscroll"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">&gt;&lt;/preference&gt;</span>
 </code></pre></div></div>
 
 <p>If you are not using Cordova then you can disable the iOS webview scroll:</p>
 
-<pre><code class="language-objectivec">[[webView scrollView] setScrollEnabled:NO];
-</code></pre>
+<div class="language-objectivec highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[[</span><span class="n">webView</span> <span class="nf">scrollView</span><span class="p">]</span> <span class="nf">setScrollEnabled</span><span class="p">:</span><span class="nb">NO</span><span class="p">];</span>
+</code></pre></div></div>
 
-<p>It’s always a good idea to do a CSS reset on the <code class="highlighter-rouge">html,body</code> and then add the following to disable the bounce effect in the browser:</p>
+<p>It’s always a good idea to do a CSS reset on the <code class="language-plaintext highlighter-rouge">html,body</code> and then add the following to disable the bounce effect in the browser:</p>
 
 <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">html</span><span class="o">,</span><span class="nt">body</span> <span class="p">{</span>
     <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span> 
@@ -127,7 +127,7 @@ bower install <span class="nt">--save</span> PolymerElements/neon-animation
 
 <h3 id="disable-select-copypaste">Disable select copy/paste</h3>
 
-<p>Another annoying web behaviour inherited is that everything is selectable on a web page. Again a useful behaviour in a web browsing context but not so much with a web app. Besides not feeling right there is a UX issue if a user taps the ‘wrong way’ instead of activating a button click as expected they end up in a text selection mode. The easiest workaround is setting <code class="highlighter-rouge">user-select</code> to <code class="highlighter-rouge">none</code> on the ‘body’. NB: If your web app contains form inputs then you can exclude those inputs using the <code class="highlighter-rouge">:not()</code> CSS selector but I find it easier to switch everything off by default.</p>
+<p>Another annoying web behaviour inherited is that everything is selectable on a web page. Again a useful behaviour in a web browsing context but not so much with a web app. Besides not feeling right there is a UX issue if a user taps the ‘wrong way’ instead of activating a button click as expected they end up in a text selection mode. The easiest workaround is setting <code class="language-plaintext highlighter-rouge">user-select</code> to <code class="language-plaintext highlighter-rouge">none</code> on the ‘body’. NB: If your web app contains form inputs then you can exclude those inputs using the <code class="language-plaintext highlighter-rouge">:not()</code> CSS selector but I find it easier to switch everything off by default.</p>
 
 <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* disable iOS text selection */</span>
 <span class="nt">body</span> <span class="p">{</span>
@@ -154,8 +154,8 @@ bower install <span class="nt">--save</span> PolymerElements/neon-animation
 	<span class="c1">// hack for iOS to prevent scrolling view up when soft keyboard pops up</span>
 	<span class="na">shouldFocusWithoutScrollUp</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
 		<span class="k">if</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">_isiOS</span><span class="p">()</span> <span class="p">)</span> <span class="p">{</span>
-    		<span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">webkitTransform</span> <span class="o">=</span> <span class="s1">'translate3d(0px,-10000px,0)'</span><span class="p">;</span> 
-    		<span class="nx">webkitRequestAnimationFrame</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">webkitTransform</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span> <span class="p">}.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">));</span>
+    		<span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">webkitTransform</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">translate3d(0px,-10000px,0)</span><span class="dl">'</span><span class="p">;</span> 
+    		<span class="nx">webkitRequestAnimationFrame</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">webkitTransform</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span> <span class="p">}.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">));</span>
     	<span class="p">}</span>
 	<span class="p">},</span>
 
@@ -165,7 +165,7 @@ bower install <span class="nt">--save</span> PolymerElements/neon-animation
 <span class="p">});</span>
 </code></pre></div></div>
 
-<p>In Cordova if you want to enable Javascript focus() calls to open the soft-keyboard you can disable the <code class="highlighter-rouge">KeyboardDisplayRequiresUserAction</code> preference. Although bear in mind iOS8 now supports focus() calls but I found the input and keyboard can lose connection sometimes.</p>
+<p>In Cordova if you want to enable Javascript focus() calls to open the soft-keyboard you can disable the <code class="language-plaintext highlighter-rouge">KeyboardDisplayRequiresUserAction</code> preference. Although bear in mind iOS8 now supports focus() calls but I found the input and keyboard can lose connection sometimes.</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;preference</span> <span class="na">name=</span><span class="s">"KeyboardDisplayRequiresUserAction"</span> <span class="na">value=</span><span class="s">"false"</span><span class="nt">&gt;&lt;/preference&gt;</span>
 </code></pre></div></div>
@@ -177,7 +177,7 @@ bower install <span class="nt">--save</span> PolymerElements/neon-animation
 *** WebKit discarded an uncaught exception in the webView:willRemoveScrollingLayer:withContentsLayer:forNode: delegate: -[WebActionDisablingCALayerDelegate setBeingRemoved:]: unrecognized selector sent to instance 0x174009d20
 </span></code></pre></div></div>
 
-<p>Solution: Add body style for <code class="highlighter-rouge">-webkit-transform</code>. This WebView bug occurred when animating an element sliding up from the bottom of the page. It caused the animation to jump and skip frames and seemed to trigger memory warnings.</p>
+<p>Solution: Add body style for <code class="language-plaintext highlighter-rouge">-webkit-transform</code>. This WebView bug occurred when animating an element sliding up from the bottom of the page. It caused the animation to jump and skip frames and seemed to trigger memory warnings.</p>
 
 <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">body</span> <span class="p">{</span>
 	<span class="nl">-webkit-transform</span><span class="p">:</span> <span class="n">translateZ</span><span class="p">(</span><span class="m">0px</span><span class="p">);</span> <span class="c">/* hack for iOS8 iframe scroll issue */</span>
@@ -196,17 +196,17 @@ bower install <span class="nt">--save</span> PolymerElements/neon-animation
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Message from debugger: failed to send the k packet
 </span></code></pre></div></div>
 
-<p>Solution: Keep app awake! In the app delegate enable <code class="highlighter-rouge">setIdleTimerDisabled</code>:</p>
+<p>Solution: Keep app awake! In the app delegate enable <code class="language-plaintext highlighter-rouge">setIdleTimerDisabled</code>:</p>
 
-<pre><code class="language-objectivec">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-    [application setIdleTimerDisabled:YES]; // don't sleep
-    return YES;
-}
-</code></pre>
+<div class="language-objectivec highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">-</span> <span class="p">(</span><span class="n">BOOL</span><span class="p">)</span><span class="nf">application</span><span class="p">:(</span><span class="n">UIApplication</span> <span class="o">*</span><span class="p">)</span><span class="nv">application</span> <span class="nf">didFinishLaunchingWithOptions</span><span class="p">:(</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="nv">launchOptions</span> <span class="p">{</span>
+    <span class="c1">// Override point for customization after application launch.</span>
+    <span class="p">[</span><span class="n">application</span> <span class="nf">setIdleTimerDisabled</span><span class="p">:</span><span class="nb">YES</span><span class="p">];</span> <span class="c1">// don't sleep</span>
+    <span class="k">return</span> <span class="nb">YES</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <blockquote>
-  <p><strong>iOS Tip:</strong> When testing web apps on iOS it can take so long to build and debug on device that the screen locks and the deploy fails. Use the <code class="highlighter-rouge">setIdleTimerDisabled</code> to keep the app alive for debugging!</p>
+  <p><strong>iOS Tip:</strong> When testing web apps on iOS it can take so long to build and debug on device that the screen locks and the deploy fails. Use the <code class="language-plaintext highlighter-rouge">setIdleTimerDisabled</code> to keep the app alive for debugging!</p>
 </blockquote>
 
 <hr />
@@ -254,15 +254,17 @@ bower install <span class="nt">--save</span> PolymerElements/neon-animation
 </div></div>
   </div>
 
-  <!-- scripts --><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-140437-35"></script>
+  <!-- scripts --><!-- Google tag (gtag.js) GA4 --><script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-GPSLBL05X1"
+></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-
   function gtag() {
     dataLayer.push(arguments);
   }
-  gtag('js', new Date());
-  gtag('config', 'UA-140437-35');
+  gtag("js", new Date());
+  gtag("config", "G-GPSLBL05X1");
 </script></body>
 
 </html>

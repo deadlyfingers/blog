@@ -32,13 +32,13 @@
 <a href="https://www.deadlyfingers.net/code/faster-cordova-web-app-deployment-with-hotwire-script" class="banner fullbleed" style="background-color:#0d6fbe">
   <i class="fas fa-code" style="color:#ffffff"></i>
 </a><time datetime="2015-10-16T14:00:03+01:00" class="date">16 Oct 2015</time><h1 class="post-title">Faster Cordova web app deployment with hotwire script</h1>
-  <div class="post-line"></div><p>Building for iOS can be very time consuming. Every time you make changes to a Cordova web app you need to do a <code class="highlighter-rouge">cordova build</code> to update the app project. Then you have to go into Xcode to debug on device. But if you don’t need to make changes to native code and you only need to update web elements like HTML, Javascript, image and media files then you can save time by just updating those bits.</p>
+  <div class="post-line"></div><p>Building for iOS can be very time consuming. Every time you make changes to a Cordova web app you need to do a <code class="language-plaintext highlighter-rouge">cordova build</code> to update the app project. Then you have to go into Xcode to debug on device. But if you don’t need to make changes to native code and you only need to update web elements like HTML, Javascript, image and media files then you can save time by just updating those bits.</p>
 
 <p>I’ve made a <a href="https://github.com/deadlyfingers/hotwire-ipa">Hotwire IPA</a> bash script to replace the ‘www’ web app folder with the updated directory. All you need to do is create an ‘*.ipa’ archive and the hotwire script can quickly update it with all web app changes and deploy to device (without need to jailbreak).</p>
 
 <h2 id="example-usage">Example usage:</h2>
 
-<p><code class="highlighter-rouge">sh hotwire-ipa.sh -f ~/Desktop/app.ipa -d "www" -p ~/Cordova/app/www -b ~/Cordova/app/platforms/ios/www -i</code></p>
+<p><code class="language-plaintext highlighter-rouge">sh hotwire-ipa.sh -f ~/Desktop/app.ipa -d "www" -p ~/Cordova/app/www -b ~/Cordova/app/platforms/ios/www -i</code></p>
 
 <p>where:<br />
 <strong>-f</strong> <em>is the path to *.ipa archive</em><br />
@@ -50,7 +50,7 @@
 
 <h2 id="time-results-for-ios-cordova-app">Time results for iOS Cordova app:</h2>
 
-<p>3m 09s - Each time you update web files you need to execute <code class="highlighter-rouge">cordova build ios</code> to stage the updates.<br />
+<p>3m 09s - Each time you update web files you need to execute <code class="language-plaintext highlighter-rouge">cordova build ios</code> to stage the updates.<br />
 0m 38s - Open in Xcode<br />
 8m 10s - Debug from Xcode</p>
 
@@ -59,11 +59,11 @@
 <p>To run the script we need to first create an Archive and export it as an *.ipa archive in Xcode. Once this is done then future updates can be pushed using the script.<br />
 2m 53s - Create Archive<br />
 2m 13s - Export as .ipa<br />
-4m 39s - Deploy to device using hotwire-ipa script with <code class="highlighter-rouge">-i</code> switch to install as *.ipa instead of *.app.</p>
+4m 39s - Deploy to device using hotwire-ipa script with <code class="language-plaintext highlighter-rouge">-i</code> switch to install as *.ipa instead of *.app.</p>
 
-<h4 id="total-8m-45s-11m-54s-if-you-include-initial-cordova-build-ios">Total: 8m 45s (11m 54s if you include initial <code class="highlighter-rouge">cordova build ios</code>)</h4>
+<h4 id="total-8m-45s-11m-54s-if-you-include-initial-cordova-build-ios">Total: 8m 45s (11m 54s if you include initial <code class="language-plaintext highlighter-rouge">cordova build ios</code>)</h4>
 
-<p>That’s 3 minutes 12 seconds saved the first time if you have already done <code class="highlighter-rouge">cordova build ios</code> just to compile the native code, then <strong>7 minutes 18 seconds saved</strong> to deploy repeated web app updates.</p>
+<p>That’s 3 minutes 12 seconds saved the first time if you have already done <code class="language-plaintext highlighter-rouge">cordova build ios</code> just to compile the native code, then <strong>7 minutes 18 seconds saved</strong> to deploy repeated web app updates.</p>
 
 <p>All times recorded using <a href="https://github.com/thaliproject/postcardapp">Postcard web app</a> (using ‘Story_0’ branch) on MacBook 1.2 GHz Intel Core M</p>
 </div>
@@ -110,15 +110,17 @@
 </div></div>
   </div>
 
-  <!-- scripts --><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-140437-35"></script>
+  <!-- scripts --><!-- Google tag (gtag.js) GA4 --><script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-GPSLBL05X1"
+></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-
   function gtag() {
     dataLayer.push(arguments);
   }
-  gtag('js', new Date());
-  gtag('config', 'UA-140437-35');
+  gtag("js", new Date());
+  gtag("config", "G-GPSLBL05X1");
 </script></body>
 
 </html>

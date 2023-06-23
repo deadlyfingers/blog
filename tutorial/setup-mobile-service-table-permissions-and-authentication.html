@@ -77,12 +77,12 @@
   </li>
   <li>Replace the code block with a new <em>authenticate()</em> method.
     <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">authenticate</span><span class="o">()</span> <span class="o">{</span>
-  <span class="n">mClient</span><span class="o">.</span><span class="na">login</span><span class="o">(</span><span class="n">MobileServiceAuthenticationProvider</span><span class="o">.</span><span class="na">Twitter</span><span class="o">,</span> <span class="k">new</span> <span class="n">UserAuthenticationCallback</span><span class="o">()</span> <span class="o">{</span>
+  <span class="n">mClient</span><span class="o">.</span><span class="na">login</span><span class="o">(</span><span class="nc">MobileServiceAuthenticationProvider</span><span class="o">.</span><span class="na">Twitter</span><span class="o">,</span> <span class="k">new</span> <span class="nc">UserAuthenticationCallback</span><span class="o">()</span> <span class="o">{</span>
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCompleted</span><span class="o">(</span><span class="n">MobileServiceUser</span> <span class="n">mobileServiceUser</span><span class="o">,</span> <span class="n">Exception</span> <span class="n">e</span><span class="o">,</span> <span class="n">ServiceFilterResponse</span> <span class="n">serviceFilterResponse</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCompleted</span><span class="o">(</span><span class="nc">MobileServiceUser</span> <span class="n">mobileServiceUser</span><span class="o">,</span> <span class="nc">Exception</span> <span class="n">e</span><span class="o">,</span> <span class="nc">ServiceFilterResponse</span> <span class="n">serviceFilterResponse</span><span class="o">)</span> <span class="o">{</span>
       <span class="k">if</span> <span class="o">(</span><span class="n">e</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
       <span class="o">{</span>
-        <span class="n">createAndShowDialog</span><span class="o">(</span><span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"You are signed in as %s"</span><span class="o">),</span> <span class="n">mobileServiceUser</span><span class="o">.</span><span class="na">getUserId</span><span class="o">()</span> <span class="o">);</span>
+        <span class="n">createAndShowDialog</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"You are signed in as %s"</span><span class="o">),</span> <span class="n">mobileServiceUser</span><span class="o">.</span><span class="na">getUserId</span><span class="o">()</span> <span class="o">);</span>
       <span class="o">}</span>
       <span class="k">else</span>
       <span class="o">{</span>
@@ -172,15 +172,17 @@ The list should only show ToDo items that belong to that user now.
 </div></div>
   </div>
 
-  <!-- scripts --><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-140437-35"></script>
+  <!-- scripts --><!-- Google tag (gtag.js) GA4 --><script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-GPSLBL05X1"
+></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-
   function gtag() {
     dataLayer.push(arguments);
   }
-  gtag('js', new Date());
-  gtag('config', 'UA-140437-35');
+  gtag("js", new Date());
+  gtag("config", "G-GPSLBL05X1");
 </script></body>
 
 </html>

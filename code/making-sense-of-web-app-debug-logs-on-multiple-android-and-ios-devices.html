@@ -38,11 +38,11 @@
 
 <p>Designing and developing in localhost is familiar territory to web developers and so it makes sense to try and get as much work done there as possible. But when you need to use the physical hardware features of a mobile platform the only way to see if things really work is to go native.</p>
 
-<p>For Cordova app development on Android there are a few ways to debug web apps but usually it’s a case of <code class="highlighter-rouge">cordova build android</code> then <code class="highlighter-rouge">cordova run android --device --debug</code>. Then if you have setup Android SDK’s PATH environment var you can run <code class="highlighter-rouge">monitor</code> in command line to open up the Android Device Monitor app to see all the logs.</p>
+<p>For Cordova app development on Android there are a few ways to debug web apps but usually it’s a case of <code class="language-plaintext highlighter-rouge">cordova build android</code> then <code class="language-plaintext highlighter-rouge">cordova run android --device --debug</code>. Then if you have setup Android SDK’s PATH environment var you can run <code class="language-plaintext highlighter-rouge">monitor</code> in command line to open up the Android Device Monitor app to see all the logs.</p>
 
 <p><img src="/assets/images/AndroidDeviceMonitor.jpg" alt="AndroidDeviceMonitor" /></p>
 
-<p>For Cordova app development on iOS it’s usually <code class="highlighter-rouge">cordova build ios</code> in Terminal and then you just open the project in Xcode to debug the app.</p>
+<p>For Cordova app development on iOS it’s usually <code class="language-plaintext highlighter-rouge">cordova build ios</code> in Terminal and then you just open the project in Xcode to debug the app.</p>
 
 <p><img src="/assets/images/XcodeLogs.jpg" alt="XcodeLogs" /></p>
 
@@ -63,7 +63,7 @@
 cordova run android <span class="nt">--debug</span> <span class="nt">--target</span><span class="o">=</span>YT91138019
 </code></pre></div></div>
 
-<p>Once Cordova has installed the app on device you can use <strong>logcat</strong> to see the logs in Terminal. However with multiple devices you want to use <code class="highlighter-rouge">adb -s</code> to target a device and then use <code class="highlighter-rouge">logcat -s</code> to filter out all the noise! With the Postcard app we are using <a href="http://jxcore.io/">jxcore</a> to run Node.js on mobile so I used ‘jxcore-log:*’ as my filter.</p>
+<p>Once Cordova has installed the app on device you can use <strong>logcat</strong> to see the logs in Terminal. However with multiple devices you want to use <code class="language-plaintext highlighter-rouge">adb -s</code> to target a device and then use <code class="language-plaintext highlighter-rouge">logcat -s</code> to filter out all the noise! With the Postcard app we are using <a href="http://jxcore.io/">jxcore</a> to run Node.js on mobile so I used ‘jxcore-log:*’ as my filter.</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb <span class="nt">-s</span> YT91138019 logcat <span class="nt">-s</span> jxcore-log:<span class="se">\*</span>
 </code></pre></div></div>
@@ -137,15 +137,17 @@ cordova run android <span class="nt">--debug</span> <span class="nt">--target</s
 </div></div>
   </div>
 
-  <!-- scripts --><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-140437-35"></script>
+  <!-- scripts --><!-- Google tag (gtag.js) GA4 --><script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-GPSLBL05X1"
+></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-
   function gtag() {
     dataLayer.push(arguments);
   }
-  gtag('js', new Date());
-  gtag('config', 'UA-140437-35');
+  gtag("js", new Date());
+  gtag("config", "G-GPSLBL05X1");
 </script></body>
 
 </html>

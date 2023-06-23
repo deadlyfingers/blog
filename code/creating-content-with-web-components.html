@@ -144,7 +144,7 @@
 
 <p><img src="/assets/images/BadgeBuilder-MicroBit-Quiz.jpg" alt="BadgeBuilder-MicroBit-Quiz" /></p>
 
-<p>For the editor we wanted the quiz elements to be pretty <abbr title="What You See Is What You Get">WYSIWYG</abbr> so for the most part the same element was used for the editor and viewer. The Polymer <a href="https://www.polymer-project.org/1.0/docs/api/dom-if"><code class="highlighter-rouge">dom-if</code></a> template was a good way to render the parts unique to each view in this case.</p>
+<p>For the editor we wanted the quiz elements to be pretty <abbr title="What You See Is What You Get">WYSIWYG</abbr> so for the most part the same element was used for the editor and viewer. The Polymer <a href="https://www.polymer-project.org/1.0/docs/api/dom-if"><code class="language-plaintext highlighter-rouge">dom-if</code></a> template was a good way to render the parts unique to each view in this case.</p>
 
 <h2 id="displaying-dynamic-content-using-web-components">Displaying dynamic content using Web Components</h2>
 
@@ -153,30 +153,30 @@
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"components"</span><span class="nt">&gt;&lt;/div&gt;</span>
 </code></pre></div></div>
 
-<p>The quiz content was loaded with Polymer’s <a href="https://elements.polymer-project.org/elements/iron-ajax"><code class="highlighter-rouge">iron-ajax</code></a> element and the array of content was parsed in the response handler using a switch statement to check against specific element types.</p>
+<p>The quiz content was loaded with Polymer’s <a href="https://elements.polymer-project.org/elements/iron-ajax"><code class="language-plaintext highlighter-rouge">iron-ajax</code></a> element and the array of content was parsed in the response handler using a switch statement to check against specific element types.</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">elements</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">var</span> <span class="nx">element</span> <span class="o">=</span> <span class="nx">elements</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
   <span class="k">switch</span><span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">elementType</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">case</span> <span class="s2">"content-html"</span><span class="p">:</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">content-html</span><span class="dl">"</span><span class="p">:</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">addHTML</span><span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">text</span><span class="p">);</span>
     <span class="k">break</span><span class="p">;</span>
-    <span class="k">case</span> <span class="s2">"content-video"</span><span class="p">:</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">content-video</span><span class="dl">"</span><span class="p">:</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">addVideo</span><span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">embededURI</span><span class="p">);</span>
       <span class="k">break</span><span class="p">;</span>
-    <span class="k">case</span> <span class="s2">"content-button"</span><span class="p">:</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">content-button</span><span class="dl">"</span><span class="p">:</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">addButton</span><span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">buttonURL</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">);</span>
       <span class="k">break</span><span class="p">;</span>
-    <span class="k">case</span> <span class="s2">"content-section"</span><span class="p">:</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">content-section</span><span class="dl">"</span><span class="p">:</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">addContentSection</span><span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">title</span><span class="p">);</span>
       <span class="k">break</span><span class="p">;</span>
-    <span class="k">case</span> <span class="s2">"quiz-short-input"</span><span class="p">:</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">quiz-short-input</span><span class="dl">"</span><span class="p">:</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">addQuizShortInput</span><span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">question</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">answerKeywords</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">answer</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">hintText</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">showHint</span><span class="p">);</span>
       <span class="k">break</span><span class="p">;</span>
-    <span class="k">case</span> <span class="s2">"quiz-long-input"</span><span class="p">:</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">quiz-long-input</span><span class="dl">"</span><span class="p">:</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">addQuizLongInput</span><span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">question</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">answer</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">wordLimit</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">hintText</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">showHint</span><span class="p">);</span>
       <span class="k">break</span><span class="p">;</span>
-    <span class="k">case</span> <span class="s2">"quiz-list-groups"</span><span class="p">:</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">quiz-list-groups</span><span class="dl">"</span><span class="p">:</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">addQuizListGroups</span><span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">question</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">answer</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">hintText</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">showHint</span><span class="p">);</span>
       <span class="k">break</span><span class="p">;</span>
     <span class="nl">default</span><span class="p">:</span>
@@ -204,7 +204,7 @@
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">addElement</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">isCreated</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">element</span><span class="p">.</span><span class="nx">edit</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-  <span class="nx">element</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s2">"draggable"</span><span class="p">);</span>
+  <span class="nx">element</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="dl">"</span><span class="s2">draggable</span><span class="dl">"</span><span class="p">);</span>
   <span class="nx">Polymer</span><span class="p">.</span><span class="nx">dom</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$</span><span class="p">.</span><span class="nx">components</span><span class="p">).</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">element</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></div>
@@ -216,7 +216,7 @@
 <span class="p">},</span>
 
 <span class="nx">listeners</span><span class="p">:</span> <span class="p">{</span>
-  <span class="s1">'dom-change'</span> <span class="p">:</span> <span class="s2">"scrollDown"</span>
+  <span class="dl">'</span><span class="s1">dom-change</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">scrollDown</span><span class="dl">"</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -237,7 +237,7 @@
       <span class="na">_id</span><span class="p">:</span> <span class="p">{</span>
         <span class="na">type</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
         <span class="na">value</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-          <span class="k">return</span> <span class="s2">""</span><span class="p">;</span>
+          <span class="k">return</span> <span class="dl">""</span><span class="p">;</span>
         <span class="p">}</span>
       <span class="p">},</span>
 
@@ -265,7 +265,7 @@
 <p>Finally, when changes need to be saved it's just a case of returning a list of all our custom elements and grabbing the data as JSON using the element's `getData` behaviour. This data array can then be posted using Polymer's <a href="https://elements.polymer-project.org/elements/iron-ajax" target="_blank">`iron-ajax`</a> element for saving to the database.</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">getElements</span><span class="p">:</span> <span class="kd">function</span><span class="p">(){</span>
-  <span class="k">return</span> <span class="nx">Polymer</span><span class="p">.</span><span class="nx">dom</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$</span><span class="p">.</span><span class="nx">components</span><span class="p">).</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">'.draggable'</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">Polymer</span><span class="p">.</span><span class="nx">dom</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$</span><span class="p">.</span><span class="nx">components</span><span class="p">).</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">.draggable</span><span class="dl">'</span><span class="p">);</span>
 <span class="p">},</span>
 
 <span class="nx">getElementsData</span><span class="p">:</span> <span class="kd">function</span><span class="p">(){</span>
@@ -326,15 +326,17 @@
 </div></div>
   </div>
 
-  <!-- scripts --><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-140437-35"></script>
+  <!-- scripts --><!-- Google tag (gtag.js) GA4 --><script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-GPSLBL05X1"
+></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-
   function gtag() {
     dataLayer.push(arguments);
   }
-  gtag('js', new Date());
-  gtag('config', 'UA-140437-35');
+  gtag("js", new Date());
+  gtag("config", "G-GPSLBL05X1");
 </script></body>
 
 </html>

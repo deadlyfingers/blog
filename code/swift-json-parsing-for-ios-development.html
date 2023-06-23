@@ -42,7 +42,7 @@
 
 <p>I’m a long time user of <a href="https://cocoapods.org/">CocoaPods</a> for Xcode source control projects as it makes it easier to avoid jamming up a repro with binaries. However the precompiled versions on CocoaPods don’t always provide the latest version available on GitHub. This is where <a href="https://github.com/Carthage/Carthage">Carthage</a> comes in as you specifically request a tag version or branch on GitHub. Carthage can be quickly installed using <a href="http://brew.sh/">Homebrew</a> as mentioned in the [installing Carthage docs].(https://github.com/Carthage/Carthage#installing-carthage)</p>
 
-<p><code class="highlighter-rouge">brew install carthage</code></p>
+<p><code class="language-plaintext highlighter-rouge">brew install carthage</code></p>
 
 <p>To setup create a new text file and save it as ‘<strong>Cartfile</strong>’ inside your Xcode project folder. (In this case I’m requesting a specific version of Argo and Curry for use with Swift 2)</p>
 
@@ -53,21 +53,21 @@
 <p>Once you have installed Carthage and saved a ‘Cartfile’ then you need to build the frameworks.</p>
 
 <ol>
-  <li>In Terminal navigate to the project folder and run <code class="highlighter-rouge">carthage update</code> to build frameworks for all platforms. NB: For packages that can only be built for a single platform use <code class="highlighter-rouge">carthage build --platform iOS</code></li>
+  <li>In Terminal navigate to the project folder and run <code class="language-plaintext highlighter-rouge">carthage update</code> to build frameworks for all platforms. NB: For packages that can only be built for a single platform use <code class="language-plaintext highlighter-rouge">carthage build --platform iOS</code></li>
   <li>Drop built ‘*.framework’ folder into Xcode project</li>
-  <li>Add Build Phases &gt; Run Script <code class="highlighter-rouge">carthage copy-frameworks</code> and add Input Files path to ‘*.framework’</li>
+  <li>Add Build Phases &gt; Run Script <code class="language-plaintext highlighter-rouge">carthage copy-frameworks</code> and add Input Files path to ‘*.framework’</li>
 </ol>
 
 <h2 id="json-data-modelling-with-argo">JSON data modelling with Argo</h2>
 
-<p>Argo decodes standard property types (<code class="highlighter-rouge">String, Int, UInt, Int64, UInt64, Double, Float, Bool</code>) as well as arrays and optional properties. You can decode a nested object or an array of nested objects that conform to the ‘Decodable’ protocol. In fact you can even do inception - using the same struct within itself as shown below. One thing that might require explanation is <a href="https://github.com/thoughtbot/Argo/blob/master/Documentation/Basic-Usage.md#safely-pulling-values-from-json">Argo’s sugar syntax</a>. The summary of the sugar syntax is this:</p>
+<p>Argo decodes standard property types (<code class="language-plaintext highlighter-rouge">String, Int, UInt, Int64, UInt64, Double, Float, Bool</code>) as well as arrays and optional properties. You can decode a nested object or an array of nested objects that conform to the ‘Decodable’ protocol. In fact you can even do inception - using the same struct within itself as shown below. One thing that might require explanation is <a href="https://github.com/thoughtbot/Argo/blob/master/Documentation/Basic-Usage.md#safely-pulling-values-from-json">Argo’s sugar syntax</a>. The summary of the sugar syntax is this:</p>
 
 <ul>
-  <li><strong><code class="highlighter-rouge">&lt;^&gt;</code></strong> syntax pulls the first property, and <code class="highlighter-rouge">&lt;*&gt;</code> pulls subsequent properties.</li>
-  <li><strong><code class="highlighter-rouge">&lt;|</code></strong> syntax relates to a property.</li>
-  <li><strong><code class="highlighter-rouge">&lt;|?</code></strong> syntax relates to an optional property.</li>
-  <li><strong><code class="highlighter-rouge">&lt;||</code></strong> syntax relates to an array of ‘decodable’ objects.</li>
-  <li><strong><code class="highlighter-rouge">&lt;||?</code></strong> syntax relates to an array of optional ‘decodable’ objects</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">&lt;^&gt;</code></strong> syntax pulls the first property, and <code class="language-plaintext highlighter-rouge">&lt;*&gt;</code> pulls subsequent properties.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">&lt;|</code></strong> syntax relates to a property.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">&lt;|?</code></strong> syntax relates to an optional property.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">&lt;||</code></strong> syntax relates to an array of ‘decodable’ objects.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">&lt;||?</code></strong> syntax relates to an array of optional ‘decodable’ objects</li>
 </ul>
 
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">import</span> <span class="kt">Foundation</span>
@@ -211,7 +211,7 @@
 <p>Often the first thing I like to do is to load a JSON file to configure my app. For example you might have various JSON config files for localhost, staging and production settings.</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"app_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://someapp.azurewebsites.net"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"app_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://someapp.azurewebsites.net"</span><span class="p">,</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
@@ -294,7 +294,7 @@
 <div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">github</span> <span class="s2">"Alamofire/Alamofire"</span> ~\&gt; <span class="m">3</span>.<span class="m">4</span>
 </code></pre></div></div>
 
-<p>Below is an example snippet taken from a login POST request. When using Alamofire the JSON data is available as <code class="highlighter-rouge">response.result.value</code> which can be parsed with the Argo decode method.</p>
+<p>Below is an example snippet taken from a login POST request. When using Alamofire the JSON data is available as <code class="language-plaintext highlighter-rouge">response.result.value</code> which can be parsed with the Argo decode method.</p>
 
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">login</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">let</span> <span class="nv">authURL</span> <span class="p">:</span> <span class="kt">NSURL</span> <span class="o">=</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://some_auth_endpoint"</span><span class="p">)</span>
@@ -406,15 +406,17 @@
 </div></div>
   </div>
 
-  <!-- scripts --><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-140437-35"></script>
+  <!-- scripts --><!-- Google tag (gtag.js) GA4 --><script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-GPSLBL05X1"
+></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-
   function gtag() {
     dataLayer.push(arguments);
   }
-  gtag('js', new Date());
-  gtag('config', 'UA-140437-35');
+  gtag("js", new Date());
+  gtag("config", "G-GPSLBL05X1");
 </script></body>
 
 </html>

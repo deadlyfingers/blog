@@ -65,7 +65,7 @@
   <li><strong>Phrase detection</strong> so you can pass phrases to <a href="https://www.luis.ai/">natural language understanding services (LUIS)</a> model.</li>
 </ul>
 
-<p>To use Web Sockets in Unity you can use the <a href="https://github.com/sta/websocket-sharp">WebSocket-Sharp library</a>, but this only supports the Unity Editor and the mono target platforms. In order to use Web Sockets when targeting Windows Mixed Reality headsets you have to use Universal Windows Platform (UWP) APIs like <a href="https://docs.microsoft.com/en-us/uwp/api/windows.networking.sockets.messagewebsocket">MessageWebSocket</a>. To make things easier I have created a common <a href="https://github.com/Unity3dAzure/UnityWebSocket">Unity Web Socket</a> interface to use WebSocket-Sharp inside the Editor and mono platforms and then use <code class="highlighter-rouge">MessageWebSocket</code> when targeting the Windows Store App platform for MR headsets.</p>
+<p>To use Web Sockets in Unity you can use the <a href="https://github.com/sta/websocket-sharp">WebSocket-Sharp library</a>, but this only supports the Unity Editor and the mono target platforms. In order to use Web Sockets when targeting Windows Mixed Reality headsets you have to use Universal Windows Platform (UWP) APIs like <a href="https://docs.microsoft.com/en-us/uwp/api/windows.networking.sockets.messagewebsocket">MessageWebSocket</a>. To make things easier I have created a common <a href="https://github.com/Unity3dAzure/UnityWebSocket">Unity Web Socket</a> interface to use WebSocket-Sharp inside the Editor and mono platforms and then use <code class="language-plaintext highlighter-rouge">MessageWebSocket</code> when targeting the Windows Store App platform for MR headsets.</p>
 
 <h3 id="unity-web-socket-interface">Unity Web Socket interface</h3>
 
@@ -157,15 +157,17 @@
 </div></div>
   </div>
 
-  <!-- scripts --><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-140437-35"></script>
+  <!-- scripts --><!-- Google tag (gtag.js) GA4 --><script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-GPSLBL05X1"
+></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-
   function gtag() {
     dataLayer.push(arguments);
   }
-  gtag('js', new Date());
-  gtag('config', 'UA-140437-35');
+  gtag("js", new Date());
+  gtag("config", "G-GPSLBL05X1");
 </script></body>
 
 </html>

@@ -49,7 +49,7 @@
 
 <p>Alternatively you can manage multiple node versions using the latest <a href="https://github.com/coreybutler/nvm-windows/releases">nvm-setup</a> Windows installer.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvm install 0.12.0 
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvm <span class="nb">install </span>0.12.0 
 nvm use 0.12.0
 </code></pre></div></div>
 
@@ -74,10 +74,10 @@ nano ~/.bash_profile
 ~/.bash_profile
 </code></pre></div></div>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvm install 0.12.0 nvm <span class="nb">alias </span>default v0.12.0
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvm <span class="nb">install </span>0.12.0 nvm <span class="nb">alias </span>default v0.12.0
 </code></pre></div></div>
 
-<p>NB: In new Terminal sessions you may need to run <code class="highlighter-rouge">nvm use default</code>. If you want to you can add this to your bash profile to setup automatically.</p>
+<p>NB: In new Terminal sessions you may need to run <code class="language-plaintext highlighter-rouge">nvm use default</code>. If you want to you can add this to your bash profile to setup automatically.</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvm use default
 </code></pre></div></div>
@@ -97,9 +97,9 @@ npm <span class="nt">-v</span>
 
 <p>Install ember-cli, bower and phantomjs globally using the -g switch.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install <span class="nt">-g</span> ember-cli 
-npm install <span class="nt">-g</span> bower 
-npm install <span class="nt">-g</span> phantomjs
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span> <span class="nt">-g</span> ember-cli 
+npm <span class="nb">install</span> <span class="nt">-g</span> bower 
+npm <span class="nb">install</span> <span class="nt">-g</span> phantomjs
 </code></pre></div></div>
 
 <h1 id="creating-the-todo-example-app-using-ember-cli-and-azure-mobile-services">Creating the Todo example app using Ember-CLI and Azure Mobile Services</h1>
@@ -109,7 +109,7 @@ npm install <span class="nt">-g</span> phantomjs
   <li>Create example <strong>TodoItem</strong> table.<br />
  <img src="/assets/images/CreateTable-TodoItem.png" alt="CreateTable-TodoItem" /></li>
   <li>Create a new Ember-CLI app
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir ~/TodoApp <span class="nb">cd</span> ~/TodoApp ember new client <span class="nb">cd </span>client
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> ~/TodoApp <span class="nb">cd</span> ~/TodoApp ember new client <span class="nb">cd </span>client
 </code></pre></div>    </div>
   </li>
   <li>Run in ember client in Browser.
@@ -120,106 +120,106 @@ npm install <span class="nt">-g</span> phantomjs
     <p>Open <a href="http://localhost:4200/">http://localhost:4200/</a> in new Browser window to see web app.<br />
   <img src="/assets/images/welcome-to-emberjs.png" alt="welcome-to-emberjs" /></p>
   </li>
-  <li>Save Azure Mobile Services javascript files into <code class="highlighter-rouge">/vendor</code> folder.
+  <li>Save Azure Mobile Services javascript files into <code class="language-plaintext highlighter-rouge">/vendor</code> folder.
     <ul>
       <li><a href="http://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.2.5.js">MobileServices.Web-1.2.5.js</a></li>
       <li><a href="http://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.2.5.min.js">MobileServices.Web-1.2.5.min.js</a></li>
     </ul>
   </li>
   <li>
-    <p>Update the Broccoli file <code class="highlighter-rouge">Brocfile.js</code> to import <code class="highlighter-rouge">/vendor</code> javascripts</p>
+    <p>Update the Broccoli file <code class="language-plaintext highlighter-rouge">Brocfile.js</code> to import <code class="language-plaintext highlighter-rouge">/vendor</code> javascripts</p>
 
-    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">var</span> <span class="nx">EmberApp</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'ember-cli/lib/broccoli/ember-app'</span><span class="p">);</span>
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">var</span> <span class="nx">EmberApp</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">ember-cli/lib/broccoli/ember-app</span><span class="dl">'</span><span class="p">);</span>
 
  <span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EmberApp</span><span class="p">();</span>
 
  <span class="nx">app</span><span class="p">.</span><span class="k">import</span><span class="p">({</span>
-   <span class="na">development</span><span class="p">:</span> <span class="s1">'vendor/MobileServices.Web-1.2.5.js'</span><span class="p">,</span>
-   <span class="na">production</span><span class="p">:</span>  <span class="s1">'vendor/MobileServices.Web-1.2.5.min.js'</span>
+   <span class="na">development</span><span class="p">:</span> <span class="dl">'</span><span class="s1">vendor/MobileServices.Web-1.2.5.js</span><span class="dl">'</span><span class="p">,</span>
+   <span class="na">production</span><span class="p">:</span>  <span class="dl">'</span><span class="s1">vendor/MobileServices.Web-1.2.5.min.js</span><span class="dl">'</span>
  <span class="p">});</span>
 
  <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">app</span><span class="p">.</span><span class="nx">toTree</span><span class="p">();</span>
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Update the js hint file <code class="highlighter-rouge">.jshintrc</code> to recognise the <code class="highlighter-rouge">WindowsAzure</code> global namespace.</p>
+    <p>Update the js hint file <code class="language-plaintext highlighter-rouge">.jshintrc</code> to recognise the <code class="language-plaintext highlighter-rouge">WindowsAzure</code> global namespace.</p>
 
     <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="p">{</span><span class="w">
-   </span><span class="s2">"predef"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+   </span><span class="nl">"predef"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
      </span><span class="s2">"document"</span><span class="p">,</span><span class="w">
      </span><span class="s2">"window"</span><span class="p">,</span><span class="w">
      </span><span class="s2">"-Promise"</span><span class="p">,</span><span class="w">
      </span><span class="s2">"WindowsAzure"</span><span class="w">
    </span><span class="p">],</span><span class="w">
-   </span><span class="s2">"browser"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"browser"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
 </span></code></pre></div>    </div>
   </li>
-  <li>Generate <code class="highlighter-rouge">TodoItem</code> model, <code class="highlighter-rouge">index</code> controller and route. (Generating a route will also generate a Handlebars <em>index.hbs</em> template by default).
+  <li>Generate <code class="language-plaintext highlighter-rouge">TodoItem</code> model, <code class="language-plaintext highlighter-rouge">index</code> controller and route. (Generating a route will also generate a Handlebars <em>index.hbs</em> template by default).
     <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ember generate model TodoItem 
  ember generate controller index 
  ember generate route index
 </code></pre></div>    </div>
   </li>
-  <li>Create <code class="highlighter-rouge">azure</code> service. (Generating a service will also generate an <em>azure-service.js</em> initalizer)
+  <li>Create <code class="language-plaintext highlighter-rouge">azure</code> service. (Generating a service will also generate an <em>azure-service.js</em> initalizer)
     <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ember generate service azure
 </code></pre></div>    </div>
   </li>
   <li>
     <p>Update the <strong>services/azure.js</strong> script with your own Mobile Service connection strings (on lines 61-62):</p>
 
-    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Ember</span> <span class="k">from</span> <span class="s1">'ember'</span><span class="p">;</span>
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Ember</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ember</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">azureService</span> <span class="o">=</span> <span class="nx">Ember</span><span class="p">.</span><span class="nb">Object</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
 
   <span class="na">read</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">table</span><span class="p">){</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">table</span> <span class="o">+</span> <span class="s2">" read"</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">table</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> read</span><span class="dl">"</span><span class="p">);</span>
     <span class="k">return</span> <span class="nx">azureService</span><span class="p">.</span><span class="nx">client</span><span class="p">().</span><span class="nx">getTable</span><span class="p">(</span><span class="nx">table</span><span class="p">).</span><span class="nx">read</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">onComplete</span><span class="p">,</span> <span class="nx">onError</span><span class="p">);</span>
     <span class="kd">function</span> <span class="nx">onComplete</span><span class="p">(</span><span class="nx">fulfilled</span><span class="p">){</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"read items:"</span> <span class="o">+</span> <span class="nx">fulfilled</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">read items:</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">fulfilled</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
       <span class="k">return</span> <span class="nx">fulfilled</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="kd">function</span> <span class="nx">onError</span><span class="p">(</span><span class="nx">error</span><span class="p">){</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Error reading item: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Error reading item: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">error</span><span class="p">);</span>
     <span class="p">}</span>
   <span class="p">},</span>
 
   <span class="na">insert</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">table</span><span class="p">,</span> <span class="nx">item</span><span class="p">,</span> <span class="nx">model</span><span class="p">){</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">table</span> <span class="o">+</span> <span class="s2">" insert:"</span> <span class="o">+</span> <span class="nx">item</span><span class="p">.</span><span class="nx">id</span> <span class="o">+</span> <span class="s2">" model:"</span> <span class="o">+</span> <span class="nx">model</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">table</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> insert:</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">item</span><span class="p">.</span><span class="nx">id</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> model:</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">model</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
     <span class="k">return</span> <span class="nx">azureService</span><span class="p">.</span><span class="nx">client</span><span class="p">().</span><span class="nx">getTable</span><span class="p">(</span><span class="nx">table</span><span class="p">).</span><span class="nx">insert</span><span class="p">(</span><span class="nx">item</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">onComplete</span><span class="p">,</span> <span class="nx">onError</span><span class="p">);</span>
     <span class="kd">function</span> <span class="nx">onComplete</span><span class="p">(</span><span class="nx">fulfilledItem</span><span class="p">){</span>
       <span class="c1">// NB: use Ember's pushObject / unshiftObject to respect KVO!</span>
       <span class="nx">model</span><span class="p">.</span><span class="nx">unshiftObject</span><span class="p">(</span><span class="nx">fulfilledItem</span><span class="p">);</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"inserted item:"</span> <span class="o">+</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">fulfilledItem</span><span class="p">)</span> <span class="o">+</span> <span class="s2">" model:"</span> <span class="o">+</span> <span class="nx">model</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">inserted item:</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">fulfilledItem</span><span class="p">)</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> model:</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">model</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
       <span class="k">return</span> <span class="nx">fulfilledItem</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="kd">function</span> <span class="nx">onError</span><span class="p">(</span><span class="nx">error</span><span class="p">){</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Error inserting item: "</span><span class="o">+</span><span class="nx">error</span><span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Error inserting item: </span><span class="dl">"</span><span class="o">+</span><span class="nx">error</span><span class="p">);</span>
     <span class="p">}</span>
   <span class="p">},</span>
 
   <span class="na">del</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">table</span><span class="p">,</span> <span class="nx">item</span><span class="p">,</span> <span class="nx">model</span><span class="p">){</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">table</span> <span class="o">+</span> <span class="s2">" del:"</span> <span class="o">+</span> <span class="nx">item</span><span class="p">.</span><span class="nx">id</span> <span class="o">+</span> <span class="s2">" model:"</span> <span class="o">+</span> <span class="nx">model</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">table</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> del:</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">item</span><span class="p">.</span><span class="nx">id</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> model:</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">model</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
     <span class="k">return</span> <span class="nx">azureService</span><span class="p">.</span><span class="nx">client</span><span class="p">().</span><span class="nx">getTable</span><span class="p">(</span><span class="nx">table</span><span class="p">).</span><span class="nx">del</span><span class="p">(</span><span class="nx">item</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">onComplete</span><span class="p">,</span> <span class="nx">onError</span><span class="p">);</span>
     <span class="kd">function</span> <span class="nx">onComplete</span><span class="p">(</span><span class="nx">fulfilled</span><span class="p">){</span>
       <span class="c1">// NB: use Ember's removeObject to respect KVO!</span>
       <span class="nx">model</span><span class="p">.</span><span class="nx">removeObject</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"deleted item:"</span> <span class="o">+</span> <span class="s2">" model:"</span> <span class="o">+</span> <span class="nx">model</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">deleted item:</span><span class="dl">"</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> model:</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">model</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
       <span class="k">return</span> <span class="nx">fulfilled</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="kd">function</span> <span class="nx">onError</span><span class="p">(</span><span class="nx">error</span><span class="p">){</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Error deleting item: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Error deleting item: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">error</span><span class="p">);</span>
     <span class="p">}</span>
   <span class="p">},</span>
 
   <span class="na">update</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">table</span><span class="p">,</span> <span class="nx">item</span><span class="p">){</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">table</span> <span class="o">+</span> <span class="s2">" update:"</span> <span class="o">+</span> <span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">table</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> update:</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
     <span class="k">return</span> <span class="nx">azureService</span><span class="p">.</span><span class="nx">client</span><span class="p">().</span><span class="nx">getTable</span><span class="p">(</span><span class="nx">table</span><span class="p">).</span><span class="nx">update</span><span class="p">(</span><span class="nx">item</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">onComplete</span><span class="p">,</span> <span class="nx">onError</span><span class="p">);</span>
     <span class="kd">function</span> <span class="nx">onComplete</span><span class="p">(</span><span class="nx">fulfilledItem</span><span class="p">){</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"updated item:"</span> <span class="o">+</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">fulfilledItem</span><span class="p">));</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">updated item:</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">fulfilledItem</span><span class="p">));</span>
       <span class="k">return</span> <span class="nx">fulfilledItem</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="kd">function</span> <span class="nx">onError</span><span class="p">(</span><span class="nx">error</span><span class="p">){</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Error updating item: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Error updating item: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">error</span><span class="p">);</span>
     <span class="p">}</span>
   <span class="p">}</span>
 
@@ -227,18 +227,18 @@ npm install <span class="nt">-g</span> phantomjs
 
 <span class="c1">//  creates static properties and methods for the class</span>
 <span class="nx">azureService</span><span class="p">.</span><span class="nx">reopenClass</span><span class="p">({</span>
-  <span class="na">APPLICATION_URL</span> <span class="p">:</span> <span class="s2">"https://MOBILE_SERVICE_URL.azure-mobile.net/"</span><span class="p">,</span>
-  <span class="na">APPLICATION_KEY</span> <span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+  <span class="na">APPLICATION_URL</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">https://MOBILE_SERVICE_URL.azure-mobile.net/</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">APPLICATION_KEY</span> <span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
   <span class="na">mobileServiceClient</span> <span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
 
   <span class="na">client</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(){</span>
-    <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">APPLICATION_URL</span> <span class="o">===</span> <span class="s2">""</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">APPLICATION_KEY</span> <span class="o">===</span> <span class="s2">""</span><span class="p">)</span> <span class="p">{</span>
-      <span class="kd">var</span> <span class="nx">error</span> <span class="o">=</span> <span class="s2">"Please configure your Azure Mobile Service URL &amp; Application KEY (app/services/azure.js 61-62)"</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">APPLICATION_URL</span> <span class="o">===</span> <span class="dl">""</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">APPLICATION_KEY</span> <span class="o">===</span> <span class="dl">""</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">error</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Please configure your Azure Mobile Service URL &amp; Application KEY (app/services/azure.js 61-62)</span><span class="dl">"</span><span class="p">;</span>
       <span class="nx">alert</span> <span class="p">(</span><span class="nx">error</span><span class="p">);</span>
-      <span class="k">throw</span> <span class="p">(</span><span class="s2">"</span><span class="err">\</span><span class="s2">n"</span> <span class="o">+</span> <span class="nx">error</span><span class="p">);</span>
+      <span class="k">throw</span> <span class="p">(</span><span class="dl">"</span><span class="se">\n</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">error</span><span class="p">);</span>
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
       <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">mobileServiceClient</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Creating Mobile Service Client..."</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Creating Mobile Service Client...</span><span class="dl">"</span><span class="p">);</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">mobileServiceClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WindowsAzure</span><span class="p">.</span><span class="nx">MobileServiceClient</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">APPLICATION_URL</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">APPLICATION_KEY</span><span class="p">);</span>
       <span class="p">}</span>
       <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">mobileServiceClient</span><span class="p">;</span>
@@ -250,52 +250,52 @@ npm install <span class="nt">-g</span> phantomjs
 <span class="k">export</span> <span class="k">default</span> <span class="nx">azureService</span><span class="p">;</span>
 </code></pre></div>    </div>
 
-    <p>When the app first loads we will need to <em>read</em> a <code class="highlighter-rouge">table</code>. In this case we will <em>read</em> the <strong>TodoItem</strong> table to get a list of TodoItems. When a user needs to add a Todo item we will call the <em>insert</em> method to add an <code class="highlighter-rouge">item</code> into a <code class="highlighter-rouge">table</code> and update our Ember <code class="highlighter-rouge">model</code> for display. The <code class="highlighter-rouge">del</code> method will work the same way except the <code class="highlighter-rouge">item</code> will be deleted. Finally the <code class="highlighter-rouge">update</code> method will be used to save changes to an <code class="highlighter-rouge">item</code>, which in this case will be when the TodoItem is completed (stroked out).</p>
+    <p>When the app first loads we will need to <em>read</em> a <code class="language-plaintext highlighter-rouge">table</code>. In this case we will <em>read</em> the <strong>TodoItem</strong> table to get a list of TodoItems. When a user needs to add a Todo item we will call the <em>insert</em> method to add an <code class="language-plaintext highlighter-rouge">item</code> into a <code class="language-plaintext highlighter-rouge">table</code> and update our Ember <code class="language-plaintext highlighter-rouge">model</code> for display. The <code class="language-plaintext highlighter-rouge">del</code> method will work the same way except the <code class="language-plaintext highlighter-rouge">item</code> will be deleted. Finally the <code class="language-plaintext highlighter-rouge">update</code> method will be used to save changes to an <code class="language-plaintext highlighter-rouge">item</code>, which in this case will be when the TodoItem is completed (stroked out).</p>
   </li>
   <li>
-    <p>Edit <strong>models/todo-item.js</strong> to handle todo <code class="highlighter-rouge">text</code> string and a <code class="highlighter-rouge">completed</code> boolean so tasks can be marked off:</p>
+    <p>Edit <strong>models/todo-item.js</strong> to handle todo <code class="language-plaintext highlighter-rouge">text</code> string and a <code class="language-plaintext highlighter-rouge">completed</code> boolean so tasks can be marked off:</p>
 
-    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">DS</span> <span class="k">from</span> <span class="s1">'ember-data'</span><span class="p">;</span>
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">DS</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ember-data</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="k">export</span> <span class="k">default</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
   <span class="c1">// NB: You may not set 'id' as an attribute on your model</span>
-  <span class="na">text</span><span class="p">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'string'</span><span class="p">),</span>
-  <span class="na">completed</span><span class="p">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'boolean'</span><span class="p">)</span>
+  <span class="na">text</span><span class="p">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="dl">'</span><span class="s1">string</span><span class="dl">'</span><span class="p">),</span>
+  <span class="na">completed</span><span class="p">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="dl">'</span><span class="s1">boolean</span><span class="dl">'</span><span class="p">)</span>
 <span class="p">});</span>
 </code></pre></div>    </div>
 
     <p>The TodoItem model consists of a string property for the Todo text and a boolean property to say if the Todo item has been completed.</p>
   </li>
   <li>
-    <p>Edit <strong>routes/index.js</strong> and set <code class="highlighter-rouge">model</code> to read TodoItems table:</p>
+    <p>Edit <strong>routes/index.js</strong> and set <code class="language-plaintext highlighter-rouge">model</code> to read TodoItems table:</p>
 
-    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Ember</span> <span class="k">from</span> <span class="s1">'ember'</span><span class="p">;</span>
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Ember</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ember</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="k">export</span> <span class="k">default</span> <span class="nx">Ember</span><span class="p">.</span><span class="nx">Route</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
 
   <span class="na">model</span><span class="p">:</span> <span class="kd">function</span><span class="p">(){</span>
-    <span class="kd">var</span> <span class="nx">service</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">'azureService'</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="s1">'TodoItem'</span><span class="p">;</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"service:"</span> <span class="o">+</span> <span class="nx">service</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">service</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">azureService</span><span class="dl">'</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">TodoItem</span><span class="dl">'</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">service:</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">service</span><span class="p">);</span>
     <span class="k">return</span> <span class="nx">service</span><span class="p">.</span><span class="nx">read</span><span class="p">(</span><span class="nx">table</span><span class="p">);</span>
   <span class="p">}</span>
 
 <span class="p">});</span>
 </code></pre></div>    </div>
 
-    <p>As <code class="highlighter-rouge">ember serve</code> auto updates as you save changes you should see some activity in your Browser’s console log.</p>
+    <p>As <code class="language-plaintext highlighter-rouge">ember serve</code> auto updates as you save changes you should see some activity in your Browser’s console log.</p>
   </li>
   <li>
-    <p>In the Browser’s console log you might get a refused to connect error “because it violates the following Content Security Policy directive: connect-src ‘self’” that means we need to update our environment config. To fix this add the following <code class="highlighter-rouge">contentSecurityPolicy</code> settings to the <code class="highlighter-rouge">ENV</code> var in <strong>config/environment.js</strong> to allow connections to <code class="highlighter-rouge">*.azure-mobile.net</code>:</p>
+    <p>In the Browser’s console log you might get a refused to connect error “because it violates the following Content Security Policy directive: connect-src ‘self’” that means we need to update our environment config. To fix this add the following <code class="language-plaintext highlighter-rouge">contentSecurityPolicy</code> settings to the <code class="language-plaintext highlighter-rouge">ENV</code> var in <strong>config/environment.js</strong> to allow connections to <code class="language-plaintext highlighter-rouge">*.azure-mobile.net</code>:</p>
 
     <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* jshint node: true */</span>
 
 <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">environment</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">var</span> <span class="nx">ENV</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">modulePrefix</span><span class="p">:</span> <span class="s1">'client'</span><span class="p">,</span>
+    <span class="na">modulePrefix</span><span class="p">:</span> <span class="dl">'</span><span class="s1">client</span><span class="dl">'</span><span class="p">,</span>
     <span class="na">environment</span><span class="p">:</span> <span class="nx">environment</span><span class="p">,</span>
-    <span class="na">baseURL</span><span class="p">:</span> <span class="s1">'/'</span><span class="p">,</span>
-    <span class="na">locationType</span><span class="p">:</span> <span class="s1">'auto'</span><span class="p">,</span>
+    <span class="na">baseURL</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">locationType</span><span class="p">:</span> <span class="dl">'</span><span class="s1">auto</span><span class="dl">'</span><span class="p">,</span>
     <span class="na">EmberENV</span><span class="p">:</span> <span class="p">{</span>
       <span class="na">FEATURES</span><span class="p">:</span> <span class="p">{</span>
         <span class="c1">// Here you can enable experimental features on an ember canary build</span>
@@ -303,13 +303,13 @@ npm install <span class="nt">-g</span> phantomjs
       <span class="p">}</span>
     <span class="p">},</span>
     <span class="na">contentSecurityPolicy</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s1">'default-src'</span><span class="p">:</span> <span class="s2">"'none'"</span><span class="p">,</span>
-      <span class="s1">'script-src'</span><span class="p">:</span> <span class="s2">"'self' 'unsafe-inline' 'unsafe-eval' *.azure-mobile.net"</span><span class="p">,</span>
-      <span class="s1">'font-src'</span><span class="p">:</span> <span class="s2">"'self'"</span><span class="p">,</span>
-      <span class="s1">'connect-src'</span><span class="p">:</span> <span class="s2">"'self' *.azure-mobile.net"</span><span class="p">,</span>
-      <span class="s1">'img-src'</span><span class="p">:</span> <span class="s2">"'self'"</span><span class="p">,</span>
-      <span class="s1">'style-src'</span><span class="p">:</span> <span class="s2">"'self' 'unsafe-inline'"</span><span class="p">,</span>
-      <span class="s1">'media-src'</span><span class="p">:</span> <span class="s2">"'self'"</span>
+      <span class="dl">'</span><span class="s1">default-src</span><span class="dl">'</span><span class="p">:</span> <span class="dl">"</span><span class="s2">'none'</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">script-src</span><span class="dl">'</span><span class="p">:</span> <span class="dl">"</span><span class="s2">'self' 'unsafe-inline' 'unsafe-eval' *.azure-mobile.net</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">font-src</span><span class="dl">'</span><span class="p">:</span> <span class="dl">"</span><span class="s2">'self'</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">connect-src</span><span class="dl">'</span><span class="p">:</span> <span class="dl">"</span><span class="s2">'self' *.azure-mobile.net</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">img-src</span><span class="dl">'</span><span class="p">:</span> <span class="dl">"</span><span class="s2">'self'</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">style-src</span><span class="dl">'</span><span class="p">:</span> <span class="dl">"</span><span class="s2">'self' 'unsafe-inline'</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">media-src</span><span class="dl">'</span><span class="p">:</span> <span class="dl">"</span><span class="s2">'self'</span><span class="dl">"</span>
     <span class="p">},</span>
     <span class="na">APP</span><span class="p">:</span> <span class="p">{</span>
       <span class="c1">// Here you can pass flags/options to your application instance</span>
@@ -354,10 +354,10 @@ npm install <span class="nt">-g</span> phantomjs
 
 <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">environment</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">var</span> <span class="nx">ENV</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">modulePrefix</span><span class="p">:</span> <span class="s1">'client'</span><span class="p">,</span>
+    <span class="na">modulePrefix</span><span class="p">:</span> <span class="dl">'</span><span class="s1">client</span><span class="dl">'</span><span class="p">,</span>
     <span class="na">environment</span><span class="p">:</span> <span class="nx">environment</span><span class="p">,</span>
-    <span class="na">baseURL</span><span class="p">:</span> <span class="s1">'/'</span><span class="p">,</span>
-    <span class="na">locationType</span><span class="p">:</span> <span class="s1">'auto'</span><span class="p">,</span>
+    <span class="na">baseURL</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">locationType</span><span class="p">:</span> <span class="dl">'</span><span class="s1">auto</span><span class="dl">'</span><span class="p">,</span>
     <span class="na">EmberENV</span><span class="p">:</span> <span class="p">{</span>
       <span class="na">FEATURES</span><span class="p">:</span> <span class="p">{</span>
         <span class="c1">// Here you can enable experimental features on an ember canary build</span>
@@ -365,13 +365,13 @@ npm install <span class="nt">-g</span> phantomjs
       <span class="p">}</span>
     <span class="p">},</span>
     <span class="na">contentSecurityPolicy</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s1">'default-src'</span><span class="p">:</span> <span class="s2">"'none'"</span><span class="p">,</span>
-      <span class="s1">'script-src'</span><span class="p">:</span> <span class="s2">"'self' 'unsafe-inline' 'unsafe-eval' *.azure-mobile.net"</span><span class="p">,</span>
-      <span class="s1">'font-src'</span><span class="p">:</span> <span class="s2">"'self'"</span><span class="p">,</span>
-      <span class="s1">'connect-src'</span><span class="p">:</span> <span class="s2">"'self' *.azure-mobile.net"</span><span class="p">,</span>
-      <span class="s1">'img-src'</span><span class="p">:</span> <span class="s2">"'self'"</span><span class="p">,</span>
-      <span class="s1">'style-src'</span><span class="p">:</span> <span class="s2">"'self' 'unsafe-inline'"</span><span class="p">,</span>
-      <span class="s1">'media-src'</span><span class="p">:</span> <span class="s2">"'self'"</span>
+      <span class="dl">'</span><span class="s1">default-src</span><span class="dl">'</span><span class="p">:</span> <span class="dl">"</span><span class="s2">'none'</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">script-src</span><span class="dl">'</span><span class="p">:</span> <span class="dl">"</span><span class="s2">'self' 'unsafe-inline' 'unsafe-eval' *.azure-mobile.net</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">font-src</span><span class="dl">'</span><span class="p">:</span> <span class="dl">"</span><span class="s2">'self'</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">connect-src</span><span class="dl">'</span><span class="p">:</span> <span class="dl">"</span><span class="s2">'self' *.azure-mobile.net</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">img-src</span><span class="dl">'</span><span class="p">:</span> <span class="dl">"</span><span class="s2">'self'</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">style-src</span><span class="dl">'</span><span class="p">:</span> <span class="dl">"</span><span class="s2">'self' 'unsafe-inline'</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">media-src</span><span class="dl">'</span><span class="p">:</span> <span class="dl">"</span><span class="s2">'self'</span><span class="dl">"</span>
     <span class="p">},</span>
     <span class="na">APP</span><span class="p">:</span> <span class="p">{</span>
       <span class="c1">// Here you can pass flags/options to your application instance</span>
@@ -380,15 +380,15 @@ npm install <span class="nt">-g</span> phantomjs
   <span class="p">};</span>
 </code></pre></div>    </div>
 
-    <p>To allow access to the service from the controller we need to inject the <code class="highlighter-rouge">azureService</code> in the <strong>initializers/azure-service.js</strong> service initializer.</p>
+    <p>To allow access to the service from the controller we need to inject the <code class="language-plaintext highlighter-rouge">azureService</code> in the <strong>initializers/azure-service.js</strong> service initializer.</p>
 
     <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="kd">function</span> <span class="nx">initialize</span><span class="p">(</span><span class="nx">container</span><span class="p">,</span> <span class="nx">application</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">application</span><span class="p">.</span><span class="nx">inject</span><span class="p">(</span><span class="s1">'route'</span><span class="p">,</span> <span class="s1">'azureService'</span><span class="p">,</span> <span class="s1">'service:azure'</span><span class="p">);</span>
-  <span class="nx">application</span><span class="p">.</span><span class="nx">inject</span><span class="p">(</span><span class="s1">'controller'</span><span class="p">,</span> <span class="s1">'azureService'</span><span class="p">,</span> <span class="s1">'service:azure'</span><span class="p">);</span>
+  <span class="nx">application</span><span class="p">.</span><span class="nx">inject</span><span class="p">(</span><span class="dl">'</span><span class="s1">route</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">azureService</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">service:azure</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nx">application</span><span class="p">.</span><span class="nx">inject</span><span class="p">(</span><span class="dl">'</span><span class="s1">controller</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">azureService</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">service:azure</span><span class="dl">'</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
-  <span class="na">name</span><span class="p">:</span> <span class="s1">'azure-service'</span><span class="p">,</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">azure-service</span><span class="dl">'</span><span class="p">,</span>
   <span class="na">initialize</span><span class="p">:</span> <span class="nx">initialize</span>
 <span class="p">};</span>
 </code></pre></div>    </div>
@@ -455,9 +455,9 @@ npm install <span class="nt">-g</span> phantomjs
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/deadlyfingers/ember-cli-todo-app-azure.git 
 <span class="nb">cd </span>ember-cli-todo-app-azure 
-npm install 
-bower install 
-ember serve
+npm <span class="nb">install 
+</span>bower <span class="nb">install 
+</span>ember serve
 </code></pre></div></div>
 </div>
 
@@ -503,15 +503,17 @@ ember serve
 </div></div>
   </div>
 
-  <!-- scripts --><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-140437-35"></script>
+  <!-- scripts --><!-- Google tag (gtag.js) GA4 --><script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-GPSLBL05X1"
+></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-
   function gtag() {
     dataLayer.push(arguments);
   }
-  gtag('js', new Date());
-  gtag('config', 'UA-140437-35');
+  gtag("js", new Date());
+  gtag("config", "G-GPSLBL05X1");
 </script></body>
 
 </html>

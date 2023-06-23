@@ -53,7 +53,7 @@
 <p>We can start by writing a basic query in Application Insights to get all the transcripts from the ‘customEvents’ table and ‘project’ only the information we need.</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">customEvents</span>
-<span class="nx">where</span> <span class="nx">name</span> <span class="o">==</span> <span class="s1">'Transcript'</span>
+<span class="nx">where</span> <span class="nx">name</span> <span class="o">==</span> <span class="dl">'</span><span class="s1">Transcript</span><span class="dl">'</span>
 <span class="o">|</span> <span class="nx">extend</span> <span class="nx">customerName</span><span class="o">=</span><span class="nx">tostring</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="nx">customerName</span><span class="p">),</span>
   <span class="nx">text</span><span class="o">=</span><span class="nx">tostring</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="nx">text</span><span class="p">),</span>
   <span class="nx">userTime</span><span class="o">=</span><span class="nx">tostring</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">),</span>
@@ -67,7 +67,7 @@
 <p>But in this example we are not using Application Insights to aggregate the results so we end up with a lot of results to process. Given the query above the following code snippet is the amount of Javascript required.</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">calculated</span><span class="p">:</span> <span class="nx">transcripts</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="kd">const</span> <span class="nx">key</span> <span class="o">=</span> <span class="s2">"customerId"</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">key</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">customerId</span><span class="dl">"</span><span class="p">;</span>
   <span class="kd">const</span> <span class="nx">transcriptsGrouped</span> <span class="o">=</span> <span class="nx">transcripts</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="kd">const</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">a</span><span class="p">.</span><span class="nx">findIndex</span><span class="p">(</span><span class="nx">col</span> <span class="o">=&gt;</span> <span class="nx">col</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="nx">c</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">i</span> <span class="o">===</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
@@ -110,20 +110,20 @@
   <span class="kd">const</span> <span class="nx">minTimeWaiting</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(...</span><span class="nx">times</span><span class="p">);</span>
 
   <span class="k">return</span> <span class="p">{</span>
-    <span class="s2">"transcriptsAverageTimeWaiting-value"</span><span class="p">:</span> <span class="nx">avgTimeWaiting</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
-    <span class="s2">"transcriptsLongestTimeWaiting-value"</span><span class="p">:</span> <span class="nx">maxTimeWaiting</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
-    <span class="s2">"transcriptsShortestTimeWaiting-value"</span><span class="p">:</span> <span class="nx">minTimeWaiting</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="dl">"</span><span class="s2">transcriptsAverageTimeWaiting-value</span><span class="dl">"</span><span class="p">:</span> <span class="nx">avgTimeWaiting</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+    <span class="dl">"</span><span class="s2">transcriptsLongestTimeWaiting-value</span><span class="dl">"</span><span class="p">:</span> <span class="nx">maxTimeWaiting</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+    <span class="dl">"</span><span class="s2">transcriptsShortestTimeWaiting-value</span><span class="dl">"</span><span class="p">:</span> <span class="nx">minTimeWaiting</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
   <span class="p">};</span>
 <span class="p">};</span>
 </code></pre></div></div>
 
 <p>The first ‘reduce’ block is required to group the transcripts per user Id. Then for every user we track the state change from waiting and talking to human agent and calculate the time difference in seconds. Where ‘state’ is an integer value that marks the current status of the conversion.<br />
-<code class="highlighter-rouge">0 = Bot 1 = Waiting 2 = Human agent</code></p>
+<code class="language-plaintext highlighter-rouge">0 = Bot 1 = Waiting 2 = Human agent</code></p>
 
 <p>But we can optimise the code by doing the aggregation within the Application Insights query by using the ‘summarize’ operator and ‘count’ function.</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">customEvents</span>
-<span class="nx">where</span> <span class="nx">name</span> <span class="o">==</span> <span class="s1">'Transcript'</span>
+<span class="nx">where</span> <span class="nx">name</span> <span class="o">==</span> <span class="dl">'</span><span class="s1">Transcript</span><span class="dl">'</span>
 <span class="o">|</span> <span class="nx">extend</span> <span class="nx">conversationId</span><span class="o">=</span><span class="nx">tostring</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="nx">userConversationId</span><span class="p">),</span>
   <span class="nx">customerId</span><span class="o">=</span><span class="nx">tostring</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="nx">customerId</span><span class="p">),</span>
   <span class="nx">state</span><span class="o">=</span><span class="nx">toint</span><span class="p">(</span><span class="nx">customDimensions</span><span class="p">.</span><span class="nx">state</span><span class="p">)</span>
@@ -143,7 +143,7 @@
     <span class="c1">// converts time hh:mm:ss format to value in seconds</span>
     <span class="nx">acc</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span>
       <span class="nx">cur</span><span class="p">.</span><span class="nx">timeTaken</span>
-        <span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">":"</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">"</span><span class="s2">:</span><span class="dl">"</span><span class="p">)</span>
         <span class="p">.</span><span class="nx">reverse</span><span class="p">()</span>
         <span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">c</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">c</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="nx">i</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
     <span class="p">);</span>
@@ -155,9 +155,9 @@
   <span class="kd">const</span> <span class="nx">minTimeWaiting</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(...</span><span class="nx">times</span><span class="p">);</span>
 
   <span class="k">return</span> <span class="p">{</span>
-    <span class="s2">"transcriptsAverageTimeWaiting-value"</span><span class="p">:</span> <span class="nx">avgTimeWaiting</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
-    <span class="s2">"transcriptsLongestTimeWaiting-value"</span><span class="p">:</span> <span class="nx">maxTimeWaiting</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
-    <span class="s2">"transcriptsShortestTimeWaiting-value"</span><span class="p">:</span> <span class="nx">minTimeWaiting</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="dl">"</span><span class="s2">transcriptsAverageTimeWaiting-value</span><span class="dl">"</span><span class="p">:</span> <span class="nx">avgTimeWaiting</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+    <span class="dl">"</span><span class="s2">transcriptsLongestTimeWaiting-value</span><span class="dl">"</span><span class="p">:</span> <span class="nx">maxTimeWaiting</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+    <span class="dl">"</span><span class="s2">transcriptsShortestTimeWaiting-value</span><span class="dl">"</span><span class="p">:</span> <span class="nx">minTimeWaiting</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
   <span class="p">};</span>
 <span class="p">};</span>
 </code></pre></div></div>
@@ -219,15 +219,17 @@
 </div></div>
   </div>
 
-  <!-- scripts --><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-140437-35"></script>
+  <!-- scripts --><!-- Google tag (gtag.js) GA4 --><script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-GPSLBL05X1"
+></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-
   function gtag() {
     dataLayer.push(arguments);
   }
-  gtag('js', new Date());
-  gtag('config', 'UA-140437-35');
+  gtag("js", new Date());
+  gtag("config", "G-GPSLBL05X1");
 </script></body>
 
 </html>

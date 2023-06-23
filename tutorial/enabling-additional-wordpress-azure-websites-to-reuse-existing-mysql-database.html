@@ -50,7 +50,7 @@
 
 <p>Download the publish profile to get your FTP username and password. Open this file in an XML text editor to locate the ‘<em>userName</em>’ and ‘<em>userPass</em>’ values which are located just after the ‘<em>ftpPassiveMode</em>’ attribute.</p>
 
-<p>Once you FTP in, navigate to <code class="highlighter-rouge">site/wwwroot/</code> and edit the <strong>wp-config.php</strong> file (you may wish to download a backup first). Then change the ‘<strong>table_prefix</strong>’ value (line no. 62) from:</p>
+<p>Once you FTP in, navigate to <code class="language-plaintext highlighter-rouge">site/wwwroot/</code> and edit the <strong>wp-config.php</strong> file (you may wish to download a backup first). Then change the ‘<strong>table_prefix</strong>’ value (line no. 62) from:</p>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$table_prefix</span> <span class="o">=</span> <span class="s1">'wp_'</span><span class="p">;</span>
 </code></pre></div></div>
@@ -110,15 +110,17 @@
 </div></div>
   </div>
 
-  <!-- scripts --><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-140437-35"></script>
+  <!-- scripts --><!-- Google tag (gtag.js) GA4 --><script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-GPSLBL05X1"
+></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-
   function gtag() {
     dataLayer.push(arguments);
   }
-  gtag('js', new Date());
-  gtag('config', 'UA-140437-35');
+  gtag("js", new Date());
+  gtag("config", "G-GPSLBL05X1");
 </script></body>
 
 </html>

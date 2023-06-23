@@ -64,19 +64,19 @@ Ultimately I decided to migrate my Wordpress blog to <a href="https://pages.gith
           <tbody>
             <tr>
               <td><em>YOUR_DOMAIN</em>.com.</td>
-              <td><code class="highlighter-rouge">185.199.108.153</code></td>
+              <td><code class="language-plaintext highlighter-rouge">185.199.108.153</code></td>
             </tr>
             <tr>
               <td><em>YOUR_DOMAIN</em>.com.</td>
-              <td><code class="highlighter-rouge">185.199.109.153</code></td>
+              <td><code class="language-plaintext highlighter-rouge">185.199.109.153</code></td>
             </tr>
             <tr>
               <td><em>YOUR_DOMAIN</em>.com.</td>
-              <td><code class="highlighter-rouge">185.199.110.153</code></td>
+              <td><code class="language-plaintext highlighter-rouge">185.199.110.153</code></td>
             </tr>
             <tr>
               <td><em>YOUR_DOMAIN</em>.com.</td>
-              <td><code class="highlighter-rouge">185.199.111.153</code></td>
+              <td><code class="language-plaintext highlighter-rouge">185.199.111.153</code></td>
             </tr>
           </tbody>
         </table>
@@ -124,7 +124,7 @@ Ultimately I decided to migrate my Wordpress blog to <a href="https://pages.gith
     <p>If you are migrating an existing blog you have to export your content from the Wordpress admin control panel.</p>
 
     <blockquote>
-      <p>The general form of the URL is as follows: <code class="highlighter-rouge">https://YOUR-USER-NAME.wordpress.com/wp-admin/export.php</code></p>
+      <p>The general form of the URL is as follows: <code class="language-plaintext highlighter-rouge">https://YOUR-USER-NAME.wordpress.com/wp-admin/export.php</code></p>
     </blockquote>
   </li>
   <li>
@@ -134,9 +134,9 @@ Ultimately I decided to migrate my Wordpress blog to <a href="https://pages.gith
       <p>Install Ruby Gems</p>
     </blockquote>
 
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem install jekyll-import
-gem install hpricot
-gem install open_uri_redirections
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem <span class="nb">install </span>jekyll-import
+gem <span class="nb">install </span>hpricot
+gem <span class="nb">install </span>open_uri_redirections
 </code></pre></div>    </div>
 
     <blockquote>
@@ -158,7 +158,7 @@ JekyllImport::Importers::WordpressDotCom.run({
       <p><strong>‘wordpress-html-to-md.rb’</strong> gist usage:</p>
     </blockquote>
 
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem install reverse_markdown
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem <span class="nb">install </span>reverse_markdown
 </code></pre></div>    </div>
 
     <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ruby ./wordpress-html-to-md.rb <span class="s2">"_posts"</span>
@@ -179,14 +179,14 @@ JekyllImport::Importers::WordpressDotCom.run({
   </li>
   <li>
     <p>To show code syntax highlights you will need to add some styles for <a href="https://github.com/jneen/rouge">Rouge</a> (GitHub Page’s syntax highlighter). You can use Rougify to copy GitHub’s code syntax highlighting to a stylesheet.</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem install rouge
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem <span class="nb">install </span>rouge
 </code></pre></div>    </div>
     <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rougify style github <span class="o">&gt;</span> _sass/styles/_rouge.scss
 </code></pre></div>    </div>
   </li>
 </ol>
 
-<p>After this you might decide to apply one of the <a href="https://pages.github.com/themes/">built-in GitHub Pages themes</a> or use a <a href="https://github.com/benbalter/jekyll-remote-theme">remote theme</a> or <a href="https://jekyllrb.com/docs/themes/">create your own theme</a>. In my case I added the <a href="https://foundation.zurb.com/sites/docs/xy-grid.html">Foundation XY-Grid</a> module for responsive design grid layouts. One thing I would like to see supported in GitHub Pages is support for <strong>npm packages</strong>. Everyone seems to have their own way for building this out and it would be nice just to provide a <code class="highlighter-rouge">package.json</code> file and let GitHub take take of the rest. One nice solution however might be to roll out the <code class="highlighter-rouge">node_modules</code> dependencies as part of a remote theme. But at this early stage I prefer to keep it all together in one repo until I have proved everything <em>just works</em> over time.</p>
+<p>After this you might decide to apply one of the <a href="https://pages.github.com/themes/">built-in GitHub Pages themes</a> or use a <a href="https://github.com/benbalter/jekyll-remote-theme">remote theme</a> or <a href="https://jekyllrb.com/docs/themes/">create your own theme</a>. In my case I added the <a href="https://foundation.zurb.com/sites/docs/xy-grid.html">Foundation XY-Grid</a> module for responsive design grid layouts. One thing I would like to see supported in GitHub Pages is support for <strong>npm packages</strong>. Everyone seems to have their own way for building this out and it would be nice just to provide a <code class="language-plaintext highlighter-rouge">package.json</code> file and let GitHub take take of the rest. One nice solution however might be to roll out the <code class="language-plaintext highlighter-rouge">node_modules</code> dependencies as part of a remote theme. But at this early stage I prefer to keep it all together in one repo until I have proved everything <em>just works</em> over time.</p>
 
 <h2 id="resources">Resources</h2>
 
@@ -260,7 +260,7 @@ JekyllImport::Importers::WordpressDotCom.run({
 
 <h3 id="gulp">Gulp</h3>
 
-<p>One <a href="https://gulpjs.com/">gulp</a> command deploys the production build to my <code class="highlighter-rouge">gh-pages</code> branch!</p>
+<p>One <a href="https://gulpjs.com/">gulp</a> command deploys the production build to my <code class="language-plaintext highlighter-rouge">gh-pages</code> branch!</p>
 
 <ul>
   <li><a href="https://www.npmjs.com/package/gulp-gh-pages">Publish build to GitHub Pages</a></li>
@@ -310,15 +310,17 @@ JekyllImport::Importers::WordpressDotCom.run({
 </div></div>
   </div>
 
-  <!-- scripts --><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-140437-35"></script>
+  <!-- scripts --><!-- Google tag (gtag.js) GA4 --><script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-GPSLBL05X1"
+></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-
   function gtag() {
     dataLayer.push(arguments);
   }
-  gtag('js', new Date());
-  gtag('config', 'UA-140437-35');
+  gtag("js", new Date());
+  gtag("config", "G-GPSLBL05X1");
 </script></body>
 
 </html>

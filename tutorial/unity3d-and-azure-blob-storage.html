@@ -64,7 +64,7 @@
 <h3 id="saving-unity-audio-clips-into-blob-storage">Saving Unity Audio Clips into Blob Storage</h3>
 
 <p>For the <a href="https://github.com/Unity3dAzure/StorageServicesDemo/tree/master/Assets/Demos/Audio">Unity audio blob demo</a> I created a <a href="https://github.com/deadlyfingers/UnityWav">helper script to convert Unity Audio Clip recording to .wav files</a> for the purpose of saving to Azure Blob Storage.<br />
-Once the audio has been recorded in Unity I can upload the file using the <code class="highlighter-rouge">PutAudioAudio</code> method which takes a callback function, the wav bytes, the container resource path, the filename and the file’s mime type. By the way this method must be wrapped using <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.StartCoroutine.html">StartCoroutine</a> which is the way Unity 5 handles asynchronous requests. Once the request is completed it will trigger the <code class="highlighter-rouge">PutAudioCompleted</code> callback function I have provided my script with a response object. If the response is successful you will see the wav file blob added in your Blob Container.</p>
+Once the audio has been recorded in Unity I can upload the file using the <code class="language-plaintext highlighter-rouge">PutAudioAudio</code> method which takes a callback function, the wav bytes, the container resource path, the filename and the file’s mime type. By the way this method must be wrapped using <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.StartCoroutine.html">StartCoroutine</a> which is the way Unity 5 handles asynchronous requests. Once the request is completed it will trigger the <code class="language-plaintext highlighter-rouge">PutAudioCompleted</code> callback function I have provided my script with a response object. If the response is successful you will see the wav file blob added in your Blob Container.</p>
 
 <p>☞ Tip: Grab the <a href="http://storageexplorer.com/">Storage Explorer app</a> for viewing all the blobs!</p>
 
@@ -88,7 +88,7 @@ Once the audio has been recorded in Unity I can upload the file using the <code 
 
 <h3 id="loading-wav-files-from-blob-storage">Loading .wav files from Blob Storage</h3>
 
-<p>As we used the Blob type container with public read access you can use the <a href="https://docs.unity3d.com/ScriptReference/Networking.UnityWebRequest.GetAudioClip.html"><code class="highlighter-rouge">UnityWebRequest.GetAudioClip</code></a> method to directly load the .wav file from Azure Blob Storage and handle it as a native Unity AudioClip type for playback.</p>
+<p>As we used the Blob type container with public read access you can use the <a href="https://docs.unity3d.com/ScriptReference/Networking.UnityWebRequest.GetAudioClip.html"><code class="language-plaintext highlighter-rouge">UnityWebRequest.GetAudioClip</code></a> method to directly load the .wav file from Azure Blob Storage and handle it as a native Unity AudioClip type for playback.</p>
 
 <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">void</span> <span class="nf">TappedLoad</span> <span class="p">()</span>
 <span class="p">{</span>
@@ -114,11 +114,11 @@ Once the audio has been recorded in Unity I can upload the file using the <code 
 
 <h2 id="image-files">Image files</h2>
 
-<p>For the <a href="https://github.com/Unity3dAzure/StorageServicesDemo/tree/master/Assets/Demos/Image">Unity image blob demo</a> I used Unity’s <a href="https://docs.unity3d.com/ScriptReference/Application.CaptureScreenshot.html"><code class="highlighter-rouge">Application.CaptureScreenshot</code></a> method to generate a png image representation of the current state of the game screen.</p>
+<p>For the <a href="https://github.com/Unity3dAzure/StorageServicesDemo/tree/master/Assets/Demos/Image">Unity image blob demo</a> I used Unity’s <a href="https://docs.unity3d.com/ScriptReference/Application.CaptureScreenshot.html"><code class="language-plaintext highlighter-rouge">Application.CaptureScreenshot</code></a> method to generate a png image representation of the current state of the game screen.</p>
 
 <h3 id="saving-images-into-blob-storage">Saving Images into Blob Storage</h3>
 
-<p>The image is saved using the <code class="highlighter-rouge">PutImageBlob</code> method which is similar to the audio blob except we pass the image bytes and mime type.</p>
+<p>The image is saved using the <code class="language-plaintext highlighter-rouge">PutImageBlob</code> method which is similar to the audio blob except we pass the image bytes and mime type.</p>
 
 <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="k">void</span> <span class="nf">PutImage</span> <span class="p">(</span><span class="kt">byte</span><span class="p">[]</span> <span class="n">imageBytes</span><span class="p">)</span>
 <span class="p">{</span>
@@ -138,7 +138,7 @@ Once the audio has been recorded in Unity I can upload the file using the <code 
 
 <h3 id="loading-image-textures-from-blob-storage">Loading Image Textures from Blob Storage</h3>
 
-<p>As we used the Blob type container with public read access you can use the <a href="https://docs.unity3d.com/ScriptReference/Networking.UnityWebRequest.GetTexture.html"><code class="highlighter-rouge">UnityWebRequest.GetTexture</code></a> method to directly load the .png file from Azure Blob Storage and handle it as a native Unity Texture type for use. As I want to use the Texture in Unity UI to display as an <a href="https://docs.unity3d.com/ScriptReference/UI.Image.html">Image</a> I need to convert it to a sprite using my <code class="highlighter-rouge">ChangeImage</code> function.</p>
+<p>As we used the Blob type container with public read access you can use the <a href="https://docs.unity3d.com/ScriptReference/Networking.UnityWebRequest.GetTexture.html"><code class="language-plaintext highlighter-rouge">UnityWebRequest.GetTexture</code></a> method to directly load the .png file from Azure Blob Storage and handle it as a native Unity Texture type for use. As I want to use the Texture in Unity UI to display as an <a href="https://docs.unity3d.com/ScriptReference/UI.Image.html">Image</a> I need to convert it to a sprite using my <code class="language-plaintext highlighter-rouge">ChangeImage</code> function.</p>
 
 <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">void</span> <span class="nf">TappedLoad</span> <span class="p">()</span>
 <span class="p">{</span>
@@ -278,15 +278,17 @@ Once the audio has been recorded in Unity I can upload the file using the <code 
 </div></div>
   </div>
 
-  <!-- scripts --><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-140437-35"></script>
+  <!-- scripts --><!-- Google tag (gtag.js) GA4 --><script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-GPSLBL05X1"
+></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-
   function gtag() {
     dataLayer.push(arguments);
   }
-  gtag('js', new Date());
-  gtag('config', 'UA-140437-35');
+  gtag("js", new Date());
+  gtag("config", "G-GPSLBL05X1");
 </script></body>
 
 </html>

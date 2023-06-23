@@ -252,8 +252,8 @@
 
 <p>While there are quite a number of things you can do to improve <a href="http://www.html5rocks.com/en/tutorials/speed/quick/">web page performance</a>, one of the recent hybrid app performance headlines for iOS is the availability of <a href="http://developer.telerik.com/featured/why-ios-8s-wkwebview-is-a-big-deal-for-hybrid-development/">WKWebView which provides faster performance than the older UIWebView</a>. Cordova supports WKWebView but there is a need to install the <a href="https://github.com/apache/cordova-plugin-wkwebview-engine">WKWebView Cordova plugin</a> and set the ‘CordovaWebViewEngine’ preference to use ‘CDVWKWebViewEngine’ in Cordova’s ‘config.xml’ file.</p>
 
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cordova plugin add cordova-plugin-wkwebview-engine --save
-</code></pre></div></div>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cordova</span><span class="w"> </span><span class="nx">plugin</span><span class="w"> </span><span class="nx">add</span><span class="w"> </span><span class="nx">cordova-plugin-wkwebview-engine</span><span class="w"> </span><span class="nt">--save</span><span class="w">
+</span></code></pre></div></div>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;feature</span> <span class="na">name=</span><span class="s">"CDVWKWebViewEngine"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"ios-package"</span> <span class="na">value=</span><span class="s">"CDVWKWebViewEngine"</span><span class="nt">/&gt;</span>
@@ -353,15 +353,17 @@
 </div></div>
   </div>
 
-  <!-- scripts --><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-140437-35"></script>
+  <!-- scripts --><!-- Google tag (gtag.js) GA4 --><script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-GPSLBL05X1"
+></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-
   function gtag() {
     dataLayer.push(arguments);
   }
-  gtag('js', new Date());
-  gtag('config', 'UA-140437-35');
+  gtag("js", new Date());
+  gtag("config", "G-GPSLBL05X1");
 </script></body>
 
 </html>
